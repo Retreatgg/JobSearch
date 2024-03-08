@@ -1,18 +1,19 @@
 package com.example.demo.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Vacancy {
     private Long id;
     private String name;
     private String description;
     private Long categoryId;
-    private Long salary;
-    private int expFrom;
-    private int expTo;
+    private Double salary;
+    private Integer expFrom;
+    private Integer expTo;
     private boolean isActive;
     private Long authorId;
     private LocalDate createdDate;
-    private LocalDate updateTime;
+    private LocalDateTime updateTime;
 
 }

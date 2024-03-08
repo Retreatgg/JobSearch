@@ -1,11 +1,12 @@
 package com.example.demo.model;
 
 import java.sql.Time;
+import java.time.LocalDateTime;
 
 
 public class Message {
     private Long id;
     private Long respondedApplicantsId;
     private String content;
-    private Time timestamp;
+    private LocalDateTime timestamp;
 }

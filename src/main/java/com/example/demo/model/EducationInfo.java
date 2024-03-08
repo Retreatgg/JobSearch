@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class EducationInfo {
@@ -7,7 +8,7 @@ public class EducationInfo {
     private Long resumeId;
     private String institution;
     private String program;
-    private Date startDate;
-    private Date endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private String degree;
 }
