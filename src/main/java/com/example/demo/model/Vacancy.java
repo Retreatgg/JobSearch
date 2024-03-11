@@ -1,6 +1,5 @@
 package com.example.demo.model;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Vacancy {
@@ -13,7 +12,7 @@ public class Vacancy {
     private Integer expTo;
     private boolean isActive;
     private Long authorId;
-    private LocalDate createdDate;
+    private LocalDateTime createdDate;
     private LocalDateTime updateTime;
 
 }
