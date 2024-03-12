@@ -8,4 +8,5 @@ import java.util.List;
 @Service
 public interface ResumeService {
     ResumeDto getResumesByCategory(Long id);
+    List<ResumeDto> getResumesByName(String name);
 }

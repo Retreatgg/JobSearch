@@ -9,4 +9,7 @@ import java.util.List;
 @Service
 public interface VacancyService {
     List<VacancyDto> getAllVacancies();
+    List<VacancyDto> getVacanciesByCategory(String name);
+
+    List<VacancyDto> getRespondedVacancies();
 }

@@ -48,4 +48,20 @@ public class UserDao {
 
         return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), phoneNumber);
     }
+
+    public List<User> getRespondedUsers() {
+        String sql = """
+                select * from USERS
+                inner join PUBLIC.RESUMES R on USERS.ID = R.APPLICANT_ID
+                where R.IS_ACTIVE = false;
+                """;
+
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(User.class));
+    }
+
+    public boolean isUserExistsByEmail(String email) {
+        String sql = "SELECT * FROM USERS WHERE EMAIL = ?";
+        List<User> users = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(User.class), email);
+        return !users.isEmpty();
+    }
 }

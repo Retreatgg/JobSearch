@@ -6,6 +6,8 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class ResumeDao {
@@ -18,5 +20,16 @@ public class ResumeDao {
                 """;
 
         return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Resume.class), id);
+    }
+
+    public List<Resume> getResumesByApplicant(String name) {
+        String sql = """
+                SELECT * FROM RESUMES
+                WHERE APPLICANT_ID = (
+                    SELECT id FROM USERS WHERE NAME = ?
+                    )
+                """;
+
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Resume.class), name);
     }
 }

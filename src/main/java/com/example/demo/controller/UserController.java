@@ -34,4 +34,14 @@ public class UserController {
     public ResponseEntity<UserDto> getUserByPhoneNumber(@PathVariable String phoneNumber) {
         return ResponseEntity.ok(userService.getUserByPhoneNumber(phoneNumber));
     }
+
+    @GetMapping("users/responded")
+    public ResponseEntity<List<UserDto>> getUsersResponded() {
+        return ResponseEntity.ok(userService.getUserResponded());
+    }
+
+    @GetMapping("users/is-exist{email}")
+    public ResponseEntity<Boolean> isUserExistsByEmail(@PathVariable String email) {
+        return ResponseEntity.ok(userService.isUserExistsByEmail(email));
+    }
 }

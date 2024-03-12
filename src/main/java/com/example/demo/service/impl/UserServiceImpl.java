@@ -84,5 +84,31 @@ public class UserServiceImpl implements UserService {
                 .build();
     }
 
+    @Override
+    public List<UserDto> getUserResponded() {
+        List<User> users = userDao.getRespondedUsers();
+        List<UserDto> dtos = new ArrayList<>();
+        users.forEach(e -> {
+            dtos.add(UserDto.builder()
+                    .id(e.getId())
+                    .age(e.getAge())
+                    .email(e.getEmail())
+                    .phoneNumber(e.getPhoneNumber())
+                    .accountType(e.getAccountType())
+                    .name(e.getName())
+                    .password(e.getPassword())
+                    .username(e.getUsername())
+                    .avatar(e.getAvatar())
+                    .build());
+        });
+
+        return dtos;
+    }
+
+    @Override
+    public Boolean isUserExistsByEmail(String email) {
+        return userDao.isUserExistsByEmail(email);
+    }
+
 
 }
