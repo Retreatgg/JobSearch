@@ -35,4 +35,22 @@ public class UserServiceImpl implements UserService {
 
         return dtos;
     }
+
+    @Override
+    public UserDto getUserByName(String name) {
+        User user = userDao.getUserByName(name);
+        return UserDto.builder()
+                .id(user.getId())
+                .name(user.getName())
+                .username(user.getUsername())
+                .email(user.getEmail())
+                .age(user.getAge())
+                .avatar(user.getAvatar())
+                .password(user.getPassword())
+                .phoneNumber(user.getPhoneNumber())
+                .accountType(user.getAccountType())
+                .build();
+    }
+
+
 }
