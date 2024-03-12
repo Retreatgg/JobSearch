@@ -1,13 +1,17 @@
-package com.example.demo.model;
+package com.example.demo.dto;
 
+import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
 
+@Data
+@Builder
 @Getter
 @Setter
-public class Resume {
+public class ResumeDto {
     private Long id;
     private Long applicantId;
     private String name;
@@ -16,5 +20,4 @@ public class Resume {
     private Boolean isActive;
     private LocalDateTime createdDate;
     private LocalDateTime updateTime;
-
 }
