@@ -1,22 +1,23 @@
 package com.example.demo.dao;
 
-import com.example.demo.model.Resume;
+import com.example.demo.model.Vacancy;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
-public class ResumeDao {
+public class VacancyDao {
     private final JdbcTemplate jdbcTemplate;
 
-    public Resume getResumesByCategory(Long id) {
+    public List<Vacancy> getAllVacancies() {
         String sql = """
-                select * from RESUMES
-                where category_id = ?
+                select * from vacancies
                 """;
 
-        return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Resume.class), id);
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Vacancy.class));
     }
 }

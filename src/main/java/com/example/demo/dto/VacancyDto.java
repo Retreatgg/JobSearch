@@ -1,13 +1,17 @@
-package com.example.demo.model;
+package com.example.demo.dto;
 
+import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
 
+@Data
+@Builder
 @Getter
 @Setter
-public class Vacancy {
+public class VacancyDto {
     private Long id;
     private String name;
     private String description;
