@@ -20,8 +20,18 @@ public class UserController {
         return ResponseEntity.ok(userService.getUsers());
     }
 
-    @GetMapping("users/{name}")
+    @GetMapping("users/name/{name}")
     public ResponseEntity<UserDto> getUserByName(@PathVariable String name) {
         return ResponseEntity.ok(userService.getUserByName(name));
+    }
+
+    @GetMapping("users/email/{email}")
+    public ResponseEntity<UserDto> getUserByEmail(@PathVariable String email) {
+        return ResponseEntity.ok(userService.getUserByEmail(email));
+    }
+
+    @GetMapping("users/phone/{phoneNumber}")
+    public ResponseEntity<UserDto> getUserByPhoneNumber(@PathVariable String phoneNumber) {
+        return ResponseEntity.ok(userService.getUserByPhoneNumber(phoneNumber));
     }
 }

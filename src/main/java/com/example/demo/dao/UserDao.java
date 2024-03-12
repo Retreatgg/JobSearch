@@ -30,4 +30,22 @@ public class UserDao {
 
         return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), name);
     }
+
+    public User getUserByEmail(String email) {
+        String sql = """
+                select * from users
+                where email = ?
+                """;
+
+        return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), email);
+    }
+
+    public User getUserByPhoneNumber(String phoneNumber) {
+        String sql = """
+                select * from users
+                where phone_number = ?
+                """;
+
+        return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), phoneNumber);
+    }
 }
