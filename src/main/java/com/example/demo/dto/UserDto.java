@@ -1,11 +1,15 @@
-package com.example.demo.model;
+package com.example.demo.dto;
 
+import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+@Data
+@Builder
 @Getter
 @Setter
-public class User {
+public class UserDto {
     private Long id;
     private String name;
     private String username;
