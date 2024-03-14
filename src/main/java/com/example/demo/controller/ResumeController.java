@@ -17,7 +17,7 @@ import java.util.List;
 public class ResumeController {
     private final ResumeService resumeService;
 
-    @GetMapping("category={categoryId}")
+    @GetMapping("category{categoryId}")
     public ResponseEntity<ResumeDto> getResumeByName(@PathVariable long categoryId) {
         return ResponseEntity.ok(resumeService.getResumesByCategory(categoryId));
     }
@@ -27,12 +27,12 @@ public class ResumeController {
         return ResponseEntity.ok(resumeService.getResumesByName(name));
     }
 
-    @GetMapping("id={id}")
+    @GetMapping("id{id}")
     public ResponseEntity<ResumeDto> getResumeById(@PathVariable long id) {
         return ResponseEntity.ok(resumeService.getResumeById(id));
     }
 
-    @GetMapping("applicantId={id}")
+    @GetMapping("applicantId{id}")
     public ResponseEntity<List<ResumeDto>> getResumesByApplicantId(@PathVariable long id) {
         return ResponseEntity.ok(resumeService.getResumesByApplicantId(id));
     }
