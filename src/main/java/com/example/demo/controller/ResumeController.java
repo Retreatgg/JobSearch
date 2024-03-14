@@ -6,23 +6,35 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("resumes")
 public class ResumeController {
     private final ResumeService resumeService;
 
-    @GetMapping("resumes/{categoryId}")
+    @GetMapping("category={categoryId}")
     public ResponseEntity<ResumeDto> getResumeByName(@PathVariable long categoryId) {
         return ResponseEntity.ok(resumeService.getResumesByCategory(categoryId));
     }
 
-    @GetMapping("resumes/applicant{name}")
+    @GetMapping("applicant{name}")
     public ResponseEntity<List<ResumeDto>> getResumesByApplicant(@PathVariable String name) {
         return ResponseEntity.ok(resumeService.getResumesByName(name));
+    }
+
+    @GetMapping("id={id}")
+    public ResponseEntity<ResumeDto> getResumeById(@PathVariable long id) {
+        return ResponseEntity.ok(resumeService.getResumeById(id));
+    }
+
+    @GetMapping("applicantId={id}")
+    public ResponseEntity<List<ResumeDto>> getResumesByApplicantId(@PathVariable long id) {
+        return ResponseEntity.ok(resumeService.getResumesByApplicantId(id));
     }
 
 }

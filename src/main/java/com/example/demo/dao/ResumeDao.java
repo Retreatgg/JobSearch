@@ -32,4 +32,22 @@ public class ResumeDao {
 
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Resume.class), name);
     }
+
+    public Resume getResumeById(Long id) {
+        String sql = """
+                select * from resumes
+                where id = ?
+                """;
+
+        return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Resume.class), id);
+    }
+
+    public List<Resume> getResumesByApplicantId(Long id) {
+        String sql = """
+                select * from resumes
+                where applicant_id = ?
+                """;
+
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Resume.class), id);
+    }
 }
