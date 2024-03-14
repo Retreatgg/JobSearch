@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - changeSet:
+      id: create table for categories
+      author: Argen
+      changes:
+        - createTable:
+            tableName: categories
+            columns:
+              - column:
+                  name: id
+                  type: long
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(45)
+              - column:
+                  name: parent_id
+                  type: long

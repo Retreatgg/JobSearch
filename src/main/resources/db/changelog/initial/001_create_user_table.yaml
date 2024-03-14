@@ -1,0 +1,39 @@
+databaseChangeLog:
+  - changeSet:
+      id: create table for Users
+      author: Argen
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: long
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(45)
+              - column:
+                  name: surname
+                  type: varchar(45)
+              - column:
+                  name : age
+                  type: Integer
+              - column:
+                  name: email
+                  type: varchar(45)
+              - column:
+                  name: password
+                  type: varchar(45)
+              - column:
+                  name: phone_number
+                  type: varchar(45)
+              - column:
+                  name: avatar
+                  type: varchar(45)
+              - column:
+                  name: account_type
+                  type: varchar(45)

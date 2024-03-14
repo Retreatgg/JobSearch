@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: create table for responded_applicants
+      author: Argen
+      changes:
+        - createTable:
+            tableName: responded_applicants
+            columns:
+              - column:
+                  name: id
+                  type: long
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: resume_id
+                  type: long
+              - column:
+                  name: vacancy_id
+                  type: long
+              - column:
+                  name: confirmation
+                  type: boolean

@@ -1,0 +1,33 @@
+databaseChangeLog:
+  - changeSet:
+      id: create table for education_info
+      author: Argen
+      changes:
+        - createTable:
+            tableName: education_info
+            columns:
+              - column:
+                  name: id
+                  type: long
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: resume_id
+                  type: long
+              - column:
+                  name: institution
+                  type: varchar(45)
+              - column:
+                  name: program
+                  type: varchar(45)
+              - column:
+                  name: start_date
+                  type: date
+              - column:
+                  name: end_date
+                  type: date
+              - column:
+                  name: degree
+                  type: varchar(45)

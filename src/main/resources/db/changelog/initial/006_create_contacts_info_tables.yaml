@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: create table for contacts_info
+      author: Argen
+      changes:
+        - createTable:
+            tableName: contacts_info
+            columns:
+              - column:
+                  name: id
+                  type: long
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: contact_value
+                  type: varchar(45)
+              - column:
+                  name: type_id
+                  type: long
+              - column:
+                  name: resume_id
+                  type: long

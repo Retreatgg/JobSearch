@@ -1,7 +1,6 @@
 package com.example.demo.model;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class EducationInfo {
     private Long id;

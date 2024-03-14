@@ -1,0 +1,45 @@
+databaseChangeLog:
+  - changeSet:
+      id: create table for vacancies
+      author: Argen
+      changes:
+        - createTable:
+            tableName: vacancies
+            columns:
+              - column:
+                  name: id
+                  type: long
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(45)
+              - column:
+                  name: description
+                  type: varchar(45)
+              - column:
+                  name: category_id
+                  type: long
+              - column:
+                  name: salary
+                  type: double
+              - column:
+                  name: exp_from
+                  type: integer
+              - column:
+                  name: exp_to
+                  type: integer
+              - column:
+                  name: is_active
+                  type: boolean
+              - column:
+                  name: author_id
+                  type: long
+              - column:
+                  name: created_date
+                  type: timestamp
+              - column:
+                  name: update_date
+                  type: timestamp

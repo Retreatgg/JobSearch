@@ -1,0 +1,30 @@
+databaseChangeLog:
+  - changeSet:
+      id: create table for work_experience_info
+      author: Argen
+      changes:
+        - createTable:
+            tableName: work_experience_info
+            columns:
+              - column:
+                  name: id
+                  type: long
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: resume_id
+                  type: long
+              - column:
+                  name: years
+                  type: integer
+              - column:
+                  name: company_name
+                  type: varchar(45)
+              - column:
+                  name: position
+                  type: varchar(45)
+              - column:
+                  name: responsibilities
+                  type: varchar(45)

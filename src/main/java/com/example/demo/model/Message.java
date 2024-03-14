@@ -1,6 +1,5 @@
 package com.example.demo.model;
 
-import java.sql.Time;
 import java.time.LocalDateTime;
 
 
