@@ -16,36 +16,36 @@ values ('Web'),
        ('Game Dev');
 
 insert into CATEGORIES(name, parent_id)
-values ('Front-End', 13),
-       ('Back-End', 13);
+values ('Front-End', 7),
+       ('Back-End', 8);
 
 insert into RESUMES(name, salary, is_active, created_date, update_time, applicant_id, category_id)
-VALUES ('Web Developer Back-End', 60000, false, CURRENT_DATE, CURRENT_TIMESTAMP, 17, 18),
-       ('Game Developer', 65000, true, CURRENT_DATE, CURRENT_TIMESTAMP, 18, 14);
+VALUES ('Web Developer Back-End', 60000, false, CURRENT_DATE, CURRENT_TIMESTAMP, 9, 11),
+       ('Game Developer', 65000, true, CURRENT_DATE, CURRENT_TIMESTAMP, 10, 7);
 
 
 insert into VACANCIES(name, description, category_id, salary, exp_from, exp_to, is_active, author_id, created_date,
                       update_date)
-VALUES ('Software Engineer', 'We are looking for a skilled software engineer to join our team.', 17, 80000, 2, 5, false,
-        19, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-       ('Data Analyst', 'Seeking a data analyst proficient in SQL and Python for data analysis tasks.', 13, 70000, 1, 3,
-        true, 20, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+VALUES ('Software Engineer', 'We are looking for a skilled software engineer to join our team.', 10, 80000, 2, 5, false,
+        11, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+       ('Data Analyst', 'Seeking a data analyst proficient in SQL and Python for data analysis tasks.', 7, 70000, 1, 3,
+        true, 12, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 insert into CONTACTS_INFO(contact_value, type_id, resume_id)
-VALUES ('john.doe@example.com', 22, 5),
-       ('+1234567890', 23, 6);
+VALUES ('john.doe@example.com', 12, 1),
+       ('+1234567890', 13, 2);
 
 insert into EDUCATION_INFO(resume_id, institution, program, start_date, end_date, degree)
-VALUES (5, 'University of Example', 'Computer Science', '2018-09-01', '2022-06-30', 'Bachelor'),
-       (6, 'Example College', 'Data Science', '2022-09-01', '2024-06-30', 'Master');
+VALUES (1, 'University of Example', 'Computer Science', '2018-09-01', '2022-06-30', 'Bachelor'),
+       (2, 'Example College', 'Data Science', '2022-09-01', '2024-06-30', 'Master');
 
 insert into WORK_EXPERIENCE_INFO(resume_id, years, company_name, position, responsibilities)
-VALUES (5, 3, 'Tech Solutions Inc.', 'Software Engineer', 'Developed and maintained software applications.'),
-       (6, 2, 'Data Analytics Co.', 'Data Analyst', 'Performed data analysis and generated reports for clients.');
+VALUES (1, 3, 'Tech Solutions Inc.', 'Software Engineer', 'Developed and maintained software applications.'),
+       (2, 2, 'Data Analytics Co.', 'Data Analyst', 'Performed data analysis and generated reports for clients.');
 
 insert into RESPONDED_APPLICANTS(resume_id, vacancy_id, confirmation)
-VALUES (5, 4, true),
-       (6, 5, false);
+VALUES (1, 3, true),
+       (2, 4, false);
 
 insert into MESSAGES(responded_applicants, content, timestamp)
 VALUES (1, 'Thank you for your application.', CURRENT_TIMESTAMP),
