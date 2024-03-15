@@ -39,4 +39,22 @@ public class VacancyDao {
 
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Vacancy.class));
     }
+
+    public List<Vacancy> getVacancyByAuthorId(long id) {
+        String sql = """
+                select * from vacancies
+                where author_id = ?
+                """;
+
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Vacancy.class), id);
+    }
+
+    public List<Vacancy> getActiveVacancies() {
+        String sql = """
+                select * from VACANCIES
+                where IS_ACTIVE = true
+                """;
+
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Vacancy.class));
+    }
 }

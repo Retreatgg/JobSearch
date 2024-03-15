@@ -33,6 +33,18 @@ public class VacancyServiceImpl implements VacancyService {
         return transformationForDtoListVacancies(vacancies);
     }
 
+    @Override
+    public List<VacancyDto> getVacancyByAuthorId(Long id) {
+        List<Vacancy> vacancies = vacancyDao.getVacancyByAuthorId(id);
+        return transformationForDtoListVacancies(vacancies);
+    }
+
+    @Override
+    public List<VacancyDto> getActiveVacancy() {
+        List<Vacancy> vacancies = vacancyDao.getActiveVacancies();
+        return transformationForDtoListVacancies(vacancies);
+    }
+
     private List<VacancyDto> transformationForDtoListVacancies(List<Vacancy> vacancies) {
         List<VacancyDto> dtos = new ArrayList<>();
         vacancies.forEach(e -> {

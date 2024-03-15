@@ -10,6 +10,7 @@ import java.util.List;
 public interface VacancyService {
     List<VacancyDto> getAllVacancies();
     List<VacancyDto> getVacanciesByCategory(String name);
-
     List<VacancyDto> getRespondedVacancies();
+    List<VacancyDto> getVacancyByAuthorId(Long id);
+    List<VacancyDto> getActiveVacancy();
 }

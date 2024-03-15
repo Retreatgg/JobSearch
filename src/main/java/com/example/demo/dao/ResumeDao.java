@@ -4,14 +4,19 @@ import com.example.demo.model.Resume;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import java.sql.PreparedStatement;
 import java.util.List;
 
 @Component
 @RequiredArgsConstructor
 public class ResumeDao {
     private final JdbcTemplate jdbcTemplate;
+    private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+
 
     public Resume getResumesByCategoryId(Long id) {
         String sql = """
@@ -49,5 +54,29 @@ public class ResumeDao {
                 """;
 
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Resume.class), id);
+    }
+
+    public void deleteResumeById(Long id) {
+        String sql = """
+                delete from resumes where id = ?
+                """;
+
+        jdbcTemplate.update(sql, id);
+    }
+
+    public void addResume(Resume resume) {
+        String sql = """
+                insert into RESUMES(name, salary, is_active, created_date, update_time, applicant_id, category_id)
+                values(:name, :salary, :is_active, :created_date, :update_time, :applicant_id, :category_id)
+                """;
+
+        namedParameterJdbcTemplate.update(sql, new MapSqlParameterSource()
+                .addValue("name", resume.getName())
+                .addValue("salary", resume.getSalary())
+                .addValue("is_active", resume.getIsActive())
+                .addValue("created_date", resume.getCreatedDate())
+                .addValue("update_time", resume.getUpdateTime())
+                .addValue("applicant_id", resume.getApplicantId())
+                .addValue("category_id", resume.getCategoryId()));
     }
 }

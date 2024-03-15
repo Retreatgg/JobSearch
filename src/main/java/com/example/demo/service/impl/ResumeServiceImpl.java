@@ -39,6 +39,26 @@ public class ResumeServiceImpl implements ResumeService {
         return transformationForListDtoResume(resumes);
     }
 
+    @Override
+    public void deleteResumeById(Long id) {
+        resumeDao.deleteResumeById(id);
+    }
+
+    @Override
+    public void addResume(ResumeDto resumeDto) {
+        Resume resume = new Resume();
+        resume.setId(resumeDto.getId());
+        resume.setName(resumeDto.getName());
+        resume.setSalary(resumeDto.getSalary());
+        resume.setIsActive(resumeDto.getIsActive());
+        resume.setCreatedDate(resumeDto.getCreatedDate());
+        resume.setUpdateTime(resumeDto.getUpdateTime());
+        resume.setApplicantId(resumeDto.getApplicantId());
+        resume.setCategoryId(resumeDto.getCategoryId());
+
+        resumeDao.addResume(resume);
+    }
+
     private ResumeDto transformationForSingleDtoResume(Resume resume) {
         return ResumeDto.builder()
                 .id(resume.getId())
