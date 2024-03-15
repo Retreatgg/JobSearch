@@ -1,8 +1,6 @@
 package com.example.demo.dao;
 
-import com.example.demo.model.Resume;
 import com.example.demo.model.User;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;

@@ -3,11 +3,9 @@ package com.example.demo.controller;
 import com.example.demo.dto.VacancyDto;
 import com.example.demo.service.VacancyService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -40,5 +38,22 @@ public class VacancyController {
     @GetMapping("active")
     public ResponseEntity<List<VacancyDto>> getActiveVacancies() {
         return ResponseEntity.ok(vacancyService.getActiveVacancy());
+    }
+
+    @DeleteMapping("delete{id}")
+    public void deleteResumeById(@PathVariable long id) {
+        vacancyService.deleteVacancyById(id);
+    }
+
+    @PostMapping("add")
+    public HttpStatus addResume(@RequestBody VacancyDto vacancyDto) {
+        vacancyService.addVacancy(vacancyDto);
+        return HttpStatus.OK;
+    }
+
+    @PostMapping("id{id}")
+    public HttpStatus editResume(@RequestBody VacancyDto vacancyDto, @PathVariable long id) {
+        vacancyService.editVacancy(vacancyDto, id);
+        return HttpStatus.OK;
     }
 }

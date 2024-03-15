@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.ResumeDto;
 import com.example.demo.dto.VacancyDto;
 import com.example.demo.model.Vacancy;
 import org.springframework.stereotype.Service;
@@ -13,4 +14,8 @@ public interface VacancyService {
     List<VacancyDto> getRespondedVacancies();
     List<VacancyDto> getVacancyByAuthorId(Long id);
     List<VacancyDto> getActiveVacancy();
+
+    void deleteVacancyById(Long id);
+    void addVacancy(VacancyDto vacancyDto);
+    void editVacancy(VacancyDto vacancyDto, long id);
 }
