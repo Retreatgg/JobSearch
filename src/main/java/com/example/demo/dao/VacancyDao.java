@@ -25,7 +25,7 @@ public class VacancyDao {
         String sql = """
                 select * from vacancies
                 where category_id = (
-                select id from categories where name = ?)
+                select id from categories where name like ?)
                 """;
 
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Vacancy.class), name);

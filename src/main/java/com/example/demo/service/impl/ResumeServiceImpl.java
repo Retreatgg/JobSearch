@@ -16,59 +16,43 @@ public class ResumeServiceImpl implements ResumeService {
     private final ResumeDao resumeDao;
 
     @Override
-    public ResumeDto getResumesByCategory(Long id) {
-        Resume e = resumeDao.getResumesByCategory(id);
-        return ResumeDto.builder()
-                .id(e.getId())
-                .name(e.getName())
-                .salary(e.getSalary())
-                .isActive(e.getIsActive())
-                .categoryId(e.getCategoryId())
-                .applicantId(e.getApplicantId())
-                .createdDate(e.getCreatedDate())
-                .updateTime(e.getUpdateTime())
-                .build();
-
+    public ResumeDto getResumesByCategoryId(Long id) {
+        Resume resume = resumeDao.getResumesByCategoryId(id);
+        return transformationForSingleDtoResume(resume);
     }
 
     @Override
     public List<ResumeDto> getResumesByName(String name) {
         List<Resume> resumes = resumeDao.getResumesByApplicant(name);
-        List<ResumeDto> dtos = new ArrayList<>();
-        resumes.forEach(e -> {
-            dtos.add(ResumeDto.builder()
-                    .id(e.getId())
-                    .name(e.getName())
-                    .salary(e.getSalary())
-                    .isActive(e.getIsActive())
-                    .categoryId(e.getCategoryId())
-                    .applicantId(e.getApplicantId())
-                    .createdDate(e.getCreatedDate())
-                    .updateTime(e.getUpdateTime())
-                    .build());
-        });
-
-        return dtos;
+        return transformationForListDtoResume(resumes);
     }
 
     @Override
     public ResumeDto getResumeById(Long id) {
-        Resume e = resumeDao.getResumeById(id);
-        return ResumeDto.builder()
-                .id(e.getId())
-                .name(e.getName())
-                .salary(e.getSalary())
-                .isActive(e.getIsActive())
-                .categoryId(e.getCategoryId())
-                .applicantId(e.getApplicantId())
-                .createdDate(e.getCreatedDate())
-                .updateTime(e.getUpdateTime())
-                .build();
+        Resume resume = resumeDao.getResumeById(id);
+        return transformationForSingleDtoResume(resume);
     }
 
     @Override
     public List<ResumeDto> getResumesByApplicantId(Long id) {
         List<Resume> resumes = resumeDao.getResumesByApplicantId(id);
+        return transformationForListDtoResume(resumes);
+    }
+
+    private ResumeDto transformationForSingleDtoResume(Resume resume) {
+        return ResumeDto.builder()
+                .id(resume.getId())
+                .name(resume.getName())
+                .salary(resume.getSalary())
+                .isActive(resume.getIsActive())
+                .categoryId(resume.getCategoryId())
+                .applicantId(resume.getApplicantId())
+                .createdDate(resume.getCreatedDate())
+                .updateTime(resume.getUpdateTime())
+                .build();
+    }
+
+    private List<ResumeDto> transformationForListDtoResume(List<Resume> resumes) {
         List<ResumeDto> dtos = new ArrayList<>();
         resumes.forEach(e -> {
             dtos.add(ResumeDto.builder()

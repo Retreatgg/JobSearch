@@ -8,7 +8,7 @@ import java.util.List;
 
 @Service
 public interface ResumeService {
-    ResumeDto getResumesByCategory(Long id);
+    ResumeDto getResumesByCategoryId(Long id);
     List<ResumeDto> getResumesByName(String name);
 
     ResumeDto getResumeById(Long id);

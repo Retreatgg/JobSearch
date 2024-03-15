@@ -13,7 +13,7 @@ import java.util.List;
 public class ResumeDao {
     private final JdbcTemplate jdbcTemplate;
 
-    public Resume getResumesByCategory(Long id) {
+    public Resume getResumesByCategoryId(Long id) {
         String sql = """
                 select * from RESUMES
                 where category_id = ?
@@ -26,7 +26,7 @@ public class ResumeDao {
         String sql = """
                 SELECT * FROM RESUMES
                 WHERE APPLICANT_ID = (
-                    SELECT id FROM USERS WHERE NAME = ?
+                    SELECT id FROM USERS WHERE NAME like ?
                     )
                 """;
 

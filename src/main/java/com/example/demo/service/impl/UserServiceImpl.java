@@ -18,75 +18,39 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserDto> getUsers() {
         List<User> users = userDao.getUsers();
-        List<UserDto> dtos = new ArrayList<>();
-        users.forEach(e -> {
-            dtos.add(UserDto.builder()
-                    .id(e.getId())
-                    .age(e.getAge())
-                    .email(e.getEmail())
-                    .phoneNumber(e.getPhoneNumber())
-                    .accountType(e.getAccountType())
-                    .name(e.getName())
-                    .password(e.getPassword())
-                    .username(e.getUsername())
-                    .avatar(e.getAvatar())
-                    .build());
-        });
-
-        return dtos;
+        return transformationForDtoListUser(users);
     }
 
     @Override
     public UserDto getUserByName(String name) {
         User user = userDao.getUserByName(name);
-        return UserDto.builder()
-                .id(user.getId())
-                .name(user.getName())
-                .username(user.getUsername())
-                .email(user.getEmail())
-                .age(user.getAge())
-                .avatar(user.getAvatar())
-                .password(user.getPassword())
-                .phoneNumber(user.getPhoneNumber())
-                .accountType(user.getAccountType())
-                .build();
+        return transformationForDtoSingleUser(user);
     }
 
     @Override
     public UserDto getUserByEmail(String email) {
         User user = userDao.getUserByEmail(email);
-        return UserDto.builder()
-                .id(user.getId())
-                .name(user.getName())
-                .username(user.getUsername())
-                .email(user.getEmail())
-                .age(user.getAge())
-                .avatar(user.getAvatar())
-                .password(user.getPassword())
-                .phoneNumber(user.getPhoneNumber())
-                .accountType(user.getAccountType())
-                .build();
+        return transformationForDtoSingleUser(user);
     }
 
     @Override
     public UserDto getUserByPhoneNumber(String phoneNumber) {
         User user = userDao.getUserByPhoneNumber(phoneNumber);
-        return UserDto.builder()
-                .id(user.getId())
-                .name(user.getName())
-                .username(user.getUsername())
-                .email(user.getEmail())
-                .age(user.getAge())
-                .avatar(user.getAvatar())
-                .password(user.getPassword())
-                .phoneNumber(user.getPhoneNumber())
-                .accountType(user.getAccountType())
-                .build();
+        return transformationForDtoSingleUser(user);
     }
 
     @Override
     public List<UserDto> getUserResponded() {
         List<User> users = userDao.getRespondedUsers();
+        return transformationForDtoListUser(users);
+    }
+
+    @Override
+    public Boolean isUserExistsByEmail(String email) {
+        return userDao.isUserExistsByEmail(email);
+    }
+
+    private List<UserDto> transformationForDtoListUser(List<User> users) {
         List<UserDto> dtos = new ArrayList<>();
         users.forEach(e -> {
             dtos.add(UserDto.builder()
@@ -96,7 +60,6 @@ public class UserServiceImpl implements UserService {
                     .phoneNumber(e.getPhoneNumber())
                     .accountType(e.getAccountType())
                     .name(e.getName())
-                    .password(e.getPassword())
                     .username(e.getUsername())
                     .avatar(e.getAvatar())
                     .build());
@@ -105,9 +68,17 @@ public class UserServiceImpl implements UserService {
         return dtos;
     }
 
-    @Override
-    public Boolean isUserExistsByEmail(String email) {
-        return userDao.isUserExistsByEmail(email);
+    private UserDto transformationForDtoSingleUser(User user) {
+        return UserDto.builder()
+                .id(user.getId())
+                .name(user.getName())
+                .username(user.getUsername())
+                .email(user.getEmail())
+                .age(user.getAge())
+                .avatar(user.getAvatar())
+                .phoneNumber(user.getPhoneNumber())
+                .accountType(user.getAccountType())
+                .build();
     }
 
 

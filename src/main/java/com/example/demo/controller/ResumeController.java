@@ -18,8 +18,8 @@ public class ResumeController {
     private final ResumeService resumeService;
 
     @GetMapping("category{categoryId}")
-    public ResponseEntity<ResumeDto> getResumeByName(@PathVariable long categoryId) {
-        return ResponseEntity.ok(resumeService.getResumesByCategory(categoryId));
+    public ResponseEntity<ResumeDto> getResumeByCategoryId(@PathVariable long categoryId) {
+        return ResponseEntity.ok(resumeService.getResumesByCategoryId(categoryId));
     }
 
     @GetMapping("applicant{name}")
