@@ -47,17 +47,17 @@ public class ResumeServiceImpl implements ResumeService {
     @Override
     public void addResume(ResumeDto resumeDto) {
         Resume resume = new Resume();
-        resume.setId(resumeDto.getId());
-        resume.setName(resumeDto.getName());
-        resume.setSalary(resumeDto.getSalary());
-        resume.setIsActive(resumeDto.getIsActive());
-        resume.setCreatedDate(resumeDto.getCreatedDate());
-        resume.setUpdateTime(resumeDto.getUpdateTime());
-        resume.setApplicantId(resumeDto.getApplicantId());
-        resume.setCategoryId(resumeDto.getCategoryId());
-
+        resume = editAndAdd(resume, resumeDto);
         resumeDao.addResume(resume);
     }
+
+    @Override
+    public void editResume(ResumeDto resumeDto, long id) {
+        Resume resume = new Resume();
+        resume = editAndAdd(resume, resumeDto);
+        resumeDao.editResume(resume, id);
+    }
+
 
     private ResumeDto transformationForSingleDtoResume(Resume resume) {
         return ResumeDto.builder()
@@ -88,6 +88,19 @@ public class ResumeServiceImpl implements ResumeService {
         });
 
         return dtos;
+    }
+
+    private Resume editAndAdd(Resume resume, ResumeDto resumeDto) {
+        resume.setId(resumeDto.getId());
+        resume.setName(resumeDto.getName());
+        resume.setSalary(resumeDto.getSalary());
+        resume.setIsActive(resumeDto.getIsActive());
+        resume.setCreatedDate(resumeDto.getCreatedDate());
+        resume.setUpdateTime(resumeDto.getUpdateTime());
+        resume.setApplicantId(resumeDto.getApplicantId());
+        resume.setCategoryId(resumeDto.getCategoryId());
+
+        return resume;
     }
 
 }

@@ -79,4 +79,15 @@ public class ResumeDao {
                 .addValue("applicant_id", resume.getApplicantId())
                 .addValue("category_id", resume.getCategoryId()));
     }
+
+    public void editResume(Resume resume, long id) {
+        String sql = "UPDATE RESUMES " +
+                "SET name = ?, salary = ?, is_active = ?, created_date = ?, " +
+                "update_time = ?, applicant_id = ?, category_id = ? " +
+                "WHERE id = ?";
+
+        jdbcTemplate.update(sql, resume.getName(), resume.getSalary(),
+                resume.getIsActive(), resume.getCreatedDate(), resume.getUpdateTime(),
+                resume.getApplicantId(), resume.getCategoryId(), id);
+    }
 }

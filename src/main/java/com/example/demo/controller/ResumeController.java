@@ -46,4 +46,10 @@ public class ResumeController {
         return HttpStatus.OK;
     }
 
+    @PostMapping("id{id}")
+    public HttpStatus editResume(@RequestBody ResumeDto resumeDto, @PathVariable long id) {
+        resumeService.editResume(resumeDto, id);
+        return HttpStatus.OK;
+    }
+
 }
