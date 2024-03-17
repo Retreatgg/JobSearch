@@ -1,5 +1,7 @@
 package com.example.demo.dto;
 
+import com.example.demo.model.Category;
+import com.example.demo.model.User;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
@@ -20,7 +22,7 @@ public class VacancyDto {
     private Integer expFrom;
     private Integer expTo;
     private Boolean isActive;
-    private Long authorId;
+    private User authorId;
     private LocalDateTime createdDate;
     private LocalDateTime updateTime;
 

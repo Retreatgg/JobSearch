@@ -1,5 +1,7 @@
 package com.example.demo.dto;
 
+import com.example.demo.model.Category;
+import com.example.demo.model.User;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
@@ -13,7 +15,7 @@ import java.time.LocalDateTime;
 @Setter
 public class ResumeDto {
     private Long id;
-    private Long applicantId;
+    private Long applicant;
     private String name;
     private Long categoryId;
     private Double salary;

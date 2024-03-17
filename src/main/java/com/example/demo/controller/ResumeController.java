@@ -25,7 +25,7 @@ public class ResumeController {
         return ResponseEntity.ok(resumeService.getResumesByName(name));
     }
 
-    @GetMapping("id{id}")
+    @GetMapping("{id}")
     public ResponseEntity<ResumeDto> getResumeById(@PathVariable long id) {
         return ResponseEntity.ok(resumeService.getResumeById(id));
     }
@@ -35,18 +35,21 @@ public class ResumeController {
         return ResponseEntity.ok(resumeService.getResumesByApplicantId(id));
     }
 
-    @DeleteMapping("delete{id}")
-    public void deleteResumeById(@PathVariable long id) {
-        resumeService.deleteResumeById(id);
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> deleteResumeById(@PathVariable long id) {
+       if(resumeService.deleteResumeById(id)) {
+           return ResponseEntity.noContent().build();
+       }
+       return ResponseEntity.notFound().build();
     }
 
-    @PostMapping("add")
+    @PostMapping("")
     public HttpStatus addResume(@RequestBody ResumeDto resumeDto) {
         resumeService.addResume(resumeDto);
         return HttpStatus.OK;
     }
 
-    @PostMapping("id{id}")
+    @PutMapping("{id}")
     public HttpStatus editResume(@RequestBody ResumeDto resumeDto, @PathVariable long id) {
         resumeService.editResume(resumeDto, id);
         return HttpStatus.OK;

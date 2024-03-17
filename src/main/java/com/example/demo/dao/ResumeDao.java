@@ -2,6 +2,7 @@ package com.example.demo.dao;
 
 import com.example.demo.model.Resume;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -9,6 +10,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
@@ -37,13 +39,17 @@ public class ResumeDao {
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Resume.class), name);
     }
 
-    public Resume getResumeById(Long id) {
+    public Optional<Resume> getResumeById(Long id) {
         String sql = """
                 select * from resumes
                 where id = ?
                 """;
 
-        return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Resume.class), id);
+        return Optional.ofNullable(
+                DataAccessUtils.singleResult(
+                        jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Resume.class), id)
+                )
+        );
     }
 
     public List<Resume> getResumesByApplicantId(Long id) {

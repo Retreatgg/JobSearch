@@ -16,4 +16,5 @@ public interface UserService {
 
     List<UserDto> getUserResponded();
     Boolean isUserExistsByEmail(String email);
+    UserDto getById(Long id);
 }

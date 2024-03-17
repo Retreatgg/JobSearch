@@ -1,12 +1,15 @@
 package com.example.demo.dao;
 
+import com.example.demo.model.Resume;
 import com.example.demo.model.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
@@ -39,6 +42,19 @@ public class UserDao {
         return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), email);
     }
 
+    public Optional<User> getById(Long id) {
+        String sql = """
+                select * from USERS
+                where id = ?
+                """;
+
+        return Optional.ofNullable(
+                DataAccessUtils.singleResult(
+                        jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(User.class), id)
+                )
+        );
+    }
+
     public User getUserByPhoneNumber(String phoneNumber) {
         String sql = """
                 select * from users
@@ -57,6 +73,8 @@ public class UserDao {
 
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(User.class));
     }
+
+
 
     public boolean isUserExistsByEmail(String email) {
         String sql = "SELECT * FROM USERS WHERE EMAIL = ?";

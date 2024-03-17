@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 public class ProfileController {
     private final ProfileService profileService;
 
-    @PostMapping("id{id}")
+    @PostMapping("{id}")
     public HttpStatus editProfile(@RequestBody UserDto userDto, @PathVariable long id) {
         profileService.editProfile(userDto, id);
         return HttpStatus.OK;

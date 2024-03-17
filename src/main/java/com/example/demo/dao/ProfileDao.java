@@ -17,7 +17,7 @@ public class ProfileDao {
                 "PASSWORD = ?, PHONE_NUMBER = ?, AVATAR = ?, ACCOUNT_TYPE = ? " +
                 "WHERE id = ?";
 
-        jdbcTemplate.update(sql, user.getName(), user.getUsername(), user.getEmail(), user.getPassword(),
+        jdbcTemplate.update(sql, user.getName(), user.getUsername(), user.getAge(), user.getEmail(), user.getPassword(),
                 user.getPhoneNumber(), user.getAvatar(), user.getAccountType(), id);
     }
 }

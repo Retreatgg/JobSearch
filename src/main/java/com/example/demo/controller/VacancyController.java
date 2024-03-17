@@ -40,18 +40,18 @@ public class VacancyController {
         return ResponseEntity.ok(vacancyService.getActiveVacancy());
     }
 
-    @DeleteMapping("delete{id}")
+    @DeleteMapping("{id}")
     public void deleteResumeById(@PathVariable long id) {
         vacancyService.deleteVacancyById(id);
     }
 
-    @PostMapping("add")
+    @PostMapping("")
     public HttpStatus addResume(@RequestBody VacancyDto vacancyDto) {
         vacancyService.addVacancy(vacancyDto);
         return HttpStatus.OK;
     }
 
-    @PostMapping("id{id}")
+    @PutMapping("{id}")
     public HttpStatus editResume(@RequestBody VacancyDto vacancyDto, @PathVariable long id) {
         vacancyService.editVacancy(vacancyDto, id);
         return HttpStatus.OK;

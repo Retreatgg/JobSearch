@@ -5,6 +5,7 @@ import com.example.demo.dto.ResumeDto;
 import com.example.demo.model.Resume;
 import com.example.demo.service.ResumeService;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -27,9 +28,10 @@ public class ResumeServiceImpl implements ResumeService {
         return transformationForListDtoResume(resumes);
     }
 
+    @SneakyThrows
     @Override
     public ResumeDto getResumeById(Long id) {
-        Resume resume = resumeDao.getResumeById(id);
+        Resume resume = resumeDao.getResumeById(id).orElseThrow(() -> new Exception("Can not find Resume by ID:" + id));;
         return transformationForSingleDtoResume(resume);
     }
 
@@ -40,8 +42,12 @@ public class ResumeServiceImpl implements ResumeService {
     }
 
     @Override
-    public void deleteResumeById(Long id) {
-        resumeDao.deleteResumeById(id);
+    public boolean deleteResumeById(Long id) {
+        if(resumeDao.getResumeById(id).) {
+            resumeDao.deleteResumeById(id);
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -66,7 +72,7 @@ public class ResumeServiceImpl implements ResumeService {
                 .salary(resume.getSalary())
                 .isActive(resume.getIsActive())
                 .categoryId(resume.getCategoryId())
-                .applicantId(resume.getApplicantId())
+                .applicant(resume.getApplicantId())
                 .createdDate(resume.getCreatedDate())
                 .updateTime(resume.getUpdateTime())
                 .build();
@@ -81,7 +87,7 @@ public class ResumeServiceImpl implements ResumeService {
                     .salary(e.getSalary())
                     .isActive(e.getIsActive())
                     .categoryId(e.getCategoryId())
-                    .applicantId(e.getApplicantId())
+                    .applicant(e.getApplicantId())
                     .createdDate(e.getCreatedDate())
                     .updateTime(e.getUpdateTime())
                     .build());
@@ -97,7 +103,7 @@ public class ResumeServiceImpl implements ResumeService {
         resume.setIsActive(resumeDto.getIsActive());
         resume.setCreatedDate(resumeDto.getCreatedDate());
         resume.setUpdateTime(resumeDto.getUpdateTime());
-        resume.setApplicantId(resumeDto.getApplicantId());
+        resume.setApplicantId(resumeDto.getApplicant());
         resume.setCategoryId(resumeDto.getCategoryId());
 
         return resume;

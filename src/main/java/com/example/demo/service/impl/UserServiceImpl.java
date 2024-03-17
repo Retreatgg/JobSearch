@@ -5,6 +5,7 @@ import com.example.demo.dto.UserDto;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -43,6 +44,13 @@ public class UserServiceImpl implements UserService {
     public List<UserDto> getUserResponded() {
         List<User> users = userDao.getRespondedUsers();
         return transformationForDtoListUser(users);
+    }
+
+    @SneakyThrows
+    @Override
+    public UserDto getById(Long id) {
+        User user = userDao.getById(id).orElseThrow(() -> new Exception("Can not find User by ID:" + id));
+        return transformationForDtoSingleUser(user);
     }
 
     @Override
