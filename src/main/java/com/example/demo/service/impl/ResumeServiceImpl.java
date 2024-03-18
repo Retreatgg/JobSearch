@@ -43,7 +43,7 @@ public class ResumeServiceImpl implements ResumeService {
 
     @Override
     public boolean deleteResumeById(Long id) {
-        if(resumeDao.getResumeById(id).) {
+        if(resumeDao.getResumeById(id).isPresent()) {
             resumeDao.deleteResumeById(id);
             return true;
         }

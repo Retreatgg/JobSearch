@@ -16,6 +16,7 @@ import java.util.Optional;
 public class UserDao {
     private final JdbcTemplate jdbcTemplate;
 
+
     public List<User> getUsers() {
         String sql = """
                 select * from users;
@@ -73,8 +74,6 @@ public class UserDao {
 
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(User.class));
     }
-
-
 
     public boolean isUserExistsByEmail(String email) {
         String sql = "SELECT * FROM USERS WHERE EMAIL = ?";

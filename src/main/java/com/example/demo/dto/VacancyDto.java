@@ -22,7 +22,7 @@ public class VacancyDto {
     private Integer expFrom;
     private Integer expTo;
     private Boolean isActive;
-    private User authorId;
+    private Long authorId;
     private LocalDateTime createdDate;
     private LocalDateTime updateTime;
 

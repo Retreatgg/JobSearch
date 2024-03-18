@@ -4,6 +4,7 @@ import com.example.demo.dao.UserDao;
 import com.example.demo.dto.UserDto;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
+import com.example.demo.util.FileUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserDao userDao;
+    private final FileUtil fileUtil;
+
 
     @Override
     public List<UserDto> getUsers() {
@@ -53,6 +56,7 @@ public class UserServiceImpl implements UserService {
         return transformationForDtoSingleUser(user);
     }
 
+
     @Override
     public Boolean isUserExistsByEmail(String email) {
         return userDao.isUserExistsByEmail(email);
@@ -69,7 +73,7 @@ public class UserServiceImpl implements UserService {
                     .accountType(e.getAccountType())
                     .name(e.getName())
                     .username(e.getUsername())
-                    .avatar(e.getAvatar())
+                    .avatar(fileUtil.convertStringToMultipartFile(e.getAvatar()))
                     .build());
         });
 
@@ -83,7 +87,7 @@ public class UserServiceImpl implements UserService {
                 .username(user.getUsername())
                 .email(user.getEmail())
                 .age(user.getAge())
-                .avatar(user.getAvatar())
+                .avatar(fileUtil.convertStringToMultipartFile(user.getAvatar()))
                 .phoneNumber(user.getPhoneNumber())
                 .accountType(user.getAccountType())
                 .build();
