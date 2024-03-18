@@ -7,11 +7,13 @@ import com.example.demo.service.UserService;
 import com.example.demo.util.FileUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -52,8 +54,14 @@ public class UserServiceImpl implements UserService {
     @SneakyThrows
     @Override
     public UserDto getById(Long id) {
-        User user = userDao.getById(id).orElseThrow(() -> new Exception("Can not find User by ID:" + id));
-        return transformationForDtoSingleUser(user);
+        try {
+            User user = userDao.getById(id).orElseThrow(() -> new Exception("Can not find User by ID:" + id));
+            return transformationForDtoSingleUser(user);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+        }
+
+        return null;
     }
 
 

@@ -1,0 +1,10 @@
+2024-03-18T18:07:45.293+06:00  INFO 19472 --- [main] com.example.demo.DemoApplication         : Starting DemoApplication using Java 21 with PID 19472 (C:\Users\NOTEBURG\Desktop\demo\target\classes started by NOTEBURG in C:\Users\NOTEBURG\Desktop\demo)
+2024-03-18T18:07:45.300+06:00  INFO 19472 --- [main] com.example.demo.DemoApplication         : No active profile set, falling back to 1 default profile: "default"
+2024-03-18T18:07:49.369+06:00  INFO 19472 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8089 (http)
+2024-03-18T18:07:49.395+06:00  INFO 19472 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-03-18T18:07:49.395+06:00  INFO 19472 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.19]
+2024-03-18T18:07:49.502+06:00  INFO 19472 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-03-18T18:07:49.503+06:00  INFO 19472 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3975 ms
+2024-03-18T18:07:49.820+06:00  INFO 19472 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-03-18T18:07:55.577+06:00  INFO 19472 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn1: url=jdbc:h2:./db/demo user=ROOT
+2024-03-18T18:07:55.581+06:00  INFO 19472 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.

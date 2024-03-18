@@ -6,11 +6,13 @@ import com.example.demo.model.Resume;
 import com.example.demo.service.ResumeService;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ResumeServiceImpl implements ResumeService {
@@ -28,11 +30,16 @@ public class ResumeServiceImpl implements ResumeService {
         return transformationForListDtoResume(resumes);
     }
 
-    @SneakyThrows
+
     @Override
     public ResumeDto getResumeById(Long id) {
-        Resume resume = resumeDao.getResumeById(id).orElseThrow(() -> new Exception("Can not find Resume by ID:" + id));;
-        return transformationForSingleDtoResume(resume);
+        try {
+            Resume resume = resumeDao.getResumeById(id).orElseThrow(() -> new Exception("Can not find Resume by ID:" + id));
+            return transformationForSingleDtoResume(resume);
+        } catch (Exception e){
+            log.error(e.getMessage());
+        }
+        return null;
     }
 
     @Override

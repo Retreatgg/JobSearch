@@ -5,6 +5,5 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface ProfileService {
-    void editProfile(UserDto userDto, long id);
     void upload(UserDto userDto, long id);
 }
