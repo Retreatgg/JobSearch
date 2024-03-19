@@ -15,43 +15,43 @@ import java.util.List;
 public class ResumeController {
     private final ResumeService resumeService;
 
-    @GetMapping("category{categoryId}")
-    public ResponseEntity<ResumeDto> getResumeByCategoryId(@PathVariable long categoryId) {
-        return ResponseEntity.ok(resumeService.getResumesByCategoryId(categoryId));
+    @GetMapping("category{categoryId}employerId{employerId}")
+    public ResponseEntity<ResumeDto> getResumeByCategoryId(@PathVariable long categoryId, @PathVariable long employerId) {
+        return ResponseEntity.ok(resumeService.getResumesByCategoryId(categoryId, employerId));
     }
 
-    @GetMapping("applicant{name}")
-    public ResponseEntity<List<ResumeDto>> getResumesByApplicant(@PathVariable String name) {
-        return ResponseEntity.ok(resumeService.getResumesByName(name));
+    @GetMapping("applicant{name}employerId{employerId}")
+    public ResponseEntity<List<ResumeDto>> getResumesByApplicant(@PathVariable String name, @PathVariable long employerId) {
+        return ResponseEntity.ok(resumeService.getResumesByName(name, employerId));
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity<ResumeDto> getResumeById(@PathVariable long id) {
-        return ResponseEntity.ok(resumeService.getResumeById(id));
+    @GetMapping("{id}employerId{employerId}")
+    public ResponseEntity<ResumeDto> getResumeById(@PathVariable long id, @PathVariable long employerId) {
+        return ResponseEntity.ok(resumeService.getResumeById(id, employerId));
     }
 
-    @GetMapping("applicantId{id}")
-    public ResponseEntity<List<ResumeDto>> getResumesByApplicantId(@PathVariable long id) {
-        return ResponseEntity.ok(resumeService.getResumesByApplicantId(id));
+    @GetMapping("applicantId{id}employerId{employerId}")
+    public ResponseEntity<List<ResumeDto>> getResumesByApplicantId(@PathVariable long id, @PathVariable long employerId) {
+        return ResponseEntity.ok(resumeService.getResumesByApplicantId(id, employerId));
     }
 
-    @DeleteMapping("{id}")
-    public ResponseEntity<Void> deleteResumeById(@PathVariable long id) {
-       if(resumeService.deleteResumeById(id)) {
+    @DeleteMapping("{id}applicant{applicantId}")
+    public ResponseEntity<Void> deleteResumeById(@PathVariable long id, @PathVariable long applicantId) {
+       if(resumeService.deleteResumeById(id, applicantId)) {
            return ResponseEntity.noContent().build();
        }
        return ResponseEntity.notFound().build();
     }
 
-    @PostMapping("")
-    public HttpStatus addResume(@RequestBody ResumeDto resumeDto) {
-        resumeService.addResume(resumeDto);
+    @PostMapping("applicant{applicantId}")
+    public HttpStatus addResume(@RequestBody ResumeDto resumeDto, @PathVariable long applicantId) {
+        resumeService.addResume(resumeDto, applicantId);
         return HttpStatus.OK;
     }
 
-    @PutMapping("{id}")
-    public HttpStatus editResume(@RequestBody ResumeDto resumeDto, @PathVariable long id) {
-        resumeService.editResume(resumeDto, id);
+    @PutMapping("{id}applicant{applicantId}")
+    public HttpStatus editResume(@RequestBody ResumeDto resumeDto, @PathVariable long id, @PathVariable long applicantId) {
+        resumeService.editResume(resumeDto, id, applicantId);
         return HttpStatus.OK;
     }
 

@@ -15,45 +15,45 @@ import java.util.List;
 public class VacancyController {
     private final VacancyService vacancyService;
 
-    @GetMapping
-    public ResponseEntity<List<VacancyDto>> getAllVacancies() {
-        return ResponseEntity.ok(vacancyService.getAllVacancies());
+    @GetMapping("applicant{applicantId}")
+    public ResponseEntity<List<VacancyDto>> getAllVacancies(@PathVariable long applicantId) {
+        return ResponseEntity.ok(vacancyService.getAllVacancies(applicantId));
     }
 
-    @GetMapping("category{name}")
-    public ResponseEntity<List<VacancyDto>> getVacanciesByCategory(@PathVariable String name) {
-        return ResponseEntity.ok(vacancyService.getVacanciesByCategory(name));
+    @GetMapping("category{name}applicant{applicantId}")
+    public ResponseEntity<List<VacancyDto>> getVacanciesByCategory(@PathVariable String name, @PathVariable long applicantId) {
+        return ResponseEntity.ok(vacancyService.getVacanciesByCategory(name, applicantId));
     }
 
-    @GetMapping("responded-vacancies")
-    public ResponseEntity<List<VacancyDto>> getRespondedVacancies() {
-        return ResponseEntity.ok(vacancyService.getRespondedVacancies());
+    @GetMapping("responded-vacancies/applicant{applicantId}")
+    public ResponseEntity<List<VacancyDto>> getRespondedVacancies(@PathVariable long applicantId) {
+        return ResponseEntity.ok(vacancyService.getRespondedVacancies(applicantId));
     }
 
-    @GetMapping("authorId{id}")
-    public ResponseEntity<List<VacancyDto>> getVacancyByAuthorId(@PathVariable Long id) {
-        return ResponseEntity.ok(vacancyService.getVacancyByAuthorId(id));
+    @GetMapping("authorId{id}applicant{applicantId}")
+    public ResponseEntity<List<VacancyDto>> getVacancyByAuthorId(@PathVariable Long id, @PathVariable long applicantId) {
+        return ResponseEntity.ok(vacancyService.getVacancyByAuthorId(id, applicantId));
     }
 
-    @GetMapping("active")
-    public ResponseEntity<List<VacancyDto>> getActiveVacancies() {
-        return ResponseEntity.ok(vacancyService.getActiveVacancy());
+    @GetMapping("active/applicant{applicantId}")
+    public ResponseEntity<List<VacancyDto>> getActiveVacancies(@PathVariable long applicantId) {
+        return ResponseEntity.ok(vacancyService.getActiveVacancy(applicantId));
     }
 
-    @DeleteMapping("{id}")
-    public void deleteResumeById(@PathVariable long id) {
-        vacancyService.deleteVacancyById(id);
+    @DeleteMapping("{id}employer{employerId}")
+    public void deleteResumeById(@PathVariable long id, @PathVariable long employerId) {
+        vacancyService.deleteVacancyById(id, employerId);
     }
 
-    @PostMapping("")
-    public HttpStatus addResume(@RequestBody VacancyDto vacancyDto) {
-        vacancyService.addVacancy(vacancyDto);
+    @PostMapping("employer{employerId}")
+    public HttpStatus addResume(@RequestBody VacancyDto vacancyDto, @PathVariable long employerId) {
+        vacancyService.addVacancy(vacancyDto, employerId);
         return HttpStatus.OK;
     }
 
-    @PutMapping("{id}")
-    public HttpStatus editResume(@RequestBody VacancyDto vacancyDto, @PathVariable long id) {
-        vacancyService.editVacancy(vacancyDto, id);
+    @PutMapping("{id}employer{employerId}")
+    public HttpStatus editResume(@RequestBody VacancyDto vacancyDto, @PathVariable long id, @PathVariable long employerId) {
+        vacancyService.editVacancy(vacancyDto, id, employerId);
         return HttpStatus.OK;
     }
 }

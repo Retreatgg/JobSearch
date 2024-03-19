@@ -1,56 +1,81 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.dao.ResumeDao;
+import com.example.demo.dao.UserDao;
 import com.example.demo.dto.ResumeDto;
 import com.example.demo.model.Resume;
+import com.example.demo.model.User;
 import com.example.demo.service.ResumeService;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class ResumeServiceImpl implements ResumeService {
     private final ResumeDao resumeDao;
+    private final UserDao userDao;
 
     @Override
-    public ResumeDto getResumesByCategoryId(Long id) {
-        Resume resume = resumeDao.getResumesByCategoryId(id);
-        return transformationForSingleDtoResume(resume);
-    }
-
-    @Override
-    public List<ResumeDto> getResumesByName(String name) {
-        List<Resume> resumes = resumeDao.getResumesByApplicant(name);
-        return transformationForListDtoResume(resumes);
-    }
-
-
-    @Override
-    public ResumeDto getResumeById(Long id) {
-        try {
-            Resume resume = resumeDao.getResumeById(id).orElseThrow(() -> new Exception("Can not find Resume by ID:" + id));
+    public ResumeDto getResumesByCategoryId(Long id, long employerId) {
+        User user = returnUserById(employerId);
+        assert user != null;
+        if (user.getAccountType().equals("Employer")) {
+            Resume resume = resumeDao.getResumesByCategoryId(id);
             return transformationForSingleDtoResume(resume);
-        } catch (Exception e){
-            log.error(e.getMessage());
         }
         return null;
     }
 
     @Override
-    public List<ResumeDto> getResumesByApplicantId(Long id) {
-        List<Resume> resumes = resumeDao.getResumesByApplicantId(id);
-        return transformationForListDtoResume(resumes);
+    public List<ResumeDto> getResumesByName(String name, long employerId) {
+        User user = returnUserById(employerId);
+        assert user != null;
+        if (user.getAccountType().equals("Employer")) {
+            List<Resume> resumes = resumeDao.getResumesByApplicant(name);
+            return transformationForListDtoResume(resumes);
+        }
+        return null;
+    }
+
+
+    @Override
+    public ResumeDto getResumeById(Long id, long employerId) {
+        User user = returnUserById(employerId);
+        assert user != null;
+        if (user.getAccountType().equals("Employer")) {
+            try {
+                Resume resume = resumeDao.getResumeById(id).orElseThrow(() -> new Exception("Can not find Resume by ID:" + id));
+                return transformationForSingleDtoResume(resume);
+            } catch (Exception e) {
+                log.error(e.getMessage());
+            }
+        }
+        return null;
     }
 
     @Override
-    public boolean deleteResumeById(Long id) {
-        if(resumeDao.getResumeById(id).isPresent()) {
+    public List<ResumeDto> getResumesByApplicantId(Long id, long employerId) {
+        User user = returnUserById(employerId);
+        assert user != null;
+        if (user.getAccountType().equals("Employer")) {
+            List<Resume> resumes = resumeDao.getResumesByApplicantId(id);
+            return transformationForListDtoResume(resumes);
+        }
+
+        return null;
+    }
+
+    @Override
+    public boolean deleteResumeById(Long id, long applicantId) {
+        User user = returnUserById(applicantId);
+        assert user != null;
+        if (resumeDao.getResumeById(id).isPresent() && user.getAccountType().equals("Applicant")) {
             resumeDao.deleteResumeById(id);
             return true;
         }
@@ -58,17 +83,26 @@ public class ResumeServiceImpl implements ResumeService {
     }
 
     @Override
-    public void addResume(ResumeDto resumeDto) {
-        Resume resume = new Resume();
-        resume = editAndAdd(resume, resumeDto);
-        resumeDao.addResume(resume);
+    public void addResume(ResumeDto resumeDto, long applicantId) {
+        User user = returnUserById(applicantId);
+        assert user != null;
+        if (user.getAccountType().equals("Applicant")) {
+            Resume resume = new Resume();
+            resume = editAndAdd(resume, resumeDto);
+            resumeDao.addResume(resume);
+        }
+
     }
 
     @Override
-    public void editResume(ResumeDto resumeDto, long id) {
-        Resume resume = new Resume();
-        resume = editAndAdd(resume, resumeDto);
-        resumeDao.editResume(resume, id);
+    public void editResume(ResumeDto resumeDto, long id, long applicantId) {
+        User user = returnUserById(applicantId);
+        assert user != null;
+        if (user.getAccountType().equals("Applicant")) {
+            Resume resume = new Resume();
+            resume = editAndAdd(resume, resumeDto);
+            resumeDao.editResume(resume, id);
+        }
     }
 
 
@@ -114,6 +148,15 @@ public class ResumeServiceImpl implements ResumeService {
         resume.setCategoryId(resumeDto.getCategoryId());
 
         return resume;
+    }
+
+    private User returnUserById(long id) {
+        Optional<User> optionalUser = userDao.getById(id);
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            return user;
+        }
+        return null;
     }
 
 }
