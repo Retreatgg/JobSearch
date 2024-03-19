@@ -24,8 +24,7 @@ public class ResumeServiceImpl implements ResumeService {
     @Override
     public ResumeDto getResumesByCategoryId(Long id, long employerId) {
         User user = returnUserById(employerId);
-        assert user != null;
-        if (user.getAccountType().equals("Employer")) {
+        if (user != null && user.getAccountType().equals("Employer")) {
             Resume resume = resumeDao.getResumesByCategoryId(id);
             return transformationForSingleDtoResume(resume);
         }
@@ -35,8 +34,7 @@ public class ResumeServiceImpl implements ResumeService {
     @Override
     public List<ResumeDto> getResumesByName(String name, long employerId) {
         User user = returnUserById(employerId);
-        assert user != null;
-        if (user.getAccountType().equals("Employer")) {
+        if (user != null && user.getAccountType().equals("Employer")) {
             List<Resume> resumes = resumeDao.getResumesByApplicant(name);
             return transformationForListDtoResume(resumes);
         }
@@ -47,8 +45,7 @@ public class ResumeServiceImpl implements ResumeService {
     @Override
     public ResumeDto getResumeById(Long id, long employerId) {
         User user = returnUserById(employerId);
-        assert user != null;
-        if (user.getAccountType().equals("Employer")) {
+        if (user != null && user.getAccountType().equals("Employer")) {
             try {
                 Resume resume = resumeDao.getResumeById(id).orElseThrow(() -> new Exception("Can not find Resume by ID:" + id));
                 return transformationForSingleDtoResume(resume);
@@ -62,8 +59,7 @@ public class ResumeServiceImpl implements ResumeService {
     @Override
     public List<ResumeDto> getResumesByApplicantId(Long id, long employerId) {
         User user = returnUserById(employerId);
-        assert user != null;
-        if (user.getAccountType().equals("Employer")) {
+        if (user != null && user.getAccountType().equals("Employer")) {
             List<Resume> resumes = resumeDao.getResumesByApplicantId(id);
             return transformationForListDtoResume(resumes);
         }
@@ -74,19 +70,26 @@ public class ResumeServiceImpl implements ResumeService {
     @Override
     public boolean deleteResumeById(Long id, long applicantId) {
         User user = returnUserById(applicantId);
-        assert user != null;
-        if (resumeDao.getResumeById(id).isPresent() && user.getAccountType().equals("Applicant")) {
-            resumeDao.deleteResumeById(id);
-            return true;
+        if (user == null || !user.getAccountType().equals("Applicant")) {
+            return false;
         }
+
+        Optional<Resume> optionalResume = resumeDao.getResumeById(id);
+        if (optionalResume.isPresent()) {
+            Resume resume = optionalResume.get();
+            if (resume.getApplicantId() == applicantId) {
+                resumeDao.deleteResumeById(id);
+                return true;
+            }
+        }
+
         return false;
     }
 
     @Override
     public void addResume(ResumeDto resumeDto, long applicantId) {
         User user = returnUserById(applicantId);
-        assert user != null;
-        if (user.getAccountType().equals("Applicant")) {
+        if (user != null && user.getAccountType().equals("Applicant")) {
             Resume resume = new Resume();
             resume = editAndAdd(resume, resumeDto);
             resumeDao.addResume(resume);
@@ -97,10 +100,8 @@ public class ResumeServiceImpl implements ResumeService {
     @Override
     public void editResume(ResumeDto resumeDto, long id, long applicantId) {
         User user = returnUserById(applicantId);
-        assert user != null;
-        if (user.getAccountType().equals("Applicant")) {
-            Resume resume = new Resume();
-            resume = editAndAdd(resume, resumeDto);
+        if (user != null && user.getAccountType().equals("Applicant") && resumeDto.getApplicant() == applicantId) {
+            Resume resume = editAndAdd(new Resume(), resumeDto);
             resumeDao.editResume(resume, id);
         }
     }

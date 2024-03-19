@@ -1,9 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.dto.ResumeDto;
 import com.example.demo.dto.VacancyDto;
-import com.example.demo.model.User;
-import com.example.demo.model.Vacancy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,4 +17,5 @@ public interface VacancyService {
     void addVacancy(VacancyDto vacancyDto, long userId);
     void editVacancy(VacancyDto vacancyDto, long id, long userId);
     List<VacancyDto> getVacanciesByCompanyName(String name, long userId);
+    VacancyDto getVacancyById(Long id, long userId);
 }

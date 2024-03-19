@@ -7,12 +7,14 @@ import com.example.demo.model.User;
 import com.example.demo.model.Vacancy;
 import com.example.demo.service.VacancyService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class VacancyServiceImpl implements VacancyService {
@@ -22,8 +24,7 @@ public class VacancyServiceImpl implements VacancyService {
     @Override
     public List<VacancyDto> getAllVacancies(long applicantId) {
         User user = returnUserById(applicantId);
-        assert user != null;
-        if (user.getAccountType().equals("Applicant")) {
+        if (user != null && user.getAccountType().equals("Applicant")) {
             List<Vacancy> vacancies = vacancyDao.getAllVacancies();
             return transformationForDtoListVacancies(vacancies);
         }
@@ -33,8 +34,7 @@ public class VacancyServiceImpl implements VacancyService {
     @Override
     public List<VacancyDto> getVacanciesByCategory(String name, long applicantId) {
         User user = returnUserById(applicantId);
-        assert user != null;
-        if (user.getAccountType().equals("Applicant")) {
+        if (user != null && user.getAccountType().equals("Applicant")) {
             List<Vacancy> vacancies = vacancyDao.getVacanciesByCategory(name);
             return transformationForDtoListVacancies(vacancies);
         }
@@ -44,8 +44,7 @@ public class VacancyServiceImpl implements VacancyService {
     @Override
     public List<VacancyDto> getRespondedVacancies(long employeeId) {
         User user = returnUserById(employeeId);
-        assert user != null;
-        if (user.getAccountType().equals("Employer")) {
+        if (user != null && user.getAccountType().equals("Employer")) {
             List<Vacancy> vacancies = vacancyDao.getRespondedVacancies();
             return transformationForDtoListVacancies(vacancies);
         }
@@ -55,8 +54,7 @@ public class VacancyServiceImpl implements VacancyService {
     @Override
     public List<VacancyDto> getVacancyByAuthorId(Long id, long applicantId) {
         User user = returnUserById(applicantId);
-        assert user != null;
-        if (user.getAccountType().equals("Applicant")) {
+        if (user != null && user.getAccountType().equals("Applicant")) {
             List<Vacancy> vacancies = vacancyDao.getVacancyByAuthorId(id);
             return transformationForDtoListVacancies(vacancies);
         }
@@ -66,8 +64,7 @@ public class VacancyServiceImpl implements VacancyService {
     @Override
     public List<VacancyDto> getActiveVacancy(long applicantId) {
         User user = returnUserById(applicantId);
-        assert user != null;
-        if (user.getAccountType().equals("Applicant")) {
+        if (user != null && user.getAccountType().equals("Applicant")) {
             List<Vacancy> vacancies = vacancyDao.getActiveVacancies();
             return transformationForDtoListVacancies(vacancies);
         }
@@ -78,9 +75,14 @@ public class VacancyServiceImpl implements VacancyService {
     @Override
     public void deleteVacancyById(Long id, long employeeId) {
         User user = returnUserById(employeeId);
-        assert user != null;
-        if (user.getAccountType().equals("Employer")) {
-            vacancyDao.deleteVacancyById(id);
+        if (user != null && user.getAccountType().equals("Employer")) {
+            Optional<Vacancy> optionalVacancy = vacancyDao.getVacancyById(id);
+            if (optionalVacancy.isPresent()) {
+                Vacancy vacancy = optionalVacancy.get();
+                if (vacancy.getAuthorId() == employeeId) {
+                    vacancyDao.deleteVacancyById(id);
+                }
+            }
         }
     }
 
@@ -98,22 +100,37 @@ public class VacancyServiceImpl implements VacancyService {
     @Override
     public void editVacancy(VacancyDto vacancyDto, long id, long employerId) {
         User user = returnUserById(employerId);
-        assert user != null;
-        if (user.getAccountType().equals("Employer")) {
-            Vacancy vacancy = new Vacancy();
-            vacancy = editAndAdd(vacancy, vacancyDto);
-            vacancyDao.editVacancy(vacancy, id);
+        if (user != null && user.getAccountType().equals("Employer")) {
+            if(vacancyDto.getAuthorId() == employerId) {
+                Vacancy vacancy = new Vacancy();
+                vacancy = editAndAdd(vacancy, vacancyDto);
+                vacancyDao.editVacancy(vacancy, id);
+            }
         }
     }
 
     @Override
     public List<VacancyDto> getVacanciesByCompanyName(String name, long applicantId) {
         User user = returnUserById(applicantId);
-        assert user != null;
-        if (user.getAccountType().equals("Applicant")) {
+        if (user != null && user.getAccountType().equals("Applicant")) {
             List<Vacancy> vacancies = vacancyDao.getVacanciesByCompanyName(name);
             return transformationForDtoListVacancies(vacancies);
         }
+        return null;
+    }
+
+    @Override
+    public VacancyDto getVacancyById(Long id, long applicantId) {
+        User user = returnUserById(applicantId);
+        if(user != null && user.getAccountType().equals("Applicant")) {
+            try {
+                Vacancy vacancy = vacancyDao.getVacancyById(id).orElseThrow(() -> new Exception("Can not find Vacancy by ID:" + id));
+                return transformationForDtoSingleVacancy(vacancy);
+            } catch (Exception e) {
+                log.error(e.getMessage());
+            }
+        }
+
         return null;
     }
 
@@ -152,6 +169,23 @@ public class VacancyServiceImpl implements VacancyService {
         });
 
         return dtos;
+    }
+
+    public VacancyDto transformationForDtoSingleVacancy(Vacancy vacancy) {
+            return VacancyDto.builder()
+                    .id(vacancy.getId())
+                    .name(vacancy.getName())
+                    .description(vacancy.getDescription())
+                    .expTo(vacancy.getExpTo())
+                    .expFrom(vacancy.getExpFrom())
+                    .createdDate(vacancy.getCreatedDate())
+                    .updateTime(vacancy.getUpdateTime())
+                    .authorId(vacancy.getAuthorId())
+                    .categoryId(vacancy.getCategoryId())
+                    .salary(vacancy.getSalary())
+                    .isActive(vacancy.getIsActive())
+                    .build();
+
     }
 
     private User returnUserById(long userId) {
