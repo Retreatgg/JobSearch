@@ -65,7 +65,7 @@ public class VacancyServiceImpl implements VacancyService {
 
     @Override
     public List<VacancyDto> getActiveVacancy(long applicantId) {
-        User user =  returnUserById(applicantId);
+        User user = returnUserById(applicantId);
         assert user != null;
         if (user.getAccountType().equals("Applicant")) {
             List<Vacancy> vacancies = vacancyDao.getActiveVacancies();
@@ -104,6 +104,17 @@ public class VacancyServiceImpl implements VacancyService {
             vacancy = editAndAdd(vacancy, vacancyDto);
             vacancyDao.editVacancy(vacancy, id);
         }
+    }
+
+    @Override
+    public List<VacancyDto> getVacanciesByCompanyName(String name, long applicantId) {
+        User user = returnUserById(applicantId);
+        assert user != null;
+        if (user.getAccountType().equals("Applicant")) {
+            List<Vacancy> vacancies = vacancyDao.getVacanciesByCompanyName(name);
+            return transformationForDtoListVacancies(vacancies);
+        }
+        return null;
     }
 
     private Vacancy editAndAdd(Vacancy vacancy, VacancyDto vacancyDto) {

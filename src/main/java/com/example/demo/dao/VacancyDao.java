@@ -62,6 +62,17 @@ public class VacancyDao {
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Vacancy.class));
     }
 
+    public List<Vacancy> getVacanciesByCompanyName(String name) {
+        String sql = """
+                select * from vacancies
+                where AUTHOR_ID = (
+                    select id from users
+                    where name like ?
+                );
+                """;
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Vacancy.class), name);
+    }
+
     public void deleteVacancyById(Long id) {
         String sql = """
                 delete from VACANCIES where id = ?

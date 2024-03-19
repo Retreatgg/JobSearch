@@ -56,4 +56,9 @@ public class VacancyController {
         vacancyService.editVacancy(vacancyDto, id, employerId);
         return HttpStatus.OK;
     }
+
+    @GetMapping("name_company{name}applicant{applicantId}")
+    public ResponseEntity<List<VacancyDto>> getVacanciesByCompanyName(@PathVariable String name, @PathVariable long applicantId) {
+        return ResponseEntity.ok(vacancyService.getVacanciesByCompanyName(name, applicantId));
+    }
 }

@@ -19,4 +19,5 @@ public interface VacancyService {
     void deleteVacancyById(Long id, long userId);
     void addVacancy(VacancyDto vacancyDto, long userId);
     void editVacancy(VacancyDto vacancyDto, long id, long userId);
+    List<VacancyDto> getVacanciesByCompanyName(String name, long userId);
 }
