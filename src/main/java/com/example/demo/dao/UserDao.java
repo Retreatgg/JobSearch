@@ -16,31 +16,40 @@ import java.util.Optional;
 public class UserDao {
     private final JdbcTemplate jdbcTemplate;
 
+    public void editProfile(User user) {
+        String sql = "UPDATE USERS " +
+                "SET name = ?, SURNAME = ?, AGE = ?, " +
+                "PASSWORD = ?, PHONE_NUMBER = ?, AVATAR = ?" +
+                "WHERE id = ?";
 
-    public List<User> getUsers() {
-        String sql = """
-                select * from users;
-                """;
-
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(User.class));
+        jdbcTemplate.update(sql, user.getName(), user.getUsername(), user.getAge(), user.getPassword(),
+                user.getPhoneNumber(), user.getAvatar());
     }
 
-    public User getUserByName(String name) {
+    public Optional<User> getUserByName(String name) {
         String sql = """
                 select * from users
                 where name = ?;
                 """;
 
-        return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), name);
+        return Optional.ofNullable(
+                DataAccessUtils.singleResult(
+                        jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(User.class), name)
+                )
+        );
     }
 
-    public User getUserByEmail(String email) {
+    public Optional<User> getUserByEmail(String email) {
         String sql = """
                 select * from users
                 where email = ?
                 """;
 
-        return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), email);
+        return Optional.ofNullable(
+                DataAccessUtils.singleResult(
+                        jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(User.class), email)
+                )
+        );
     }
 
     public Optional<User> getById(Long id) {
