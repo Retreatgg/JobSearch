@@ -23,7 +23,7 @@ public class UserDao {
                 "WHERE id = ?";
 
         jdbcTemplate.update(sql, user.getName(), user.getUsername(), user.getAge(), user.getPassword(),
-                user.getPhoneNumber(), user.getAvatar());
+                user.getPhoneNumber(), user.getAvatar(), user.getId());
     }
 
     public Optional<User> getUserByName(String name) {
@@ -65,23 +65,17 @@ public class UserDao {
         );
     }
 
-    public User getUserByPhoneNumber(String phoneNumber) {
+    public Optional<User> getUserByPhoneNumber(String phoneNumber) {
         String sql = """
                 select * from users
                 where phone_number = ?
                 """;
 
-        return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), phoneNumber);
-    }
-
-    public List<User> getRespondedUsers() {
-        String sql = """
-                select * from USERS
-                inner join PUBLIC.RESUMES R on USERS.ID = R.APPLICANT_ID
-                where R.IS_ACTIVE = false;
-                """;
-
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(User.class));
+        return Optional.ofNullable(
+                DataAccessUtils.singleResult(
+                        jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(User.class), phoneNumber)
+                )
+        );
     }
 
     public boolean isUserExistsByEmail(String email) {

@@ -80,7 +80,7 @@ public class UserServiceImpl implements UserService {
                     .phoneNumber(e.getPhoneNumber())
                     .accountType(e.getAccountType())
                     .name(e.getName())
-                    .username(e.getUsername())
+                    .surname(e.getUsername())
                     .avatar(fileUtil.convertStringToMultipartFile(e.getAvatar()))
                     .build());
         });
@@ -92,7 +92,7 @@ public class UserServiceImpl implements UserService {
         return UserDto.builder()
                 .id(user.getId())
                 .name(user.getName())
-                .username(user.getUsername())
+                .surname(user.getUsername())
                 .email(user.getEmail())
                 .age(user.getAge())
                 .avatar(fileUtil.convertStringToMultipartFile(user.getAvatar()))

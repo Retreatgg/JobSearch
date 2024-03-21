@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -25,17 +26,20 @@ public class ResumeServiceImpl implements ResumeService {
     public ResumeDto getResumesByCategoryId(Long id, long employerId) {
         User user = returnUserById(employerId);
         if (user != null && user.getAccountType().equals("Employer")) {
-            Resume resume = resumeDao.getResumesByCategoryId(id);
-            return transformationForSingleDtoResume(resume);
+            Optional<Resume> resumeOptional = resumeDao.getResumesByCategoryId(id);
+            if(resumeOptional.isPresent()) {
+                Resume resume = resumeOptional.get();
+                return transformationForSingleDtoResume(resume);
+            }
         }
         return null;
     }
 
     @Override
-    public List<ResumeDto> getResumesByName(String name, long employerId) {
+    public List<ResumeDto> getResumesByApplicantId(long id, long employerId) {
         User user = returnUserById(employerId);
         if (user != null && user.getAccountType().equals("Employer")) {
-            List<Resume> resumes = resumeDao.getResumesByApplicant(name);
+            List<Resume> resumes = resumeDao.getResumesByApplicant(id);
             return transformationForListDtoResume(resumes);
         }
         return null;
@@ -53,17 +57,6 @@ public class ResumeServiceImpl implements ResumeService {
                 log.error(e.getMessage());
             }
         }
-        return null;
-    }
-
-    @Override
-    public List<ResumeDto> getResumesByApplicantId(Long id, long employerId) {
-        User user = returnUserById(employerId);
-        if (user != null && user.getAccountType().equals("Employer")) {
-            List<Resume> resumes = resumeDao.getResumesByApplicantId(id);
-            return transformationForListDtoResume(resumes);
-        }
-
         return null;
     }
 
@@ -91,18 +84,33 @@ public class ResumeServiceImpl implements ResumeService {
         User user = returnUserById(applicantId);
         if (user != null && user.getAccountType().equals("Applicant")) {
             Resume resume = new Resume();
-            resume = editAndAdd(resume, resumeDto);
+            resume.setId(resumeDto.getId());
+            resume.setName(resumeDto.getName());
+            resume.setSalary(resumeDto.getSalary());
+            resume.setIsActive(resumeDto.getIsActive());
+            resume.setCreatedDate(resumeDto.getCreatedDate());
+            resume.setUpdateTime(resumeDto.getUpdateTime());
+            resume.setApplicantId(resumeDto.getApplicant());
+            resume.setCategoryId(resumeDto.getCategoryId());
             resumeDao.addResume(resume);
         }
 
     }
 
     @Override
-    public void editResume(ResumeDto resumeDto, long id, long applicantId) {
+    public void editResume(ResumeDto resumeDto, long applicantId) {
         User user = returnUserById(applicantId);
         if (user != null && user.getAccountType().equals("Applicant") && resumeDto.getApplicant() == applicantId) {
-            Resume resume = editAndAdd(new Resume(), resumeDto);
-            resumeDao.editResume(resume, id);
+            Resume resume = new Resume();
+            resume.setId(resumeDto.getId());
+            resume.setName(resumeDto.getName());
+            resume.setSalary(resumeDto.getSalary());
+            resume.setIsActive(resumeDto.getIsActive());
+            resume.setCreatedDate(resumeDto.getCreatedDate());
+            resume.setUpdateTime(LocalDateTime.now());
+            resume.setApplicantId(resumeDto.getApplicant());
+            resume.setCategoryId(resumeDto.getCategoryId());
+            resumeDao.editResume(resume);
         }
     }
 
@@ -136,19 +144,6 @@ public class ResumeServiceImpl implements ResumeService {
         });
 
         return dtos;
-    }
-
-    private Resume editAndAdd(Resume resume, ResumeDto resumeDto) {
-        resume.setId(resumeDto.getId());
-        resume.setName(resumeDto.getName());
-        resume.setSalary(resumeDto.getSalary());
-        resume.setIsActive(resumeDto.getIsActive());
-        resume.setCreatedDate(resumeDto.getCreatedDate());
-        resume.setUpdateTime(resumeDto.getUpdateTime());
-        resume.setApplicantId(resumeDto.getApplicant());
-        resume.setCategoryId(resumeDto.getCategoryId());
-
-        return resume;
     }
 
     private User returnUserById(long id) {

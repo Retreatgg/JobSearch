@@ -1,5 +1,6 @@
 package com.example.demo.dto;
 
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
@@ -13,10 +14,15 @@ import java.time.LocalDateTime;
 @Setter
 public class ResumeDto {
     private Long id;
+    @NotEmpty
     private Long applicant;
+    @NotEmpty
     private String name;
+    @NotEmpty
     private Long categoryId;
+    @NotEmpty
     private Double salary;
+    @NotEmpty
     private Boolean isActive;
     private LocalDateTime createdDate;
     private LocalDateTime updateTime;

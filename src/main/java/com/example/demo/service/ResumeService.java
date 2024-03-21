@@ -10,12 +10,11 @@ import java.util.List;
 @Service
 public interface ResumeService {
     ResumeDto getResumesByCategoryId(Long id, long userId);
-    List<ResumeDto> getResumesByName(String name, long userId);
+    List<ResumeDto> getResumesByApplicantId(long id, long userId);
 
     ResumeDto getResumeById(Long id, long userId);
-    List<ResumeDto> getResumesByApplicantId(Long id, long uesrId);
 
     boolean deleteResumeById(Long id, long userId);
     void addResume(ResumeDto resumeDto, long userId);
-    void editResume(ResumeDto resumeDto, long id, long userId);
+    void editResume(ResumeDto resumeDto, long userId);
 }

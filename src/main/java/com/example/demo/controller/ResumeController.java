@@ -20,19 +20,14 @@ public class ResumeController {
         return ResponseEntity.ok(resumeService.getResumesByCategoryId(categoryId, employerId));
     }
 
-    @GetMapping("applicant{name}employerId{employerId}")
-    public ResponseEntity<List<ResumeDto>> getResumesByApplicant(@PathVariable String name, @PathVariable long employerId) {
-        return ResponseEntity.ok(resumeService.getResumesByName(name, employerId));
+    @GetMapping("applicant{id}employerId{employerId}")
+    public ResponseEntity<List<ResumeDto>> getResumesByApplicant(@PathVariable long id, @PathVariable long employerId) {
+        return ResponseEntity.ok(resumeService.getResumesByApplicantId(id, employerId));
     }
 
     @GetMapping("{id}employerId{employerId}")
     public ResponseEntity<ResumeDto> getResumeById(@PathVariable long id, @PathVariable long employerId) {
         return ResponseEntity.ok(resumeService.getResumeById(id, employerId));
-    }
-
-    @GetMapping("applicantId{id}employerId{employerId}")
-    public ResponseEntity<List<ResumeDto>> getResumesByApplicantId(@PathVariable long id, @PathVariable long employerId) {
-        return ResponseEntity.ok(resumeService.getResumesByApplicantId(id, employerId));
     }
 
     @DeleteMapping("{id}applicant{applicantId}")
@@ -49,9 +44,9 @@ public class ResumeController {
         return HttpStatus.OK;
     }
 
-    @PutMapping("{id}applicant{applicantId}")
-    public HttpStatus editResume(@RequestBody ResumeDto resumeDto, @PathVariable long id, @PathVariable long applicantId) {
-        resumeService.editResume(resumeDto, id, applicantId);
+    @PutMapping("applicant{applicantId}")
+    public HttpStatus editResume(@RequestBody ResumeDto resumeDto, @PathVariable long applicantId) {
+        resumeService.editResume(resumeDto, applicantId);
         return HttpStatus.OK;
     }
 
