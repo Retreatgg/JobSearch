@@ -8,7 +8,10 @@ import com.example.demo.dto.ResumeDto;
 import com.example.demo.dto.ResumeUpdateDto;
 import com.example.demo.model.Resume;
 import com.example.demo.model.User;
+import com.example.demo.service.ContactInfoService;
+import com.example.demo.service.EducationInfoService;
 import com.example.demo.service.ResumeService;
+import com.example.demo.service.WorkExperienceInfoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -25,6 +28,9 @@ public class ResumeServiceImpl implements ResumeService {
     private final ResumeDao resumeDao;
     private final UserDao userDao;
     private final CategoryDao categoryDao;
+    private final WorkExperienceInfoService workExperienceInfoService;
+    private final EducationInfoService educationInfoService;
+    private final ContactInfoService contactInfoService;
 
     @Override
     public ResumeDto getResumesByCategoryId(Long id, long employerId) {
@@ -96,6 +102,8 @@ public class ResumeServiceImpl implements ResumeService {
             resume.setApplicantId(userDao.returnIdByEmail(resumeDto.getAuthorEmail()));
             resume.setCategoryId(categoryDao.returnIdByName(resumeDto.getCategoryName()));
             resumeDao.addResume(resume);
+            resumeDto.getWorkExperienceInfo().forEach(wei -> workExperienceInfoService.createWorkExperienceInfo(resume.getId(), wei));
+            resumeDto.getEducationInfo().forEach(ei -> educationInfoService.createEducationInfo(resume.getId(), ei));
         }
 
     }
@@ -111,6 +119,9 @@ public class ResumeServiceImpl implements ResumeService {
             resume.setIsActive(resumeDto.getIsActive());
             resume.setCategoryId(categoryDao.returnIdByName(resumeDto.getCategoryName()));
             resumeDao.editResume(resume);
+            resumeDto.getWorkExperienceInfo().forEach(wei -> workExperienceInfoService.createWorkExperienceInfo(resume.getId(), wei));
+            resumeDto.getEducationInfo().forEach(ei -> educationInfoService.createEducationInfo(resume.getId(), ei));
+            contactInfoService.createContactInfo(resume.getId(), resumeDto.getContacts());
         }
     }
 

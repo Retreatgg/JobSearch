@@ -1,7 +1,12 @@
 package com.example.demo.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDate;
 
+@Getter
+@Setter
 public class EducationInfo {
     private Long id;
     private Long resumeId;
