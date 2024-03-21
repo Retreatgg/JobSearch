@@ -1,7 +1,6 @@
 package com.example.demo.dao;
 
 import com.example.demo.model.Resume;
-import com.example.demo.model.Vacancy;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -86,10 +85,10 @@ public class ResumeDao {
 
     public void editResume(Resume resume) {
         String sql = "UPDATE RESUMES " +
-                "SET name = ?, salary = ?, is_active = ?" +
+                "SET name = ?, salary = ?, is_active = ?, UPDATE_TIME = ?" +
                 "WHERE id = ?";
 
         jdbcTemplate.update(sql, resume.getName(), resume.getSalary(),
-                resume.getIsActive(), resume.getId());
+                resume.getIsActive(), LocalDateTime.now(), resume.getId());
     }
 }

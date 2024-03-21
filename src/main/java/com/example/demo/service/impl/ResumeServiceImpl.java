@@ -5,6 +5,7 @@ import com.example.demo.dao.ResumeDao;
 import com.example.demo.dao.UserDao;
 import com.example.demo.dto.ResumeCreateDto;
 import com.example.demo.dto.ResumeDto;
+import com.example.demo.dto.ResumeUpdateDto;
 import com.example.demo.model.Resume;
 import com.example.demo.model.User;
 import com.example.demo.service.ResumeService;
@@ -12,8 +13,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -102,18 +101,15 @@ public class ResumeServiceImpl implements ResumeService {
     }
 
     @Override
-    public void editResume(ResumeDto resumeDto, long applicantId) {
+    public void editResume(ResumeUpdateDto resumeDto, long id, long applicantId) {
         User user = returnUserById(applicantId);
-        if (user != null && user.getAccountType().equals("Applicant") && resumeDto.getApplicant() == applicantId) {
+        if (user != null && user.getAccountType().equals("Applicant")) {
             Resume resume = new Resume();
-            resume.setId(resumeDto.getId());
-            resume.setName(resumeDto.getName());
+            resume.setId(id);
+            resume.setName(resumeDto.getTitle());
             resume.setSalary(resumeDto.getSalary());
             resume.setIsActive(resumeDto.getIsActive());
-            resume.setCreatedDate(resumeDto.getCreatedDate());
-            resume.setUpdateTime(LocalDateTime.now());
-            resume.setApplicantId(resumeDto.getApplicant());
-            resume.setCategoryId(resumeDto.getCategoryId());
+            resume.setCategoryId(categoryDao.returnIdByName(resumeDto.getCategoryName()));
             resumeDao.editResume(resume);
         }
     }

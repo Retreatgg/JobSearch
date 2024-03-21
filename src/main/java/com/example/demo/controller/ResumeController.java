@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.ResumeCreateDto;
 import com.example.demo.dto.ResumeDto;
+import com.example.demo.dto.ResumeUpdateDto;
 import com.example.demo.service.ResumeService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -46,9 +47,9 @@ public class ResumeController {
         return HttpStatus.OK;
     }
 
-    @PutMapping("applicant{applicantId}")
-    public HttpStatus editResume(@RequestBody @Valid ResumeDto resumeDto, @PathVariable long applicantId) {
-        resumeService.editResume(resumeDto, applicantId);
+    @PutMapping("{id}applicant{applicantId}")
+    public HttpStatus editResume(@RequestBody @Valid ResumeUpdateDto resumeDto, @PathVariable long applicantId, @PathVariable long id) {
+        resumeService.editResume(resumeDto, id, applicantId);
         return HttpStatus.OK;
     }
 
