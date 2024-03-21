@@ -84,16 +84,12 @@ public class UserDao {
         return !users.isEmpty();
     }
 
-    public Optional<Long> returnIdByEmail(String email) {
+    public Long returnIdByEmail(String email) {
         String sql = """
                 select id from users
                 where email like ?
                 """;
 
-        return Optional.ofNullable(
-                DataAccessUtils.singleResult(
-                        jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Long.class), email)
-                )
-        );
+        return jdbcTemplate.queryForObject(sql, Long.class, email);
     }
 }

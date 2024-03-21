@@ -70,18 +70,18 @@ public class ResumeDao {
 
     public void addResume(Resume resume) {
         String sql = """
-                insert into RESUMES(name, salary, is_active, applicant_id, category_id)
-                values(:name, :salary, :is_active, :applicant_id, :category_id)
+                insert into RESUMES(name, salary, is_active, applicant_id, category_id, CREATED_DATE, UPDATE_TIME)
+                values(:name, :salary, :is_active, :applicant_id, :category_id, current_timestamp, current_timestamp())
                 """;
 
         namedParameterJdbcTemplate.update(sql, new MapSqlParameterSource()
                 .addValue("name", resume.getName())
                 .addValue("salary", resume.getSalary())
                 .addValue("is_active", resume.getIsActive())
-                .addValue("created_date", LocalDateTime.now())
-                .addValue("update_time", LocalDateTime.now())
                 .addValue("applicant_id", resume.getApplicantId())
-                .addValue("category_id", resume.getCategoryId()));
+                .addValue("category_id", resume.getCategoryId())
+                .addValue("created_date", LocalDateTime.now())
+                .addValue("update_time", LocalDateTime.now()));
     }
 
     public void editResume(Resume resume) {

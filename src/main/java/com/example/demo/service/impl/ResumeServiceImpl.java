@@ -94,20 +94,8 @@ public class ResumeServiceImpl implements ResumeService {
             resume.setIsActive(resumeDto.getIsActive());
             resume.setCreatedDate(LocalDateTime.now());
             resume.setUpdateTime(LocalDateTime.now());
-
-            Optional<Long> optionalAuthorId = userDao.returnIdByEmail(resumeDto.getAuthorEmail());
-            if(optionalAuthorId.isPresent()) {
-                Long authorId = optionalAuthorId.get();
-                resume.setApplicantId(authorId);
-            }
-
-            Optional<Long> optionalCategoryId = categoryDao.returnIdByName(resumeDto.getCategoryName());
-            if(optionalCategoryId.isPresent()) {
-                Long categoryId = optionalCategoryId.get();
-                resume.setId(categoryId);
-            }
-            System.out.println("Adding resume to database: " + resume);
-            resumeDao.addResume(resume);
+            resume.setApplicantId(userDao.returnIdByEmail(resumeDto.getAuthorEmail()));
+            resume.setCategoryId(categoryDao.returnIdByName(resumeDto.getCategoryName()));
             resumeDao.addResume(resume);
         }
 
