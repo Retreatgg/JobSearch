@@ -98,13 +98,13 @@ public class VacancyServiceImpl implements VacancyService {
     }
 
     @Override
-    public void editVacancy(VacancyDto vacancyDto, long id, long employerId) {
+    public void editVacancy(VacancyDto vacancyDto, long employerId) {
         User user = returnUserById(employerId);
         if (user != null && user.getAccountType().equals("Employer")) {
             if(vacancyDto.getAuthorId() == employerId) {
                 Vacancy vacancy = new Vacancy();
                 vacancy = editAndAdd(vacancy, vacancyDto);
-                vacancyDao.editVacancy(vacancy, id);
+                vacancyDao.editVacancy(vacancy);
             }
         }
     }

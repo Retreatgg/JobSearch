@@ -1,6 +1,7 @@
 package com.example.demo.exception.handler;
 
 import com.example.demo.exception.ErrorResponseBody;
+import com.example.demo.exception.ResumeNotFoundException;
 import com.example.demo.exception.UserNotFoundException;
 import com.example.demo.service.ErrorService;
 import lombok.RequiredArgsConstructor;
@@ -24,5 +25,10 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponseBody> validationHandler(MethodArgumentNotValidException exception) {
         return new ResponseEntity<>(errorService.makeResponse(exception.getBindingResult()), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(ResumeNotFoundException.class)
+    public ResponseEntity<ErrorResponseBody> noSuchResumeElement(ResumeNotFoundException exception) {
+        return new ResponseEntity<>(errorService.makeResponse(exception), HttpStatus.NOT_FOUND);
     }
 }

@@ -83,4 +83,17 @@ public class UserDao {
         List<User> users = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(User.class), email);
         return !users.isEmpty();
     }
+
+    public Optional<Long> returnIdByEmail(String email) {
+        String sql = """
+                select id from users
+                where email like ?
+                """;
+
+        return Optional.ofNullable(
+                DataAccessUtils.singleResult(
+                        jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Long.class), email)
+                )
+        );
+    }
 }

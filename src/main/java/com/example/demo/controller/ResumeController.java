@@ -1,7 +1,9 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.ResumeCreateDto;
 import com.example.demo.dto.ResumeDto;
 import com.example.demo.service.ResumeService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,13 +41,13 @@ public class ResumeController {
     }
 
     @PostMapping("applicant{applicantId}")
-    public HttpStatus addResume(@RequestBody ResumeDto resumeDto, @PathVariable long applicantId) {
+    public HttpStatus addResume(@RequestBody @Valid ResumeCreateDto resumeDto, @PathVariable long applicantId) {
         resumeService.addResume(resumeDto, applicantId);
         return HttpStatus.OK;
     }
 
     @PutMapping("applicant{applicantId}")
-    public HttpStatus editResume(@RequestBody ResumeDto resumeDto, @PathVariable long applicantId) {
+    public HttpStatus editResume(@RequestBody @Valid ResumeDto resumeDto, @PathVariable long applicantId) {
         resumeService.editResume(resumeDto, applicantId);
         return HttpStatus.OK;
     }

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -20,35 +21,16 @@ public class UserServiceImpl implements UserService {
     private final UserDao userDao;
     private final FileUtil fileUtil;
 
-
-    @Override
-    public List<UserDto> getUsers() {
-        List<User> users = userDao.getUsers();
-        return transformationForDtoListUser(users);
-    }
-
-    @Override
-    public UserDto getUserByName(String name) {
-        User user = userDao.getUserByName(name);
-        return transformationForDtoSingleUser(user);
-    }
-
     @Override
     public UserDto getUserByEmail(String email) {
-        User user = userDao.getUserByEmail(email);
-        return transformationForDtoSingleUser(user);
+        Optional<User> user = userDao.getUserByEmail(email);
+        return user.map(this::transformationForDtoSingleUser).orElse(null);
     }
 
     @Override
     public UserDto getUserByPhoneNumber(String phoneNumber) {
-        User user = userDao.getUserByPhoneNumber(phoneNumber);
-        return transformationForDtoSingleUser(user);
-    }
-
-    @Override
-    public List<UserDto> getUserResponded() {
-        List<User> users = userDao.getRespondedUsers();
-        return transformationForDtoListUser(users);
+        Optional<User> user = userDao.getUserByPhoneNumber(phoneNumber);
+        return user.map(this::transformationForDtoSingleUser).orElse(null);
     }
 
     @SneakyThrows

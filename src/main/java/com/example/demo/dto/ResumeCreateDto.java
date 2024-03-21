@@ -1,28 +1,34 @@
-/* package com.example.demo.dto;
+package com.example.demo.dto;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.List;
+
+@Data
+@Builder
+@Getter
+@Setter
 public class ResumeCreateDto {
-    {
-        "resumeCreateDto": {
-        "author_email": "",
-                "title": "",
-                "category_name": "",
-                "salary": 0.0,
-                "work_exp_infos": [
-        {
-            "company": "",
-                "position": "",
-                "resp": ""
-        },{},{}
-    ],
-        "education_infos": [
-        {},{}
-    ],
-        "contacts": {
-            "telegram": "",
-                    "ok.ru": ""
-        },
-        "isActive": true
-    }
-    }
-
-} */
+    @NotNull
+    @Email
+    private String authorEmail;
+    @NotNull
+    private String title;
+    @NotNull
+    private String categoryName;
+    @NotNull
+    @Positive
+    private Double salary;
+    private List<WorkExperienceInfoDto> workExperienceInfo;
+    private List<EducationInfoDto> educationInfo;
+    @NotNull
+    private ContactTypeDto contacts;
+    @NotNull
+    private Boolean isActive;
+}

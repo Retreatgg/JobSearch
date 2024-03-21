@@ -1,6 +1,5 @@
 package com.example.demo.dao;
 
-import com.example.demo.model.Resume;
 import com.example.demo.model.Vacancy;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.support.DataAccessUtils;
@@ -79,12 +78,15 @@ public class VacancyDao {
         );
     }
 
-    public List<Vacancy> getVacanciesByCompanyId(Long id) {
+    public List<Vacancy> getVacanciesByCompanyName(String name) {
         String sql = """
                 select * from vacancies
-                where AUTHOR_ID = id
+                where AUTHOR_ID = (
+                    select id from USERS
+                    where name like ?
+                )
                 """;
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Vacancy.class), id);
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Vacancy.class), name);
     }
 
     public void deleteVacancyById(Long id) {
@@ -94,6 +96,7 @@ public class VacancyDao {
 
         jdbcTemplate.update(sql, id);
     }
+
 
     public void addVacancy(Vacancy vacancy) {
         String sql = """

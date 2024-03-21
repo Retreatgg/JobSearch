@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.ResumeCreateDto;
 import com.example.demo.dto.ResumeDto;
 import com.example.demo.model.Resume;
 import com.example.demo.model.User;
@@ -15,6 +16,6 @@ public interface ResumeService {
     ResumeDto getResumeById(Long id, long userId);
 
     boolean deleteResumeById(Long id, long userId);
-    void addResume(ResumeDto resumeDto, long userId);
+    void addResume(ResumeCreateDto resumeDto, long userId);
     void editResume(ResumeDto resumeDto, long userId);
 }

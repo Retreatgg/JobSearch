@@ -1,7 +1,9 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.dao.CategoryDao;
 import com.example.demo.dao.ResumeDao;
 import com.example.demo.dao.UserDao;
+import com.example.demo.dto.ResumeCreateDto;
 import com.example.demo.dto.ResumeDto;
 import com.example.demo.model.Resume;
 import com.example.demo.model.User;
@@ -10,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +25,7 @@ import java.util.Optional;
 public class ResumeServiceImpl implements ResumeService {
     private final ResumeDao resumeDao;
     private final UserDao userDao;
+    private final CategoryDao categoryDao;
 
     @Override
     public ResumeDto getResumesByCategoryId(Long id, long employerId) {
@@ -80,18 +85,29 @@ public class ResumeServiceImpl implements ResumeService {
     }
 
     @Override
-    public void addResume(ResumeDto resumeDto, long applicantId) {
+    public void addResume(ResumeCreateDto resumeDto, long applicantId) {
         User user = returnUserById(applicantId);
         if (user != null && user.getAccountType().equals("Applicant")) {
             Resume resume = new Resume();
-            resume.setId(resumeDto.getId());
-            resume.setName(resumeDto.getName());
+            resume.setName(resumeDto.getTitle());
             resume.setSalary(resumeDto.getSalary());
             resume.setIsActive(resumeDto.getIsActive());
-            resume.setCreatedDate(resumeDto.getCreatedDate());
-            resume.setUpdateTime(resumeDto.getUpdateTime());
-            resume.setApplicantId(resumeDto.getApplicant());
-            resume.setCategoryId(resumeDto.getCategoryId());
+            resume.setCreatedDate(LocalDateTime.now());
+            resume.setUpdateTime(LocalDateTime.now());
+
+            Optional<Long> optionalAuthorId = userDao.returnIdByEmail(resumeDto.getAuthorEmail());
+            if(optionalAuthorId.isPresent()) {
+                Long authorId = optionalAuthorId.get();
+                resume.setApplicantId(authorId);
+            }
+
+            Optional<Long> optionalCategoryId = categoryDao.returnIdByName(resumeDto.getCategoryName());
+            if(optionalCategoryId.isPresent()) {
+                Long categoryId = optionalCategoryId.get();
+                resume.setId(categoryId);
+            }
+            System.out.println("Adding resume to database: " + resume);
+            resumeDao.addResume(resume);
             resumeDao.addResume(resume);
         }
 

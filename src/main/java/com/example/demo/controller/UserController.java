@@ -17,16 +17,6 @@ import java.util.List;
 public class UserController {
     private final UserService userService;
 
-    @GetMapping
-    public ResponseEntity<List<UserDto>> getUsers() {
-        return ResponseEntity.ok(userService.getUsers());
-    }
-
-    @GetMapping("name/{name}")
-    public ResponseEntity<UserDto> getUserByName(@PathVariable String name) {
-        return ResponseEntity.ok(userService.getUserByName(name));
-    }
-
     @GetMapping("email/{email}")
     public ResponseEntity<UserDto> getUserByEmail(@PathVariable String email) {
         return ResponseEntity.ok(userService.getUserByEmail(email));
@@ -35,11 +25,6 @@ public class UserController {
     @GetMapping("phone/{phoneNumber}")
     public ResponseEntity<UserDto> getUserByPhoneNumber(@PathVariable String phoneNumber) {
         return ResponseEntity.ok(userService.getUserByPhoneNumber(phoneNumber));
-    }
-
-    @GetMapping("responded")
-    public ResponseEntity<List<UserDto>> getUsersResponded() {
-        return ResponseEntity.ok(userService.getUserResponded());
     }
 
     @GetMapping("is-exist{email}")

@@ -2,12 +2,18 @@ package com.example.demo.service.impl;
 
 import com.example.demo.exception.ErrorResponseBody;
 import com.example.demo.service.ErrorService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
+@Service
+@RequiredArgsConstructor
 public class ErrorServiceImpl implements ErrorService {
     @Override
     public ErrorResponseBody makeResponse(Exception exception) {
