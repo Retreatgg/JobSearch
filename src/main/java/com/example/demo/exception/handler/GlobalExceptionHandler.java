@@ -25,4 +25,9 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponseBody> validationHandler(MethodArgumentNotValidException exception) {
         return new ResponseEntity<>(errorService.makeResponse(exception.getBindingResult()), HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ErrorResponseBody> illegalArgumentHandler(IllegalArgumentException e) {
+        return new ResponseEntity<>(errorService.makeResponse(e), HttpStatus.BAD_REQUEST);
+    }
 }
