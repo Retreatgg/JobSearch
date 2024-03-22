@@ -4,14 +4,10 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Positive;
 import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 @Data
 @Builder
-@Getter
-@Setter
-public class VacancyDto {
+public class VacancyUpdateDto {
     @NotEmpty
     private String name;
     @NotEmpty
@@ -20,6 +16,7 @@ public class VacancyDto {
     private Long categoryId;
     @NotEmpty
     private Double salary;
+
     @NotEmpty
     @Positive
     private Integer expFrom;
@@ -28,7 +25,4 @@ public class VacancyDto {
     private Integer expTo;
     @NotEmpty
     private Boolean isActive;
-    @NotEmpty
-    private Long authorId;
-
 }

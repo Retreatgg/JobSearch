@@ -120,12 +120,12 @@ public class VacancyDao {
     public void editVacancy(Vacancy vacancy) {
         String sql = "UPDATE VACANCIES " +
                 "SET name = ?, salary = ?, is_active = ?," +
-                "EXP_FROM = ?, EXP_TO = ?, DESCRIPTION = ? " +
+                "EXP_FROM = ?, EXP_TO = ?, DESCRIPTION = ?, CATEGORY_ID = ? " +
                 "WHERE id = ?";
 
         jdbcTemplate.update(sql, vacancy.getName(), vacancy.getSalary(),
                 vacancy.getIsActive(), vacancy.getExpFrom(), vacancy.getExpTo(), vacancy.getDescription(),
-                vacancy.getId());
+                vacancy.getCategoryId(), vacancy.getId());
     }
 
     public void activationVacancy(Vacancy vacancy) {

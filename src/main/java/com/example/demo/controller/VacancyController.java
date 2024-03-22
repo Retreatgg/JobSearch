@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.VacancyDto;
+import com.example.demo.dto.VacancyUpdateDto;
 import com.example.demo.service.VacancyService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -53,8 +54,8 @@ public class VacancyController {
     }
 
     @PutMapping("{id}employer{employerId}")
-    public HttpStatus editResume(@RequestBody @Valid VacancyDto vacancyDto, @PathVariable long employerId) {
-        vacancyService.editVacancy(vacancyDto, employerId);
+    public HttpStatus editResume(@RequestBody @Valid VacancyUpdateDto vacancyDto, @PathVariable long id, @PathVariable long employerId) {
+        vacancyService.editVacancy(vacancyDto, id, employerId);
         return HttpStatus.OK;
     }
 
