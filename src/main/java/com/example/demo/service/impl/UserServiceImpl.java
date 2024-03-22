@@ -1,17 +1,18 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.dao.UserDao;
+import com.example.demo.dto.UserCreateDto;
 import com.example.demo.dto.UserDto;
+import com.example.demo.dto.UserUpdateDto;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
 import com.example.demo.util.FileUtil;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -20,79 +21,70 @@ public class UserServiceImpl implements UserService {
     private final UserDao userDao;
     private final FileUtil fileUtil;
 
-
-    @Override
-    public List<UserDto> getUsers() {
-        List<User> users = userDao.getUsers();
-        return transformationForDtoListUser(users);
-    }
-
-    @Override
-    public UserDto getUserByName(String name) {
-        User user = userDao.getUserByName(name);
-        return transformationForDtoSingleUser(user);
-    }
-
     @Override
     public UserDto getUserByEmail(String email) {
-        User user = userDao.getUserByEmail(email);
+        User user = userDao.getUserByEmail(email).orElseThrow(() -> new NoSuchElementException("Can not find User by email:" + email));
         return transformationForDtoSingleUser(user);
     }
 
     @Override
     public UserDto getUserByPhoneNumber(String phoneNumber) {
-        User user = userDao.getUserByPhoneNumber(phoneNumber);
-        return transformationForDtoSingleUser(user);
+        Optional<User> user = userDao.getUserByPhoneNumber(phoneNumber);
+        return user.map(this::transformationForDtoSingleUser)
+                .orElseThrow(() -> new NoSuchElementException("Can not find User by phone number: " + phoneNumber));
     }
-
-    @Override
-    public List<UserDto> getUserResponded() {
-        List<User> users = userDao.getRespondedUsers();
-        return transformationForDtoListUser(users);
-    }
-
-    @SneakyThrows
-    @Override
-    public UserDto getById(Long id) {
-        try {
-            User user = userDao.getById(id).orElseThrow(() -> new Exception("Can not find User by ID:" + id));
-            return transformationForDtoSingleUser(user);
-        } catch (Exception e) {
-            log.error(e.getMessage());
-        }
-
-        return null;
-    }
-
 
     @Override
     public Boolean isUserExistsByEmail(String email) {
         return userDao.isUserExistsByEmail(email);
     }
 
-    private List<UserDto> transformationForDtoListUser(List<User> users) {
-        List<UserDto> dtos = new ArrayList<>();
-        users.forEach(e -> {
-            dtos.add(UserDto.builder()
-                    .id(e.getId())
-                    .age(e.getAge())
-                    .email(e.getEmail())
-                    .phoneNumber(e.getPhoneNumber())
-                    .accountType(e.getAccountType())
-                    .name(e.getName())
-                    .username(e.getUsername())
-                    .avatar(fileUtil.convertStringToMultipartFile(e.getAvatar()))
-                    .build());
-        });
+    @Override
+    public void createUser(UserCreateDto userCreateDto) {
+        if (isUserExistsByEmail(userCreateDto.getEmail())) {
+            throw new IllegalArgumentException("User with email " + userCreateDto.getEmail() + " already exists");
+        }
 
-        return dtos;
+        User user = new User();
+        user.setAge(userCreateDto.getAge());
+        user.setName(userCreateDto.getName());
+        user.setAvatar("unnamed.jpg");
+        user.setEmail(userCreateDto.getEmail());
+        user.setAccountType(userCreateDto.getAccountType());
+        user.setSurname(userCreateDto.getSurname());
+        user.setPassword(userCreateDto.getPassword());
+        user.setPhoneNumber(userCreateDto.getPhoneNumber());
+        userDao.createUser(user);
+    }
+
+    @Override
+    public void editProfile(UserUpdateDto userUpdateDto, long profileId, String email) {
+        Optional<User> userOptional = userDao.getUserById(profileId);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            if (user.getEmail().equals(email)) {
+                String fileName = fileUtil.saveUploadedFile(userUpdateDto.getAvatar(), "/images");
+                user.setAge(userUpdateDto.getAge());
+                user.setAvatar(fileName);
+                user.setSurname(userUpdateDto.getSurname());
+                user.setName(userUpdateDto.getName());
+                user.setPassword(userUpdateDto.getPassword());
+                user.setPhoneNumber(userUpdateDto.getPhoneNumber());
+
+                userDao.editProfile(user);
+            } else {
+                throw new IllegalArgumentException("This is not your account. You can't change it");
+            }
+        } else {
+            throw new NoSuchElementException("User with id " + profileId + " not found");
+        }
     }
 
     private UserDto transformationForDtoSingleUser(User user) {
         return UserDto.builder()
                 .id(user.getId())
                 .name(user.getName())
-                .username(user.getUsername())
+                .surname(user.getSurname())
                 .email(user.getEmail())
                 .age(user.getAge())
                 .avatar(fileUtil.convertStringToMultipartFile(user.getAvatar()))

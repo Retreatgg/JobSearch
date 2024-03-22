@@ -1,7 +1,9 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.VacancyDto;
+import com.example.demo.dto.VacancyUpdateDto;
 import com.example.demo.service.VacancyService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -46,13 +48,13 @@ public class VacancyController {
     }
 
     @PostMapping("employer{employerId}")
-    public HttpStatus addResume(@RequestBody VacancyDto vacancyDto, @PathVariable long employerId) {
+    public HttpStatus addResume(@RequestBody @Valid VacancyDto vacancyDto, @PathVariable long employerId) {
         vacancyService.addVacancy(vacancyDto, employerId);
         return HttpStatus.OK;
     }
 
     @PutMapping("{id}employer{employerId}")
-    public HttpStatus editResume(@RequestBody VacancyDto vacancyDto, @PathVariable long id, @PathVariable long employerId) {
+    public HttpStatus editResume(@RequestBody @Valid VacancyUpdateDto vacancyDto, @PathVariable long id, @PathVariable long employerId) {
         vacancyService.editVacancy(vacancyDto, id, employerId);
         return HttpStatus.OK;
     }

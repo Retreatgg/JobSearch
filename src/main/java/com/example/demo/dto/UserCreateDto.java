@@ -5,18 +5,17 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.web.multipart.MultipartFile;
 
 @Data
 @Builder
 @Getter
 @Setter
-public class UserDto {
-    private Long id;
+public class UserCreateDto {
     @NotEmpty
     private String name;
     @NotEmpty
     private String surname;
+
     @Min(18)
     private Integer age;
 
@@ -31,9 +30,10 @@ public class UserDto {
             message = "Should contain at least one UPPER case letter, one number"
     )
     private String password;
+
     @NotEmpty
+    @Pattern(regexp="\\d{10}", message="Invalid phone number")
     private String phoneNumber;
-    private MultipartFile avatar;
     @NotEmpty
     private String accountType;
 }

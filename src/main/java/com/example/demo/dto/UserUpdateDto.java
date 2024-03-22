@@ -11,18 +11,13 @@ import org.springframework.web.multipart.MultipartFile;
 @Builder
 @Getter
 @Setter
-public class UserDto {
-    private Long id;
+public class UserUpdateDto {
     @NotEmpty
     private String name;
     @NotEmpty
     private String surname;
     @Min(18)
     private Integer age;
-
-    @NotEmpty
-    @Email
-    private String email;
 
     @NotBlank
     @Size(min = 4, max = 24, message = "Length must be >= 4 and <= 24")
@@ -31,9 +26,9 @@ public class UserDto {
             message = "Should contain at least one UPPER case letter, one number"
     )
     private String password;
+
     @NotEmpty
+    @Pattern(regexp="\\d{10}", message="Invalid phone number")
     private String phoneNumber;
     private MultipartFile avatar;
-    @NotEmpty
-    private String accountType;
 }

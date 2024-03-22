@@ -1,7 +1,6 @@
 package com.example.demo.dao;
 
 import com.example.demo.model.Resume;
-import com.example.demo.model.Vacancy;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -10,6 +9,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,24 +20,29 @@ public class ResumeDao {
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
 
-    public Resume getResumesByCategoryId(Long id) {
+    public Optional<Resume> getResumesByCategoryId(Long id) {
         String sql = """
                 select * from RESUMES
                 where category_id = ?
                 """;
 
-        return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Resume.class), id);
+        return Optional.ofNullable(
+                DataAccessUtils.singleResult(
+                        jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Resume.class), id)
+                )
+        );
     }
 
-    public List<Resume> getResumesByApplicant(String name) {
+    public List<Resume> getResumesByApplicant(long id) {
         String sql = """
                 SELECT * FROM RESUMES
-                WHERE APPLICANT_ID = (
-                    SELECT id FROM USERS WHERE NAME like ?
-                    )
+                WHERE applicant_id = (
+                    select * from USERS
+                    where id = ?
+                )
                 """;
 
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Resume.class), name);
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Resume.class), id);
     }
 
     public Optional<Resume> getResumeById(Long id) {
@@ -53,14 +58,6 @@ public class ResumeDao {
         );
     }
 
-    public List<Resume> getResumesByApplicantId(Long id) {
-        String sql = """
-                select * from resumes
-                where applicant_id = ?
-                """;
-
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Resume.class), id);
-    }
 
     public void deleteResumeById(Long id) {
         String sql = """
@@ -72,28 +69,26 @@ public class ResumeDao {
 
     public void addResume(Resume resume) {
         String sql = """
-                insert into RESUMES(name, salary, is_active, created_date, update_time, applicant_id, category_id)
-                values(:name, :salary, :is_active, :created_date, :update_time, :applicant_id, :category_id)
+                insert into RESUMES(name, salary, is_active, applicant_id, category_id, CREATED_DATE, UPDATE_TIME)
+                values(:name, :salary, :is_active, :applicant_id, :category_id, current_timestamp, current_timestamp())
                 """;
 
         namedParameterJdbcTemplate.update(sql, new MapSqlParameterSource()
                 .addValue("name", resume.getName())
                 .addValue("salary", resume.getSalary())
                 .addValue("is_active", resume.getIsActive())
-                .addValue("created_date", resume.getCreatedDate())
-                .addValue("update_time", resume.getUpdateTime())
                 .addValue("applicant_id", resume.getApplicantId())
-                .addValue("category_id", resume.getCategoryId()));
+                .addValue("category_id", resume.getCategoryId())
+                .addValue("created_date", LocalDateTime.now())
+                .addValue("update_time", LocalDateTime.now()));
     }
 
-    public void editResume(Resume resume, long id) {
+    public void editResume(Resume resume) {
         String sql = "UPDATE RESUMES " +
-                "SET name = ?, salary = ?, is_active = ?, created_date = ?, " +
-                "update_time = ?, applicant_id = ?, category_id = ? " +
+                "SET name = ?, salary = ?, is_active = ?, UPDATE_TIME = ?" +
                 "WHERE id = ?";
 
         jdbcTemplate.update(sql, resume.getName(), resume.getSalary(),
-                resume.getIsActive(), resume.getCreatedDate(), resume.getUpdateTime(),
-                resume.getApplicantId(), resume.getCategoryId(), id);
+                resume.getIsActive(), LocalDateTime.now(), resume.getId());
     }
 }

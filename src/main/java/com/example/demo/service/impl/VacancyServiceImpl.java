@@ -3,6 +3,7 @@ package com.example.demo.service.impl;
 import com.example.demo.dao.UserDao;
 import com.example.demo.dao.VacancyDao;
 import com.example.demo.dto.VacancyDto;
+import com.example.demo.dto.VacancyUpdateDto;
 import com.example.demo.model.User;
 import com.example.demo.model.Vacancy;
 import com.example.demo.service.VacancyService;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Slf4j
@@ -82,8 +84,13 @@ public class VacancyServiceImpl implements VacancyService {
                 if (vacancy.getAuthorId() == employeeId) {
                     vacancyDao.deleteVacancyById(id);
                 }
+            } else {
+                throw new NoSuchElementException("Vacancy with ID " + id + " not found");
             }
+        } else {
+            throw new NoSuchElementException("User with ID " + employeeId + " not authorized to delete vacancy with ID " + id);
         }
+
     }
 
     @Override
@@ -92,20 +99,41 @@ public class VacancyServiceImpl implements VacancyService {
         assert user != null;
         if (user.getAccountType().equals("Employer")) {
             Vacancy vacancy = new Vacancy();
-            vacancy = editAndAdd(vacancy, vacancyDto);
+            vacancy.setAuthorId(vacancyDto.getAuthorId());
+            vacancy.setSalary(vacancyDto.getSalary());
+            vacancy.setDescription(vacancyDto.getDescription());
+            vacancy.setExpTo(vacancyDto.getExpTo());
+            vacancy.setIsActive(vacancyDto.getIsActive());
+            vacancy.setCategoryId(vacancyDto.getCategoryId());
+            vacancy.setExpFrom(vacancyDto.getExpFrom());
+            vacancy.setName(vacancyDto.getName());
             vacancyDao.addVacancy(vacancy);
+        } else {
+            throw new NoSuchElementException("User with ID " + employerId + " not authorized to add vacancy");
         }
     }
 
     @Override
-    public void editVacancy(VacancyDto vacancyDto, long id, long employerId) {
+    public void editVacancy(VacancyUpdateDto vacancyDto, long vacancyId, long employerId) {
         User user = returnUserById(employerId);
         if (user != null && user.getAccountType().equals("Employer")) {
-            if(vacancyDto.getAuthorId() == employerId) {
-                Vacancy vacancy = new Vacancy();
-                vacancy = editAndAdd(vacancy, vacancyDto);
-                vacancyDao.editVacancy(vacancy, id);
+            Optional<Vacancy> vacancyOptional = vacancyDao.getVacancyById(vacancyId);
+            if (vacancyOptional.isPresent()) {
+                Vacancy vacancy = vacancyOptional.get();
+                vacancy.setExpTo(vacancyDto.getExpTo());
+                vacancy.setSalary(vacancyDto.getSalary());
+                vacancy.setDescription(vacancyDto.getDescription());
+                vacancy.setIsActive(vacancyDto.getIsActive());
+                vacancy.setName(vacancyDto.getName());
+                vacancy.setExpFrom(vacancyDto.getExpFrom());
+                vacancy.setCategoryId(vacancyDto.getCategoryId());
+
+                vacancyDao.editVacancy(vacancy);
+            } else {
+                throw new NoSuchElementException("Not found vacancy with ID " + vacancyId);
             }
+        } else {
+            throw new NoSuchElementException("User with ID " + employerId + " not authorized to edit vacancy");
         }
     }
 
@@ -122,78 +150,46 @@ public class VacancyServiceImpl implements VacancyService {
     @Override
     public VacancyDto getVacancyById(Long id, long applicantId) {
         User user = returnUserById(applicantId);
-        if(user != null && user.getAccountType().equals("Applicant")) {
-            try {
-                Vacancy vacancy = vacancyDao.getVacancyById(id).orElseThrow(() -> new Exception("Can not find Vacancy by ID:" + id));
-                return transformationForDtoSingleVacancy(vacancy);
-            } catch (Exception e) {
-                log.error(e.getMessage());
-            }
+        if (user != null && user.getAccountType().equals("Applicant")) {
+            Vacancy vacancy = vacancyDao.getVacancyById(id).orElseThrow(() -> new NoSuchElementException("Can not find Vacancy by ID:" + id));
+            return transformationForDtoSingleVacancy(vacancy);
         }
 
         return null;
     }
 
-    private Vacancy editAndAdd(Vacancy vacancy, VacancyDto vacancyDto) {
-        vacancy.setId(vacancyDto.getId());
-        vacancy.setName(vacancyDto.getName());
-        vacancy.setSalary(vacancyDto.getSalary());
-        vacancy.setIsActive(vacancyDto.getIsActive());
-        vacancy.setCreatedDate(vacancyDto.getCreatedDate());
-        vacancy.setUpdateTime(vacancyDto.getUpdateTime());
-        vacancy.setAuthorId(vacancyDto.getAuthorId());
-        vacancy.setCategoryId(vacancyDto.getCategoryId());
-        vacancy.setDescription(vacancyDto.getDescription());
-        vacancy.setExpFrom(vacancyDto.getExpFrom());
-        vacancy.setExpTo(vacancyDto.getExpTo());
-
-        return vacancy;
-    }
-
     private List<VacancyDto> transformationForDtoListVacancies(List<Vacancy> vacancies) {
         List<VacancyDto> dtos = new ArrayList<>();
-        vacancies.forEach(e -> {
-            dtos.add(VacancyDto.builder()
-                    .id(e.getId())
-                    .name(e.getName())
-                    .description(e.getDescription())
-                    .expTo(e.getExpTo())
-                    .expFrom(e.getExpFrom())
-                    .createdDate(e.getCreatedDate())
-                    .updateTime(e.getUpdateTime())
-                    .authorId(e.getAuthorId())
-                    .categoryId(e.getCategoryId())
-                    .salary(e.getSalary())
-                    .isActive(e.getIsActive())
-                    .build());
-        });
+        vacancies.forEach(e -> dtos.add(VacancyDto.builder()
+                .name(e.getName())
+                .description(e.getDescription())
+                .expTo(e.getExpTo())
+                .expFrom(e.getExpFrom())
+                .authorId(e.getAuthorId())
+                .categoryId(e.getCategoryId())
+                .salary(e.getSalary())
+                .isActive(e.getIsActive())
+                .build()));
 
         return dtos;
     }
 
     public VacancyDto transformationForDtoSingleVacancy(Vacancy vacancy) {
-            return VacancyDto.builder()
-                    .id(vacancy.getId())
-                    .name(vacancy.getName())
-                    .description(vacancy.getDescription())
-                    .expTo(vacancy.getExpTo())
-                    .expFrom(vacancy.getExpFrom())
-                    .createdDate(vacancy.getCreatedDate())
-                    .updateTime(vacancy.getUpdateTime())
-                    .authorId(vacancy.getAuthorId())
-                    .categoryId(vacancy.getCategoryId())
-                    .salary(vacancy.getSalary())
-                    .isActive(vacancy.getIsActive())
-                    .build();
+        return VacancyDto.builder()
+                .name(vacancy.getName())
+                .description(vacancy.getDescription())
+                .expTo(vacancy.getExpTo())
+                .expFrom(vacancy.getExpFrom())
+                .authorId(vacancy.getAuthorId())
+                .categoryId(vacancy.getCategoryId())
+                .salary(vacancy.getSalary())
+                .isActive(vacancy.getIsActive())
+                .build();
 
     }
 
     private User returnUserById(long userId) {
         Optional<User> optionalUser = userDao.getById(userId);
-        if (optionalUser.isPresent()) {
-            User user = optionalUser.get();
-            return user;
-        }
-        return null;
+        return optionalUser.orElse(null);
     }
 }
