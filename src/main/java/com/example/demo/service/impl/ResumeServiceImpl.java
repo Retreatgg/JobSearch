@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Slf4j
@@ -37,7 +38,7 @@ public class ResumeServiceImpl implements ResumeService {
         User user = returnUserById(employerId);
         if (user != null && user.getAccountType().equals("Employer")) {
             Optional<Resume> resumeOptional = resumeDao.getResumesByCategoryId(id);
-            if(resumeOptional.isPresent()) {
+            if (resumeOptional.isPresent()) {
                 Resume resume = resumeOptional.get();
                 return transformationForSingleDtoResume(resume);
             }
@@ -50,7 +51,11 @@ public class ResumeServiceImpl implements ResumeService {
         User user = returnUserById(employerId);
         if (user != null && user.getAccountType().equals("Employer")) {
             List<Resume> resumes = resumeDao.getResumesByApplicant(id);
-            return transformationForListDtoResume(resumes);
+            if (resumes != null && !resumes.isEmpty()) {
+                return transformationForListDtoResume(resumes);
+            } else {
+                throw new NoSuchElementException("No resumes found for applicant with ID: " + id);
+            }
         }
         return null;
     }
@@ -60,12 +65,8 @@ public class ResumeServiceImpl implements ResumeService {
     public ResumeDto getResumeById(Long id, long employerId) {
         User user = returnUserById(employerId);
         if (user != null && user.getAccountType().equals("Employer")) {
-            try {
-                Resume resume = resumeDao.getResumeById(id).orElseThrow(() -> new Exception("Can not find Resume by ID:" + id));
-                return transformationForSingleDtoResume(resume);
-            } catch (Exception e) {
-                log.error(e.getMessage());
-            }
+            Resume resume = resumeDao.getResumeById(id).orElseThrow(() -> new NoSuchElementException("Can not find Resume by ID:" + id));
+            return transformationForSingleDtoResume(resume);
         }
         return null;
     }
@@ -82,11 +83,16 @@ public class ResumeServiceImpl implements ResumeService {
             Resume resume = optionalResume.get();
             if (resume.getApplicantId() == applicantId) {
                 resumeDao.deleteResumeById(id);
+                contactInfoService.delete(id);
+                workExperienceInfoService.delete(id);
+                educationInfoService.delete(id);
                 return true;
+            } else {
+                throw new NoSuchElementException("User with ID " + applicantId + " is not authorized to delete resume with ID " + id);
             }
+        } else {
+            throw new NoSuchElementException("Resume with ID " + id + " not found");
         }
-
-        return false;
     }
 
     @Override
@@ -104,6 +110,7 @@ public class ResumeServiceImpl implements ResumeService {
             resumeDao.addResume(resume);
             resumeDto.getWorkExperienceInfo().forEach(wei -> workExperienceInfoService.createWorkExperienceInfo(resume.getId(), wei));
             resumeDto.getEducationInfo().forEach(ei -> educationInfoService.createEducationInfo(resume.getId(), ei));
+            contactInfoService.createContactInfo(resume.getId(), resumeDto.getContacts());
         }
 
     }
@@ -111,7 +118,9 @@ public class ResumeServiceImpl implements ResumeService {
     @Override
     public void editResume(ResumeUpdateDto resumeDto, long id, long applicantId) {
         User user = returnUserById(applicantId);
-        if (user != null && user.getAccountType().equals("Applicant")) {
+        Optional<Resume> resumeOptional = resumeDao.getResumeById(id);
+        if (user != null && user.getAccountType().equals("Applicant")
+                && resumeOptional.isPresent() && resumeOptional.get().getApplicantId() == applicantId) {
             Resume resume = new Resume();
             resume.setId(id);
             resume.setName(resumeDto.getTitle());

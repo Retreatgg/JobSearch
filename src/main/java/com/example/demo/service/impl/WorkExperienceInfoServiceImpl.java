@@ -21,4 +21,9 @@ public class WorkExperienceInfoServiceImpl implements WorkExperienceInfoService 
         workExperienceInfo.setResponsibilities(workExperienceInfoDto.getResponsibilities());
         workExperienceInfoDao.createWorkExperienceInfo(workExperienceInfo);
     }
+
+    @Override
+    public void delete(long id) {
+        workExperienceInfoDao.delete(id);
+    }
 }

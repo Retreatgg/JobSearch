@@ -1,5 +1,6 @@
 package com.example.demo.dto;
 
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.Builder;
@@ -15,17 +16,24 @@ import java.util.List;
 @Setter
 public class ResumeUpdateDto {
     private Long id;
+
     @NotNull
     private String title;
+
     @NotNull
+    @NotEmpty
     private String categoryName;
+
     @NotNull
     @Positive
     private Double salary;
+
     private List<WorkExperienceInfoDto> workExperienceInfo;
     private List<EducationInfoDto> educationInfo;
+
     @NotNull
     private ContactInfoDto contacts;
+
     @NotNull
     private Boolean isActive;
 }

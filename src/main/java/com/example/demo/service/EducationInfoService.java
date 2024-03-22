@@ -6,4 +6,6 @@ import org.springframework.stereotype.Service;
 @Service
 public interface EducationInfoService {
     void createEducationInfo(Long id, EducationInfoDto educationInfoDto);
+    void delete(long id);
 }
+

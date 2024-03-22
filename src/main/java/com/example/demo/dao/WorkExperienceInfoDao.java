@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 public class WorkExperienceInfoDao {
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
     public void createWorkExperienceInfo(WorkExperienceInfo workExperienceInfo) {
         String sql = """
@@ -26,6 +27,15 @@ public class WorkExperienceInfoDao {
                 .addValue("company_name", workExperienceInfo.getCompanyName())
                 .addValue("position", workExperienceInfo.getPosition())
                 .addValue("responsibilities", workExperienceInfo.getResponsibilities()));
+    }
+
+    public void delete(long id) {
+        String sql = """
+                delete from work_experience_info
+                where RESUME_ID = ?
+                """;
+
+        jdbcTemplate.update(sql, id);
     }
 
 }

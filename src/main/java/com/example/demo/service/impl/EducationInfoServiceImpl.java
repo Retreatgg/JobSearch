@@ -24,4 +24,9 @@ public class EducationInfoServiceImpl implements EducationInfoService {
 
         educationInfoDao.createEducationInfo(educationInfo);
     }
+
+    @Override
+    public void delete(long id) {
+        educationInfoDao.delete(id);
+    }
 }

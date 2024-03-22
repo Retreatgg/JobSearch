@@ -18,13 +18,17 @@ public class ResumeCreateDto {
     @NotNull
     @Email
     private String authorEmail;
+
     @NotNull
     private String title;
+
     @NotNull
     private String categoryName;
+
     @NotNull
     @Positive
     private Double salary;
+
     private List<WorkExperienceInfoDto> workExperienceInfo;
     private List<EducationInfoDto> educationInfo;
     @NotNull

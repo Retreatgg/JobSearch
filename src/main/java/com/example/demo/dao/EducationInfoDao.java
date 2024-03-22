@@ -2,6 +2,7 @@ package com.example.demo.dao;
 
 import com.example.demo.model.EducationInfo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class EducationInfoDao {
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
     public void createEducationInfo(EducationInfo educationInfo) {
         String sql = """
@@ -24,5 +26,14 @@ public class EducationInfoDao {
                 .addValue("start_date", educationInfo.getStartDate())
                 .addValue("end_date", educationInfo.getEndDate())
                 .addValue("degree", educationInfo.getDegree()));
+    }
+
+    public void delete(long id) {
+        String sql = """
+                delete from education_info
+                where RESUME_ID = ?
+                """;
+
+        jdbcTemplate.update(sql, id);
     }
 }

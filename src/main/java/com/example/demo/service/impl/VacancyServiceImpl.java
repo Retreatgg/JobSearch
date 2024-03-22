@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Slf4j
@@ -101,7 +102,7 @@ public class VacancyServiceImpl implements VacancyService {
     public void editVacancy(VacancyDto vacancyDto, long employerId) {
         User user = returnUserById(employerId);
         if (user != null && user.getAccountType().equals("Employer")) {
-            if(vacancyDto.getAuthorId() == employerId) {
+            if (vacancyDto.getAuthorId() == employerId) {
                 Vacancy vacancy = new Vacancy();
                 vacancy = editAndAdd(vacancy, vacancyDto);
                 vacancyDao.editVacancy(vacancy);
@@ -122,13 +123,9 @@ public class VacancyServiceImpl implements VacancyService {
     @Override
     public VacancyDto getVacancyById(Long id, long applicantId) {
         User user = returnUserById(applicantId);
-        if(user != null && user.getAccountType().equals("Applicant")) {
-            try {
-                Vacancy vacancy = vacancyDao.getVacancyById(id).orElseThrow(() -> new Exception("Can not find Vacancy by ID:" + id));
-                return transformationForDtoSingleVacancy(vacancy);
-            } catch (Exception e) {
-                log.error(e.getMessage());
-            }
+        if (user != null && user.getAccountType().equals("Applicant")) {
+            Vacancy vacancy = vacancyDao.getVacancyById(id).orElseThrow(() -> new NoSuchElementException("Can not find Vacancy by ID:" + id));
+            return transformationForDtoSingleVacancy(vacancy);
         }
 
         return null;
@@ -172,19 +169,19 @@ public class VacancyServiceImpl implements VacancyService {
     }
 
     public VacancyDto transformationForDtoSingleVacancy(Vacancy vacancy) {
-            return VacancyDto.builder()
-                    .id(vacancy.getId())
-                    .name(vacancy.getName())
-                    .description(vacancy.getDescription())
-                    .expTo(vacancy.getExpTo())
-                    .expFrom(vacancy.getExpFrom())
-                    .createdDate(vacancy.getCreatedDate())
-                    .updateTime(vacancy.getUpdateTime())
-                    .authorId(vacancy.getAuthorId())
-                    .categoryId(vacancy.getCategoryId())
-                    .salary(vacancy.getSalary())
-                    .isActive(vacancy.getIsActive())
-                    .build();
+        return VacancyDto.builder()
+                .id(vacancy.getId())
+                .name(vacancy.getName())
+                .description(vacancy.getDescription())
+                .expTo(vacancy.getExpTo())
+                .expFrom(vacancy.getExpFrom())
+                .createdDate(vacancy.getCreatedDate())
+                .updateTime(vacancy.getUpdateTime())
+                .authorId(vacancy.getAuthorId())
+                .categoryId(vacancy.getCategoryId())
+                .salary(vacancy.getSalary())
+                .isActive(vacancy.getIsActive())
+                .build();
 
     }
 

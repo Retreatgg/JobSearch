@@ -4,4 +4,5 @@ import com.example.demo.dto.ContactInfoDto;
 
 public interface ContactInfoService {
     void createContactInfo(Long id, ContactInfoDto contactInfoDto);
+    void delete(long id);
 }

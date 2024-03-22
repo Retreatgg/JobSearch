@@ -29,16 +29,13 @@ public class ResumeController {
     }
 
     @GetMapping("{id}employerId{employerId}")
-    public ResponseEntity<ResumeDto> getResumeById(@PathVariable long id, @PathVariable long employerId) {
+    public ResponseEntity<?> getResumeById(@PathVariable long id, @PathVariable long employerId) {
         return ResponseEntity.ok(resumeService.getResumeById(id, employerId));
     }
 
     @DeleteMapping("{id}applicant{applicantId}")
-    public ResponseEntity<Void> deleteResumeById(@PathVariable long id, @PathVariable long applicantId) {
-       if(resumeService.deleteResumeById(id, applicantId)) {
-           return ResponseEntity.noContent().build();
-       }
-       return ResponseEntity.notFound().build();
+    public ResponseEntity<?> deleteResumeById(@PathVariable long id, @PathVariable long applicantId) {
+           return ResponseEntity.ok(resumeService.deleteResumeById(id, applicantId));
     }
 
     @PostMapping("applicant{applicantId}")
@@ -52,5 +49,6 @@ public class ResumeController {
         resumeService.editResume(resumeDto, id, applicantId);
         return HttpStatus.OK;
     }
+
 
 }

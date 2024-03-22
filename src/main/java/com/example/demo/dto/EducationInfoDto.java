@@ -14,14 +14,13 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class EducationInfoDto {
-    @NotNull
+
     private String institution;
-    @NotNull
+
     private String program;
-    @Past
+
     private LocalDate startDate;
-    @Past
+
     private LocalDate endDate;
-    @NotNull
     private String degree;
 }

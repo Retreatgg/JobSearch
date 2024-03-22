@@ -20,4 +20,9 @@ public class ContactInfoServiceImpl implements ContactInfoService {
 
         contactsInfoDao.createContactsInfo(contactInfo);
     }
+
+    @Override
+    public void delete(long id) {
+        contactsInfoDao.deleteContactInfo(id);
+    }
 }
