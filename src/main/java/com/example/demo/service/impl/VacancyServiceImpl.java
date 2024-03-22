@@ -83,8 +83,13 @@ public class VacancyServiceImpl implements VacancyService {
                 if (vacancy.getAuthorId() == employeeId) {
                     vacancyDao.deleteVacancyById(id);
                 }
+            } else {
+                throw new NoSuchElementException("Vacancy with ID " + id + " not found");
             }
+        } else {
+            throw new NoSuchElementException("User with ID " + employeeId + " not authorized to delete vacancy with ID " + id);
         }
+
     }
 
     @Override
@@ -95,6 +100,8 @@ public class VacancyServiceImpl implements VacancyService {
             Vacancy vacancy = new Vacancy();
             vacancy = editAndAdd(vacancy, vacancyDto);
             vacancyDao.addVacancy(vacancy);
+        } else {
+            throw new NoSuchElementException("User with ID " + employerId + " not authorized to add vacancy");
         }
     }
 
@@ -106,7 +113,11 @@ public class VacancyServiceImpl implements VacancyService {
                 Vacancy vacancy = new Vacancy();
                 vacancy = editAndAdd(vacancy, vacancyDto);
                 vacancyDao.editVacancy(vacancy);
+            } else {
+                throw new NoSuchElementException("User with ID " + employerId + " not authorized to edit vacancy with ID " + vacancyDto.getId());
             }
+        } else {
+            throw new NoSuchElementException("User with ID " + employerId + " not authorized to edit vacancy");
         }
     }
 

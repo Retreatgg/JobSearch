@@ -1,7 +1,5 @@
 package com.example.demo.dto;
 
-import com.example.demo.model.Category;
-import com.example.demo.model.User;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Positive;
 import lombok.Builder;

@@ -1,7 +1,5 @@
 package com.example.demo.dto;
 
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Past;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;

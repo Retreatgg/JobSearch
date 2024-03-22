@@ -1,6 +1,5 @@
 package com.example.demo.dao;
 
-import com.example.demo.model.Resume;
 import com.example.demo.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.support.DataAccessUtils;

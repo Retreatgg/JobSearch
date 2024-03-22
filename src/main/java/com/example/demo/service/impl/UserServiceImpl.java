@@ -6,12 +6,10 @@ import com.example.demo.model.User;
 import com.example.demo.service.UserService;
 import com.example.demo.util.FileUtil;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Slf4j
@@ -23,51 +21,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto getUserByEmail(String email) {
-        Optional<User> user = userDao.getUserByEmail(email);
-        return user.map(this::transformationForDtoSingleUser).orElse(null);
+        User user = userDao.getUserByEmail(email).orElseThrow(() -> new NoSuchElementException("Can not find User by email:" + email));
+        return transformationForDtoSingleUser(user);
     }
 
     @Override
     public UserDto getUserByPhoneNumber(String phoneNumber) {
         Optional<User> user = userDao.getUserByPhoneNumber(phoneNumber);
-        return user.map(this::transformationForDtoSingleUser).orElse(null);
+        return user.map(this::transformationForDtoSingleUser)
+                .orElseThrow(() -> new NoSuchElementException("Can not find User by phone number: " + phoneNumber));
     }
-
-    @SneakyThrows
-    @Override
-    public UserDto getById(Long id) {
-        try {
-            User user = userDao.getById(id).orElseThrow(() -> new Exception("Can not find User by ID:" + id));
-            return transformationForDtoSingleUser(user);
-        } catch (Exception e) {
-            log.error(e.getMessage());
-        }
-
-        return null;
-    }
-
 
     @Override
     public Boolean isUserExistsByEmail(String email) {
         return userDao.isUserExistsByEmail(email);
-    }
-
-    private List<UserDto> transformationForDtoListUser(List<User> users) {
-        List<UserDto> dtos = new ArrayList<>();
-        users.forEach(e -> {
-            dtos.add(UserDto.builder()
-                    .id(e.getId())
-                    .age(e.getAge())
-                    .email(e.getEmail())
-                    .phoneNumber(e.getPhoneNumber())
-                    .accountType(e.getAccountType())
-                    .name(e.getName())
-                    .surname(e.getUsername())
-                    .avatar(fileUtil.convertStringToMultipartFile(e.getAvatar()))
-                    .build());
-        });
-
-        return dtos;
     }
 
     private UserDto transformationForDtoSingleUser(User user) {
