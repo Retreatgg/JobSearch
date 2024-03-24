@@ -43,18 +43,18 @@ public class VacancyController {
     }
 
     @DeleteMapping("{id}employer{employerId}")
-    public void deleteResumeById(@PathVariable long id, @PathVariable long employerId) {
+    public void deleteVacancyById(@PathVariable long id, @PathVariable long employerId) {
         vacancyService.deleteVacancyById(id, employerId);
     }
 
     @PostMapping("employer{employerId}")
-    public HttpStatus addResume(@RequestBody @Valid VacancyDto vacancyDto, @PathVariable long employerId) {
+    public HttpStatus addVacancy(@RequestBody @Valid VacancyDto vacancyDto, @PathVariable long employerId) {
         vacancyService.addVacancy(vacancyDto, employerId);
         return HttpStatus.OK;
     }
 
     @PutMapping("{id}employer{employerId}")
-    public HttpStatus editResume(@RequestBody @Valid VacancyUpdateDto vacancyDto, @PathVariable long id, @PathVariable long employerId) {
+    public HttpStatus editVacancy(@RequestBody @Valid VacancyUpdateDto vacancyDto, @PathVariable long id, @PathVariable long employerId) {
         vacancyService.editVacancy(vacancyDto, id, employerId);
         return HttpStatus.OK;
     }

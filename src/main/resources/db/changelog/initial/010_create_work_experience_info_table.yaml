@@ -27,4 +27,4 @@ databaseChangeLog:
                   type: varchar(45)
               - column:
                   name: responsibilities
-                  type: varchar(45)
+                  type: varchar(120)
