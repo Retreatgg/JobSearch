@@ -1,4 +1,4 @@
-insert into USERS(name, surname, age, email, password, phone_number, avatar, account_type)
+/* insert into USERS(name, surname, age, email, password, phone_number, avatar, account_type)
 values ('John', 'Doe', 25, 'john@example.com', 'password1', '123456789', '', 'Applicant'),
        ('Jane', 'Smith', 30, 'jane@example.com', 'password2', '987654321', '', 'Applicant'),
        ('Alice', 'Johnson', 35, 'alice@example.com', 'password3', '111222333', '', 'Employer'),
@@ -50,4 +50,4 @@ VALUES (1, 1, true),
 insert into MESSAGES(responded_applicants, content, timestamp)
 VALUES (1, 'Thank you for your application.', CURRENT_TIMESTAMP),
        (2, 'Unfortunately, your application was not successful at this time.',
-        CURRENT_TIMESTAMP);
+        CURRENT_TIMESTAMP); */

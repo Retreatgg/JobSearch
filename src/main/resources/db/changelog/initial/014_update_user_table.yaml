@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - changeSet:
+      id: Update table USERS
+      author: Argen
+      changes:
+        - addColumn:
+            tableName: USERS
+            columns:
+              - column:
+                  name: enabled
+                  type: boolean
+                  constraints:
+                    nullable: false
