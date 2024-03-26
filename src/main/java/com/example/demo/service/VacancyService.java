@@ -11,7 +11,6 @@ import java.util.List;
 public interface VacancyService {
     List<VacancyDto> getAllVacancies();
     List<VacancyDto> getVacanciesByCategory(String name);
-    List<VacancyDto> getRespondedVacancies();
     List<VacancyDto> getActiveVacancy();
 
     void deleteVacancyById(Long id, Authentication auth);

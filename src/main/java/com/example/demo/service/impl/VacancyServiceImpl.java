@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.dao.RespondedApplicantsDao;
 import com.example.demo.dao.UserDao;
 import com.example.demo.dao.VacancyDao;
 import com.example.demo.dto.RespondedApplicantsDto;
@@ -24,9 +25,9 @@ import java.util.*;
 @RequiredArgsConstructor
 public class VacancyServiceImpl implements VacancyService {
     private final VacancyDao vacancyDao;
-    private final UserDao userDao;
     private final RespondedApplicantService respondedApplicantService;
     private final ResumeService resumeService;
+    private final RespondedApplicantsDao respondedApplicantsDao;
 
     @Override
     public List<VacancyDto> getAllVacancies() {
@@ -37,12 +38,6 @@ public class VacancyServiceImpl implements VacancyService {
     @Override
     public List<VacancyDto> getVacanciesByCategory(String name) {
         List<Vacancy> vacancies = vacancyDao.getVacanciesByCategory(name);
-        return transformationForDtoListVacancies(vacancies);
-    }
-
-    @Override
-    public List<VacancyDto> getRespondedVacancies() {
-        List<Vacancy> vacancies = vacancyDao.getRespondedVacancies();
         return transformationForDtoListVacancies(vacancies);
     }
 

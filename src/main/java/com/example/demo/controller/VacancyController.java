@@ -1,7 +1,9 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.RespondedApplicantsDto;
 import com.example.demo.dto.VacancyDto;
 import com.example.demo.dto.VacancyUpdateDto;
+import com.example.demo.service.RespondedApplicantService;
 import com.example.demo.service.VacancyService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -17,15 +19,16 @@ import java.util.List;
 @RequestMapping("vacancies")
 public class VacancyController {
     private final VacancyService vacancyService;
+    private final RespondedApplicantService respondedApplicantService;
 
     @GetMapping("")
     public ResponseEntity<List<VacancyDto>> getAllVacancies() {
         return ResponseEntity.ok(vacancyService.getAllVacancies());
     }
 
-    @GetMapping("responded-vacancies")
-    public ResponseEntity<List<VacancyDto>> getRespondedVacancies() {
-        return ResponseEntity.ok(vacancyService.getRespondedVacancies());
+    @GetMapping("responded-vacancy/{id}")
+    public ResponseEntity<List<RespondedApplicantsDto>> getRespondedVacancies(@PathVariable long id) {
+        return ResponseEntity.ok(respondedApplicantService.respondedApplicants(id));
     }
 
     @GetMapping("active")

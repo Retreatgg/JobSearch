@@ -57,7 +57,8 @@ public class SecurityConfig {
                          .requestMatchers(HttpMethod.PUT, "/resumes/**").hasAuthority("Applicant")
                          .requestMatchers(HttpMethod.PUT, "/vacancies/**").hasAuthority("Employer")
                          .requestMatchers(HttpMethod.DELETE, "/vacancies/").hasAuthority("Employer")
-                         .requestMatchers(HttpMethod.POST, "/vacancies/**").hasAuthority("Employer")
+                         .requestMatchers(HttpMethod.POST, "/vacancies/").hasAuthority("Employer")
+                         .requestMatchers(HttpMethod.POST, "vacancies/respond/").hasAuthority("Applicant")
                          .requestMatchers(HttpMethod.GET, "/resumes/**").hasAuthority("Employer")
                          .requestMatchers(HttpMethod.GET, "vacancies/**").permitAll()
                          .anyRequest().permitAll());

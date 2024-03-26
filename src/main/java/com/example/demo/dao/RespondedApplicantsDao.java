@@ -1,14 +1,21 @@
 package com.example.demo.dao;
 
+import com.example.demo.dto.VacancyDto;
 import com.example.demo.model.RespondedApplicant;
+import com.example.demo.model.Vacancy;
 import lombok.RequiredArgsConstructor;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class RespondedApplicantsDao {
+    private final JdbcTemplate jdbcTemplate;
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     public void createRespondedApplicants(RespondedApplicant respondedApplicantsDto) {
@@ -21,5 +28,14 @@ public class RespondedApplicantsDao {
                 .addValue("resume_id", respondedApplicantsDto.getResumeId())
                 .addValue("VACANCY_ID", respondedApplicantsDto.getVacancyId())
                 .addValue("CONFIRMATION", respondedApplicantsDto.getConfirmation()));
+    }
+
+    public List<RespondedApplicant> getRespondedVacancies(long id) {
+        String sql = """
+                select * from responded_applicants
+                where vacancy_id = ?
+                """;
+
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(RespondedApplicant.class), id);
     }
 }
