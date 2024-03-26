@@ -24,11 +24,6 @@ public class UserController {
         return ResponseEntity.ok(userService.getUserByPhoneNumber(phoneNumber));
     }
 
-    @GetMapping("is-exist{email}")
-    public ResponseEntity<Boolean> isUserExistsByEmail(@PathVariable String email) {
-        return ResponseEntity.ok(userService.isUserExistsByEmail(email));
-    }
-
     @PostMapping()
     public HttpStatus createUser(@RequestBody UserCreateDto userCreateDto) {
         userService.createUser(userCreateDto);

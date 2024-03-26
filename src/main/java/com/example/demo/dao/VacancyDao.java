@@ -18,7 +18,7 @@ import java.util.Optional;
 public class VacancyDao {
 
     private final JdbcTemplate jdbcTemplate;
-    private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+    private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     public List<Vacancy> getAllVacancies() {
         String sql = """
@@ -36,15 +36,6 @@ public class VacancyDao {
                 """;
 
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Vacancy.class), name);
-    }
-
-    public List<Vacancy> getRespondedVacancies() {
-        String sql = """
-                select * from VACANCIES
-                where IS_ACTIVE = false
-                """;
-
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Vacancy.class));
     }
 
     public List<Vacancy> getVacancyByAuthorId(long id) {

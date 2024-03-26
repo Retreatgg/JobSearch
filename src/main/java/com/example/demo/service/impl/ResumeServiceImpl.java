@@ -14,13 +14,13 @@ import com.example.demo.service.ResumeService;
 import com.example.demo.service.WorkExperienceInfoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
+import java.util.*;
 
 @Slf4j
 @Service
@@ -34,9 +34,22 @@ public class ResumeServiceImpl implements ResumeService {
     private final ContactInfoService contactInfoService;
 
     @Override
-    public ResumeDto getResumesByCategoryId(Long id, long employerId) {
-        User user = returnUserById(employerId);
-        if (user != null && user.getAccountType().equals("Employer")) {
+    public List<ResumeDto> getAllResumes(Authentication authentication) {
+        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+        String authority = authorities.isEmpty() ? "" : authorities.iterator().next().getAuthority();
+        if (authority.equalsIgnoreCase("Employer")) {
+            List<Resume> resumes = resumeDao.getAllResumes();
+            return transformationForListDtoResume(resumes);
+        }
+
+        return null;
+    }
+
+    @Override
+    public ResumeDto getResumesByCategoryId(Long id, Authentication auth) {
+        Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
+        String authority = authorities.isEmpty() ? "" : authorities.iterator().next().getAuthority();
+        if (authority.equalsIgnoreCase("Employer")) {
             Optional<Resume> resumeOptional = resumeDao.getResumesByCategoryId(id);
             if (resumeOptional.isPresent()) {
                 Resume resume = resumeOptional.get();
@@ -47,9 +60,10 @@ public class ResumeServiceImpl implements ResumeService {
     }
 
     @Override
-    public List<ResumeDto> getResumesByApplicantId(long id, long employerId) {
-        User user = returnUserById(employerId);
-        if (user != null && user.getAccountType().equals("Employer")) {
+    public List<ResumeDto> getResumesByApplicantId(long id, Authentication auth) {
+        Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
+        String authority = authorities.isEmpty() ? "" : authorities.iterator().next().getAuthority();
+        if (authority.equalsIgnoreCase("Employer")) {
             List<Resume> resumes = resumeDao.getResumesByApplicant(id);
             if (resumes != null && !resumes.isEmpty()) {
                 return transformationForListDtoResume(resumes);
@@ -62,43 +76,52 @@ public class ResumeServiceImpl implements ResumeService {
 
 
     @Override
-    public ResumeDto getResumeById(Long id, long employerId) {
-        User user = returnUserById(employerId);
-        if (user != null && user.getAccountType().equals("Employer")) {
+    public ResumeDto getResumeById(Long id, Authentication auth) {
+        Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
+        String authority = authorities.isEmpty() ? "" : authorities.iterator().next().getAuthority();
+        if (authority.equalsIgnoreCase("Employer")) {
             Resume resume = resumeDao.getResumeById(id).orElseThrow(() -> new NoSuchElementException("Can not find Resume by ID:" + id));
             return transformationForSingleDtoResume(resume);
+
         }
         return null;
     }
 
-    @Override
-    public boolean deleteResumeById(Long id, long applicantId) {
-        User user = returnUserById(applicantId);
-        if (user == null || !user.getAccountType().equals("Applicant")) {
-            return false;
-        }
+     @Override
+     public boolean deleteResumeById(Long id, Authentication auth) {
+         UserDetails userDetails = (UserDetails) auth.getPrincipal();
+         String email = userDetails.getUsername();
+         Optional<User> userOptional = userDao.getUserByEmail(email);
+         if (userOptional.isPresent()) {
+             User user = userOptional.get();
+             if (user == null || !user.getAccountType().equalsIgnoreCase("Applicant")) {
+                 return false;
+             }
 
-        Optional<Resume> optionalResume = resumeDao.getResumeById(id);
-        if (optionalResume.isPresent()) {
-            Resume resume = optionalResume.get();
-            if (resume.getApplicantId() == applicantId) {
-                resumeDao.deleteResumeById(id);
-                contactInfoService.delete(id);
-                workExperienceInfoService.delete(id);
-                educationInfoService.delete(id);
-                return true;
-            } else {
-                throw new NoSuchElementException("User with ID " + applicantId + " is not authorized to delete resume with ID " + id);
-            }
-        } else {
-            throw new NoSuchElementException("Resume with ID " + id + " not found");
-        }
-    }
+             Optional<Resume> optionalResume = resumeDao.getResumeById(id);
+             if (optionalResume.isPresent()) {
+                 Resume resume = optionalResume.get();
+                 if (resume.getApplicantId() == user.getId()) {
+                     resumeDao.deleteResumeById(id);
+                     contactInfoService.delete(id);
+                     workExperienceInfoService.delete(id);
+                     educationInfoService.delete(id);
+                     return true;
+                 } else {
+                     throw new NoSuchElementException("User with ID " + user.getId() + " is not authorized to delete resume with ID " + id);
+                 }
+             } else {
+                 throw new NoSuchElementException("Resume with ID " + id + " not found");
+             }
+         }
+         return false;
+     }
 
     @Override
-    public void addResume(ResumeCreateDto resumeDto, long applicantId) {
-        User user = returnUserById(applicantId);
-        if (user != null && user.getAccountType().equals("Applicant")) {
+    public void addResume(ResumeCreateDto resumeDto, Authentication auth) {
+        Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
+        String authority = authorities.isEmpty() ? "" : authorities.iterator().next().getAuthority();
+        if (authority.equalsIgnoreCase("Employer")) {
             Resume resume = new Resume();
             resume.setName(resumeDto.getTitle());
             resume.setSalary(resumeDto.getSalary());
@@ -116,11 +139,10 @@ public class ResumeServiceImpl implements ResumeService {
     }
 
     @Override
-    public void editResume(ResumeUpdateDto resumeDto, long id, long applicantId) {
-        User user = returnUserById(applicantId);
-        Optional<Resume> resumeOptional = resumeDao.getResumeById(id);
-        if (user != null && user.getAccountType().equals("Applicant")
-                && resumeOptional.isPresent() && resumeOptional.get().getApplicantId() == applicantId) {
+    public void editResume(ResumeUpdateDto resumeDto, long id, Authentication auth) {
+        Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
+        String authority = authorities.isEmpty() ? "" : authorities.iterator().next().getAuthority();
+        if (authority.equalsIgnoreCase("Employer")) {
             Resume resume = new Resume();
             resume.setId(id);
             resume.setName(resumeDto.getTitle());
@@ -132,6 +154,7 @@ public class ResumeServiceImpl implements ResumeService {
             resumeDto.getEducationInfo().forEach(ei -> educationInfoService.createEducationInfo(resume.getId(), ei));
             contactInfoService.createContactInfo(resume.getId(), resumeDto.getContacts());
         }
+
     }
 
 
@@ -164,15 +187,6 @@ public class ResumeServiceImpl implements ResumeService {
         });
 
         return dtos;
-    }
-
-    private User returnUserById(long id) {
-        Optional<User> optionalUser = userDao.getById(id);
-        if (optionalUser.isPresent()) {
-            User user = optionalUser.get();
-            return user;
-        }
-        return null;
     }
 
 }

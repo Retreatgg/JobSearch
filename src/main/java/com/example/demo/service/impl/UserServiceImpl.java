@@ -3,12 +3,17 @@ package com.example.demo.service.impl;
 import com.example.demo.dao.UserDao;
 import com.example.demo.dto.UserCreateDto;
 import com.example.demo.dto.UserDto;
+import com.example.demo.dto.UserRoleDto;
 import com.example.demo.dto.UserUpdateDto;
 import com.example.demo.model.User;
+import com.example.demo.service.UserRoleService;
 import com.example.demo.service.UserService;
 import com.example.demo.util.FileUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
@@ -20,6 +25,8 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
     private final UserDao userDao;
     private final FileUtil fileUtil;
+    private final PasswordEncoder encoder;
+    private final UserRoleService userRoleService;
 
     @Override
     public UserDto getUserByEmail(String email) {
@@ -52,14 +59,37 @@ public class UserServiceImpl implements UserService {
         user.setEmail(userCreateDto.getEmail());
         user.setAccountType(userCreateDto.getAccountType());
         user.setSurname(userCreateDto.getSurname());
-        user.setPassword(userCreateDto.getPassword());
+        user.setPassword(encoder.encode(userCreateDto.getPassword()));
         user.setPhoneNumber(userCreateDto.getPhoneNumber());
+        user.setEnabled(true);
         userDao.createUser(user);
+        Optional<User> userOptional = userDao.getUserByEmail(userCreateDto.getEmail());
+        if (userOptional.isPresent()) {
+            User newUser = userOptional.get();
+            if (userCreateDto.getAccountType().equals("Applicant")) {
+                UserRoleDto userRoleDto = UserRoleDto.builder()
+                        .roleId(2L)
+                        .userId(newUser.getId())
+                        .build();
+                userRoleService.createRoleForUser(userRoleDto);
+            } else if (userCreateDto.getAccountType().equals("Employer")) {
+                UserRoleDto userRoleDto = UserRoleDto.builder()
+                        .userId(newUser.getId())
+                        .roleId(1L)
+                        .build();
+                userRoleService.createRoleForUser(userRoleDto);
+            } else {
+                throw new NoSuchElementException("No such role");
+            }
+        }
+
     }
 
     @Override
-    public void editProfile(UserUpdateDto userUpdateDto, long profileId, String email) {
-        Optional<User> userOptional = userDao.getUserById(profileId);
+    public void editProfile(UserUpdateDto userUpdateDto, Authentication auth) {
+        UserDetails userDetails = (UserDetails) auth.getPrincipal();
+        String email = userDetails.getUsername();
+        Optional<User> userOptional = userDao.getUserByEmail(email);
         if (userOptional.isPresent()) {
             User user = userOptional.get();
             if (user.getEmail().equals(email)) {
@@ -68,15 +98,13 @@ public class UserServiceImpl implements UserService {
                 user.setAvatar(fileName);
                 user.setSurname(userUpdateDto.getSurname());
                 user.setName(userUpdateDto.getName());
-                user.setPassword(userUpdateDto.getPassword());
+                user.setPassword(encoder.encode(userUpdateDto.getPassword()));
                 user.setPhoneNumber(userUpdateDto.getPhoneNumber());
-
                 userDao.editProfile(user);
             } else {
                 throw new IllegalArgumentException("This is not your account. You can't change it");
             }
-        } else {
-            throw new NoSuchElementException("User with id " + profileId + " not found");
+
         }
     }
 

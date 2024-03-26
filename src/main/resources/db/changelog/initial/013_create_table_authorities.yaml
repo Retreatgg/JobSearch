@@ -1,10 +1,10 @@
 databaseChangeLog:
   - changeSet:
-      id: create table for messages
+      id: create authorities
       author: Argen
       changes:
         - createTable:
-            tableName: messages
+            tableName: authorities
             columns:
               - column:
                   name: id
@@ -14,11 +14,5 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: responded_applicants
-                  type: long
-              - column:
-                  name: content
-                  type: varchar(120)
-              - column:
-                  name: timestamp
-                  type: timestamp
+                  name: authority
+                  type: varchar(50)

@@ -1,0 +1,22 @@
+databaseChangeLog:
+  - changeSet:
+      id: Create table USER_AUTHORITY
+      author: Argen
+      changes:
+        - createTable:
+            tableName: user_role
+            columns:
+              - column:
+                  name: user_id
+                  type: long
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_user_id
+                    references: users(id)
+              - column:
+                  name: role_id
+                  type: long
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_authorities_id
+                    references: authorities(id)

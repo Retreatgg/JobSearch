@@ -30,4 +30,4 @@ databaseChangeLog:
                   type: date
               - column:
                   name: degree
-                  type: varchar(45)
+                  type: varchar(120)

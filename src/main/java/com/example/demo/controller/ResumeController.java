@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,35 +19,40 @@ import java.util.List;
 public class ResumeController {
     private final ResumeService resumeService;
 
-    @GetMapping("category{categoryId}employerId{employerId}")
-    public ResponseEntity<ResumeDto> getResumeByCategoryId(@PathVariable long categoryId, @PathVariable long employerId) {
-        return ResponseEntity.ok(resumeService.getResumesByCategoryId(categoryId, employerId));
+    @GetMapping()
+    public ResponseEntity<List<ResumeDto>> getAllResumes(Authentication authentication) {
+        return ResponseEntity.ok(resumeService.getAllResumes(authentication));
     }
 
-    @GetMapping("applicant{id}employerId{employerId}")
-    public ResponseEntity<List<ResumeDto>> getResumesByApplicant(@PathVariable long id, @PathVariable long employerId) {
-        return ResponseEntity.ok(resumeService.getResumesByApplicantId(id, employerId));
+    @GetMapping("/category/{categoryId}")
+    public ResponseEntity<ResumeDto> getResumeByCategoryId(@PathVariable long categoryId, Authentication auth) {
+        return ResponseEntity.ok(resumeService.getResumesByCategoryId(categoryId, auth));
     }
 
-    @GetMapping("{id}employerId{employerId}")
-    public ResponseEntity<?> getResumeById(@PathVariable long id, @PathVariable long employerId) {
-        return ResponseEntity.ok(resumeService.getResumeById(id, employerId));
+    @GetMapping("/applicant/{id}")
+    public ResponseEntity<List<ResumeDto>> getResumesByApplicant(@PathVariable long id, Authentication auth) {
+        return ResponseEntity.ok(resumeService.getResumesByApplicantId(id, auth));
     }
 
-    @DeleteMapping("{id}applicant{applicantId}")
-    public ResponseEntity<?> deleteResumeById(@PathVariable long id, @PathVariable long applicantId) {
-           return ResponseEntity.ok(resumeService.deleteResumeById(id, applicantId));
+    @GetMapping("{id}")
+    public ResponseEntity<?> getResumeById(@PathVariable long id, Authentication auth) {
+        return ResponseEntity.ok(resumeService.getResumeById(id, auth));
     }
 
-    @PostMapping("applicant{applicantId}")
-    public HttpStatus addResume(@RequestBody @Valid ResumeCreateDto resumeDto, @PathVariable long applicantId) {
-        resumeService.addResume(resumeDto, applicantId);
+    @DeleteMapping("{id}")
+    public ResponseEntity<?> deleteResumeById(@PathVariable long id, Authentication auth) {
+           return ResponseEntity.ok(resumeService.deleteResumeById(id, auth));
+    }
+
+    @PostMapping("")
+    public HttpStatus addResume(@RequestBody @Valid ResumeCreateDto resumeDto, Authentication auth) {
+        resumeService.addResume(resumeDto, auth);
         return HttpStatus.OK;
     }
 
-    @PutMapping("{id}applicant{applicantId}")
-    public HttpStatus editResume(@RequestBody @Valid ResumeUpdateDto resumeDto, @PathVariable long applicantId, @PathVariable long id) {
-        resumeService.editResume(resumeDto, id, applicantId);
+    @PutMapping("{id}")
+    public HttpStatus editResume(@RequestBody @Valid ResumeUpdateDto resumeDto, Authentication auth, @PathVariable long id) {
+        resumeService.editResume(resumeDto, id, auth);
         return HttpStatus.OK;
     }
 
