@@ -32,6 +32,17 @@ public class ResumeServiceImpl implements ResumeService {
     private final ContactInfoService contactInfoService;
 
     @Override
+    public List<ResumeDto> getAllResumes(Authentication authentication) {
+        User user = (User) authentication.getPrincipal();
+        if(user.getAccountType().equals("Employer")) {
+            List<Resume> resumes = resumeDao.getAllResumes();
+            return transformationForListDtoResume(resumes);
+        }
+
+        return null;
+    }
+
+    @Override
     public ResumeDto getResumesByCategoryId(Long id, Authentication auth) {
         User user = (User) auth.getPrincipal();
         if (user != null && user.getAccountType().equals("Employer")) {

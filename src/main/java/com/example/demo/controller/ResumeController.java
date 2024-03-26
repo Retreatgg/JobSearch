@@ -19,6 +19,11 @@ import java.util.List;
 public class ResumeController {
     private final ResumeService resumeService;
 
+    @GetMapping()
+    public ResponseEntity<List<ResumeDto>> getAllResumes(Authentication authentication) {
+        return ResponseEntity.ok(resumeService.getAllResumes(authentication));
+    }
+
     @GetMapping("/category/{categoryId}")
     public ResponseEntity<ResumeDto> getResumeByCategoryId(@PathVariable long categoryId, Authentication auth) {
         return ResponseEntity.ok(resumeService.getResumesByCategoryId(categoryId, auth));

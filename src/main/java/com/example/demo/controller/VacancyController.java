@@ -54,4 +54,10 @@ public class VacancyController {
     public ResponseEntity<List<VacancyDto>> getVacanciesByCompanyName(@PathVariable String name) {
         return ResponseEntity.ok(vacancyService.getVacanciesByCompanyName(name));
     }
+
+    @PostMapping("respond/{id}")
+    public HttpStatus respond(@PathVariable long id, Authentication authentication) {
+        vacancyService.respond(id, authentication);
+        return HttpStatus.OK;
+    }
 }

@@ -19,11 +19,20 @@ public class ResumeDao {
     private final JdbcTemplate jdbcTemplate;
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
+    public List<Resume> getAllResumes() {
+        String sql = """
+                select * from resumes
+                where is_active = true
+                """;
+
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Resume.class));
+    }
 
     public Optional<Resume> getResumesByCategoryId(Long id) {
         String sql = """
                 select * from RESUMES
                 where category_id = ?
+                and IS_ACTIVE = true;
                 """;
 
         return Optional.ofNullable(
@@ -39,7 +48,7 @@ public class ResumeDao {
                 WHERE applicant_id = (
                     select * from USERS
                     where id = ?
-                )
+                ) and IS_ACTIVE = true               
                 """;
 
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Resume.class), id);

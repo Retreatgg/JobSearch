@@ -2,10 +2,15 @@ package com.example.demo.service.impl;
 
 import com.example.demo.dao.UserDao;
 import com.example.demo.dao.VacancyDao;
+import com.example.demo.dto.RespondedApplicantsDto;
+import com.example.demo.dto.ResumeDto;
 import com.example.demo.dto.VacancyDto;
 import com.example.demo.dto.VacancyUpdateDto;
+import com.example.demo.model.Resume;
 import com.example.demo.model.User;
 import com.example.demo.model.Vacancy;
+import com.example.demo.service.RespondedApplicantService;
+import com.example.demo.service.ResumeService;
 import com.example.demo.service.VacancyService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +25,8 @@ import java.util.*;
 public class VacancyServiceImpl implements VacancyService {
     private final VacancyDao vacancyDao;
     private final UserDao userDao;
+    private final RespondedApplicantService respondedApplicantService;
+    private final ResumeService resumeService;
 
     @Override
     public List<VacancyDto> getAllVacancies() {
@@ -112,6 +119,21 @@ public class VacancyServiceImpl implements VacancyService {
     public List<VacancyDto> getVacanciesByCompanyName(String name) {
         List<Vacancy> vacancies = vacancyDao.getVacanciesByCompanyName(name);
         return transformationForDtoListVacancies(vacancies);
+    }
+
+    @Override
+    public void respond(Long id, Authentication authentication) {
+        User user = (User) authentication.getPrincipal();
+        if(user.getAccountType().equals("Applicant")) {
+            ResumeDto resume = resumeService.getResumeById(user.getId(), authentication);
+            RespondedApplicantsDto respondedApplicantsDto = RespondedApplicantsDto.builder()
+                    .vacancyId(id)
+                    .resumeId(resume.getId())
+                    .confirmation(false)
+                    .build();
+
+            respondedApplicantService.createRespondedApplicant(respondedApplicantsDto);
+        }
     }
 
     private List<VacancyDto> transformationForDtoListVacancies(List<Vacancy> vacancies) {
