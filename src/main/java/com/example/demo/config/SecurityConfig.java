@@ -52,14 +52,14 @@ public class SecurityConfig {
                  .logout(AbstractHttpConfigurer::disable)
                  .csrf(AbstractHttpConfigurer::disable)
                  .authorizeHttpRequests(authorize -> authorize
-                         .requestMatchers(HttpMethod.POST, "/resumes/**").hasAuthority("Applicant")
-                         .requestMatchers(HttpMethod.DELETE, "/resumes/**").hasAuthority("Applicant")
-                         .requestMatchers(HttpMethod.PUT, "/resumes/**").hasAuthority("Applicant")
-                         .requestMatchers(HttpMethod.PUT, "/vacancies/**").hasAuthority("Employer")
-                         .requestMatchers(HttpMethod.DELETE, "/vacancies/").hasAuthority("Employer")
-                         .requestMatchers(HttpMethod.POST, "/vacancies/").hasAuthority("Employer")
-                         .requestMatchers(HttpMethod.POST, "vacancies/respond/").hasAuthority("Applicant")
-                         .requestMatchers(HttpMethod.GET, "/resumes/**").hasAuthority("Employer")
+                         .requestMatchers(HttpMethod.POST, "/resumes/**").hasAuthority("APPLICANT")
+                         .requestMatchers(HttpMethod.DELETE, "/resumes/**").hasAuthority("APPLICANT")
+                         .requestMatchers(HttpMethod.PUT, "/resumes/**").hasAuthority("APPLICANT")
+                         .requestMatchers(HttpMethod.PUT, "/vacancies/**").hasAuthority("EMPLOYER")
+                         .requestMatchers(HttpMethod.DELETE, "/vacancies/").hasAuthority("EMPLOYER")
+                         .requestMatchers(HttpMethod.POST, "/vacancies/").hasAuthority("EMPLOYER")
+                         .requestMatchers(HttpMethod.POST, "vacancies/respond").hasAuthority("APPLICANT")
+                         .requestMatchers(HttpMethod.GET, "/resumes/**").hasAuthority("EMPLOYER")
                          .requestMatchers(HttpMethod.GET, "vacancies/**").permitAll()
                          .anyRequest().permitAll());
 

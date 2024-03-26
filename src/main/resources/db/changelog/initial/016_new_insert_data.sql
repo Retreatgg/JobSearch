@@ -53,8 +53,8 @@ VALUES (1, 'Thank you for your application.', CURRENT_TIMESTAMP),
         CURRENT_TIMESTAMP);
 
 insert into AUTHORITIES(authority)
-values ( 'Employer' ),
-       ('Applicant');
+values ( 'EMPLOYER' ),
+       ('APPLICANT');
 
 insert into USER_ROLE(user_id, role_id)
 VALUES ( 1, 2 ),

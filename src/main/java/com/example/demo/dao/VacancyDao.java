@@ -18,7 +18,7 @@ import java.util.Optional;
 public class VacancyDao {
 
     private final JdbcTemplate jdbcTemplate;
-    private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+    private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     public List<Vacancy> getAllVacancies() {
         String sql = """
