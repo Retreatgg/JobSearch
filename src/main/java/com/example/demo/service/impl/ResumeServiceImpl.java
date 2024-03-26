@@ -6,7 +6,6 @@ import com.example.demo.dao.UserDao;
 import com.example.demo.dto.ResumeCreateDto;
 import com.example.demo.dto.ResumeDto;
 import com.example.demo.dto.ResumeUpdateDto;
-import com.example.demo.dto.UserDtoAuth;
 import com.example.demo.model.Resume;
 import com.example.demo.model.User;
 import com.example.demo.service.ContactInfoService;
@@ -17,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -89,7 +89,8 @@ public class ResumeServiceImpl implements ResumeService {
 
      @Override
      public boolean deleteResumeById(Long id, Authentication auth) {
-         /*String email = ((User) auth.getPrincipal()).getEmail();
+         UserDetails userDetails = (UserDetails) auth.getPrincipal();
+         String email = userDetails.getUsername();
          Optional<User> userOptional = userDao.getUserByEmail(email);
          if (userOptional.isPresent()) {
              User user = userOptional.get();
@@ -112,7 +113,7 @@ public class ResumeServiceImpl implements ResumeService {
              } else {
                  throw new NoSuchElementException("Resume with ID " + id + " not found");
              }
-         }*/
+         }
          return false;
      }
 

@@ -1,7 +1,5 @@
 package com.example.demo.model;
 
-import com.example.demo.dto.UserDto;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -1,6 +1,7 @@
 package com.example.demo.dto;
 
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.Builder;
 import lombok.Data;
@@ -12,17 +13,15 @@ public class VacancyUpdateDto {
     private String name;
     @NotEmpty
     private String description;
-    @NotEmpty
+    @NotNull
     private Long categoryId;
-    @NotEmpty
+    @Positive
     private Double salary;
 
-    @NotEmpty
     @Positive
     private Integer expFrom;
-    @NotEmpty
     @Positive
     private Integer expTo;
-    @NotEmpty
+    @NotNull
     private Boolean isActive;
 }

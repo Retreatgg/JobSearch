@@ -6,6 +6,7 @@ import com.example.demo.dto.RespondedApplicantsDto;
 import com.example.demo.dto.ResumeDto;
 import com.example.demo.dto.VacancyDto;
 import com.example.demo.dto.VacancyUpdateDto;
+import com.example.demo.model.User;
 import com.example.demo.model.Vacancy;
 import com.example.demo.service.RespondedApplicantService;
 import com.example.demo.service.ResumeService;
@@ -14,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -47,7 +49,8 @@ public class VacancyServiceImpl implements VacancyService {
 
     @Override
     public void deleteVacancyById(Long id, Authentication auth) {
-        /*String email = ((User) auth.getPrincipal()).getEmail();
+        UserDetails userDetails = (UserDetails) auth.getPrincipal();
+        String email = userDetails.getUsername();
         Optional<User> userOptional = userDao.getUserByEmail(email);
         if (userOptional.isPresent()) {
             User user = userOptional.get();
@@ -64,7 +67,7 @@ public class VacancyServiceImpl implements VacancyService {
             } else {
                 throw new NoSuchElementException("User with ID " + user.getId() + " not authorized to delete vacancy with ID " + id);
             }
-        }*/
+        }
 
     }
 

@@ -25,7 +25,6 @@ public class ResumeCreateDto {
     @NotNull
     private String categoryName;
 
-    @NotNull
     @Positive
     private Double salary;
 
