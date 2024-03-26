@@ -9,12 +9,10 @@ import com.example.demo.model.Vacancy;
 import com.example.demo.service.VacancyService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
+import java.util.*;
 
 @Slf4j
 @Service
@@ -24,9 +22,9 @@ public class VacancyServiceImpl implements VacancyService {
     private final UserDao userDao;
 
     @Override
-    public List<VacancyDto> getAllVacancies(long applicantId) {
-        User user = returnUserById(applicantId);
-        if (user != null && user.getAccountType().equals("Applicant")) {
+    public List<VacancyDto> getAllVacancies(Authentication auth) {
+        User user = (User) auth.getPrincipal();
+        if (user.getAccountType().equals("Applicant")) {
             List<Vacancy> vacancies = vacancyDao.getAllVacancies();
             return transformationForDtoListVacancies(vacancies);
         }
@@ -34,9 +32,9 @@ public class VacancyServiceImpl implements VacancyService {
     }
 
     @Override
-    public List<VacancyDto> getVacanciesByCategory(String name, long applicantId) {
-        User user = returnUserById(applicantId);
-        if (user != null && user.getAccountType().equals("Applicant")) {
+    public List<VacancyDto> getVacanciesByCategory(String name, Authentication auth) {
+        User user = (User) auth.getPrincipal();
+        if (user.getAccountType().equals("Applicant")) {
             List<Vacancy> vacancies = vacancyDao.getVacanciesByCategory(name);
             return transformationForDtoListVacancies(vacancies);
         }
@@ -44,9 +42,9 @@ public class VacancyServiceImpl implements VacancyService {
     }
 
     @Override
-    public List<VacancyDto> getRespondedVacancies(long employeeId) {
-        User user = returnUserById(employeeId);
-        if (user != null && user.getAccountType().equals("Employer")) {
+    public List<VacancyDto> getRespondedVacancies(Authentication auth) {
+        User user = (User) auth.getPrincipal();
+        if (user.getAccountType().equals("Employer")) {
             List<Vacancy> vacancies = vacancyDao.getRespondedVacancies();
             return transformationForDtoListVacancies(vacancies);
         }
@@ -54,9 +52,9 @@ public class VacancyServiceImpl implements VacancyService {
     }
 
     @Override
-    public List<VacancyDto> getVacancyByAuthorId(Long id, long applicantId) {
-        User user = returnUserById(applicantId);
-        if (user != null && user.getAccountType().equals("Applicant")) {
+    public List<VacancyDto> getVacancyByAuthorId(Long id, Authentication auth) {
+        User user = (User) auth.getPrincipal();
+        if (user.getAccountType().equals("Applicant")) {
             List<Vacancy> vacancies = vacancyDao.getVacancyByAuthorId(id);
             return transformationForDtoListVacancies(vacancies);
         }
@@ -64,9 +62,9 @@ public class VacancyServiceImpl implements VacancyService {
     }
 
     @Override
-    public List<VacancyDto> getActiveVacancy(long applicantId) {
-        User user = returnUserById(applicantId);
-        if (user != null && user.getAccountType().equals("Applicant")) {
+    public List<VacancyDto> getActiveVacancy(Authentication auth) {
+        User user = (User) auth.getPrincipal();
+        if (user.getAccountType().equals("Applicant")) {
             List<Vacancy> vacancies = vacancyDao.getActiveVacancies();
             return transformationForDtoListVacancies(vacancies);
         }
@@ -75,28 +73,28 @@ public class VacancyServiceImpl implements VacancyService {
     }
 
     @Override
-    public void deleteVacancyById(Long id, long employeeId) {
-        User user = returnUserById(employeeId);
+    public void deleteVacancyById(Long id, Authentication auth) {
+        User user = (User) auth.getPrincipal();
         if (user != null && user.getAccountType().equals("Employer")) {
             Optional<Vacancy> optionalVacancy = vacancyDao.getVacancyById(id);
             if (optionalVacancy.isPresent()) {
                 Vacancy vacancy = optionalVacancy.get();
-                if (vacancy.getAuthorId() == employeeId) {
+                if (Objects.equals(vacancy.getAuthorId(), user.getId())) {
                     vacancyDao.deleteVacancyById(id);
                 }
             } else {
                 throw new NoSuchElementException("Vacancy with ID " + id + " not found");
             }
         } else {
-            throw new NoSuchElementException("User with ID " + employeeId + " not authorized to delete vacancy with ID " + id);
+            assert user != null;
+            throw new NoSuchElementException("User with ID " + user.getId() + " not authorized to delete vacancy with ID " + id);
         }
 
     }
 
     @Override
-    public void addVacancy(VacancyDto vacancyDto, long employerId) {
-        User user = returnUserById(employerId);
-        assert user != null;
+    public void addVacancy(VacancyDto vacancyDto, Authentication auth) {
+        User user = (User) auth.getPrincipal();
         if (user.getAccountType().equals("Employer")) {
             Vacancy vacancy = new Vacancy();
             vacancy.setAuthorId(vacancyDto.getAuthorId());
@@ -109,14 +107,14 @@ public class VacancyServiceImpl implements VacancyService {
             vacancy.setName(vacancyDto.getName());
             vacancyDao.addVacancy(vacancy);
         } else {
-            throw new NoSuchElementException("User with ID " + employerId + " not authorized to add vacancy");
+            throw new NoSuchElementException("User with ID " + user.getId() + " not authorized to add vacancy");
         }
     }
 
     @Override
-    public void editVacancy(VacancyUpdateDto vacancyDto, long vacancyId, long employerId) {
-        User user = returnUserById(employerId);
-        if (user != null && user.getAccountType().equals("Employer")) {
+    public void editVacancy(VacancyUpdateDto vacancyDto, long vacancyId, Authentication auth) {
+        User user = (User) auth.getPrincipal();
+        if (user.getAccountType().equals("Employer")) {
             Optional<Vacancy> vacancyOptional = vacancyDao.getVacancyById(vacancyId);
             if (vacancyOptional.isPresent()) {
                 Vacancy vacancy = vacancyOptional.get();
@@ -133,14 +131,14 @@ public class VacancyServiceImpl implements VacancyService {
                 throw new NoSuchElementException("Not found vacancy with ID " + vacancyId);
             }
         } else {
-            throw new NoSuchElementException("User with ID " + employerId + " not authorized to edit vacancy");
+            throw new NoSuchElementException("User with ID " + user.getId() + " not authorized to edit vacancy");
         }
     }
 
     @Override
-    public List<VacancyDto> getVacanciesByCompanyName(String name, long applicantId) {
-        User user = returnUserById(applicantId);
-        if (user != null && user.getAccountType().equals("Applicant")) {
+    public List<VacancyDto> getVacanciesByCompanyName(String name, Authentication auth) {
+        User user = (User) auth.getPrincipal();
+        if (user.getAccountType().equals("Applicant")) {
             List<Vacancy> vacancies = vacancyDao.getVacanciesByCompanyName(name);
             return transformationForDtoListVacancies(vacancies);
         }
@@ -148,9 +146,9 @@ public class VacancyServiceImpl implements VacancyService {
     }
 
     @Override
-    public VacancyDto getVacancyById(Long id, long applicantId) {
-        User user = returnUserById(applicantId);
-        if (user != null && user.getAccountType().equals("Applicant")) {
+    public VacancyDto getVacancyById(Long id, Authentication auth) {
+        User user = (User) auth.getPrincipal();
+        if (user.getAccountType().equals("Applicant")) {
             Vacancy vacancy = vacancyDao.getVacancyById(id).orElseThrow(() -> new NoSuchElementException("Can not find Vacancy by ID:" + id));
             return transformationForDtoSingleVacancy(vacancy);
         }
@@ -188,8 +186,4 @@ public class VacancyServiceImpl implements VacancyService {
 
     }
 
-    private User returnUserById(long userId) {
-        Optional<User> optionalUser = userDao.getById(userId);
-        return optionalUser.orElse(null);
-    }
 }

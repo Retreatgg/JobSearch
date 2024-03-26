@@ -9,6 +9,7 @@ import com.example.demo.service.UserService;
 import com.example.demo.util.FileUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
@@ -58,26 +59,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void editProfile(UserUpdateDto userUpdateDto, long profileId, String email) {
-        Optional<User> userOptional = userDao.getUserById(profileId);
-        if (userOptional.isPresent()) {
-            User user = userOptional.get();
-            if (user.getEmail().equals(email)) {
-                String fileName = fileUtil.saveUploadedFile(userUpdateDto.getAvatar(), "/images");
-                user.setAge(userUpdateDto.getAge());
-                user.setAvatar(fileName);
-                user.setSurname(userUpdateDto.getSurname());
-                user.setName(userUpdateDto.getName());
-                user.setPassword(userUpdateDto.getPassword());
-                user.setPhoneNumber(userUpdateDto.getPhoneNumber());
-
-                userDao.editProfile(user);
-            } else {
-                throw new IllegalArgumentException("This is not your account. You can't change it");
-            }
+    public void editProfile(UserUpdateDto userUpdateDto, Authentication auth, String email) {
+        User user = (User) auth.getPrincipal();
+        if (user.getEmail().equals(email)) {
+            String fileName = fileUtil.saveUploadedFile(userUpdateDto.getAvatar(), "/images");
+            user.setAge(userUpdateDto.getAge());
+            user.setAvatar(fileName);
+            user.setSurname(userUpdateDto.getSurname());
+            user.setName(userUpdateDto.getName());
+            user.setPassword(userUpdateDto.getPassword());
+            user.setPhoneNumber(userUpdateDto.getPhoneNumber());
+            userDao.editProfile(user);
         } else {
-            throw new NoSuchElementException("User with id " + profileId + " not found");
+            throw new IllegalArgumentException("This is not your account. You can't change it");
         }
+
     }
 
     private UserDto transformationForDtoSingleUser(User user) {
