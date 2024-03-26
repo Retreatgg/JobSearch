@@ -4,6 +4,7 @@ import com.example.demo.dto.UserUpdateDto;
 import com.example.demo.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -11,9 +12,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("profile")
 public class ProfileController {
     private final UserService userService;
-    @PostMapping("{id}email{email}")
-    public HttpStatus editProfile(@PathVariable long id, @PathVariable String email, UserUpdateDto updateDto) {
-        userService.editProfile(updateDto, id, email);
+    @PostMapping("{email}")
+    public HttpStatus editProfile(Authentication auth, @PathVariable String email, UserUpdateDto updateDto) {
+        userService.editProfile(updateDto, auth, email);
         return HttpStatus.OK;
     }
 }

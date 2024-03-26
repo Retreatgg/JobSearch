@@ -145,17 +145,6 @@ public class VacancyServiceImpl implements VacancyService {
         return null;
     }
 
-    @Override
-    public VacancyDto getVacancyById(Long id, Authentication auth) {
-        User user = (User) auth.getPrincipal();
-        if (user.getAccountType().equals("Applicant")) {
-            Vacancy vacancy = vacancyDao.getVacancyById(id).orElseThrow(() -> new NoSuchElementException("Can not find Vacancy by ID:" + id));
-            return transformationForDtoSingleVacancy(vacancy);
-        }
-
-        return null;
-    }
-
     private List<VacancyDto> transformationForDtoListVacancies(List<Vacancy> vacancies) {
         List<VacancyDto> dtos = new ArrayList<>();
         vacancies.forEach(e -> dtos.add(VacancyDto.builder()

@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.jaas.memory.InMemoryConfiguration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -56,8 +57,12 @@ public class SecurityConfig {
                  .logout(AbstractHttpConfigurer::disable)
                  .csrf(AbstractHttpConfigurer::disable)
                  .authorizeHttpRequests(authorize -> authorize
-                         .requestMatchers("/resumes/**").hasAuthority("Employer")
-                         .requestMatchers("/vacancies/**").hasAuthority("Applicant")
+                         .requestMatchers(HttpMethod.POST, "/resumes/**").hasAuthority("Applicant")
+                         .requestMatchers(HttpMethod.DELETE, "/resumes/**").hasAuthority("Applicant")
+                         .requestMatchers(HttpMethod.PUT, "/resumes/**").hasAuthority("Applicant")
+                         .requestMatchers(HttpMethod.PUT, "/vacancies/**").hasAuthority("Employer")
+                         .requestMatchers(HttpMethod.DELETE, "/vacancies/").hasAuthority("Employer")
+                         .requestMatchers(HttpMethod.POST, "/vacancies/**").hasAuthority("Employer")
                          .anyRequest().permitAll());
 
          return http.build();

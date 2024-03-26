@@ -10,6 +10,7 @@ import com.example.demo.util.FileUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
@@ -21,6 +22,7 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
     private final UserDao userDao;
     private final FileUtil fileUtil;
+    private final PasswordEncoder encoder;
 
     @Override
     public UserDto getUserByEmail(String email) {
@@ -53,8 +55,9 @@ public class UserServiceImpl implements UserService {
         user.setEmail(userCreateDto.getEmail());
         user.setAccountType(userCreateDto.getAccountType());
         user.setSurname(userCreateDto.getSurname());
-        user.setPassword(userCreateDto.getPassword());
+        user.setPassword(encoder.encode(userCreateDto.getPassword()));
         user.setPhoneNumber(userCreateDto.getPhoneNumber());
+        user.setEnabled(true);
         userDao.createUser(user);
     }
 
@@ -67,7 +70,7 @@ public class UserServiceImpl implements UserService {
             user.setAvatar(fileName);
             user.setSurname(userUpdateDto.getSurname());
             user.setName(userUpdateDto.getName());
-            user.setPassword(userUpdateDto.getPassword());
+            user.setPassword(encoder.encode(userUpdateDto.getPassword()));
             user.setPhoneNumber(userUpdateDto.getPhoneNumber());
             userDao.editProfile(user);
         } else {

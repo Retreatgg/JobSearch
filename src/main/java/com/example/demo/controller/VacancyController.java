@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,50 +18,45 @@ import java.util.List;
 public class VacancyController {
     private final VacancyService vacancyService;
 
-    @GetMapping("applicant{applicantId}")
-    public ResponseEntity<List<VacancyDto>> getAllVacancies(@PathVariable long applicantId) {
-        return ResponseEntity.ok(vacancyService.getAllVacancies(applicantId));
+    @GetMapping("")
+    public ResponseEntity<List<VacancyDto>> getAllVacancies(Authentication auth) {
+        return ResponseEntity.ok(vacancyService.getAllVacancies(auth));
     }
 
-    @GetMapping("category{name}applicant{applicantId}")
-    public ResponseEntity<List<VacancyDto>> getVacanciesByCategory(@PathVariable String name, @PathVariable long applicantId) {
-        return ResponseEntity.ok(vacancyService.getVacanciesByCategory(name, applicantId));
+    @GetMapping("responded-vacancies")
+    public ResponseEntity<List<VacancyDto>> getRespondedVacancies(Authentication auth) {
+        return ResponseEntity.ok(vacancyService.getRespondedVacancies(auth));
     }
 
-    @GetMapping("responded-vacancies/applicant{applicantId}")
-    public ResponseEntity<List<VacancyDto>> getRespondedVacancies(@PathVariable long applicantId) {
-        return ResponseEntity.ok(vacancyService.getRespondedVacancies(applicantId));
+    @GetMapping("author/{id}")
+    public ResponseEntity<List<VacancyDto>> getVacancyByAuthorId(@PathVariable Long id, Authentication auth) {
+        return ResponseEntity.ok(vacancyService.getVacancyByAuthorId(id, auth));
     }
 
-    @GetMapping("authorId{id}applicant{applicantId}")
-    public ResponseEntity<List<VacancyDto>> getVacancyByAuthorId(@PathVariable Long id, @PathVariable long applicantId) {
-        return ResponseEntity.ok(vacancyService.getVacancyByAuthorId(id, applicantId));
+    @GetMapping("active")
+    public ResponseEntity<List<VacancyDto>> getActiveVacancies(Authentication auth) {
+        return ResponseEntity.ok(vacancyService.getActiveVacancy(auth));
     }
 
-    @GetMapping("active/applicant{applicantId}")
-    public ResponseEntity<List<VacancyDto>> getActiveVacancies(@PathVariable long applicantId) {
-        return ResponseEntity.ok(vacancyService.getActiveVacancy(applicantId));
+    @DeleteMapping("{id}")
+    public void deleteVacancyById(@PathVariable long id, Authentication auth) {
+        vacancyService.deleteVacancyById(id, auth);
     }
 
-    @DeleteMapping("{id}employer{employerId}")
-    public void deleteVacancyById(@PathVariable long id, @PathVariable long employerId) {
-        vacancyService.deleteVacancyById(id, employerId);
-    }
-
-    @PostMapping("employer{employerId}")
-    public HttpStatus addVacancy(@RequestBody @Valid VacancyDto vacancyDto, @PathVariable long employerId) {
-        vacancyService.addVacancy(vacancyDto, employerId);
+    @PostMapping("")
+    public HttpStatus addVacancy(@RequestBody @Valid VacancyDto vacancyDto, Authentication auth) {
+        vacancyService.addVacancy(vacancyDto, auth);
         return HttpStatus.OK;
     }
 
-    @PutMapping("{id}employer{employerId}")
-    public HttpStatus editVacancy(@RequestBody @Valid VacancyUpdateDto vacancyDto, @PathVariable long id, @PathVariable long employerId) {
-        vacancyService.editVacancy(vacancyDto, id, employerId);
+    @PutMapping("{id}")
+    public HttpStatus editVacancy(@RequestBody @Valid VacancyUpdateDto vacancyDto, @PathVariable long id, Authentication auth) {
+        vacancyService.editVacancy(vacancyDto, id, auth);
         return HttpStatus.OK;
     }
 
-    @GetMapping("name_company{name}applicant{applicantId}")
-    public ResponseEntity<List<VacancyDto>> getVacanciesByCompanyName(@PathVariable String name, @PathVariable long applicantId) {
-        return ResponseEntity.ok(vacancyService.getVacanciesByCompanyName(name, applicantId));
+    @GetMapping("company/{name}")
+    public ResponseEntity<List<VacancyDto>> getVacanciesByCompanyName(@PathVariable String name, Authentication auth) {
+        return ResponseEntity.ok(vacancyService.getVacanciesByCompanyName(name, auth));
     }
 }
