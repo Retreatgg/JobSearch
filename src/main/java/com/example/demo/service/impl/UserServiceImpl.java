@@ -5,6 +5,7 @@ import com.example.demo.dto.UserCreateDto;
 import com.example.demo.dto.UserDto;
 import com.example.demo.dto.UserUpdateDto;
 import com.example.demo.model.User;
+import com.example.demo.service.UserRoleService;
 import com.example.demo.service.UserService;
 import com.example.demo.util.FileUtil;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,7 @@ public class UserServiceImpl implements UserService {
     private final UserDao userDao;
     private final FileUtil fileUtil;
     private final PasswordEncoder encoder;
+    private final UserRoleService userRoleService;
 
     @Override
     public UserDto getUserByEmail(String email) {
@@ -59,6 +61,18 @@ public class UserServiceImpl implements UserService {
         user.setPhoneNumber(userCreateDto.getPhoneNumber());
         user.setEnabled(true);
         userDao.createUser(user);
+        Optional<User> userOptional = userDao.getUserByEmail(userCreateDto.getEmail());
+        if(userOptional.isPresent()) {
+            User newUser = userOptional.get();
+            if(userCreateDto.getAccountType().equals("Applicant")) {
+                userRoleService.createRoleForUser(newUser.getId(), 2L);
+            } else if (userCreateDto.getAccountType().equals("Employer")){
+                userRoleService.createRoleForUser(newUser.getId(), 1L);
+            } else {
+                throw new NoSuchElementException("No such role");
+            }
+        }
+
     }
 
     @Override

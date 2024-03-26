@@ -46,3 +46,1263 @@ This generated password is for development use only. Your security configuration
 
 2024-03-26T09:03:03.472+06:00  INFO 19316 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8089 (http) with context path ''
 2024-03-26T09:03:03.510+06:00  INFO 19316 --- [main] com.example.demo.DemoApplication         : Started DemoApplication in 11.573 seconds (process running for 14.902)
+2024-03-26T10:09:19.735+06:00  INFO 4892 --- [main] com.example.demo.DemoApplication         : Starting DemoApplication using Java 21 with PID 4892 (C:\Users\NOTEBURG\Desktop\demo\target\classes started by NOTEBURG in C:\Users\NOTEBURG\Desktop\demo)
+2024-03-26T10:09:19.778+06:00  INFO 4892 --- [main] com.example.demo.DemoApplication         : No active profile set, falling back to 1 default profile: "default"
+2024-03-26T10:09:33.146+06:00  INFO 4892 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8089 (http)
+2024-03-26T10:09:33.241+06:00  INFO 4892 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-03-26T10:09:33.243+06:00  INFO 4892 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.19]
+2024-03-26T10:09:34.031+06:00  INFO 4892 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-03-26T10:09:34.033+06:00  INFO 4892 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 13460 ms
+2024-03-26T10:09:35.625+06:00  INFO 4892 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-03-26T10:09:46.828+06:00  INFO 4892 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn1: url=jdbc:h2:./db/demo user=ROOT
+2024-03-26T10:09:46.831+06:00  INFO 4892 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-03-26T10:09:46.958+06:00  INFO 4892 --- [main] liquibase.database                       : Set default schema name to PUBLIC
+2024-03-26T10:09:48.440+06:00  INFO 4892 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/001_create_user_table.yaml
+2024-03-26T10:09:48.494+06:00  INFO 4892 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/002_create_categories_table.yaml
+2024-03-26T10:09:48.502+06:00  INFO 4892 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/003_create_resumes_table.yaml
+2024-03-26T10:09:48.516+06:00  INFO 4892 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/004_create_vacancies_table.yaml
+2024-03-26T10:09:48.536+06:00  INFO 4892 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/005_create_contact_types_table.yaml
+2024-03-26T10:09:48.572+06:00  INFO 4892 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/006_create_contacts_info_tables.yaml
+2024-03-26T10:09:48.582+06:00  INFO 4892 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/007_create_messages_table.yaml
+2024-03-26T10:09:48.596+06:00  INFO 4892 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/008_create_responded_applicants_table.yaml
+2024-03-26T10:09:48.607+06:00  INFO 4892 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/009_create_education_info_table.yaml
+2024-03-26T10:09:48.633+06:00  INFO 4892 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/010_create_work_experience_info_table.yaml
+2024-03-26T10:09:48.651+06:00  INFO 4892 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/011_create_foreign_keys.yaml
+2024-03-26T10:09:48.681+06:00  INFO 4892 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/012_insert_data.sql
+2024-03-26T10:09:48.737+06:00  INFO 4892 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/013_create_table_authorities.yaml
+2024-03-26T10:09:48.763+06:00  INFO 4892 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/014_update_user_table.yaml
+2024-03-26T10:09:48.780+06:00  INFO 4892 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/015_create_tables_roles_for_users.yaml
+2024-03-26T10:09:48.804+06:00  INFO 4892 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/016_new_insert_data.sql
+2024-03-26T10:09:49.359+06:00  INFO 4892 --- [main] liquibase.changelog                      : Reading from PUBLIC.DATABASECHANGELOG
+2024-03-26T10:09:49.746+06:00  INFO 4892 --- [main] liquibase.ui                             : Database is up to date, no changesets to execute
+2024-03-26T10:09:49.754+06:00  INFO 4892 --- [main] liquibase.changelog                      : Reading from PUBLIC.DATABASECHANGELOG
+2024-03-26T10:09:49.821+06:00  INFO 4892 --- [main] liquibase.util                           : UPDATE SUMMARY
+2024-03-26T10:09:49.823+06:00  INFO 4892 --- [main] liquibase.util                           : Run:                          0
+2024-03-26T10:09:49.835+06:00  INFO 4892 --- [main] liquibase.util                           : Previously run:              16
+2024-03-26T10:09:49.835+06:00  INFO 4892 --- [main] liquibase.util                           : Filtered out:                 0
+2024-03-26T10:09:49.835+06:00  INFO 4892 --- [main] liquibase.util                           : -------------------------------
+2024-03-26T10:09:49.836+06:00  INFO 4892 --- [main] liquibase.util                           : Total change sets:           16
+2024-03-26T10:09:49.839+06:00  INFO 4892 --- [main] liquibase.util                           : Update summary generated
+2024-03-26T10:09:49.905+06:00  INFO 4892 --- [main] liquibase.lockservice                    : Successfully released change log lock
+2024-03-26T10:09:49.907+06:00  INFO 4892 --- [main] liquibase.command                        : Command execution complete
+2024-03-26T10:09:51.595+06:00  INFO 4892 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@120d13ae, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1aaaabd1, org.springframework.security.web.context.SecurityContextHolderFilter@2f3cd727, org.springframework.security.web.header.HeaderWriterFilter@25b20860, org.springframework.web.filter.CorsFilter@7cbe3a05, org.springframework.security.web.csrf.CsrfFilter@6df87ffd, org.springframework.security.web.authentication.logout.LogoutFilter@2006fdaa, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@65a80fdb, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@75de7009, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@40b70f31, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@1ac25dbb, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@703cb756, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5897aae1, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3adde4ea, org.springframework.security.web.access.ExceptionTranslationFilter@1bcb8599, org.springframework.security.web.access.intercept.AuthorizationFilter@aa23f11]
+2024-03-26T10:09:52.779+06:00  WARN 4892 --- [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 0864cf76-27ee-450c-960b-1ce3b660444e
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-03-26T10:09:52.915+06:00  INFO 4892 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8089 (http) with context path ''
+2024-03-26T10:09:52.940+06:00  INFO 4892 --- [main] com.example.demo.DemoApplication         : Started DemoApplication in 35.461 seconds (process running for 41.102)
+2024-03-26T10:10:35.176+06:00  INFO 4892 --- [http-nio-8089-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-03-26T10:10:35.180+06:00  INFO 4892 --- [http-nio-8089-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-03-26T10:10:35.184+06:00  INFO 4892 --- [http-nio-8089-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2024-03-26T10:11:14.411+06:00  INFO 4892 --- [http-nio-8089-exec-5] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 1829 ms
+2024-03-26T10:16:46.560+06:00  INFO 4892 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-03-26T10:16:46.592+06:00  INFO 4892 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-03-26T10:17:26.011+06:00  INFO 3436 --- [main] com.example.demo.DemoApplication         : Starting DemoApplication using Java 21 with PID 3436 (C:\Users\NOTEBURG\Desktop\demo\target\classes started by NOTEBURG in C:\Users\NOTEBURG\Desktop\demo)
+2024-03-26T10:17:26.023+06:00  INFO 3436 --- [main] com.example.demo.DemoApplication         : No active profile set, falling back to 1 default profile: "default"
+2024-03-26T10:17:33.491+06:00  INFO 3436 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8089 (http)
+2024-03-26T10:17:33.553+06:00  INFO 3436 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-03-26T10:17:33.556+06:00  INFO 3436 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.19]
+2024-03-26T10:17:33.770+06:00  INFO 3436 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-03-26T10:17:33.772+06:00  INFO 3436 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 7406 ms
+2024-03-26T10:17:34.730+06:00  INFO 3436 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-03-26T10:17:46.306+06:00  INFO 3436 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn1: url=jdbc:h2:./db/demo user=ROOT
+2024-03-26T10:17:46.316+06:00  INFO 3436 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-03-26T10:17:47.844+06:00  INFO 3436 --- [main] liquibase.database                       : Set default schema name to PUBLIC
+2024-03-26T10:17:50.820+06:00  INFO 3436 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/001_create_user_table.yaml
+2024-03-26T10:17:51.202+06:00  INFO 3436 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/002_create_categories_table.yaml
+2024-03-26T10:17:51.266+06:00  INFO 3436 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/003_create_resumes_table.yaml
+2024-03-26T10:17:51.456+06:00  INFO 3436 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/004_create_vacancies_table.yaml
+2024-03-26T10:17:51.542+06:00  INFO 3436 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/005_create_contact_types_table.yaml
+2024-03-26T10:17:51.598+06:00  INFO 3436 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/006_create_contacts_info_tables.yaml
+2024-03-26T10:17:51.626+06:00  INFO 3436 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/007_create_messages_table.yaml
+2024-03-26T10:17:51.646+06:00  INFO 3436 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/008_create_responded_applicants_table.yaml
+2024-03-26T10:17:51.682+06:00  INFO 3436 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/009_create_education_info_table.yaml
+2024-03-26T10:17:51.800+06:00  INFO 3436 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/010_create_work_experience_info_table.yaml
+2024-03-26T10:17:51.836+06:00  INFO 3436 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/011_create_foreign_keys.yaml
+2024-03-26T10:17:51.865+06:00  INFO 3436 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/012_insert_data.sql
+2024-03-26T10:17:51.881+06:00  INFO 3436 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/013_create_table_authorities.yaml
+2024-03-26T10:17:51.906+06:00  INFO 3436 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/014_update_user_table.yaml
+2024-03-26T10:17:51.920+06:00  INFO 3436 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/015_create_tables_roles_for_users.yaml
+2024-03-26T10:17:51.939+06:00  INFO 3436 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/016_new_insert_data.sql
+2024-03-26T10:17:52.581+06:00  INFO 3436 --- [main] liquibase.changelog                      : Reading from PUBLIC.DATABASECHANGELOG
+2024-03-26T10:17:52.800+06:00  INFO 3436 --- [main] liquibase.ui                             : Database is up to date, no changesets to execute
+2024-03-26T10:17:52.808+06:00  INFO 3436 --- [main] liquibase.changelog                      : Reading from PUBLIC.DATABASECHANGELOG
+2024-03-26T10:17:52.867+06:00  INFO 3436 --- [main] liquibase.util                           : UPDATE SUMMARY
+2024-03-26T10:17:52.868+06:00  INFO 3436 --- [main] liquibase.util                           : Run:                          0
+2024-03-26T10:17:52.869+06:00  INFO 3436 --- [main] liquibase.util                           : Previously run:              16
+2024-03-26T10:17:52.872+06:00  INFO 3436 --- [main] liquibase.util                           : Filtered out:                 0
+2024-03-26T10:17:52.873+06:00  INFO 3436 --- [main] liquibase.util                           : -------------------------------
+2024-03-26T10:17:52.873+06:00  INFO 3436 --- [main] liquibase.util                           : Total change sets:           16
+2024-03-26T10:17:52.878+06:00  INFO 3436 --- [main] liquibase.util                           : Update summary generated
+2024-03-26T10:17:52.950+06:00  INFO 3436 --- [main] liquibase.lockservice                    : Successfully released change log lock
+2024-03-26T10:17:52.955+06:00  INFO 3436 --- [main] liquibase.command                        : Command execution complete
+2024-03-26T10:17:54.721+06:00  INFO 3436 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@7a021f49, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@e60c5a, org.springframework.security.web.context.SecurityContextHolderFilter@4af84a76, org.springframework.security.web.header.HeaderWriterFilter@6bf54260, org.springframework.web.filter.CorsFilter@626df173, org.springframework.security.web.csrf.CsrfFilter@2dd2ff87, org.springframework.security.web.authentication.logout.LogoutFilter@c6244e7, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@33568e26, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@674e4c82, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@4e030feb, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@3e489ac1, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5709e10b, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@114badf0, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2411b935, org.springframework.security.web.access.ExceptionTranslationFilter@713e49c3, org.springframework.security.web.access.intercept.AuthorizationFilter@4ba1c1a2]
+2024-03-26T10:17:55.345+06:00  WARN 3436 --- [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: de2587e9-9514-4dc7-a233-211dab91c3af
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-03-26T10:17:55.473+06:00  INFO 3436 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8089 (http) with context path ''
+2024-03-26T10:17:55.496+06:00  INFO 3436 --- [main] com.example.demo.DemoApplication         : Started DemoApplication in 32.598 seconds (process running for 36.649)
+2024-03-26T10:18:00.210+06:00  INFO 3436 --- [http-nio-8089-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-03-26T10:18:00.210+06:00  INFO 3436 --- [http-nio-8089-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-03-26T10:18:00.214+06:00  INFO 3436 --- [http-nio-8089-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2024-03-26T10:18:31.404+06:00  INFO 3436 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-03-26T10:18:31.414+06:00  INFO 3436 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-03-26T10:19:02.241+06:00  INFO 18764 --- [main] com.example.demo.DemoApplication         : Starting DemoApplication using Java 21 with PID 18764 (C:\Users\NOTEBURG\Desktop\demo\target\classes started by NOTEBURG in C:\Users\NOTEBURG\Desktop\demo)
+2024-03-26T10:19:02.250+06:00  INFO 18764 --- [main] com.example.demo.DemoApplication         : No active profile set, falling back to 1 default profile: "default"
+2024-03-26T10:19:07.364+06:00  INFO 18764 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8089 (http)
+2024-03-26T10:19:07.388+06:00  INFO 18764 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-03-26T10:19:07.388+06:00  INFO 18764 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.19]
+2024-03-26T10:19:07.497+06:00  INFO 18764 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-03-26T10:19:07.497+06:00  INFO 18764 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 5048 ms
+2024-03-26T10:19:07.947+06:00  INFO 18764 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-03-26T10:19:21.577+06:00  INFO 18764 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn1: url=jdbc:h2:./db/demo user=ROOT
+2024-03-26T10:19:21.582+06:00  INFO 18764 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-03-26T10:19:21.739+06:00  INFO 18764 --- [main] liquibase.database                       : Set default schema name to PUBLIC
+2024-03-26T10:19:22.372+06:00  INFO 18764 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/001_create_user_table.yaml
+2024-03-26T10:19:22.396+06:00  INFO 18764 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/002_create_categories_table.yaml
+2024-03-26T10:19:22.405+06:00  INFO 18764 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/003_create_resumes_table.yaml
+2024-03-26T10:19:22.417+06:00  INFO 18764 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/004_create_vacancies_table.yaml
+2024-03-26T10:19:22.431+06:00  INFO 18764 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/005_create_contact_types_table.yaml
+2024-03-26T10:19:22.439+06:00  INFO 18764 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/006_create_contacts_info_tables.yaml
+2024-03-26T10:19:22.449+06:00  INFO 18764 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/007_create_messages_table.yaml
+2024-03-26T10:19:22.457+06:00  INFO 18764 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/008_create_responded_applicants_table.yaml
+2024-03-26T10:19:22.464+06:00  INFO 18764 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/009_create_education_info_table.yaml
+2024-03-26T10:19:22.472+06:00  INFO 18764 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/010_create_work_experience_info_table.yaml
+2024-03-26T10:19:22.481+06:00  INFO 18764 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/011_create_foreign_keys.yaml
+2024-03-26T10:19:22.489+06:00  INFO 18764 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/012_insert_data.sql
+2024-03-26T10:19:22.500+06:00  INFO 18764 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/013_create_table_authorities.yaml
+2024-03-26T10:19:22.507+06:00  INFO 18764 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/014_update_user_table.yaml
+2024-03-26T10:19:22.513+06:00  INFO 18764 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/015_create_tables_roles_for_users.yaml
+2024-03-26T10:19:22.519+06:00  INFO 18764 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/016_new_insert_data.sql
+2024-03-26T10:19:22.826+06:00  INFO 18764 --- [main] liquibase.changelog                      : Reading from PUBLIC.DATABASECHANGELOG
+2024-03-26T10:19:22.962+06:00  INFO 18764 --- [main] liquibase.ui                             : Database is up to date, no changesets to execute
+2024-03-26T10:19:22.966+06:00  INFO 18764 --- [main] liquibase.changelog                      : Reading from PUBLIC.DATABASECHANGELOG
+2024-03-26T10:19:22.984+06:00  INFO 18764 --- [main] liquibase.util                           : UPDATE SUMMARY
+2024-03-26T10:19:22.985+06:00  INFO 18764 --- [main] liquibase.util                           : Run:                          0
+2024-03-26T10:19:22.985+06:00  INFO 18764 --- [main] liquibase.util                           : Previously run:              16
+2024-03-26T10:19:22.986+06:00  INFO 18764 --- [main] liquibase.util                           : Filtered out:                 0
+2024-03-26T10:19:22.986+06:00  INFO 18764 --- [main] liquibase.util                           : -------------------------------
+2024-03-26T10:19:22.986+06:00  INFO 18764 --- [main] liquibase.util                           : Total change sets:           16
+2024-03-26T10:19:22.988+06:00  INFO 18764 --- [main] liquibase.util                           : Update summary generated
+2024-03-26T10:19:23.023+06:00  INFO 18764 --- [main] liquibase.lockservice                    : Successfully released change log lock
+2024-03-26T10:19:23.024+06:00  INFO 18764 --- [main] liquibase.command                        : Command execution complete
+2024-03-26T10:19:23.918+06:00  INFO 18764 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@322ab6ce, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5b74902c, org.springframework.security.web.context.SecurityContextHolderFilter@2dd2ff87, org.springframework.security.web.header.HeaderWriterFilter@625f5712, org.springframework.web.filter.CorsFilter@4e4bfd9c, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@7165bde6, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@28cf179c, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@bdda8a7, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@43ee1cf7, org.springframework.security.web.session.SessionManagementFilter@188bf4d8, org.springframework.security.web.access.ExceptionTranslationFilter@1b3bb287, org.springframework.security.web.access.intercept.AuthorizationFilter@390a07a0]
+2024-03-26T10:19:24.425+06:00  WARN 18764 --- [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: d3107b00-33e5-4e7d-9564-f338fea9c6f3
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-03-26T10:19:24.525+06:00  INFO 18764 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8089 (http) with context path ''
+2024-03-26T10:19:24.549+06:00  INFO 18764 --- [main] com.example.demo.DemoApplication         : Started DemoApplication in 24.259 seconds (process running for 28.52)
+2024-03-26T10:19:29.392+06:00  INFO 18764 --- [http-nio-8089-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-03-26T10:19:29.393+06:00  INFO 18764 --- [http-nio-8089-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-03-26T10:19:29.396+06:00  INFO 18764 --- [http-nio-8089-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2024-03-26T10:21:45.406+06:00  INFO 18764 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-03-26T10:21:45.479+06:00  INFO 18764 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-03-26T10:22:26.893+06:00  INFO 3328 --- [main] com.example.demo.DemoApplication         : Starting DemoApplication using Java 21 with PID 3328 (C:\Users\NOTEBURG\Desktop\demo\target\classes started by NOTEBURG in C:\Users\NOTEBURG\Desktop\demo)
+2024-03-26T10:22:26.906+06:00  INFO 3328 --- [main] com.example.demo.DemoApplication         : No active profile set, falling back to 1 default profile: "default"
+2024-03-26T10:22:32.547+06:00  INFO 3328 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8089 (http)
+2024-03-26T10:22:32.587+06:00  INFO 3328 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-03-26T10:22:32.589+06:00  INFO 3328 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.19]
+2024-03-26T10:22:32.853+06:00  INFO 3328 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-03-26T10:22:32.855+06:00  INFO 3328 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 5662 ms
+2024-03-26T10:22:33.400+06:00  INFO 3328 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-03-26T10:22:39.222+06:00  INFO 3328 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn1: url=jdbc:h2:./db/demo user=ROOT
+2024-03-26T10:22:39.235+06:00  INFO 3328 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-03-26T10:22:39.419+06:00  INFO 3328 --- [main] liquibase.database                       : Set default schema name to PUBLIC
+2024-03-26T10:22:40.220+06:00  INFO 3328 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/001_create_user_table.yaml
+2024-03-26T10:22:40.247+06:00  INFO 3328 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/002_create_categories_table.yaml
+2024-03-26T10:22:40.255+06:00  INFO 3328 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/003_create_resumes_table.yaml
+2024-03-26T10:22:40.264+06:00  INFO 3328 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/004_create_vacancies_table.yaml
+2024-03-26T10:22:40.277+06:00  INFO 3328 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/005_create_contact_types_table.yaml
+2024-03-26T10:22:40.290+06:00  INFO 3328 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/006_create_contacts_info_tables.yaml
+2024-03-26T10:22:40.300+06:00  INFO 3328 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/007_create_messages_table.yaml
+2024-03-26T10:22:40.310+06:00  INFO 3328 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/008_create_responded_applicants_table.yaml
+2024-03-26T10:22:40.325+06:00  INFO 3328 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/009_create_education_info_table.yaml
+2024-03-26T10:22:40.360+06:00  INFO 3328 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/010_create_work_experience_info_table.yaml
+2024-03-26T10:22:40.371+06:00  INFO 3328 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/011_create_foreign_keys.yaml
+2024-03-26T10:22:40.389+06:00  INFO 3328 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/012_insert_data.sql
+2024-03-26T10:22:40.403+06:00  INFO 3328 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/013_create_table_authorities.yaml
+2024-03-26T10:22:40.412+06:00  INFO 3328 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/014_update_user_table.yaml
+2024-03-26T10:22:40.421+06:00  INFO 3328 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/015_create_tables_roles_for_users.yaml
+2024-03-26T10:22:40.431+06:00  INFO 3328 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/016_new_insert_data.sql
+2024-03-26T10:22:40.956+06:00  INFO 3328 --- [main] liquibase.changelog                      : Reading from PUBLIC.DATABASECHANGELOG
+2024-03-26T10:22:41.234+06:00  INFO 3328 --- [main] liquibase.ui                             : Database is up to date, no changesets to execute
+2024-03-26T10:22:41.241+06:00  INFO 3328 --- [main] liquibase.changelog                      : Reading from PUBLIC.DATABASECHANGELOG
+2024-03-26T10:22:41.277+06:00  INFO 3328 --- [main] liquibase.util                           : UPDATE SUMMARY
+2024-03-26T10:22:41.278+06:00  INFO 3328 --- [main] liquibase.util                           : Run:                          0
+2024-03-26T10:22:41.281+06:00  INFO 3328 --- [main] liquibase.util                           : Previously run:              16
+2024-03-26T10:22:41.282+06:00  INFO 3328 --- [main] liquibase.util                           : Filtered out:                 0
+2024-03-26T10:22:41.282+06:00  INFO 3328 --- [main] liquibase.util                           : -------------------------------
+2024-03-26T10:22:41.283+06:00  INFO 3328 --- [main] liquibase.util                           : Total change sets:           16
+2024-03-26T10:22:41.288+06:00  INFO 3328 --- [main] liquibase.util                           : Update summary generated
+2024-03-26T10:22:41.359+06:00  INFO 3328 --- [main] liquibase.lockservice                    : Successfully released change log lock
+2024-03-26T10:22:41.362+06:00  INFO 3328 --- [main] liquibase.command                        : Command execution complete
+2024-03-26T10:22:42.623+06:00  INFO 3328 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@3a4cb483, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4d770bcd, org.springframework.security.web.context.SecurityContextHolderFilter@1736273c, org.springframework.security.web.header.HeaderWriterFilter@7d82ca56, org.springframework.web.filter.CorsFilter@fe156f4, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@1f70bce5, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@36eb8e07, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3df6494f, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@79b4cff, org.springframework.security.web.session.SessionManagementFilter@5a58db42, org.springframework.security.web.access.ExceptionTranslationFilter@2ae5580, org.springframework.security.web.access.intercept.AuthorizationFilter@c2f7c63]
+2024-03-26T10:22:43.214+06:00  WARN 3328 --- [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 9cf65c05-24c8-48f6-a558-f98208c2dc76
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-03-26T10:22:43.352+06:00  INFO 3328 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8089 (http) with context path ''
+2024-03-26T10:22:43.376+06:00  INFO 3328 --- [main] com.example.demo.DemoApplication         : Started DemoApplication in 19.329 seconds (process running for 25.097)
+2024-03-26T10:23:18.150+06:00  INFO 3328 --- [http-nio-8089-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-03-26T10:23:18.150+06:00  INFO 3328 --- [http-nio-8089-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-03-26T10:23:18.152+06:00  INFO 3328 --- [http-nio-8089-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2024-03-26T10:24:01.783+06:00 ERROR 3328 --- [http-nio-8089-exec-5] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.dao.DataIntegrityViolationException: PreparedStatementCallback; SQL [insert into users(name, surname, age, email, password, phone_number, avatar, account_type)
+values(?, ?, ?, ?, ?, ?, ?, ?)
+]; Значение NULL не разрешено для поля "ENABLED"
+NULL not allowed for column "ENABLED"; SQL statement:
+insert into users(name, surname, age, email, password, phone_number, avatar, account_type)
+values(?, ?, ?, ?, ?, ?, ?, ?) [23502-224]] with root cause
+
+org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException: Значение NULL не разрешено для поля "ENABLED"
+NULL not allowed for column "ENABLED"; SQL statement:
+insert into users(name, surname, age, email, password, phone_number, avatar, account_type)
+values(?, ?, ?, ?, ?, ?, ?, ?) [23502-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:520) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.message.DbException.get(DbException.java:223) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.message.DbException.get(DbException.java:199) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.table.Column.validateConvertUpdateSequence(Column.java:365) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.table.Table.convertInsertRow(Table.java:936) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.dml.Insert.insertRows(Insert.java:167) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.dml.Insert.update(Insert.java:135) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.dml.DataChangeStatement.update(DataChangeStatement.java:74) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.CommandContainer.update(CommandContainer.java:169) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Command.executeUpdate(Command.java:256) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdateInternal(JdbcPreparedStatement.java:216) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdate(JdbcPreparedStatement.java:174) ~[h2-2.2.224.jar:2.2.224]
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeUpdate(ProxyPreparedStatement.java:61) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeUpdate(HikariProxyPreparedStatement.java) ~[HikariCP-5.0.1.jar:na]
+	at org.springframework.jdbc.core.JdbcTemplate.lambda$update$2(JdbcTemplate.java:975) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:658) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.update(JdbcTemplate.java:970) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.update(JdbcTemplate.java:991) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate.update(NamedParameterJdbcTemplate.java:337) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at com.example.demo.dao.UserDao.createUser(UserDao.java:91) ~[classes/:na]
+	at com.example.demo.service.impl.UserServiceImpl.createUser(UserServiceImpl.java:63) ~[classes/:na]
+	at com.example.demo.controller.UserController.createUser(UserController.java:34) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:259) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:192) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:920) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:830) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.19.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.19.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.authentication.www.BasicAuthenticationFilter.doFilterInternal(BasicAuthenticationFilter.java:213) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230) ~[spring-security-config-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+
+2024-03-26T10:24:26.539+06:00 ERROR 3328 --- [http-nio-8089-exec-7] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.dao.DataIntegrityViolationException: PreparedStatementCallback; SQL [insert into users(name, surname, age, email, password, phone_number, avatar, account_type)
+values(?, ?, ?, ?, ?, ?, ?, ?)
+]; Значение NULL не разрешено для поля "ENABLED"
+NULL not allowed for column "ENABLED"; SQL statement:
+insert into users(name, surname, age, email, password, phone_number, avatar, account_type)
+values(?, ?, ?, ?, ?, ?, ?, ?) [23502-224]] with root cause
+
+org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException: Значение NULL не разрешено для поля "ENABLED"
+NULL not allowed for column "ENABLED"; SQL statement:
+insert into users(name, surname, age, email, password, phone_number, avatar, account_type)
+values(?, ?, ?, ?, ?, ?, ?, ?) [23502-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:520) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.message.DbException.get(DbException.java:223) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.message.DbException.get(DbException.java:199) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.table.Column.validateConvertUpdateSequence(Column.java:365) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.table.Table.convertInsertRow(Table.java:936) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.dml.Insert.insertRows(Insert.java:167) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.dml.Insert.update(Insert.java:135) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.dml.DataChangeStatement.update(DataChangeStatement.java:74) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.CommandContainer.update(CommandContainer.java:169) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Command.executeUpdate(Command.java:256) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdateInternal(JdbcPreparedStatement.java:216) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdate(JdbcPreparedStatement.java:174) ~[h2-2.2.224.jar:2.2.224]
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeUpdate(ProxyPreparedStatement.java:61) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeUpdate(HikariProxyPreparedStatement.java) ~[HikariCP-5.0.1.jar:na]
+	at org.springframework.jdbc.core.JdbcTemplate.lambda$update$2(JdbcTemplate.java:975) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:658) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.update(JdbcTemplate.java:970) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.update(JdbcTemplate.java:991) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate.update(NamedParameterJdbcTemplate.java:337) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at com.example.demo.dao.UserDao.createUser(UserDao.java:91) ~[classes/:na]
+	at com.example.demo.service.impl.UserServiceImpl.createUser(UserServiceImpl.java:63) ~[classes/:na]
+	at com.example.demo.controller.UserController.createUser(UserController.java:34) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:259) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:192) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:920) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:830) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.19.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.19.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.authentication.www.BasicAuthenticationFilter.doFilterInternal(BasicAuthenticationFilter.java:213) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230) ~[spring-security-config-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+
+2024-03-26T10:25:32.001+06:00  INFO 3328 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-03-26T10:25:32.017+06:00  INFO 3328 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-03-26T10:26:00.698+06:00  INFO 8036 --- [main] com.example.demo.DemoApplication         : Starting DemoApplication using Java 21 with PID 8036 (C:\Users\NOTEBURG\Desktop\demo\target\classes started by NOTEBURG in C:\Users\NOTEBURG\Desktop\demo)
+2024-03-26T10:26:00.708+06:00  INFO 8036 --- [main] com.example.demo.DemoApplication         : No active profile set, falling back to 1 default profile: "default"
+2024-03-26T10:26:05.821+06:00  INFO 8036 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8089 (http)
+2024-03-26T10:26:05.845+06:00  INFO 8036 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-03-26T10:26:05.846+06:00  INFO 8036 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.19]
+2024-03-26T10:26:05.959+06:00  INFO 8036 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-03-26T10:26:05.961+06:00  INFO 8036 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 5038 ms
+2024-03-26T10:26:06.631+06:00  INFO 8036 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-03-26T10:26:12.507+06:00  INFO 8036 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn1: url=jdbc:h2:./db/demo user=ROOT
+2024-03-26T10:26:12.512+06:00  INFO 8036 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-03-26T10:26:12.659+06:00  INFO 8036 --- [main] liquibase.database                       : Set default schema name to PUBLIC
+2024-03-26T10:26:13.349+06:00  INFO 8036 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/001_create_user_table.yaml
+2024-03-26T10:26:13.376+06:00  INFO 8036 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/002_create_categories_table.yaml
+2024-03-26T10:26:13.387+06:00  INFO 8036 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/003_create_resumes_table.yaml
+2024-03-26T10:26:13.406+06:00  INFO 8036 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/004_create_vacancies_table.yaml
+2024-03-26T10:26:13.424+06:00  INFO 8036 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/005_create_contact_types_table.yaml
+2024-03-26T10:26:13.436+06:00  INFO 8036 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/006_create_contacts_info_tables.yaml
+2024-03-26T10:26:13.448+06:00  INFO 8036 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/007_create_messages_table.yaml
+2024-03-26T10:26:13.457+06:00  INFO 8036 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/008_create_responded_applicants_table.yaml
+2024-03-26T10:26:13.465+06:00  INFO 8036 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/009_create_education_info_table.yaml
+2024-03-26T10:26:13.475+06:00  INFO 8036 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/010_create_work_experience_info_table.yaml
+2024-03-26T10:26:13.484+06:00  INFO 8036 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/011_create_foreign_keys.yaml
+2024-03-26T10:26:13.495+06:00  INFO 8036 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/012_insert_data.sql
+2024-03-26T10:26:13.506+06:00  INFO 8036 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/013_create_table_authorities.yaml
+2024-03-26T10:26:13.512+06:00  INFO 8036 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/014_update_user_table.yaml
+2024-03-26T10:26:13.518+06:00  INFO 8036 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/015_create_tables_roles_for_users.yaml
+2024-03-26T10:26:13.525+06:00  INFO 8036 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/016_new_insert_data.sql
+2024-03-26T10:26:13.979+06:00  INFO 8036 --- [main] liquibase.changelog                      : Reading from PUBLIC.DATABASECHANGELOG
+2024-03-26T10:26:14.308+06:00  INFO 8036 --- [main] liquibase.ui                             : Database is up to date, no changesets to execute
+2024-03-26T10:26:14.315+06:00  INFO 8036 --- [main] liquibase.changelog                      : Reading from PUBLIC.DATABASECHANGELOG
+2024-03-26T10:26:14.348+06:00  INFO 8036 --- [main] liquibase.util                           : UPDATE SUMMARY
+2024-03-26T10:26:14.348+06:00  INFO 8036 --- [main] liquibase.util                           : Run:                          0
+2024-03-26T10:26:14.350+06:00  INFO 8036 --- [main] liquibase.util                           : Previously run:              16
+2024-03-26T10:26:14.351+06:00  INFO 8036 --- [main] liquibase.util                           : Filtered out:                 0
+2024-03-26T10:26:14.352+06:00  INFO 8036 --- [main] liquibase.util                           : -------------------------------
+2024-03-26T10:26:14.353+06:00  INFO 8036 --- [main] liquibase.util                           : Total change sets:           16
+2024-03-26T10:26:14.356+06:00  INFO 8036 --- [main] liquibase.util                           : Update summary generated
+2024-03-26T10:26:14.425+06:00  INFO 8036 --- [main] liquibase.lockservice                    : Successfully released change log lock
+2024-03-26T10:26:14.427+06:00  INFO 8036 --- [main] liquibase.command                        : Command execution complete
+2024-03-26T10:26:15.576+06:00  INFO 8036 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@703cb756, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5897aae1, org.springframework.security.web.context.SecurityContextHolderFilter@7614378d, org.springframework.security.web.header.HeaderWriterFilter@5d22ed6c, org.springframework.web.filter.CorsFilter@11dbcb3b, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@4a47bc9c, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7c0ff7a0, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@24c84e65, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4aa517c3, org.springframework.security.web.session.SessionManagementFilter@5a4b8e25, org.springframework.security.web.access.ExceptionTranslationFilter@4fe4503a, org.springframework.security.web.access.intercept.AuthorizationFilter@1c0680b0]
+2024-03-26T10:26:16.154+06:00  WARN 8036 --- [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: d3cb64dc-d356-4fd0-b2ec-6f70da79ad91
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-03-26T10:26:16.270+06:00  INFO 8036 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8089 (http) with context path ''
+2024-03-26T10:26:16.297+06:00  INFO 8036 --- [main] com.example.demo.DemoApplication         : Started DemoApplication in 17.681 seconds (process running for 20.795)
+2024-03-26T10:26:22.677+06:00  INFO 8036 --- [http-nio-8089-exec-3] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-03-26T10:26:22.680+06:00  INFO 8036 --- [http-nio-8089-exec-3] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-03-26T10:26:22.683+06:00  INFO 8036 --- [http-nio-8089-exec-3] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2024-03-26T10:26:24.237+06:00 ERROR 8036 --- [http-nio-8089-exec-3] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.jdbc.BadSqlGrammarException: PreparedStatementCallback; bad SQL grammar [insert into users(name, surname, age, email, password, phone_number, avatar, account_type, ENABLED)
+values(?, ?, ?, ?, ?, ?, ?, ?, ENABLED)
+]] with root cause
+
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Столбец "ENABLED" не найден
+Column "ENABLED" not found; SQL statement:
+insert into users(name, surname, age, email, password, phone_number, avatar, account_type, ENABLED)
+values(?, ?, ?, ?, ?, ?, ?, ?, ENABLED) [42122-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:514) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.message.DbException.get(DbException.java:223) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.message.DbException.get(DbException.java:199) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.expression.ExpressionColumn.getColumnException(ExpressionColumn.java:244) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.expression.ExpressionColumn.optimizeOther(ExpressionColumn.java:226) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:213) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.dml.Insert.doPrepare(Insert.java:300) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.dml.DataChangeStatement.prepare(DataChangeStatement.java:37) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.Parser.prepareCommand(Parser.java:489) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:639) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:559) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1166) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.jdbc.JdbcPreparedStatement.<init>(JdbcPreparedStatement.java:93) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:316) ~[h2-2.2.224.jar:2.2.224]
+	at com.zaxxer.hikari.pool.ProxyConnection.prepareStatement(ProxyConnection.java:327) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyConnection.prepareStatement(HikariProxyConnection.java) ~[HikariCP-5.0.1.jar:na]
+	at org.springframework.jdbc.core.PreparedStatementCreatorFactory$PreparedStatementCreatorImpl.createPreparedStatement(PreparedStatementCreatorFactory.java:239) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:656) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.update(JdbcTemplate.java:970) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.update(JdbcTemplate.java:991) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate.update(NamedParameterJdbcTemplate.java:337) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at com.example.demo.dao.UserDao.createUser(UserDao.java:91) ~[classes/:na]
+	at com.example.demo.service.impl.UserServiceImpl.createUser(UserServiceImpl.java:63) ~[classes/:na]
+	at com.example.demo.controller.UserController.createUser(UserController.java:34) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:259) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:192) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:920) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:830) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.19.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.19.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.authentication.www.BasicAuthenticationFilter.doFilterInternal(BasicAuthenticationFilter.java:213) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230) ~[spring-security-config-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+
+2024-03-26T10:26:45.777+06:00  INFO 8036 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-03-26T10:26:45.781+06:00  INFO 8036 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-03-26T10:27:08.997+06:00  INFO 340 --- [main] com.example.demo.DemoApplication         : Starting DemoApplication using Java 21 with PID 340 (C:\Users\NOTEBURG\Desktop\demo\target\classes started by NOTEBURG in C:\Users\NOTEBURG\Desktop\demo)
+2024-03-26T10:27:09.008+06:00  INFO 340 --- [main] com.example.demo.DemoApplication         : No active profile set, falling back to 1 default profile: "default"
+2024-03-26T10:27:15.050+06:00  INFO 340 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8089 (http)
+2024-03-26T10:27:15.093+06:00  INFO 340 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-03-26T10:27:15.094+06:00  INFO 340 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.19]
+2024-03-26T10:27:15.301+06:00  INFO 340 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-03-26T10:27:15.306+06:00  INFO 340 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 6099 ms
+2024-03-26T10:27:15.809+06:00  INFO 340 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-03-26T10:27:22.101+06:00  INFO 340 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn1: url=jdbc:h2:./db/demo user=ROOT
+2024-03-26T10:27:22.111+06:00  INFO 340 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-03-26T10:27:22.370+06:00  INFO 340 --- [main] liquibase.database                       : Set default schema name to PUBLIC
+2024-03-26T10:27:23.026+06:00  INFO 340 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/001_create_user_table.yaml
+2024-03-26T10:27:23.052+06:00  INFO 340 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/002_create_categories_table.yaml
+2024-03-26T10:27:23.058+06:00  INFO 340 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/003_create_resumes_table.yaml
+2024-03-26T10:27:23.070+06:00  INFO 340 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/004_create_vacancies_table.yaml
+2024-03-26T10:27:23.080+06:00  INFO 340 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/005_create_contact_types_table.yaml
+2024-03-26T10:27:23.088+06:00  INFO 340 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/006_create_contacts_info_tables.yaml
+2024-03-26T10:27:23.094+06:00  INFO 340 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/007_create_messages_table.yaml
+2024-03-26T10:27:23.100+06:00  INFO 340 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/008_create_responded_applicants_table.yaml
+2024-03-26T10:27:23.107+06:00  INFO 340 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/009_create_education_info_table.yaml
+2024-03-26T10:27:23.116+06:00  INFO 340 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/010_create_work_experience_info_table.yaml
+2024-03-26T10:27:23.122+06:00  INFO 340 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/011_create_foreign_keys.yaml
+2024-03-26T10:27:23.131+06:00  INFO 340 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/012_insert_data.sql
+2024-03-26T10:27:23.139+06:00  INFO 340 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/013_create_table_authorities.yaml
+2024-03-26T10:27:23.145+06:00  INFO 340 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/014_update_user_table.yaml
+2024-03-26T10:27:23.150+06:00  INFO 340 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/015_create_tables_roles_for_users.yaml
+2024-03-26T10:27:23.156+06:00  INFO 340 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/016_new_insert_data.sql
+2024-03-26T10:27:23.506+06:00  INFO 340 --- [main] liquibase.changelog                      : Reading from PUBLIC.DATABASECHANGELOG
+2024-03-26T10:27:23.664+06:00  INFO 340 --- [main] liquibase.ui                             : Database is up to date, no changesets to execute
+2024-03-26T10:27:23.667+06:00  INFO 340 --- [main] liquibase.changelog                      : Reading from PUBLIC.DATABASECHANGELOG
+2024-03-26T10:27:23.684+06:00  INFO 340 --- [main] liquibase.util                           : UPDATE SUMMARY
+2024-03-26T10:27:23.684+06:00  INFO 340 --- [main] liquibase.util                           : Run:                          0
+2024-03-26T10:27:23.686+06:00  INFO 340 --- [main] liquibase.util                           : Previously run:              16
+2024-03-26T10:27:23.686+06:00  INFO 340 --- [main] liquibase.util                           : Filtered out:                 0
+2024-03-26T10:27:23.687+06:00  INFO 340 --- [main] liquibase.util                           : -------------------------------
+2024-03-26T10:27:23.687+06:00  INFO 340 --- [main] liquibase.util                           : Total change sets:           16
+2024-03-26T10:27:23.689+06:00  INFO 340 --- [main] liquibase.util                           : Update summary generated
+2024-03-26T10:27:23.740+06:00  INFO 340 --- [main] liquibase.lockservice                    : Successfully released change log lock
+2024-03-26T10:27:23.744+06:00  INFO 340 --- [main] liquibase.command                        : Command execution complete
+2024-03-26T10:27:24.888+06:00  INFO 340 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@4e030feb, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2411b935, org.springframework.security.web.context.SecurityContextHolderFilter@17a7d6c8, org.springframework.security.web.header.HeaderWriterFilter@77fceac6, org.springframework.web.filter.CorsFilter@1425e531, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@35555145, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7ef9c8a5, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@c6244e7, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@194e78af, org.springframework.security.web.session.SessionManagementFilter@53e166ad, org.springframework.security.web.access.ExceptionTranslationFilter@4a29fe2e, org.springframework.security.web.access.intercept.AuthorizationFilter@7a021f49]
+2024-03-26T10:27:25.397+06:00  WARN 340 --- [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 8e73537a-7cb3-41a3-a0bc-84cf8846d1d3
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-03-26T10:27:25.549+06:00  INFO 340 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8089 (http) with context path ''
+2024-03-26T10:27:25.573+06:00  INFO 340 --- [main] com.example.demo.DemoApplication         : Started DemoApplication in 18.742 seconds (process running for 22.266)
+2024-03-26T10:27:29.050+06:00  INFO 340 --- [http-nio-8089-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-03-26T10:27:29.050+06:00  INFO 340 --- [http-nio-8089-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-03-26T10:27:29.053+06:00  INFO 340 --- [http-nio-8089-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2024-03-26T10:27:30.419+06:00 ERROR 340 --- [http-nio-8089-exec-1] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.dao.InvalidDataAccessApiUsageException: No value supplied for the SQL parameter 'userId': No value registered for key 'userId'] with root cause
+
+org.springframework.dao.InvalidDataAccessApiUsageException: No value supplied for the SQL parameter 'userId': No value registered for key 'userId'
+	at org.springframework.jdbc.core.namedparam.NamedParameterUtils.buildValueArray(NamedParameterUtils.java:379) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate.getPreparedStatementCreator(NamedParameterJdbcTemplate.java:472) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate.getPreparedStatementCreator(NamedParameterJdbcTemplate.java:446) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate.update(NamedParameterJdbcTemplate.java:337) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at com.example.demo.dao.UserRoleDao.createRoleForUser(UserRoleDao.java:19) ~[classes/:na]
+	at com.example.demo.service.impl.UserRoleServiceImpl.createRoleForUser(UserRoleServiceImpl.java:16) ~[classes/:na]
+	at com.example.demo.service.impl.UserServiceImpl.createUser(UserServiceImpl.java:68) ~[classes/:na]
+	at com.example.demo.controller.UserController.createUser(UserController.java:34) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:259) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:192) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:920) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:830) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.19.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.19.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.authentication.www.BasicAuthenticationFilter.doFilterInternal(BasicAuthenticationFilter.java:213) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230) ~[spring-security-config-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+
+2024-03-26T10:27:58.075+06:00  INFO 340 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-03-26T10:27:58.092+06:00  INFO 340 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-03-26T10:28:27.690+06:00  INFO 16432 --- [main] com.example.demo.DemoApplication         : Starting DemoApplication using Java 21 with PID 16432 (C:\Users\NOTEBURG\Desktop\demo\target\classes started by NOTEBURG in C:\Users\NOTEBURG\Desktop\demo)
+2024-03-26T10:28:27.705+06:00  INFO 16432 --- [main] com.example.demo.DemoApplication         : No active profile set, falling back to 1 default profile: "default"
+2024-03-26T10:28:35.653+06:00  INFO 16432 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8089 (http)
+2024-03-26T10:28:35.684+06:00  INFO 16432 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-03-26T10:28:35.684+06:00  INFO 16432 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.19]
+2024-03-26T10:28:35.843+06:00  INFO 16432 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-03-26T10:28:35.843+06:00  INFO 16432 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 6882 ms
+2024-03-26T10:28:36.364+06:00  INFO 16432 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-03-26T10:28:42.247+06:00  INFO 16432 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn1: url=jdbc:h2:./db/demo user=ROOT
+2024-03-26T10:28:42.252+06:00  INFO 16432 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-03-26T10:28:42.375+06:00  INFO 16432 --- [main] liquibase.database                       : Set default schema name to PUBLIC
+2024-03-26T10:28:43.034+06:00  INFO 16432 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/001_create_user_table.yaml
+2024-03-26T10:28:43.075+06:00  INFO 16432 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/002_create_categories_table.yaml
+2024-03-26T10:28:43.083+06:00  INFO 16432 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/003_create_resumes_table.yaml
+2024-03-26T10:28:43.103+06:00  INFO 16432 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/004_create_vacancies_table.yaml
+2024-03-26T10:28:43.116+06:00  INFO 16432 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/005_create_contact_types_table.yaml
+2024-03-26T10:28:43.124+06:00  INFO 16432 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/006_create_contacts_info_tables.yaml
+2024-03-26T10:28:43.133+06:00  INFO 16432 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/007_create_messages_table.yaml
+2024-03-26T10:28:43.144+06:00  INFO 16432 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/008_create_responded_applicants_table.yaml
+2024-03-26T10:28:43.153+06:00  INFO 16432 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/009_create_education_info_table.yaml
+2024-03-26T10:28:43.157+06:00  INFO 16432 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/010_create_work_experience_info_table.yaml
+2024-03-26T10:28:43.165+06:00  INFO 16432 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/011_create_foreign_keys.yaml
+2024-03-26T10:28:43.173+06:00  INFO 16432 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/012_insert_data.sql
+2024-03-26T10:28:43.184+06:00  INFO 16432 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/013_create_table_authorities.yaml
+2024-03-26T10:28:43.192+06:00  INFO 16432 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/014_update_user_table.yaml
+2024-03-26T10:28:43.197+06:00  INFO 16432 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/015_create_tables_roles_for_users.yaml
+2024-03-26T10:28:43.203+06:00  INFO 16432 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/016_new_insert_data.sql
+2024-03-26T10:28:43.604+06:00  INFO 16432 --- [main] liquibase.changelog                      : Reading from PUBLIC.DATABASECHANGELOG
+2024-03-26T10:28:43.753+06:00  INFO 16432 --- [main] liquibase.ui                             : Database is up to date, no changesets to execute
+2024-03-26T10:28:43.753+06:00  INFO 16432 --- [main] liquibase.changelog                      : Reading from PUBLIC.DATABASECHANGELOG
+2024-03-26T10:28:43.776+06:00  INFO 16432 --- [main] liquibase.util                           : UPDATE SUMMARY
+2024-03-26T10:28:43.776+06:00  INFO 16432 --- [main] liquibase.util                           : Run:                          0
+2024-03-26T10:28:43.776+06:00  INFO 16432 --- [main] liquibase.util                           : Previously run:              16
+2024-03-26T10:28:43.776+06:00  INFO 16432 --- [main] liquibase.util                           : Filtered out:                 0
+2024-03-26T10:28:43.776+06:00  INFO 16432 --- [main] liquibase.util                           : -------------------------------
+2024-03-26T10:28:43.776+06:00  INFO 16432 --- [main] liquibase.util                           : Total change sets:           16
+2024-03-26T10:28:43.776+06:00  INFO 16432 --- [main] liquibase.util                           : Update summary generated
+2024-03-26T10:28:43.841+06:00  INFO 16432 --- [main] liquibase.lockservice                    : Successfully released change log lock
+2024-03-26T10:28:43.843+06:00  INFO 16432 --- [main] liquibase.command                        : Command execution complete
+2024-03-26T10:28:45.263+06:00  INFO 16432 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@4c164f81, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1bcb8599, org.springframework.security.web.context.SecurityContextHolderFilter@194e78af, org.springframework.security.web.header.HeaderWriterFilter@e60c5a, org.springframework.web.filter.CorsFilter@b671dda, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@2ace1cd3, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@669580e2, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5d22ed6c, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@25b20860, org.springframework.security.web.session.SessionManagementFilter@4e030feb, org.springframework.security.web.access.ExceptionTranslationFilter@24010875, org.springframework.security.web.access.intercept.AuthorizationFilter@5100c143]
+2024-03-26T10:28:46.426+06:00  WARN 16432 --- [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 1e89bfdc-572c-4527-8807-8a45e4a1f4f4
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-03-26T10:28:48.106+06:00  INFO 16432 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8089 (http) with context path ''
+2024-03-26T10:28:48.274+06:00  INFO 16432 --- [main] com.example.demo.DemoApplication         : Started DemoApplication in 23.298 seconds (process running for 26.586)
+2024-03-26T10:28:58.241+06:00  INFO 16432 --- [http-nio-8089-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-03-26T10:28:58.242+06:00  INFO 16432 --- [http-nio-8089-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-03-26T10:28:58.245+06:00  INFO 16432 --- [http-nio-8089-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2024-03-26T10:29:39.734+06:00 ERROR 16432 --- [http-nio-8089-exec-4] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.dao.InvalidDataAccessApiUsageException: No value supplied for the SQL parameter 'authority_id': No value registered for key 'authority_id'] with root cause
+
+org.springframework.dao.InvalidDataAccessApiUsageException: No value supplied for the SQL parameter 'authority_id': No value registered for key 'authority_id'
+	at org.springframework.jdbc.core.namedparam.NamedParameterUtils.buildValueArray(NamedParameterUtils.java:379) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate.getPreparedStatementCreator(NamedParameterJdbcTemplate.java:472) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate.getPreparedStatementCreator(NamedParameterJdbcTemplate.java:446) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate.update(NamedParameterJdbcTemplate.java:337) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at com.example.demo.dao.UserRoleDao.createRoleForUser(UserRoleDao.java:19) ~[classes/:na]
+	at com.example.demo.service.impl.UserRoleServiceImpl.createRoleForUser(UserRoleServiceImpl.java:16) ~[classes/:na]
+	at com.example.demo.service.impl.UserServiceImpl.createUser(UserServiceImpl.java:68) ~[classes/:na]
+	at com.example.demo.controller.UserController.createUser(UserController.java:34) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:259) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:192) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:920) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:830) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.19.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.19.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.authentication.www.BasicAuthenticationFilter.doFilterInternal(BasicAuthenticationFilter.java:213) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230) ~[spring-security-config-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+
+2024-03-26T10:30:09.420+06:00  INFO 16432 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-03-26T10:30:09.459+06:00  INFO 16432 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-03-26T10:30:40.111+06:00  INFO 5076 --- [main] com.example.demo.DemoApplication         : Starting DemoApplication using Java 21 with PID 5076 (C:\Users\NOTEBURG\Desktop\demo\target\classes started by NOTEBURG in C:\Users\NOTEBURG\Desktop\demo)
+2024-03-26T10:30:40.143+06:00  INFO 5076 --- [main] com.example.demo.DemoApplication         : No active profile set, falling back to 1 default profile: "default"
+2024-03-26T10:30:53.550+06:00  INFO 5076 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8089 (http)
+2024-03-26T10:30:53.597+06:00  INFO 5076 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-03-26T10:30:53.598+06:00  INFO 5076 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.19]
+2024-03-26T10:30:53.810+06:00  INFO 5076 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-03-26T10:30:53.811+06:00  INFO 5076 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 13388 ms
+2024-03-26T10:30:54.224+06:00  INFO 5076 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-03-26T10:30:54.518+06:00  INFO 5076 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:./db/demo user=ROOT
+2024-03-26T10:30:54.524+06:00  INFO 5076 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-03-26T10:30:54.742+06:00  INFO 5076 --- [main] liquibase.database                       : Set default schema name to PUBLIC
+2024-03-26T10:30:56.072+06:00  INFO 5076 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/001_create_user_table.yaml
+2024-03-26T10:30:56.128+06:00  INFO 5076 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/002_create_categories_table.yaml
+2024-03-26T10:30:56.142+06:00  INFO 5076 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/003_create_resumes_table.yaml
+2024-03-26T10:30:56.182+06:00  INFO 5076 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/004_create_vacancies_table.yaml
+2024-03-26T10:30:56.205+06:00  INFO 5076 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/005_create_contact_types_table.yaml
+2024-03-26T10:30:56.225+06:00  INFO 5076 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/006_create_contacts_info_tables.yaml
+2024-03-26T10:30:56.237+06:00  INFO 5076 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/007_create_messages_table.yaml
+2024-03-26T10:30:56.247+06:00  INFO 5076 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/008_create_responded_applicants_table.yaml
+2024-03-26T10:30:56.258+06:00  INFO 5076 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/009_create_education_info_table.yaml
+2024-03-26T10:30:56.292+06:00  INFO 5076 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/010_create_work_experience_info_table.yaml
+2024-03-26T10:30:56.305+06:00  INFO 5076 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/011_create_foreign_keys.yaml
+2024-03-26T10:30:56.339+06:00  INFO 5076 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/012_insert_data.sql
+2024-03-26T10:30:56.356+06:00  INFO 5076 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/013_create_table_authorities.yaml
+2024-03-26T10:30:56.381+06:00  INFO 5076 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/014_update_user_table.yaml
+2024-03-26T10:30:56.414+06:00  INFO 5076 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/015_create_tables_roles_for_users.yaml
+2024-03-26T10:30:56.424+06:00  INFO 5076 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/016_new_insert_data.sql
+2024-03-26T10:30:56.830+06:00  INFO 5076 --- [main] liquibase.changelog                      : Reading from PUBLIC.DATABASECHANGELOG
+2024-03-26T10:30:57.220+06:00  INFO 5076 --- [main] liquibase.ui                             : Database is up to date, no changesets to execute
+2024-03-26T10:30:57.229+06:00  INFO 5076 --- [main] liquibase.changelog                      : Reading from PUBLIC.DATABASECHANGELOG
+2024-03-26T10:30:57.257+06:00  INFO 5076 --- [main] liquibase.util                           : UPDATE SUMMARY
+2024-03-26T10:30:57.258+06:00  INFO 5076 --- [main] liquibase.util                           : Run:                          0
+2024-03-26T10:30:57.259+06:00  INFO 5076 --- [main] liquibase.util                           : Previously run:              16
+2024-03-26T10:30:57.259+06:00  INFO 5076 --- [main] liquibase.util                           : Filtered out:                 0
+2024-03-26T10:30:57.260+06:00  INFO 5076 --- [main] liquibase.util                           : -------------------------------
+2024-03-26T10:30:57.260+06:00  INFO 5076 --- [main] liquibase.util                           : Total change sets:           16
+2024-03-26T10:30:57.262+06:00  INFO 5076 --- [main] liquibase.util                           : Update summary generated
+2024-03-26T10:30:57.307+06:00  INFO 5076 --- [main] liquibase.lockservice                    : Successfully released change log lock
+2024-03-26T10:30:57.310+06:00  INFO 5076 --- [main] liquibase.command                        : Command execution complete
+2024-03-26T10:30:58.460+06:00  INFO 5076 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@41f40dfa, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2548fc01, org.springframework.security.web.context.SecurityContextHolderFilter@3eb0fd88, org.springframework.security.web.header.HeaderWriterFilter@1f3361e9, org.springframework.web.filter.CorsFilter@4331be30, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@fa11fda, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@484302ee, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4e647f39, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5cd71ee2, org.springframework.security.web.session.SessionManagementFilter@1214c98b, org.springframework.security.web.access.ExceptionTranslationFilter@7ebc5be6, org.springframework.security.web.access.intercept.AuthorizationFilter@5cd701e4]
+2024-03-26T10:30:59.282+06:00  WARN 5076 --- [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 60ae3335-0b85-43d9-b05f-395a12fe3caa
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-03-26T10:30:59.400+06:00  INFO 5076 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8089 (http) with context path ''
+2024-03-26T10:30:59.420+06:00  INFO 5076 --- [main] com.example.demo.DemoApplication         : Started DemoApplication in 22.509 seconds (process running for 29.018)
+2024-03-26T10:31:04.537+06:00  INFO 5076 --- [http-nio-8089-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-03-26T10:31:04.538+06:00  INFO 5076 --- [http-nio-8089-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-03-26T10:31:04.541+06:00  INFO 5076 --- [http-nio-8089-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2024-03-26T10:31:06.491+06:00 ERROR 5076 --- [http-nio-8089-exec-1] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.dao.DataIntegrityViolationException: PreparedStatementCallback; SQL [insert into user_role(user_id, role_id)
+values(?, ?)
+]; Значение NULL не разрешено для поля "USER_ID"
+NULL not allowed for column "USER_ID"; SQL statement:
+insert into user_role(user_id, role_id)
+values(?, ?) [23502-224]] with root cause
+
+org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException: Значение NULL не разрешено для поля "USER_ID"
+NULL not allowed for column "USER_ID"; SQL statement:
+insert into user_role(user_id, role_id)
+values(?, ?) [23502-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:520) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.engine.SessionRemote.readException(SessionRemote.java:650) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.engine.SessionRemote.done(SessionRemote.java:619) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.command.CommandRemote.executeUpdate(CommandRemote.java:237) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdateInternal(JdbcPreparedStatement.java:216) ~[h2-2.2.224.jar:2.2.224]
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdate(JdbcPreparedStatement.java:174) ~[h2-2.2.224.jar:2.2.224]
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeUpdate(ProxyPreparedStatement.java:61) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeUpdate(HikariProxyPreparedStatement.java) ~[HikariCP-5.0.1.jar:na]
+	at org.springframework.jdbc.core.JdbcTemplate.lambda$update$2(JdbcTemplate.java:975) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:658) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.update(JdbcTemplate.java:970) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.JdbcTemplate.update(JdbcTemplate.java:991) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate.update(NamedParameterJdbcTemplate.java:337) ~[spring-jdbc-6.1.4.jar:6.1.4]
+	at com.example.demo.dao.UserRoleDao.createRoleForUser(UserRoleDao.java:19) ~[classes/:na]
+	at com.example.demo.service.impl.UserRoleServiceImpl.createRoleForUser(UserRoleServiceImpl.java:16) ~[classes/:na]
+	at com.example.demo.service.impl.UserServiceImpl.createUser(UserServiceImpl.java:68) ~[classes/:na]
+	at com.example.demo.controller.UserController.createUser(UserController.java:34) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:259) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:192) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:920) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:830) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.19.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.19.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.authentication.www.BasicAuthenticationFilter.doFilterInternal(BasicAuthenticationFilter.java:213) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195) ~[spring-webmvc-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230) ~[spring-security-config-6.2.2.jar:6.2.2]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.4.jar:6.1.4]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.19.jar:10.1.19]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+
+2024-03-26T10:31:59.849+06:00  INFO 5076 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-03-26T10:31:59.920+06:00  INFO 5076 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-03-26T10:32:36.663+06:00  INFO 20008 --- [main] com.example.demo.DemoApplication         : Starting DemoApplication using Java 21 with PID 20008 (C:\Users\NOTEBURG\Desktop\demo\target\classes started by NOTEBURG in C:\Users\NOTEBURG\Desktop\demo)
+2024-03-26T10:32:36.678+06:00  INFO 20008 --- [main] com.example.demo.DemoApplication         : No active profile set, falling back to 1 default profile: "default"
+2024-03-26T10:32:42.264+06:00  INFO 20008 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8089 (http)
+2024-03-26T10:32:42.291+06:00  INFO 20008 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-03-26T10:32:42.292+06:00  INFO 20008 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.19]
+2024-03-26T10:32:42.436+06:00  INFO 20008 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-03-26T10:32:42.437+06:00  INFO 20008 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 5509 ms
+2024-03-26T10:32:45.884+06:00  INFO 20008 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-03-26T10:32:46.517+06:00  INFO 20008 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:./db/demo user=ROOT
+2024-03-26T10:32:46.543+06:00  INFO 20008 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-03-26T10:32:47.119+06:00  INFO 20008 --- [main] liquibase.database                       : Set default schema name to PUBLIC
+2024-03-26T10:32:48.366+06:00  INFO 20008 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/001_create_user_table.yaml
+2024-03-26T10:32:48.417+06:00  INFO 20008 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/002_create_categories_table.yaml
+2024-03-26T10:32:48.426+06:00  INFO 20008 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/003_create_resumes_table.yaml
+2024-03-26T10:32:48.440+06:00  INFO 20008 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/004_create_vacancies_table.yaml
+2024-03-26T10:32:48.459+06:00  INFO 20008 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/005_create_contact_types_table.yaml
+2024-03-26T10:32:48.471+06:00  INFO 20008 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/006_create_contacts_info_tables.yaml
+2024-03-26T10:32:48.481+06:00  INFO 20008 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/007_create_messages_table.yaml
+2024-03-26T10:32:48.488+06:00  INFO 20008 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/008_create_responded_applicants_table.yaml
+2024-03-26T10:32:48.496+06:00  INFO 20008 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/009_create_education_info_table.yaml
+2024-03-26T10:32:48.507+06:00  INFO 20008 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/010_create_work_experience_info_table.yaml
+2024-03-26T10:32:48.518+06:00  INFO 20008 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/011_create_foreign_keys.yaml
+2024-03-26T10:32:48.534+06:00  INFO 20008 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/012_insert_data.sql
+2024-03-26T10:32:48.548+06:00  INFO 20008 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/013_create_table_authorities.yaml
+2024-03-26T10:32:48.556+06:00  INFO 20008 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/014_update_user_table.yaml
+2024-03-26T10:32:48.565+06:00  INFO 20008 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/015_create_tables_roles_for_users.yaml
+2024-03-26T10:32:48.571+06:00  INFO 20008 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/016_new_insert_data.sql
+2024-03-26T10:32:49.349+06:00  INFO 20008 --- [main] liquibase.changelog                      : Reading from PUBLIC.DATABASECHANGELOG
+2024-03-26T10:32:49.819+06:00  INFO 20008 --- [main] liquibase.ui                             : Database is up to date, no changesets to execute
+2024-03-26T10:32:49.831+06:00  INFO 20008 --- [main] liquibase.changelog                      : Reading from PUBLIC.DATABASECHANGELOG
+2024-03-26T10:32:49.883+06:00  INFO 20008 --- [main] liquibase.util                           : UPDATE SUMMARY
+2024-03-26T10:32:49.884+06:00  INFO 20008 --- [main] liquibase.util                           : Run:                          0
+2024-03-26T10:32:49.885+06:00  INFO 20008 --- [main] liquibase.util                           : Previously run:              16
+2024-03-26T10:32:49.886+06:00  INFO 20008 --- [main] liquibase.util                           : Filtered out:                 0
+2024-03-26T10:32:49.886+06:00  INFO 20008 --- [main] liquibase.util                           : -------------------------------
+2024-03-26T10:32:49.887+06:00  INFO 20008 --- [main] liquibase.util                           : Total change sets:           16
+2024-03-26T10:32:49.892+06:00  INFO 20008 --- [main] liquibase.util                           : Update summary generated
+2024-03-26T10:32:49.994+06:00  INFO 20008 --- [main] liquibase.lockservice                    : Successfully released change log lock
+2024-03-26T10:32:50.000+06:00  INFO 20008 --- [main] liquibase.command                        : Command execution complete
+2024-03-26T10:32:52.441+06:00  INFO 20008 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6d7bb5cc, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@756200d1, org.springframework.security.web.context.SecurityContextHolderFilter@625f5712, org.springframework.security.web.header.HeaderWriterFilter@7e8c58fd, org.springframework.web.filter.CorsFilter@390a07a0, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@3c98981e, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@188bf4d8, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7dd7ec56, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@674e4c82, org.springframework.security.web.session.SessionManagementFilter@780c0, org.springframework.security.web.access.ExceptionTranslationFilter@3dd591b9, org.springframework.security.web.access.intercept.AuthorizationFilter@5709e10b]
+2024-03-26T10:33:04.809+06:00  WARN 20008 --- [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: f6518bb7-eb3a-49f2-849d-9746e700dcd0
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-03-26T10:33:15.363+06:00  INFO 20008 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8089 (http) with context path ''
+2024-03-26T10:33:16.414+06:00  INFO 20008 --- [main] com.example.demo.DemoApplication         : Started DemoApplication in 42.185 seconds (process running for 46.866)
+2024-03-26T10:33:29.950+06:00  INFO 20008 --- [http-nio-8089-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-03-26T10:33:29.952+06:00  INFO 20008 --- [http-nio-8089-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-03-26T10:33:29.958+06:00  INFO 20008 --- [http-nio-8089-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 6 ms
+2024-03-26T10:37:02.214+06:00  WARN 20008 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=3m14s881ms312µs200ns).
+2024-03-26T10:37:09.335+06:00  INFO 20008 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-03-26T10:37:10.224+06:00  INFO 20008 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-03-26T10:37:42.351+06:00  INFO 13956 --- [main] com.example.demo.DemoApplication         : Starting DemoApplication using Java 21 with PID 13956 (C:\Users\NOTEBURG\Desktop\demo\target\classes started by NOTEBURG in C:\Users\NOTEBURG\Desktop\demo)
+2024-03-26T10:37:42.363+06:00  INFO 13956 --- [main] com.example.demo.DemoApplication         : No active profile set, falling back to 1 default profile: "default"
+2024-03-26T10:37:47.905+06:00  INFO 13956 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8089 (http)
+2024-03-26T10:37:47.939+06:00  INFO 13956 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-03-26T10:37:47.940+06:00  INFO 13956 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.19]
+2024-03-26T10:37:48.171+06:00  INFO 13956 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-03-26T10:37:48.172+06:00  INFO 13956 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 5536 ms
+2024-03-26T10:37:51.423+06:00  INFO 13956 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-03-26T10:37:52.090+06:00  INFO 13956 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:./db/demo user=ROOT
+2024-03-26T10:37:52.108+06:00  INFO 13956 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-03-26T10:37:52.543+06:00  INFO 13956 --- [main] liquibase.database                       : Set default schema name to PUBLIC
+2024-03-26T10:37:54.851+06:00  INFO 13956 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/001_create_user_table.yaml
+2024-03-26T10:37:54.927+06:00  INFO 13956 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/002_create_categories_table.yaml
+2024-03-26T10:37:54.942+06:00  INFO 13956 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/003_create_resumes_table.yaml
+2024-03-26T10:37:54.980+06:00  INFO 13956 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/004_create_vacancies_table.yaml
+2024-03-26T10:37:55.005+06:00  INFO 13956 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/005_create_contact_types_table.yaml
+2024-03-26T10:37:55.018+06:00  INFO 13956 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/006_create_contacts_info_tables.yaml
+2024-03-26T10:37:55.034+06:00  INFO 13956 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/007_create_messages_table.yaml
+2024-03-26T10:37:55.044+06:00  INFO 13956 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/008_create_responded_applicants_table.yaml
+2024-03-26T10:37:55.071+06:00  INFO 13956 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/009_create_education_info_table.yaml
+2024-03-26T10:37:55.101+06:00  INFO 13956 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/010_create_work_experience_info_table.yaml
+2024-03-26T10:37:55.133+06:00  INFO 13956 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/011_create_foreign_keys.yaml
+2024-03-26T10:37:55.175+06:00  INFO 13956 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/012_insert_data.sql
+2024-03-26T10:37:55.195+06:00  INFO 13956 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/013_create_table_authorities.yaml
+2024-03-26T10:37:55.208+06:00  INFO 13956 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/014_update_user_table.yaml
+2024-03-26T10:37:55.220+06:00  INFO 13956 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/015_create_tables_roles_for_users.yaml
+2024-03-26T10:37:55.232+06:00  INFO 13956 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/016_new_insert_data.sql
+2024-03-26T10:37:56.298+06:00  INFO 13956 --- [main] liquibase.changelog                      : Reading from PUBLIC.DATABASECHANGELOG
+2024-03-26T10:37:56.750+06:00  INFO 13956 --- [main] liquibase.ui                             : Database is up to date, no changesets to execute
+2024-03-26T10:37:56.762+06:00  INFO 13956 --- [main] liquibase.changelog                      : Reading from PUBLIC.DATABASECHANGELOG
+2024-03-26T10:37:56.822+06:00  INFO 13956 --- [main] liquibase.util                           : UPDATE SUMMARY
+2024-03-26T10:37:56.823+06:00  INFO 13956 --- [main] liquibase.util                           : Run:                          0
+2024-03-26T10:37:56.823+06:00  INFO 13956 --- [main] liquibase.util                           : Previously run:              16
+2024-03-26T10:37:56.825+06:00  INFO 13956 --- [main] liquibase.util                           : Filtered out:                 0
+2024-03-26T10:37:56.826+06:00  INFO 13956 --- [main] liquibase.util                           : -------------------------------
+2024-03-26T10:37:56.826+06:00  INFO 13956 --- [main] liquibase.util                           : Total change sets:           16
+2024-03-26T10:37:56.833+06:00  INFO 13956 --- [main] liquibase.util                           : Update summary generated
+2024-03-26T10:37:56.948+06:00  INFO 13956 --- [main] liquibase.lockservice                    : Successfully released change log lock
+2024-03-26T10:37:56.953+06:00  INFO 13956 --- [main] liquibase.command                        : Command execution complete
+2024-03-26T10:37:59.235+06:00  INFO 13956 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@14d18029, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6edb1e9c, org.springframework.security.web.context.SecurityContextHolderFilter@399c408c, org.springframework.security.web.header.HeaderWriterFilter@45cb5307, org.springframework.web.filter.CorsFilter@75d7297d, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@301d84f6, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4a5fab78, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@77a85e76, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4e20a985, org.springframework.security.web.session.SessionManagementFilter@50ac1249, org.springframework.security.web.access.ExceptionTranslationFilter@4910afdf, org.springframework.security.web.access.intercept.AuthorizationFilter@6dd2e453]
+2024-03-26T10:38:00.862+06:00  WARN 13956 --- [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 0d7d8bac-af65-45ab-b015-fb8fd3246a37
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-03-26T10:38:01.240+06:00  INFO 13956 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8089 (http) with context path ''
+2024-03-26T10:38:01.317+06:00  INFO 13956 --- [main] com.example.demo.DemoApplication         : Started DemoApplication in 21.434 seconds (process running for 25.761)
+2024-03-26T10:38:19.823+06:00  INFO 13956 --- [http-nio-8089-exec-3] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-03-26T10:38:19.824+06:00  INFO 13956 --- [http-nio-8089-exec-3] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-03-26T10:38:19.833+06:00  INFO 13956 --- [http-nio-8089-exec-3] o.s.web.servlet.DispatcherServlet        : Completed initialization in 8 ms
+2024-03-26T10:39:43.442+06:00  WARN 13956 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=51s131ms974µs900ns).
+2024-03-26T10:40:53.865+06:00  INFO 13956 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-03-26T10:40:54.736+06:00  INFO 13956 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

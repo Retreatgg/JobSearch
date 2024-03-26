@@ -84,8 +84,8 @@ public class UserDao {
 
     public void createUser(User user) {
         String sql = """
-                insert into users(name, surname, age, email, password, phone_number, avatar, account_type)
-                values(:name, :surname, :age, :email, :password, :phone_number, :avatar, :account_type)
+                insert into users(name, surname, age, email, password, phone_number, avatar, account_type, ENABLED)
+                values(:name, :surname, :age, :email, :password, :phone_number, :avatar, :account_type, :ENABLED)
                 """;
 
         namedParameterJdbcTemplate.update(sql, new MapSqlParameterSource()
@@ -97,6 +97,7 @@ public class UserDao {
                 .addValue("phone_number", user.getPhoneNumber())
                 .addValue("avatar", user.getAvatar())
                 .addValue("account_type", user.getAccountType())
+                .addValue("ENABLED", user.getEnabled())
         );
     }
 
