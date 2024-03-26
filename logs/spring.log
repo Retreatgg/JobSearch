@@ -1,1 +1,48 @@
 2024-03-26T09:02:53.557+06:00  INFO 19316 --- [main] com.example.demo.DemoApplication         : Starting DemoApplication using Java 21 with PID 19316 (C:\Users\NOTEBURG\Desktop\demo\target\classes started by NOTEBURG in C:\Users\NOTEBURG\Desktop\demo)
+2024-03-26T09:02:53.595+06:00  INFO 19316 --- [main] com.example.demo.DemoApplication         : No active profile set, falling back to 1 default profile: "default"
+2024-03-26T09:02:57.914+06:00  INFO 19316 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8089 (http)
+2024-03-26T09:02:57.941+06:00  INFO 19316 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-03-26T09:02:57.942+06:00  INFO 19316 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.19]
+2024-03-26T09:02:58.073+06:00  INFO 19316 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-03-26T09:02:58.074+06:00  INFO 19316 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 4314 ms
+2024-03-26T09:02:58.567+06:00  INFO 19316 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-03-26T09:02:58.902+06:00  INFO 19316 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:./db/demo user=ROOT
+2024-03-26T09:02:58.907+06:00  INFO 19316 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-03-26T09:02:59.122+06:00  INFO 19316 --- [main] liquibase.database                       : Set default schema name to PUBLIC
+2024-03-26T09:02:59.969+06:00  INFO 19316 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/001_create_user_table.yaml
+2024-03-26T09:03:00.001+06:00  INFO 19316 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/002_create_categories_table.yaml
+2024-03-26T09:03:00.021+06:00  INFO 19316 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/003_create_resumes_table.yaml
+2024-03-26T09:03:00.050+06:00  INFO 19316 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/004_create_vacancies_table.yaml
+2024-03-26T09:03:00.071+06:00  INFO 19316 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/005_create_contact_types_table.yaml
+2024-03-26T09:03:00.091+06:00  INFO 19316 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/006_create_contacts_info_tables.yaml
+2024-03-26T09:03:00.103+06:00  INFO 19316 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/007_create_messages_table.yaml
+2024-03-26T09:03:00.115+06:00  INFO 19316 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/008_create_responded_applicants_table.yaml
+2024-03-26T09:03:00.125+06:00  INFO 19316 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/009_create_education_info_table.yaml
+2024-03-26T09:03:00.141+06:00  INFO 19316 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/010_create_work_experience_info_table.yaml
+2024-03-26T09:03:00.154+06:00  INFO 19316 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/011_create_foreign_keys.yaml
+2024-03-26T09:03:00.178+06:00  INFO 19316 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/012_insert_data.sql
+2024-03-26T09:03:00.196+06:00  INFO 19316 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/013_create_table_authorities.yaml
+2024-03-26T09:03:00.213+06:00  INFO 19316 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/014_update_user_table.yaml
+2024-03-26T09:03:00.224+06:00  INFO 19316 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/015_create_tables_roles_for_users.yaml
+2024-03-26T09:03:00.238+06:00  INFO 19316 --- [main] liquibase.changelog                      : Reading resource: db/changelog/initial/016_new_insert_data.sql
+2024-03-26T09:03:00.702+06:00  INFO 19316 --- [main] liquibase.changelog                      : Reading from PUBLIC.DATABASECHANGELOG
+2024-03-26T09:03:00.923+06:00  INFO 19316 --- [main] liquibase.ui                             : Database is up to date, no changesets to execute
+2024-03-26T09:03:00.933+06:00  INFO 19316 --- [main] liquibase.changelog                      : Reading from PUBLIC.DATABASECHANGELOG
+2024-03-26T09:03:00.973+06:00  INFO 19316 --- [main] liquibase.util                           : UPDATE SUMMARY
+2024-03-26T09:03:00.974+06:00  INFO 19316 --- [main] liquibase.util                           : Run:                          0
+2024-03-26T09:03:00.979+06:00  INFO 19316 --- [main] liquibase.util                           : Previously run:              16
+2024-03-26T09:03:00.980+06:00  INFO 19316 --- [main] liquibase.util                           : Filtered out:                 0
+2024-03-26T09:03:00.980+06:00  INFO 19316 --- [main] liquibase.util                           : -------------------------------
+2024-03-26T09:03:00.980+06:00  INFO 19316 --- [main] liquibase.util                           : Total change sets:           16
+2024-03-26T09:03:00.984+06:00  INFO 19316 --- [main] liquibase.util                           : Update summary generated
+2024-03-26T09:03:01.047+06:00  INFO 19316 --- [main] liquibase.lockservice                    : Successfully released change log lock
+2024-03-26T09:03:01.049+06:00  INFO 19316 --- [main] liquibase.command                        : Command execution complete
+2024-03-26T09:03:02.145+06:00  INFO 19316 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@1ab268bd, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2fafa7b5, org.springframework.security.web.context.SecurityContextHolderFilter@52eca410, org.springframework.security.web.header.HeaderWriterFilter@6a9df5, org.springframework.web.filter.CorsFilter@181098bf, org.springframework.security.web.csrf.CsrfFilter@1feb586d, org.springframework.security.web.authentication.logout.LogoutFilter@77d54a41, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@2a984952, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@7e691624, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@632b5c79, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@7809b43a, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@69a76b74, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1dd443c1, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6a552721, org.springframework.security.web.access.ExceptionTranslationFilter@450d10cb, org.springframework.security.web.access.intercept.AuthorizationFilter@5d74507c]
+2024-03-26T09:03:03.284+06:00  WARN 19316 --- [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 7b458a34-f33c-4197-bf6d-ec293b1df7f2
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-03-26T09:03:03.472+06:00  INFO 19316 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8089 (http) with context path ''
+2024-03-26T09:03:03.510+06:00  INFO 19316 --- [main] com.example.demo.DemoApplication         : Started DemoApplication in 11.573 seconds (process running for 14.902)
