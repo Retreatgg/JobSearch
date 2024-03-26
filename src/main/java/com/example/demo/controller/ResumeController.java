@@ -19,12 +19,12 @@ import java.util.List;
 public class ResumeController {
     private final ResumeService resumeService;
 
-    @GetMapping("category{categoryId}")
+    @GetMapping("/category/{categoryId}")
     public ResponseEntity<ResumeDto> getResumeByCategoryId(@PathVariable long categoryId, Authentication auth) {
         return ResponseEntity.ok(resumeService.getResumesByCategoryId(categoryId, auth));
     }
 
-    @GetMapping("applicant{id}")
+    @GetMapping("/applicant/{id}")
     public ResponseEntity<List<ResumeDto>> getResumesByApplicant(@PathVariable long id, Authentication auth) {
         return ResponseEntity.ok(resumeService.getResumesByApplicantId(id, auth));
     }

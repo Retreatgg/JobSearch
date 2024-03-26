@@ -19,23 +19,18 @@ public class VacancyController {
     private final VacancyService vacancyService;
 
     @GetMapping("")
-    public ResponseEntity<List<VacancyDto>> getAllVacancies(Authentication auth) {
-        return ResponseEntity.ok(vacancyService.getAllVacancies(auth));
+    public ResponseEntity<List<VacancyDto>> getAllVacancies() {
+        return ResponseEntity.ok(vacancyService.getAllVacancies());
     }
 
     @GetMapping("responded-vacancies")
-    public ResponseEntity<List<VacancyDto>> getRespondedVacancies(Authentication auth) {
-        return ResponseEntity.ok(vacancyService.getRespondedVacancies(auth));
-    }
-
-    @GetMapping("author/{id}")
-    public ResponseEntity<List<VacancyDto>> getVacancyByAuthorId(@PathVariable Long id, Authentication auth) {
-        return ResponseEntity.ok(vacancyService.getVacancyByAuthorId(id, auth));
+    public ResponseEntity<List<VacancyDto>> getRespondedVacancies() {
+        return ResponseEntity.ok(vacancyService.getRespondedVacancies());
     }
 
     @GetMapping("active")
-    public ResponseEntity<List<VacancyDto>> getActiveVacancies(Authentication auth) {
-        return ResponseEntity.ok(vacancyService.getActiveVacancy(auth));
+    public ResponseEntity<List<VacancyDto>> getActiveVacancies() {
+        return ResponseEntity.ok(vacancyService.getActiveVacancy());
     }
 
     @DeleteMapping("{id}")
@@ -56,7 +51,7 @@ public class VacancyController {
     }
 
     @GetMapping("company/{name}")
-    public ResponseEntity<List<VacancyDto>> getVacanciesByCompanyName(@PathVariable String name, Authentication auth) {
-        return ResponseEntity.ok(vacancyService.getVacanciesByCompanyName(name, auth));
+    public ResponseEntity<List<VacancyDto>> getVacanciesByCompanyName(@PathVariable String name) {
+        return ResponseEntity.ok(vacancyService.getVacanciesByCompanyName(name));
     }
 }

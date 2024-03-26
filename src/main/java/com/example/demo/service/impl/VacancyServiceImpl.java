@@ -22,54 +22,27 @@ public class VacancyServiceImpl implements VacancyService {
     private final UserDao userDao;
 
     @Override
-    public List<VacancyDto> getAllVacancies(Authentication auth) {
-        User user = (User) auth.getPrincipal();
-        if (user.getAccountType().equals("Applicant")) {
-            List<Vacancy> vacancies = vacancyDao.getAllVacancies();
-            return transformationForDtoListVacancies(vacancies);
-        }
-        return null;
+    public List<VacancyDto> getAllVacancies() {
+        List<Vacancy> vacancies = vacancyDao.getAllVacancies();
+        return transformationForDtoListVacancies(vacancies);
     }
 
     @Override
-    public List<VacancyDto> getVacanciesByCategory(String name, Authentication auth) {
-        User user = (User) auth.getPrincipal();
-        if (user.getAccountType().equals("Applicant")) {
-            List<Vacancy> vacancies = vacancyDao.getVacanciesByCategory(name);
-            return transformationForDtoListVacancies(vacancies);
-        }
-        return null;
+    public List<VacancyDto> getVacanciesByCategory(String name) {
+        List<Vacancy> vacancies = vacancyDao.getVacanciesByCategory(name);
+        return transformationForDtoListVacancies(vacancies);
     }
 
     @Override
-    public List<VacancyDto> getRespondedVacancies(Authentication auth) {
-        User user = (User) auth.getPrincipal();
-        if (user.getAccountType().equals("Employer")) {
-            List<Vacancy> vacancies = vacancyDao.getRespondedVacancies();
-            return transformationForDtoListVacancies(vacancies);
-        }
-        return null;
+    public List<VacancyDto> getRespondedVacancies() {
+        List<Vacancy> vacancies = vacancyDao.getRespondedVacancies();
+        return transformationForDtoListVacancies(vacancies);
     }
 
     @Override
-    public List<VacancyDto> getVacancyByAuthorId(Long id, Authentication auth) {
-        User user = (User) auth.getPrincipal();
-        if (user.getAccountType().equals("Applicant")) {
-            List<Vacancy> vacancies = vacancyDao.getVacancyByAuthorId(id);
-            return transformationForDtoListVacancies(vacancies);
-        }
-        return null;
-    }
-
-    @Override
-    public List<VacancyDto> getActiveVacancy(Authentication auth) {
-        User user = (User) auth.getPrincipal();
-        if (user.getAccountType().equals("Applicant")) {
-            List<Vacancy> vacancies = vacancyDao.getActiveVacancies();
-            return transformationForDtoListVacancies(vacancies);
-        }
-
-        return null;
+    public List<VacancyDto> getActiveVacancy() {
+        List<Vacancy> vacancies = vacancyDao.getActiveVacancies();
+        return transformationForDtoListVacancies(vacancies);
     }
 
     @Override
@@ -136,13 +109,9 @@ public class VacancyServiceImpl implements VacancyService {
     }
 
     @Override
-    public List<VacancyDto> getVacanciesByCompanyName(String name, Authentication auth) {
-        User user = (User) auth.getPrincipal();
-        if (user.getAccountType().equals("Applicant")) {
-            List<Vacancy> vacancies = vacancyDao.getVacanciesByCompanyName(name);
-            return transformationForDtoListVacancies(vacancies);
-        }
-        return null;
+    public List<VacancyDto> getVacanciesByCompanyName(String name) {
+        List<Vacancy> vacancies = vacancyDao.getVacanciesByCompanyName(name);
+        return transformationForDtoListVacancies(vacancies);
     }
 
     private List<VacancyDto> transformationForDtoListVacancies(List<Vacancy> vacancies) {

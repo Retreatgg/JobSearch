@@ -3,6 +3,7 @@ package com.example.demo.service.impl;
 import com.example.demo.dao.UserDao;
 import com.example.demo.dto.UserCreateDto;
 import com.example.demo.dto.UserDto;
+import com.example.demo.dto.UserRoleDto;
 import com.example.demo.dto.UserUpdateDto;
 import com.example.demo.model.User;
 import com.example.demo.service.UserRoleService;
@@ -65,9 +66,17 @@ public class UserServiceImpl implements UserService {
         if(userOptional.isPresent()) {
             User newUser = userOptional.get();
             if(userCreateDto.getAccountType().equals("Applicant")) {
-                userRoleService.createRoleForUser(newUser.getId(), 2L);
+                UserRoleDto userRoleDto = UserRoleDto.builder()
+                        .roleId(2L)
+                        .userId(newUser.getId())
+                        .build();
+                userRoleService.createRoleForUser(userRoleDto);
             } else if (userCreateDto.getAccountType().equals("Employer")){
-                userRoleService.createRoleForUser(newUser.getId(), 1L);
+                UserRoleDto userRoleDto = UserRoleDto.builder()
+                        .userId(newUser.getId())
+                        .roleId(1L)
+                        .build();
+                userRoleService.createRoleForUser(userRoleDto);
             } else {
                 throw new NoSuchElementException("No such role");
             }
