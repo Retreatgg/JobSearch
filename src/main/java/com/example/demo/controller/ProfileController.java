@@ -1,7 +1,9 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.UserUpdateDto;
+import com.example.demo.service.ResumeService;
 import com.example.demo.service.UserService;
+import com.example.demo.service.VacancyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("profile")
 public class ProfileController {
     private final UserService userService;
+    private final VacancyService vacancyService;
+    private final ResumeService resumeService;
     @PostMapping("edit")
     public String editProfile(Authentication authentication, UserUpdateDto updateDto) {
         userService.editProfile(updateDto, authentication);
@@ -30,6 +34,7 @@ public class ProfileController {
     @GetMapping
     public String getProfile(Authentication authentication, Model model) {
         model.addAttribute("user", userService.getUserByEmail("bob@example.com"));
+        model.addAttribute("vacancies", vacancyService.getVacanciesByCompanyName("Bob"));
         return "profile/profile";
     }
 }

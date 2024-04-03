@@ -9,19 +9,22 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequiredArgsConstructor
 @RequestMapping("resumes")
 public class ResumeController {
     private final ResumeService resumeService;
 
     @GetMapping()
-    public ResponseEntity<List<ResumeDto>> getAllResumes(Authentication authentication) {
-        return ResponseEntity.ok(resumeService.getAllResumes(authentication));
+    public String getAllResumes(Authentication authentication, Model model) {
+        model.addAttribute("resumes", resumeService.getAllResumes());
+        return "resume/all_resumes";
     }
 
     @GetMapping("/category/{categoryId}")

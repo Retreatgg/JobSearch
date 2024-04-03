@@ -84,7 +84,7 @@
                         </#if>
                         <div class="row mb-3">
                             <div class="col-sm-3">
-                                <h6 class="mb-0">Upload File</h6>
+                                <h6 class="mb-0">Upload avatar</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
                                 <input type="file" class="form-control" name="avatar">

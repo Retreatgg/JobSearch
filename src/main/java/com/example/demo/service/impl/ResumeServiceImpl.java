@@ -46,6 +46,12 @@ public class ResumeServiceImpl implements ResumeService {
     }
 
     @Override
+    public List<ResumeDto> getAllResumes() {
+        List<Resume> resumes = resumeDao.getAllResumes();
+        return transformationForListDtoResume(resumes);
+    }
+
+    @Override
     public ResumeDto getResumesByCategoryId(Long id, Authentication auth) {
         Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
         String authority = authorities.isEmpty() ? "" : authorities.iterator().next().getAuthority();
