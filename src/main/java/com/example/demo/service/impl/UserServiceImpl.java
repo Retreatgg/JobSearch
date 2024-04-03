@@ -108,6 +108,14 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public User getUserByAuth(Authentication auth) {
+        UserDetails userDetails = (UserDetails) auth.getPrincipal();
+        String email = userDetails.getUsername();
+        Optional<User> userOptional = userDao.getUserByEmail(email);
+        return userOptional.orElseThrow(() -> new NoSuchElementException("Пользователь не найден"));
+    }
+
     private UserDto transformationForDtoSingleUser(User user) {
         return UserDto.builder()
                 .id(user.getId())

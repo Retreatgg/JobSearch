@@ -4,11 +4,11 @@ import com.example.demo.dto.UserCreateDto;
 import com.example.demo.dto.UserDto;
 import com.example.demo.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+@Controller
 @RequiredArgsConstructor
 @RequestMapping("users")
 public class UserController {
@@ -24,9 +24,14 @@ public class UserController {
         return ResponseEntity.ok(userService.getUserByPhoneNumber(phoneNumber));
     }
 
-    @PostMapping()
-    public HttpStatus createUser(@RequestBody UserCreateDto userCreateDto) {
-        userService.createUser(userCreateDto);
-        return HttpStatus.OK;
+    @GetMapping("register")
+    public String createUser() {
+        return "user/create_user";
+    }
+
+    @PostMapping("register")
+    public String createUser(UserCreateDto user) {
+        userService.createUser(user);
+        return "redirect:/";
     }
 }
