@@ -68,7 +68,7 @@ public class ResumeServiceImpl implements ResumeService {
             if (resumes != null && !resumes.isEmpty()) {
                 return transformationForListDtoResume(resumes);
             } else {
-                throw new NoSuchElementException("No resumes found for applicant with ID: " + id);
+                throw new NoSuchElementException("No resumes found gitfor applicant with ID: " + id);
             }
         }
         return null;
