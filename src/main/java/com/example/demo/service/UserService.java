@@ -17,5 +17,4 @@ public interface UserService {
     Boolean isUserExistsByEmail(String email);
     void createUser(UserCreateDto userCreateDto);
     void editProfile(UserUpdateDto userUpdateDto, Authentication auth);
-    User getUserByAuth(Authentication aut);
 }

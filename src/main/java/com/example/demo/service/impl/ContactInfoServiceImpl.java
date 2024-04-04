@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class ContactInfoServiceImpl implements ContactInfoService {
+
     private final ContactsInfoDao contactsInfoDao;
+
     @Override
     public void createContactInfo(Long id, ContactInfoDto contactInfoDto) {
         ContactInfo contactInfo = new ContactInfo();

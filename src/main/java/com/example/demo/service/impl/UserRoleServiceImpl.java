@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class UserRoleServiceImpl implements UserRoleService {
+
     private final UserRoleDao userRoleDao;
     @Override
     public void createRoleForUser(UserRoleDto userRoleDto) {

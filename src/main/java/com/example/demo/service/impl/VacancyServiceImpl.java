@@ -11,23 +11,28 @@ import com.example.demo.model.Vacancy;
 import com.example.demo.service.RespondedApplicantService;
 import com.example.demo.service.ResumeService;
 import com.example.demo.service.VacancyService;
+import com.example.demo.util.FileUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+
+import static com.example.demo.enums.AccountType.APPLICANT;
+import static com.example.demo.enums.AccountType.EMPLOYER;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class VacancyServiceImpl implements VacancyService {
+
     private final VacancyDao vacancyDao;
     private final UserDao userDao;
     private final RespondedApplicantService respondedApplicantService;
     private final ResumeService resumeService;
+
+    private final FileUtil fileUtil;
 
     @Override
     public List<VacancyDto> getAllVacancies() {
@@ -49,34 +54,26 @@ public class VacancyServiceImpl implements VacancyService {
 
     @Override
     public void deleteVacancyById(Long id, Authentication auth) {
-        UserDetails userDetails = (UserDetails) auth.getPrincipal();
-        String email = userDetails.getUsername();
-        Optional<User> userOptional = userDao.getUserByEmail(email);
-        if (userOptional.isPresent()) {
-            User user = userOptional.get();
-            if (user.getAccountType().equalsIgnoreCase("Employer")) {
-                Optional<Vacancy> optionalVacancy = vacancyDao.getVacancyById(id);
-                if (optionalVacancy.isPresent()) {
-                    Vacancy vacancy = optionalVacancy.get();
-                    if (Objects.equals(vacancy.getAuthorId(), user.getId())) {
-                        vacancyDao.deleteVacancyById(id);
-                    }
-                } else {
-                    throw new NoSuchElementException("Vacancy with ID " + id + " not found");
-                }
-            } else {
-                throw new NoSuchElementException("User with ID " + user.getId() + " not authorized to delete vacancy with ID " + id);
+        User user = fileUtil.getUserByAuth(auth);
+        if (user.getAccountType().equals(EMPLOYER.toString())) {
+            Vacancy vacancy = getVacancyById(id);
+
+            if (Objects.equals(vacancy.getAuthorId(), user.getId())) {
+                vacancyDao.deleteVacancyById(id);
             }
+        } else {
+            throw new NoSuchElementException("User with ID " + user.getId() + " not authorized to delete vacancy with ID " + id);
         }
 
     }
 
     @Override
     public void addVacancy(VacancyDto vacancyDto, Authentication auth) {
-        Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
-        String authority = authorities.isEmpty() ? "" : authorities.iterator().next().getAuthority();
-        if (authority.equalsIgnoreCase("Employer")) {
+        String authority = fileUtil.getAuthority(auth);
+
+        if (authority.equalsIgnoreCase(EMPLOYER.toString())) {
             Vacancy vacancy = new Vacancy();
+
             vacancy.setAuthorId(vacancyDto.getAuthorId());
             vacancy.setSalary(vacancyDto.getSalary());
             vacancy.setDescription(vacancyDto.getDescription());
@@ -85,6 +82,7 @@ public class VacancyServiceImpl implements VacancyService {
             vacancy.setCategoryId(vacancyDto.getCategoryId());
             vacancy.setExpFrom(vacancyDto.getExpFrom());
             vacancy.setName(vacancyDto.getName());
+
             vacancyDao.addVacancy(vacancy);
         }
 
@@ -93,24 +91,20 @@ public class VacancyServiceImpl implements VacancyService {
 
     @Override
     public void editVacancy(VacancyUpdateDto vacancyDto, long vacancyId, Authentication auth) {
-        Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
-        String authority = authorities.isEmpty() ? "" : authorities.iterator().next().getAuthority();
-        if (authority.equalsIgnoreCase("Employer")) {
-            Optional<Vacancy> vacancyOptional = vacancyDao.getVacancyById(vacancyId);
-            if (vacancyOptional.isPresent()) {
-                Vacancy vacancy = vacancyOptional.get();
-                vacancy.setExpTo(vacancyDto.getExpTo());
-                vacancy.setSalary(vacancyDto.getSalary());
-                vacancy.setDescription(vacancyDto.getDescription());
-                vacancy.setIsActive(vacancyDto.getIsActive());
-                vacancy.setName(vacancyDto.getName());
-                vacancy.setExpFrom(vacancyDto.getExpFrom());
-                vacancy.setCategoryId(vacancyDto.getCategoryId());
+        String authority = fileUtil.getAuthority(auth);
 
-                vacancyDao.editVacancy(vacancy);
-            } else {
-                throw new NoSuchElementException("Not found vacancy with ID " + vacancyId);
-            }
+        if (authority.equals(EMPLOYER.toString())) {
+
+            Vacancy vacancy = getVacancyById(vacancyId);
+            vacancy.setExpTo(vacancyDto.getExpTo());
+            vacancy.setSalary(vacancyDto.getSalary());
+            vacancy.setDescription(vacancyDto.getDescription());
+            vacancy.setIsActive(vacancyDto.getIsActive());
+            vacancy.setName(vacancyDto.getName());
+            vacancy.setExpFrom(vacancyDto.getExpFrom());
+            vacancy.setCategoryId(vacancyDto.getCategoryId());
+
+            vacancyDao.editVacancy(vacancy);
         } else {
             throw new NoSuchElementException("User not authorized to edit vacancy");
         }
@@ -125,9 +119,9 @@ public class VacancyServiceImpl implements VacancyService {
 
     @Override
     public void respond(Long id, Authentication authentication) {
-        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-        String authority = authorities.isEmpty() ? "" : authorities.iterator().next().getAuthority();
-        if (authority.equalsIgnoreCase("applicant")) {
+        String authority = fileUtil.getAuthority(authentication);
+        
+        if (authority.equals(APPLICANT.toString())) {
             ResumeDto resume = resumeService.getResumeById(id, authentication);
             RespondedApplicantsDto respondedApplicantsDto = RespondedApplicantsDto.builder()
                     .vacancyId(id)
@@ -156,18 +150,9 @@ public class VacancyServiceImpl implements VacancyService {
         return dtos;
     }
 
-    public VacancyDto transformationForDtoSingleVacancy(Vacancy vacancy) {
-        return VacancyDto.builder()
-                .name(vacancy.getName())
-                .description(vacancy.getDescription())
-                .expTo(vacancy.getExpTo())
-                .expFrom(vacancy.getExpFrom())
-                .authorId(vacancy.getAuthorId())
-                .categoryId(vacancy.getCategoryId())
-                .salary(vacancy.getSalary())
-                .isActive(vacancy.getIsActive())
-                .build();
-
+    private Vacancy getVacancyById(Long id) {
+        Optional<Vacancy> vacancyOptional = vacancyDao.getVacancyById(id);
+        return vacancyOptional.orElseThrow(() -> new NoSuchElementException("Vacancy by ID: " + id + " is not found"));
     }
 
 }

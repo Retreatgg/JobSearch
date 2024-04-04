@@ -14,6 +14,7 @@ import java.util.*;
 @Service
 @RequiredArgsConstructor
 public class ErrorServiceImpl implements ErrorService {
+
     @Override
     public ErrorResponseBody makeResponse(Exception exception) {
         String message = exception.getMessage();

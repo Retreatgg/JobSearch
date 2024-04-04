@@ -12,37 +12,44 @@ import com.example.demo.service.ContactInfoService;
 import com.example.demo.service.EducationInfoService;
 import com.example.demo.service.ResumeService;
 import com.example.demo.service.WorkExperienceInfoService;
+import com.example.demo.util.FileUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Objects;
+
+import static com.example.demo.enums.AccountType.APPLICANT;
+import static com.example.demo.enums.AccountType.EMPLOYER;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class ResumeServiceImpl implements ResumeService {
+
     private final ResumeDao resumeDao;
     private final UserDao userDao;
     private final CategoryDao categoryDao;
     private final WorkExperienceInfoService workExperienceInfoService;
     private final EducationInfoService educationInfoService;
     private final ContactInfoService contactInfoService;
+    private final FileUtil fileUtil;
 
     @Override
     public List<ResumeDto> getAllResumes(Authentication authentication) {
-        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-        String authority = authorities.isEmpty() ? "" : authorities.iterator().next().getAuthority();
-        if (authority.equalsIgnoreCase("Employer")) {
+        String authority = fileUtil.getAuthority(authentication);
+
+        if (authority.equals(String.valueOf(EMPLOYER))) {
             List<Resume> resumes = resumeDao.getAllResumes();
             return transformationForListDtoResume(resumes);
         }
 
-        return null;
+        throw new IllegalArgumentException("Your role is not appropriate");
     }
 
     @Override
@@ -53,82 +60,78 @@ public class ResumeServiceImpl implements ResumeService {
 
     @Override
     public ResumeDto getResumesByCategoryId(Long id, Authentication auth) {
-        Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
-        String authority = authorities.isEmpty() ? "" : authorities.iterator().next().getAuthority();
-        if (authority.equalsIgnoreCase("Employer")) {
-            Optional<Resume> resumeOptional = resumeDao.getResumesByCategoryId(id);
-            if (resumeOptional.isPresent()) {
-                Resume resume = resumeOptional.get();
-                return transformationForSingleDtoResume(resume);
-            }
+        String authority = fileUtil.getAuthority(auth);
+
+        if (authority.equals(String.valueOf(EMPLOYER))) {
+            Resume resume = resumeDao.getResumesByCategoryId(id)
+                    .orElseThrow(() -> new NoSuchElementException("Resume is not found"));
+
+            return transformationForSingleDtoResume(resume);
         }
-        return null;
+
+        throw new IllegalArgumentException("Your role is not appropriate");
     }
 
     @Override
     public List<ResumeDto> getResumesByApplicantId(long id, Authentication auth) {
-        Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
-        String authority = authorities.isEmpty() ? "" : authorities.iterator().next().getAuthority();
-        if (authority.equalsIgnoreCase("Employer")) {
+        String authority = fileUtil.getAuthority(auth);
+
+        if (authority.equals(String.valueOf(EMPLOYER))) {
             List<Resume> resumes = resumeDao.getResumesByApplicant(id);
             if (resumes != null && !resumes.isEmpty()) {
                 return transformationForListDtoResume(resumes);
             } else {
-                throw new NoSuchElementException("No resumes found gitfor applicant with ID: " + id);
+                throw new NoSuchElementException("No resumes found for applicant with ID: " + id);
             }
         }
-        return null;
+
+        throw new IllegalArgumentException("Your role is not appropriate");
     }
 
 
     @Override
     public ResumeDto getResumeById(Long id, Authentication auth) {
-        Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
-        String authority = authorities.isEmpty() ? "" : authorities.iterator().next().getAuthority();
-        if (authority.equalsIgnoreCase("Employer")) {
-            Resume resume = resumeDao.getResumeById(id).orElseThrow(() -> new NoSuchElementException("Can not find Resume by ID:" + id));
-            return transformationForSingleDtoResume(resume);
+        String authority = fileUtil.getAuthority(auth);
 
+        if (authority.equals(String.valueOf(EMPLOYER))) {
+            Resume resume = resumeDao.getResumeById(id)
+                    .orElseThrow(() -> new NoSuchElementException("Can not find Resume by ID:" + id));
+            return transformationForSingleDtoResume(resume);
         }
-        return null;
+
+        throw new IllegalArgumentException("Your role is not appropriate");
     }
 
-     @Override
-     public boolean deleteResumeById(Long id, Authentication auth) {
-         UserDetails userDetails = (UserDetails) auth.getPrincipal();
-         String email = userDetails.getUsername();
-         Optional<User> userOptional = userDao.getUserByEmail(email);
-         if (userOptional.isPresent()) {
-             User user = userOptional.get();
-             if (user == null || !user.getAccountType().equalsIgnoreCase("Applicant")) {
-                 return false;
-             }
+    @Override
+    public boolean deleteResumeById(Long id, Authentication auth) {
+        User user = fileUtil.getUserByAuth(auth);
 
-             Optional<Resume> optionalResume = resumeDao.getResumeById(id);
-             if (optionalResume.isPresent()) {
-                 Resume resume = optionalResume.get();
-                 if (resume.getApplicantId() == user.getId()) {
-                     resumeDao.deleteResumeById(id);
-                     contactInfoService.delete(id);
-                     workExperienceInfoService.delete(id);
-                     educationInfoService.delete(id);
-                     return true;
-                 } else {
-                     throw new NoSuchElementException("User with ID " + user.getId() + " is not authorized to delete resume with ID " + id);
-                 }
-             } else {
-                 throw new NoSuchElementException("Resume with ID " + id + " not found");
-             }
-         }
-         return false;
-     }
+        if (!user.getAccountType().equals(String.valueOf(APPLICANT))) {
+            return false;
+        }
+
+        Resume resume = resumeDao.getResumeById(id)
+                .orElseThrow(() -> new NoSuchElementException("Can not find Resume by ID:" + id));
+
+        if (Objects.equals(resume.getApplicantId(), user.getId())) {
+            resumeDao.deleteResumeById(id);
+            contactInfoService.delete(id);
+            workExperienceInfoService.delete(id);
+            educationInfoService.delete(id);
+
+            return true;
+        }
+
+        throw new IllegalArgumentException("Your role is not appropriate");
+    }
 
     @Override
     public void addResume(ResumeCreateDto resumeDto, Authentication auth) {
-        Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
-        String authority = authorities.isEmpty() ? "" : authorities.iterator().next().getAuthority();
-        if (authority.equalsIgnoreCase("Employer")) {
+        String authority = fileUtil.getAuthority(auth);
+
+        if (authority.equalsIgnoreCase(String.valueOf(APPLICANT))) {
             Resume resume = new Resume();
+
             resume.setName(resumeDto.getTitle());
             resume.setSalary(resumeDto.getSalary());
             resume.setIsActive(resumeDto.getIsActive());
@@ -136,31 +139,37 @@ public class ResumeServiceImpl implements ResumeService {
             resume.setUpdateTime(LocalDateTime.now());
             resume.setApplicantId(userDao.returnIdByEmail(resumeDto.getAuthorEmail()));
             resume.setCategoryId(categoryDao.returnIdByName(resumeDto.getCategoryName()));
+
             resumeDao.addResume(resume);
-            resumeDto.getWorkExperienceInfo().forEach(wei -> workExperienceInfoService.createWorkExperienceInfo(resume.getId(), wei));
+
+            resumeDto.getWorkExperienceInfo()
+                    .forEach(wei -> workExperienceInfoService.createWorkExperienceInfo(resume.getId(), wei));
             resumeDto.getEducationInfo().forEach(ei -> educationInfoService.createEducationInfo(resume.getId(), ei));
             contactInfoService.createContactInfo(resume.getId(), resumeDto.getContacts());
         }
-
     }
 
     @Override
     public void editResume(ResumeUpdateDto resumeDto, long id, Authentication auth) {
-        Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
-        String authority = authorities.isEmpty() ? "" : authorities.iterator().next().getAuthority();
-        if (authority.equalsIgnoreCase("Employer")) {
-            Resume resume = new Resume();
-            resume.setId(id);
+        String authority = fileUtil.getAuthority(auth);
+        User user = fileUtil.getUserByAuth(auth);
+        Resume resume = resumeDao.getResumeById(id)
+                .orElseThrow(() -> new NoSuchElementException("Resume is not found"));
+
+        if (authority.equalsIgnoreCase(String.valueOf(APPLICANT)) && Objects.equals(resume.getApplicantId(), user.getId())) {
+
             resume.setName(resumeDto.getTitle());
             resume.setSalary(resumeDto.getSalary());
             resume.setIsActive(resumeDto.getIsActive());
             resume.setCategoryId(categoryDao.returnIdByName(resumeDto.getCategoryName()));
+
             resumeDao.editResume(resume);
-            resumeDto.getWorkExperienceInfo().forEach(wei -> workExperienceInfoService.createWorkExperienceInfo(resume.getId(), wei));
+
+            resumeDto.getWorkExperienceInfo()
+                    .forEach(wei -> workExperienceInfoService.createWorkExperienceInfo(resume.getId(), wei));
             resumeDto.getEducationInfo().forEach(ei -> educationInfoService.createEducationInfo(resume.getId(), ei));
             contactInfoService.createContactInfo(resume.getId(), resumeDto.getContacts());
         }
-
     }
 
 

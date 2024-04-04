@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class WorkExperienceInfoServiceImpl implements WorkExperienceInfoService {
+
     private final WorkExperienceInfoDao workExperienceInfoDao;
     @Override
     public void createWorkExperienceInfo(Long id, WorkExperienceInfoDto workExperienceInfoDto) {

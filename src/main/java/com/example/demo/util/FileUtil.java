@@ -1,23 +1,35 @@
 package com.example.demo.util;
 
+import com.example.demo.dao.UserDao;
+import com.example.demo.model.User;
 import io.micrometer.common.util.StringUtils;
+import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.mock.web.MockMultipartFile;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Collection;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.UUID;
 
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class FileUtil {
+
     private static final String UPLOAD_DIR = "data";
+    private final UserDao userDao;
 
     @SneakyThrows
     public String saveUploadedFile(MultipartFile file, String subDir) {
@@ -51,5 +63,17 @@ public class FileUtil {
         MultipartFile multipartFile = new MockMultipartFile("file", bytes) ;
 
         return multipartFile;
+    }
+
+    public User getUserByAuth(Authentication auth) {
+        UserDetails userDetails = (UserDetails) auth.getPrincipal();
+        String email = userDetails.getUsername();
+        Optional<User> userOptional = userDao.getUserByEmail(email);
+        return userOptional.orElseThrow(() -> new NoSuchElementException("User is not found"));
+    }
+
+    public String getAuthority(Authentication authentication) {
+        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+        return authorities.isEmpty() ? "" : authorities.iterator().next().getAuthority();
     }
 }

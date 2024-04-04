@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class EducationInfoServiceImpl implements EducationInfoService {
+
     private final EducationInfoDao educationInfoDao;
 
     @Override

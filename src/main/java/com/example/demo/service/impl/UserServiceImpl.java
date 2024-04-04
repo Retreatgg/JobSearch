@@ -12,17 +12,20 @@ import com.example.demo.util.FileUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+import static com.example.demo.enums.AccountType.APPLICANT;
+import static com.example.demo.enums.AccountType.EMPLOYER;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
+
     private final UserDao userDao;
     private final FileUtil fileUtil;
     private final PasswordEncoder encoder;
@@ -57,63 +60,50 @@ public class UserServiceImpl implements UserService {
         user.setName(userCreateDto.getName());
         user.setAvatar("unnamed.jpg");
         user.setEmail(userCreateDto.getEmail());
-        user.setAccountType(userCreateDto.getAccountType());
         user.setSurname(userCreateDto.getSurname());
         user.setPassword(encoder.encode(userCreateDto.getPassword()));
         user.setPhoneNumber(userCreateDto.getPhoneNumber());
         user.setEnabled(true);
-        userDao.createUser(user);
-        Optional<User> userOptional = userDao.getUserByEmail(userCreateDto.getEmail());
-        if (userOptional.isPresent()) {
-            User newUser = userOptional.get();
-            if (userCreateDto.getAccountType().equals("Applicant")) {
-                UserRoleDto userRoleDto = UserRoleDto.builder()
-                        .roleId(2L)
-                        .userId(newUser.getId())
-                        .build();
-                userRoleService.createRoleForUser(userRoleDto);
-            } else if (userCreateDto.getAccountType().equals("Employer")) {
-                UserRoleDto userRoleDto = UserRoleDto.builder()
-                        .userId(newUser.getId())
-                        .roleId(1L)
-                        .build();
-                userRoleService.createRoleForUser(userRoleDto);
-            } else {
-                throw new NoSuchElementException("No such role");
-            }
+        user.setAccountType(userCreateDto.getAccountType());
+
+        String accountType = userCreateDto.getAccountType();
+        if (accountType.equals(APPLICANT.toString()) || accountType.equals(EMPLOYER.toString())) {
+            userDao.createUser(user);
+        } else {
+            throw new NoSuchElementException("No such role");
         }
 
+        User newUser = userDao.getUserByEmail(user.getEmail())
+                .orElseThrow(() -> new NoSuchElementException("Can not find User by email:" + user.getEmail()));
+
+        if (userCreateDto.getAccountType().equals(String.valueOf(APPLICANT))) {
+            UserRoleDto userRoleDto = UserRoleDto.builder()
+                    .roleId(2L)
+                    .userId(newUser.getId())
+                    .build();
+            userRoleService.createRoleForUser(userRoleDto);
+        } else if (userCreateDto.getAccountType().equals(String.valueOf(EMPLOYER))) {
+            UserRoleDto userRoleDto = UserRoleDto.builder()
+                    .userId(newUser.getId())
+                    .roleId(1L)
+                    .build();
+            userRoleService.createRoleForUser(userRoleDto);
+        }
     }
 
     @Override
     public void editProfile(UserUpdateDto userUpdateDto, Authentication auth) {
-        UserDetails userDetails = (UserDetails) auth.getPrincipal();
-        String email = userDetails.getUsername();
-        Optional<User> userOptional = userDao.getUserByEmail(email);
-        if (userOptional.isPresent()) {
-            User user = userOptional.get();
-            if (user.getEmail().equals(email)) {
-                String fileName = fileUtil.saveUploadedFile(userUpdateDto.getAvatar(), "/images");
-                user.setAge(userUpdateDto.getAge());
-                user.setAvatar(fileName);
-                user.setSurname(userUpdateDto.getSurname());
-                user.setName(userUpdateDto.getName());
-                user.setPassword(encoder.encode(userUpdateDto.getPassword()));
-                user.setPhoneNumber(userUpdateDto.getPhoneNumber());
-                userDao.editProfile(user);
-            } else {
-                throw new IllegalArgumentException("This is not your account. You can't change it");
-            }
+        User user = FileUtil.getUserByAuth(auth);
 
-        }
-    }
+        String fileName = fileUtil.saveUploadedFile(userUpdateDto.getAvatar(), "/images");
+        user.setAge(userUpdateDto.getAge());
+        user.setAvatar(fileName);
+        user.setSurname(userUpdateDto.getSurname());
+        user.setName(userUpdateDto.getName());
+        user.setPassword(encoder.encode(userUpdateDto.getPassword()));
+        user.setPhoneNumber(userUpdateDto.getPhoneNumber());
 
-    @Override
-    public User getUserByAuth(Authentication auth) {
-        UserDetails userDetails = (UserDetails) auth.getPrincipal();
-        String email = userDetails.getUsername();
-        Optional<User> userOptional = userDao.getUserByEmail(email);
-        return userOptional.orElseThrow(() -> new NoSuchElementException("Пользователь не найден"));
+        userDao.editProfile(user);
     }
 
     private UserDto transformationForDtoSingleUser(User user) {

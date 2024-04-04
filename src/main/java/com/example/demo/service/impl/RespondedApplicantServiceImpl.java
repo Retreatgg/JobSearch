@@ -2,11 +2,9 @@ package com.example.demo.service.impl;
 
 import com.example.demo.dao.RespondedApplicantsDao;
 import com.example.demo.dto.RespondedApplicantsDto;
-import com.example.demo.dto.VacancyDto;
 import com.example.demo.model.RespondedApplicant;
 import com.example.demo.service.RespondedApplicantService;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.validator.constraints.pl.REGON;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,6 +13,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class RespondedApplicantServiceImpl implements RespondedApplicantService {
+
     private final RespondedApplicantsDao respondedApplicantsDao;
     @Override
     public void createRespondedApplicant(RespondedApplicantsDto respondedApplicantsDto) {
