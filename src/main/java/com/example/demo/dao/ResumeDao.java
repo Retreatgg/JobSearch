@@ -46,7 +46,7 @@ public class ResumeDao {
         String sql = """
                 SELECT * FROM RESUMES
                 WHERE applicant_id = (
-                    select * from USERS
+                    select id from USERS
                     where id = ?
                 ) and IS_ACTIVE = true               
                 """;

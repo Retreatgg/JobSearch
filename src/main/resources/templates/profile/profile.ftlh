@@ -148,10 +148,10 @@
                             </div>
                         </div>
                     </#list>
-
                 </div>
             </#if>
-        <#else>
+        </#if>
+        <#if user.accountType == "APPLICANT">
             <#if resumes??>
                 <div class="row">
                     <h3>My resumes</h3>
@@ -176,10 +176,10 @@
                             </div>
                         </div>
                     </#list>
-
                 </div>
             </#if>
         </#if>
+
     </div>
 </@main.layout>
 

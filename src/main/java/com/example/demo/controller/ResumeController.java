@@ -33,6 +33,7 @@ public class ResumeController {
         model.addAttribute("work_info", workExperienceInfoService.getWorkInfo(id));
         model.addAttribute("educations", educationInfoService.getEducations(id));
 
+
         return "resume/resume";
     }
 }

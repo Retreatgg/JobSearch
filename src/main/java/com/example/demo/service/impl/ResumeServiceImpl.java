@@ -70,16 +70,16 @@ public class ResumeServiceImpl implements ResumeService {
     public List<ResumeDto> getResumesByApplicantId(long id, Authentication auth) {
         String authority = fileUtil.getAuthority(auth);
 
-        if (authority.equals(String.valueOf(EMPLOYER))) {
+        if (authority.equals(String.valueOf(APPLICANT))) {
             List<Resume> resumes = resumeDao.getResumesByApplicant(id);
             if (resumes != null && !resumes.isEmpty()) {
                 return transformationForListDtoResume(resumes);
             } else {
-                throw new NoSuchElementException("No resumes found for applicant with ID: " + id);
+                return null;
             }
         }
 
-        throw new IllegalArgumentException("Your role is not appropriate");
+        return null;
     }
 
 

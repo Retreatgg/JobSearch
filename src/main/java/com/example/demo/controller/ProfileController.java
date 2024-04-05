@@ -8,7 +8,6 @@ import com.example.demo.service.VacancyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,12 +42,8 @@ public class ProfileController {
     public String getProfile(Authentication auth, Model model, @PathVariable String email) {
         UserDto user = userService.getUserByEmail(auth, email);
         model.addAttribute("user", user);
-
-        if (user.getAccountType().equals(EMPLOYER.toString())) {
-            model.addAttribute("vacancies", vacancyService.getVacanciesByCompanyName(user.getName()));
-        } else if (user.getAccountType().equals(APPLICANT.toString())) {
-            model.addAttribute("resumes", resumeService.getResumesByApplicantId(user.getId(), auth));
-        }
+        model.addAttribute("vacancies", vacancyService.getVacanciesByCompanyName(user.getName()));
+        model.addAttribute("resumes", resumeService.getResumesByApplicantId(user.getId(), auth));
 
         return "profile/profile";
     }

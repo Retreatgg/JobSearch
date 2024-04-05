@@ -11,7 +11,9 @@
                         <div class="mt-3">
                             <span class="text-muted d-block">$ ${vacancy.salary}</span>
                         </div>
-                        <a href="${vacancy.id}" class="btn btn-primary mt-3">More info</a>
+                        <div class="job-right my-4 flex-shrink-0">
+                            <a href="${vacancy.id}" class="btn btn-light">More info</a>
+                        </div>
                     </div>
                 </div>
             </div>
