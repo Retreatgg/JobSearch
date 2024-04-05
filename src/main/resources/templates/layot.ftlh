@@ -55,10 +55,10 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/">For applicants</a>
+                            <a class="nav-link active" aria-current="page" href="/vacancies/active">For applicants</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/">For employers</a>
+                            <a class="nav-link active" aria-current="page" href="/resumes">For employers</a>
                         </li>
                     </ul>
                 </div>

@@ -7,6 +7,9 @@ import com.example.demo.service.EducationInfoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class EducationInfoServiceImpl implements EducationInfoService {
@@ -29,5 +32,23 @@ public class EducationInfoServiceImpl implements EducationInfoService {
     @Override
     public void delete(long id) {
         educationInfoDao.delete(id);
+    }
+
+    @Override
+    public List<EducationInfoDto> getEducations(Long resumeId) {
+        List<EducationInfo> educationInfos = educationInfoDao.getEducations(resumeId);
+        List<EducationInfoDto> educationInfoDtos = new ArrayList<>();
+
+        educationInfos.forEach(e -> {
+            educationInfoDtos.add(EducationInfoDto.builder()
+                            .degree(e.getDegree())
+                            .endDate(e.getEndDate())
+                            .institution(e.getInstitution())
+                            .program(e.getProgram())
+                            .startDate(e.getStartDate())
+                    .build());
+        });
+
+        return educationInfoDtos;
     }
 }

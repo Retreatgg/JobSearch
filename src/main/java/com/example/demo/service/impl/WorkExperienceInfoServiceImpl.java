@@ -7,6 +7,9 @@ import com.example.demo.service.WorkExperienceInfoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class WorkExperienceInfoServiceImpl implements WorkExperienceInfoService {
@@ -26,5 +29,20 @@ public class WorkExperienceInfoServiceImpl implements WorkExperienceInfoService 
     @Override
     public void delete(long id) {
         workExperienceInfoDao.delete(id);
+    }
+
+    @Override
+    public List<WorkExperienceInfoDto> getWorkInfo(Long resumeId) {
+        List<WorkExperienceInfo> workExperienceInfo = workExperienceInfoDao.getWorkInfo(resumeId);
+        List<WorkExperienceInfoDto> dtos = new ArrayList<>();
+        workExperienceInfo.forEach(e -> {
+            dtos.add(WorkExperienceInfoDto.builder()
+                            .companyName(e.getCompanyName())
+                            .years(e.getYears())
+                            .position(e.getPosition())
+                            .responsibilities(e.getResponsibilities())
+                    .build());
+        });
+        return dtos;
     }
 }

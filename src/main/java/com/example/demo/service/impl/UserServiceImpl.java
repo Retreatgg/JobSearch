@@ -32,9 +32,14 @@ public class UserServiceImpl implements UserService {
     private final UserRoleService userRoleService;
 
     @Override
-    public UserDto getUserByEmail(String email) {
-        User user = userDao.getUserByEmail(email).orElseThrow(() -> new NoSuchElementException("Can not find User by email:" + email));
-        return transformationForDtoSingleUser(user);
+    public UserDto getUserByEmail(Authentication authentication, String email) {
+        User userAuth = fileUtil.getUserByAuth(authentication);
+        if(userAuth.getEmail().equals(email)) {
+            User user = userDao.getUserByEmail(email).orElseThrow(() -> new NoSuchElementException("Can not find User by email:" + email));
+            return transformationForDtoSingleUser(user);
+        }
+
+        throw new IllegalArgumentException("Not your profile");
     }
 
     @Override
@@ -93,7 +98,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void editProfile(UserUpdateDto userUpdateDto, Authentication auth) {
-        User user = FileUtil.getUserByAuth(auth);
+        User user = fileUtil.getUserByAuth(auth);
 
         String fileName = fileUtil.saveUploadedFile(userUpdateDto.getAvatar(), "/images");
         user.setAge(userUpdateDto.getAge());

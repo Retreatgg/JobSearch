@@ -28,7 +28,7 @@ public class VacancyDto {
     private Integer expTo;
     @NotNull
     private Boolean isActive;
- @NotNull
+    @NotNull
     private Long authorId;
 
 }

@@ -48,11 +48,10 @@ public class SecurityConfig {
          http
                  .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                  .httpBasic(Customizer.withDefaults())
-                 .formLogin(AbstractHttpConfigurer::disable)
                  .logout(AbstractHttpConfigurer::disable)
                  .csrf(AbstractHttpConfigurer::disable)
                  .authorizeHttpRequests(authorize -> authorize
-                         /*.requestMatchers(HttpMethod.POST, "/resumes/**").hasAuthority("APPLICANT")
+                         .requestMatchers(HttpMethod.POST, "/resumes/**").hasAuthority("APPLICANT")
                          .requestMatchers(HttpMethod.DELETE, "/resumes/**").hasAuthority("APPLICANT")
                          .requestMatchers(HttpMethod.PUT, "/resumes/**").hasAuthority("APPLICANT")
                          .requestMatchers(HttpMethod.PUT, "/vacancies/**").hasAuthority("EMPLOYER")
@@ -60,8 +59,7 @@ public class SecurityConfig {
                          .requestMatchers(HttpMethod.POST, "/vacancies/").hasAuthority("EMPLOYER")
                          .requestMatchers(HttpMethod.POST, "vacancies/respond").hasAuthority("APPLICANT")
                          .requestMatchers(HttpMethod.GET, "/resumes/**").hasAuthority("EMPLOYER")
-                         .requestMatchers(HttpMethod.GET, "vacancies/**").permitAll()*/
-                         .requestMatchers("/profile/**").permitAll()
+                         .requestMatchers(HttpMethod.GET, "vacancies/**").permitAll()
                          .anyRequest().permitAll());
 
          return http.build();

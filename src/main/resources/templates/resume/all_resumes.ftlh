@@ -20,7 +20,7 @@
                             </div>
                         </div>
                         <div class="job-right my-4 flex-shrink-0">
-                            <a href="#" class="btn d-block w-100 d-sm-inline-block btn-light">View Profile</a>
+                            <a href="/resumes/${resume.id}" class="btn d-block w-100 d-sm-inline-block btn-light">More info</a>
                         </div>
                     </div>
                 </div>

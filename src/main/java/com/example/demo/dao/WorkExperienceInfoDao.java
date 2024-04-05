@@ -2,10 +2,13 @@ package com.example.demo.dao;
 
 import com.example.demo.model.WorkExperienceInfo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -35,6 +38,15 @@ public class WorkExperienceInfoDao {
                 """;
 
         jdbcTemplate.update(sql, id);
+    }
+
+    public List<WorkExperienceInfo> getWorkInfo(Long id) {
+        String sql = """
+                select * from work_experience_info
+                where resume_id = ?
+                """;
+
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(WorkExperienceInfo.class), id);
     }
 
 }

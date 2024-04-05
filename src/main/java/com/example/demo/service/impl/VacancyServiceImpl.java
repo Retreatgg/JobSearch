@@ -1,11 +1,7 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.dao.UserDao;
 import com.example.demo.dao.VacancyDao;
-import com.example.demo.dto.RespondedApplicantsDto;
-import com.example.demo.dto.ResumeDto;
-import com.example.demo.dto.VacancyDto;
-import com.example.demo.dto.VacancyUpdateDto;
+import com.example.demo.dto.*;
 import com.example.demo.model.User;
 import com.example.demo.model.Vacancy;
 import com.example.demo.service.RespondedApplicantService;
@@ -28,26 +24,25 @@ import static com.example.demo.enums.AccountType.EMPLOYER;
 public class VacancyServiceImpl implements VacancyService {
 
     private final VacancyDao vacancyDao;
-    private final UserDao userDao;
     private final RespondedApplicantService respondedApplicantService;
     private final ResumeService resumeService;
 
     private final FileUtil fileUtil;
 
     @Override
-    public List<VacancyDto> getAllVacancies() {
+    public List<VacancyDtoForShow> getAllVacancies() {
         List<Vacancy> vacancies = vacancyDao.getAllVacancies();
         return transformationForDtoListVacancies(vacancies);
     }
 
     @Override
-    public List<VacancyDto> getVacanciesByCategory(String name) {
+    public List<VacancyDtoForShow> getVacanciesByCategory(String name) {
         List<Vacancy> vacancies = vacancyDao.getVacanciesByCategory(name);
         return transformationForDtoListVacancies(vacancies);
     }
 
     @Override
-    public List<VacancyDto> getActiveVacancy() {
+    public List<VacancyDtoForShow> getActiveVacancy() {
         List<Vacancy> vacancies = vacancyDao.getActiveVacancies();
         return transformationForDtoListVacancies(vacancies);
     }
@@ -112,7 +107,7 @@ public class VacancyServiceImpl implements VacancyService {
     }
 
     @Override
-    public List<VacancyDto> getVacanciesByCompanyName(String name) {
+    public List<VacancyDtoForShow> getVacanciesByCompanyName(String name) {
         List<Vacancy> vacancies = vacancyDao.getVacanciesByCompanyName(name);
         return transformationForDtoListVacancies(vacancies);
     }
@@ -120,7 +115,7 @@ public class VacancyServiceImpl implements VacancyService {
     @Override
     public void respond(Long id, Authentication authentication) {
         String authority = fileUtil.getAuthority(authentication);
-        
+
         if (authority.equals(APPLICANT.toString())) {
             ResumeDto resume = resumeService.getResumeById(id, authentication);
             RespondedApplicantsDto respondedApplicantsDto = RespondedApplicantsDto.builder()
@@ -134,9 +129,10 @@ public class VacancyServiceImpl implements VacancyService {
 
     }
 
-    private List<VacancyDto> transformationForDtoListVacancies(List<Vacancy> vacancies) {
-        List<VacancyDto> dtos = new ArrayList<>();
-        vacancies.forEach(e -> dtos.add(VacancyDto.builder()
+    private List<VacancyDtoForShow> transformationForDtoListVacancies(List<Vacancy> vacancies) {
+        List<VacancyDtoForShow> dtos = new ArrayList<>();
+        vacancies.forEach(e -> dtos.add(VacancyDtoForShow.builder()
+                        .id(e.getId())
                 .name(e.getName())
                 .description(e.getDescription())
                 .expTo(e.getExpTo())
@@ -150,7 +146,8 @@ public class VacancyServiceImpl implements VacancyService {
         return dtos;
     }
 
-    private Vacancy getVacancyById(Long id) {
+    @Override
+    public Vacancy getVacancyById(Long id) {
         Optional<Vacancy> vacancyOptional = vacancyDao.getVacancyById(id);
         return vacancyOptional.orElseThrow(() -> new NoSuchElementException("Vacancy by ID: " + id + " is not found"));
     }
