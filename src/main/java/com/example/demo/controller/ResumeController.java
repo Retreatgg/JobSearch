@@ -1,5 +1,8 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.EducationInfoDto;
+import com.example.demo.dto.ResumeCreateDto;
+import com.example.demo.dto.WorkExperienceInfoDto;
 import com.example.demo.model.EducationInfo;
 import com.example.demo.service.EducationInfoService;
 import com.example.demo.service.ResumeService;
@@ -10,7 +13,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -35,5 +42,33 @@ public class ResumeController {
 
 
         return "resume/resume";
+    }
+
+    @GetMapping("add")
+    public String formResume() {
+        return "resume/add_resume";
+    }
+
+    @PostMapping("add")
+    public String addResume(Authentication authentication, ResumeCreateDto resumeCreateDto, WorkExperienceInfoDto workInfo, EducationInfoDto educ) {
+        List<EducationInfoDto> educationInfos = new ArrayList<>();
+        educationInfos.add(educ);
+        List<WorkExperienceInfoDto> workExperienceInfo = new ArrayList<>();
+        workExperienceInfo.add(workInfo);
+
+        resumeCreateDto.setEducationInfo(educationInfos);
+        resumeCreateDto.setWorkExperienceInfo(workExperienceInfo);
+        resumeService.addResume(resumeCreateDto, authentication);
+        return "redirect:/vacancies/active";
+    }
+
+    @GetMapping("add/work_info")
+    public String addWorkExp() {
+        return "resume/add_work_exp";
+    }
+
+    @GetMapping("add/education")
+    public String addEducation() {
+        return "resume/add_education";
     }
 }

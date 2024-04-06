@@ -1,4 +1,4 @@
-/* package com.example.demo.controller.api;
+ package com.example.demo.controller.api;
 
 import com.example.demo.dto.UserCreateDto;
 import com.example.demo.dto.UserDto;
@@ -9,9 +9,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+@RestController("restUser")
 @RequiredArgsConstructor
-@RequestMapping("users")
+@RequestMapping("api/users")
 public class UserController {
     private final UserService userService;
 
@@ -26,4 +26,3 @@ public class UserController {
     }
 
 }
- */

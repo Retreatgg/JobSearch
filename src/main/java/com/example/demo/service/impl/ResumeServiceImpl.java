@@ -122,6 +122,7 @@ public class ResumeServiceImpl implements ResumeService {
     @Override
     public void addResume(ResumeCreateDto resumeDto, Authentication auth) {
         String authority = fileUtil.getAuthority(auth);
+        User user = fileUtil.getUserByAuth(auth);
 
         if (authority.equalsIgnoreCase(String.valueOf(APPLICANT))) {
             Resume resume = new Resume();
@@ -131,7 +132,7 @@ public class ResumeServiceImpl implements ResumeService {
             resume.setIsActive(resumeDto.getIsActive());
             resume.setCreatedDate(LocalDateTime.now());
             resume.setUpdateTime(LocalDateTime.now());
-            resume.setApplicantId(userDao.returnIdByEmail(resumeDto.getAuthorEmail()));
+            resume.setApplicantId(userDao.returnIdByEmail(user.getEmail()));
             resume.setCategoryId(categoryDao.returnIdByName(resumeDto.getCategoryName()));
 
             resumeDao.addResume(resume);

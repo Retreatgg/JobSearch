@@ -1,4 +1,4 @@
-/*package com.example.demo.controller.api;
+package com.example.demo.controller.api;
 
 import com.example.demo.dto.ResumeCreateDto;
 import com.example.demo.dto.ResumeDto;
@@ -9,22 +9,20 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@RestController("restResume")
 @RequiredArgsConstructor
-@RequestMapping("resumes")
+@RequestMapping("api/resumes")
 public class ResumeController {
     private final ResumeService resumeService;
 
    @GetMapping()
-    public String getAllResumes(Authentication authentication, Model model) {
-        model.addAttribute("resumes", resumeService.getAllResumes(authentication));
-        return "resume/all_resumes";
+    public ResponseEntity<List<ResumeDto>> getAllResumes(Authentication authentication) {
+        return ResponseEntity.ok(resumeService.getAllResumes(authentication));
     }
 
     @GetMapping("/category/{categoryId}")
@@ -60,4 +58,4 @@ public class ResumeController {
     }
 
 
-} */
+}

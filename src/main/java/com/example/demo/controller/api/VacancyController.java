@@ -1,31 +1,30 @@
-/* package com.example.demo.controller.api;
+ package com.example.demo.controller.api;
 
-import com.example.demo.dto.RespondedApplicantsDto;
-import com.example.demo.dto.VacancyDto;
-import com.example.demo.dto.VacancyUpdateDto;
-import com.example.demo.model.Vacancy;
-import com.example.demo.service.RespondedApplicantService;
-import com.example.demo.service.VacancyService;
-import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+ import com.example.demo.dto.RespondedApplicantsDto;
+ import com.example.demo.dto.VacancyDto;
+ import com.example.demo.dto.VacancyDtoForShow;
+ import com.example.demo.dto.VacancyUpdateDto;
+ import com.example.demo.model.Vacancy;
+ import com.example.demo.service.RespondedApplicantService;
+ import com.example.demo.service.VacancyService;
+ import jakarta.validation.Valid;
+ import lombok.RequiredArgsConstructor;
+ import org.springframework.http.HttpStatus;
+ import org.springframework.http.ResponseEntity;
+ import org.springframework.security.core.Authentication;
+ import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+ import java.util.List;
 
-@RestController
+@RestController("restVacancy")
 @RequiredArgsConstructor
-@RequestMapping("vacancies")
+@RequestMapping("api/vacancies")
 public class VacancyController {
     private final VacancyService vacancyService;
     private final RespondedApplicantService respondedApplicantService;
 
     @GetMapping("")
-    public ResponseEntity<List<VacancyDto>> getAllVacancies() {
+    public ResponseEntity<List<VacancyDtoForShow>> getAllVacancies() {
         return ResponseEntity.ok(vacancyService.getAllVacancies());
     }
 
@@ -38,7 +37,6 @@ public class VacancyController {
     public Vacancy getVacancy(@PathVariable Long id) {
         return vacancyService.getVacancyById(id);
     }
-
 
     @DeleteMapping("{id}")
     public void deleteVacancyById(@PathVariable long id, Authentication auth) {
@@ -58,7 +56,7 @@ public class VacancyController {
     }
 
     @GetMapping("company/{name}")
-    public ResponseEntity<List<VacancyDto>> getVacanciesByCompanyName(@PathVariable String name) {
+    public ResponseEntity<List<VacancyDtoForShow>> getVacanciesByCompanyName(@PathVariable String name) {
         return ResponseEntity.ok(vacancyService.getVacanciesByCompanyName(name));
     }
 
@@ -68,4 +66,3 @@ public class VacancyController {
         return HttpStatus.OK;
     }
 }
-*/

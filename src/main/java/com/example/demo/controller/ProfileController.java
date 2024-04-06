@@ -14,8 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import static com.example.demo.enums.AccountType.APPLICANT;
-import static com.example.demo.enums.AccountType.EMPLOYER;
+
 
 @Controller
 @RequiredArgsConstructor
@@ -38,7 +37,7 @@ public class ProfileController {
         return "profile/edit_profile";
     }
 
-    @GetMapping("/{email}")
+    @GetMapping("{email}")
     public String getProfile(Authentication auth, Model model, @PathVariable String email) {
         UserDto user = userService.getUserByEmail(auth, email);
         model.addAttribute("user", user);

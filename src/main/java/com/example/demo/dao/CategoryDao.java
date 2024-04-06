@@ -1,8 +1,12 @@
 package com.example.demo.dao;
 
+import com.example.demo.model.Category;
 import lombok.RequiredArgsConstructor;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -16,5 +20,13 @@ public class CategoryDao {
                 """;
 
         return jdbcTemplate.queryForObject(sql, Long.class, name);
+    }
+
+    public List<Category> getCategories() {
+        String sql = """
+                select * from categories
+                """;
+
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Category.class));
     }
 }

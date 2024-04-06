@@ -15,9 +15,6 @@ import java.util.List;
 @Getter
 @Setter
 public class ResumeCreateDto {
-    @NotNull
-    @Email
-    private String authorEmail;
 
     @NotNull
     private String title;

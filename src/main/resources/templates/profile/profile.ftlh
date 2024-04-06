@@ -33,7 +33,7 @@
                                     <#else>
                                         <div class="col-sm-6">
                                             <a class="btn btn-info btn-block" target="__blank"
-                                               href="#">ADD RESUME</a>
+                                               href="/resumes/add">ADD RESUME</a>
                                         </div>
                                     </#if>
 

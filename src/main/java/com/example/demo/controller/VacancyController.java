@@ -1,11 +1,15 @@
 package com.example.demo.controller;
 
+import com.example.demo.dao.CategoryDao;
+import com.example.demo.dto.VacancyDto;
+import com.example.demo.service.CategoryService;
 import com.example.demo.service.VacancyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -14,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class VacancyController {
 
     private final VacancyService vacancyService;
+    private final CategoryService categoryService;
 
     @GetMapping("{id}")
     public String getVacancy(Model model, @PathVariable Long id) {
@@ -25,5 +30,15 @@ public class VacancyController {
     public String getActiveVacancies(Model model) {
         model.addAttribute("vacancies", vacancyService.getActiveVacancy());
         return "vacancy/all_active_vacancies";
+    }
+
+    @GetMapping("add")
+    public String addVacancy(Model model) {
+        model.addAttribute("categories", categoryService.categories());
+        return "vacancy/add_vacancy";
+    }
+    @PostMapping("add")
+    public String addNewVacancy(VacancyDto vacancyDto) {
+        return "vacancy/add_vacancy";
     }
 }

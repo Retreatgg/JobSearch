@@ -65,11 +65,12 @@ public class VacancyServiceImpl implements VacancyService {
     @Override
     public void addVacancy(VacancyDto vacancyDto, Authentication auth) {
         String authority = fileUtil.getAuthority(auth);
+        User user = fileUtil.getUserByAuth(auth);
 
         if (authority.equalsIgnoreCase(EMPLOYER.toString())) {
             Vacancy vacancy = new Vacancy();
 
-            vacancy.setAuthorId(vacancyDto.getAuthorId());
+            vacancy.setAuthorId(user.getId());
             vacancy.setSalary(vacancyDto.getSalary());
             vacancy.setDescription(vacancyDto.getDescription());
             vacancy.setExpTo(vacancyDto.getExpTo());
