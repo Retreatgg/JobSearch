@@ -1,4 +1,6 @@
 <#import "../layot.ftlh" as main>
+<#import "../paginatton.ftlh" as p>
+
 <@main.layout>
     <h3 class="mb-4 mt-2">Vacancies: ${vacancies?size}</h3>
 
@@ -19,4 +21,9 @@
             </div>
         </#list>
     </div>
+
+    <#assign maxPage = vacancies?size / perPage?number>
+    <@p.pagination page maxPage>
+    </@p.pagination>
+
 </@main.layout>

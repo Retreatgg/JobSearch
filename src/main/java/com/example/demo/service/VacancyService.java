@@ -13,7 +13,7 @@ import java.util.List;
 public interface VacancyService {
     List<VacancyDtoForShow> getAllVacancies();
     List<VacancyDtoForShow> getVacanciesByCategory(String name);
-    List<VacancyDtoForShow> getActiveVacancy();
+    List<VacancyDtoForShow> getActiveVacancy(String page, String perPage);
 
     void deleteVacancyById(Long id, Authentication auth);
     void addVacancy(VacancyDto vacancyDto, Authentication auth);

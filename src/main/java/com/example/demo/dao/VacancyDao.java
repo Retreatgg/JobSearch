@@ -47,13 +47,15 @@ public class VacancyDao {
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Vacancy.class), id);
     }
 
-    public List<Vacancy> getActiveVacancies() {
+    public List<Vacancy> getActiveVacancies(int perPage, int offset) {
         String sql = """
                 select * from VACANCIES
                 where IS_ACTIVE = true
+                limit ?
+                offset ?
                 """;
 
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Vacancy.class));
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Vacancy.class), perPage, offset);
     }
 
     public Optional<Vacancy> getVacancyById(Long id) {

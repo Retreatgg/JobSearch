@@ -42,8 +42,12 @@ public class VacancyServiceImpl implements VacancyService {
     }
 
     @Override
-    public List<VacancyDtoForShow> getActiveVacancy() {
-        List<Vacancy> vacancies = vacancyDao.getActiveVacancies();
+    public List<VacancyDtoForShow> getActiveVacancy(String page, String perPage) {
+        int numberPage = Integer.parseInt(page);
+        int perPageNumber = Integer.parseInt(perPage);
+        int offset = numberPage * perPageNumber;
+
+        List<Vacancy> vacancies = vacancyDao.getActiveVacancies(perPageNumber, offset);
         return transformationForDtoListVacancies(vacancies);
     }
 

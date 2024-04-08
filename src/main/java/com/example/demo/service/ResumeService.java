@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 public interface ResumeService {
-    List<ResumeDto> getAllResumes(Authentication authentication);
+    List<ResumeDto> getAllResumes(Authentication authentication, String perPage, String page);
     ResumeDto getResumesByCategoryId(Long id, Authentication auth);
     List<ResumeDto> getResumesByApplicantId(long id, Authentication auth);
 

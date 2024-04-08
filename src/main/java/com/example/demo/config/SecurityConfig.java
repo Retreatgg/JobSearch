@@ -51,7 +51,7 @@ public class SecurityConfig {
                  .logout(AbstractHttpConfigurer::disable)
                  .csrf(AbstractHttpConfigurer::disable)
                  .authorizeHttpRequests(authorize -> authorize
-                        /* .requestMatchers(HttpMethod.POST, "/resumes/**").hasAuthority("APPLICANT")
+                         .requestMatchers(HttpMethod.POST, "/resumes/**").hasAuthority("APPLICANT")
                          .requestMatchers(HttpMethod.DELETE, "/resumes/**").hasAuthority("APPLICANT")
                          .requestMatchers(HttpMethod.PUT, "/resumes/**").hasAuthority("APPLICANT")
                          .requestMatchers(HttpMethod.PUT, "/vacancies/**").hasAuthority("EMPLOYER")
@@ -59,7 +59,9 @@ public class SecurityConfig {
                          .requestMatchers(HttpMethod.POST, "/vacancies/").hasAuthority("EMPLOYER")
                          .requestMatchers(HttpMethod.POST, "vacancies/respond").hasAuthority("APPLICANT")
                          .requestMatchers(HttpMethod.GET, "/resumes/**").hasAuthority("EMPLOYER")
-                         .requestMatchers(HttpMethod.GET, "vacancies/**").permitAll() */
+                         .requestMatchers("profile/**").hasAuthority("EMPLOYER")
+                         .requestMatchers("profile/**").hasAuthority("APPLICANT")
+                         .requestMatchers(HttpMethod.GET, "vacancies/**").permitAll()
                          .anyRequest().permitAll());
 
          return http.build();

@@ -20,7 +20,7 @@
             <div class="card">
                 <div class="card-body">
                     <form action="/profile/edit" method="POST" enctype="multipart/form-data">
-                        <#if user.accountType == "Applicant">
+                        <#if user.accountType == "APPLICANT">
                             <div class="row mb-3">
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Name</h6>
@@ -63,7 +63,7 @@
                                 <input type="text" class="form-control" name="phoneNumber">
                             </div>
                         </div>
-                        <#if user.accountType == "Applicant">
+                        <#if user.accountType == "APPLICANT">
                             <div class="row mb-3">
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Age</h6>

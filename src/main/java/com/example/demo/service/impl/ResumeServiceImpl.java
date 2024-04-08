@@ -41,11 +41,15 @@ public class ResumeServiceImpl implements ResumeService {
     private final FileUtil fileUtil;
 
     @Override
-    public List<ResumeDto> getAllResumes(Authentication authentication) {
+    public List<ResumeDto> getAllResumes(Authentication authentication, String page, String perPage) {
+        int numberPage = Integer.parseInt(page);
+        int sizePageNumber = Integer.parseInt(perPage);
+        int offset = numberPage * sizePageNumber;
+
         String authority = fileUtil.getAuthority(authentication);
 
         if (authority.equals(String.valueOf(EMPLOYER))) {
-            List<Resume> resumes = resumeDao.getAllResumes();
+            List<Resume> resumes = resumeDao.getAllResumes(sizePageNumber, offset);
             return transformationForListDtoResume(resumes);
         }
 

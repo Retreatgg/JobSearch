@@ -11,9 +11,12 @@ import com.example.demo.service.UserService;
 import com.example.demo.util.FileUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -63,7 +66,7 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         user.setAge(userCreateDto.getAge());
         user.setName(userCreateDto.getName());
-        user.setAvatar("unnamed.jpg");
+        user.setAvatar("unnamed.jpeg");
         user.setEmail(userCreateDto.getEmail());
         user.setSurname(userCreateDto.getSurname());
         user.setPassword(encoder.encode(userCreateDto.getPassword()));
@@ -103,12 +106,22 @@ public class UserServiceImpl implements UserService {
         String fileName = fileUtil.saveUploadedFile(userUpdateDto.getAvatar(), "/images");
         user.setAge(userUpdateDto.getAge());
         user.setAvatar(fileName);
-        user.setSurname(userUpdateDto.getSurname());
+        if(userUpdateDto.getSurname() != null) {
+            user.setSurname(userUpdateDto.getSurname());
+        } else {
+            user.setSurname("");
+        }
         user.setName(userUpdateDto.getName());
         user.setPassword(encoder.encode(userUpdateDto.getPassword()));
         user.setPhoneNumber(userUpdateDto.getPhoneNumber());
 
         userDao.editProfile(user);
+    }
+
+    @Override
+    public ResponseEntity<?> downloadImage(String email){
+        String filename = userDao.getAvatarByUserId(email);;
+        return fileUtil.getOutputFile(filename,"/images", MediaType.IMAGE_JPEG);
     }
 
     private UserDto transformationForDtoSingleUser(User user) {

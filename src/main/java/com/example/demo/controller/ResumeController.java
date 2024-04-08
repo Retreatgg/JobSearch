@@ -11,10 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +26,14 @@ public class ResumeController {
     private final EducationInfoService educationInfoService;
 
     @GetMapping()
-    public String getAllResumes(Authentication authentication, Model model) {
-        model.addAttribute("resumes", resumeService.getAllResumes(authentication));
+    public String getAllResumes(
+            Authentication authentication, Model model,
+            @RequestParam(name = "page", defaultValue = "1") String page,
+            @RequestParam(name = "size", defaultValue = "5") String perPage)
+    {
+        model.addAttribute("resumes", resumeService.getAllResumes(authentication, page, perPage));
+        model.addAttribute("page", page);
+        model.addAttribute("perPage", perPage);
         return "resume/all_resumes";
     }
 

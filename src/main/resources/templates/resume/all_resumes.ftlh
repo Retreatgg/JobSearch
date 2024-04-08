@@ -1,5 +1,8 @@
 <#import "../layot.ftlh" as main>
+<#import "../paginatton.ftlh" as p>
 <@main.layout>
+
+    <h3 class="mb-4 mt-2">Resumes: ${resumes?size}</h3>
     <div class="row mt-5">
         <div class="col-lg-10 mx-auto">
             <div class="career-search mb-60">
@@ -29,4 +32,8 @@
             </div>
         </div>
     </div>
+
+    <#assign maxPage = resumes?size / perPage?number>
+    <@p.pagination page maxPage>
+    </@p.pagination>
 </@main.layout>

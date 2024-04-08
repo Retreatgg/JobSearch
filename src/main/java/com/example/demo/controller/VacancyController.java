@@ -7,10 +7,7 @@ import com.example.demo.service.VacancyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("vacancies")
@@ -27,8 +24,14 @@ public class VacancyController {
     }
 
     @GetMapping("active")
-    public String getActiveVacancies(Model model) {
-        model.addAttribute("vacancies", vacancyService.getActiveVacancy());
+    public String getActiveVacancies(
+            Model model,
+            @RequestParam(name = "page", defaultValue = "1") String page,
+            @RequestParam(name = "size", defaultValue = "5") String perPage)
+    {
+        model.addAttribute("vacancies", vacancyService.getActiveVacancy(page, perPage));
+        model.addAttribute("page", Integer.parseInt(page));
+        model.addAttribute("perPage", perPage);
         return "vacancy/all_active_vacancies";
     }
 

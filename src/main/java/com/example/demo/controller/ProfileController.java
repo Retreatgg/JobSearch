@@ -6,6 +6,7 @@ import com.example.demo.service.ResumeService;
 import com.example.demo.service.UserService;
 import com.example.demo.service.VacancyService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,6 +44,7 @@ public class ProfileController {
         model.addAttribute("user", user);
         model.addAttribute("vacancies", vacancyService.getVacanciesByCompanyName(user.getName()));
         model.addAttribute("resumes", resumeService.getResumesByApplicantId(user.getId(), auth));
+        model.addAttribute("image", userService.downloadImage(email));
 
         return "profile/profile";
     }

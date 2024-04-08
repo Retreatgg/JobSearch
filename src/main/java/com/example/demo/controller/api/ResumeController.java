@@ -20,9 +20,13 @@ import java.util.List;
 public class ResumeController {
     private final ResumeService resumeService;
 
-   @GetMapping()
-    public ResponseEntity<List<ResumeDto>> getAllResumes(Authentication authentication) {
-        return ResponseEntity.ok(resumeService.getAllResumes(authentication));
+    @GetMapping()
+    public ResponseEntity<List<ResumeDto>> getAllResumes(
+            Authentication authentication,
+            @RequestParam(name = "page", defaultValue = "1") String page,
+            @RequestParam(name = "size", defaultValue = "5") String perPage)
+    {
+        return ResponseEntity.ok(resumeService.getAllResumes(authentication, page, perPage));
     }
 
     @GetMapping("/category/{categoryId}")
@@ -42,7 +46,7 @@ public class ResumeController {
 
     @DeleteMapping("{id}")
     public ResponseEntity<?> deleteResumeById(@PathVariable long id, Authentication auth) {
-           return ResponseEntity.ok(resumeService.deleteResumeById(id, auth));
+        return ResponseEntity.ok(resumeService.deleteResumeById(id, auth));
     }
 
     @PostMapping("")

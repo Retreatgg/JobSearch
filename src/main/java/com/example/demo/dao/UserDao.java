@@ -113,4 +113,13 @@ public class UserDao {
                 )
         );
     }
+
+    public String getAvatarByUserId(String userEmail) {
+        String sql = """
+                select avatar from users 
+                where email like ?
+                """;
+
+        return jdbcTemplate.queryForObject(sql, String.class, userEmail);
+    }
 }

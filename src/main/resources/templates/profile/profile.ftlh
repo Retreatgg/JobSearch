@@ -19,8 +19,8 @@
                             </div>
                         </#if>
                         <div class="d-flex flex-column align-items-center text-center">
-                            <#if user.avatar??>
-                                <img src="${user.avatar}" alt="User Avatar" class="rounded-circle" width="150">
+                            <#if image??>
+                                <img src="./images/${image}" alt="User Avatar" class="rounded-circle" width="150">
                             </#if>
                             <div class="mt-3">
                                 <h4>${user.name}</h4>

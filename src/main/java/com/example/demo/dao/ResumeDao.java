@@ -19,13 +19,15 @@ public class ResumeDao {
     private final JdbcTemplate jdbcTemplate;
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    public List<Resume> getAllResumes() {
+    public List<Resume> getAllResumes(int perPage, int offset) {
         String sql = """
                 select * from resumes
                 where is_active = true
+                limit ?
+                offset ?
                 """;
 
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Resume.class));
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Resume.class), perPage, offset);
     }
 
     public Optional<Resume> getResumesByCategoryId(Long id) {
