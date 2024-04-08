@@ -15,7 +15,6 @@ import java.util.List;
 @Getter
 @Setter
 public class ResumeUpdateDto {
-    private Long id;
 
     @NotNull
     private String title;
@@ -32,7 +31,7 @@ public class ResumeUpdateDto {
     private List<EducationInfoDto> educationInfo;
 
     @NotNull
-    private ContactInfoDto contacts;
+    private List<ContactInfoDto> contacts;
 
     @NotNull
     private Boolean isActive;

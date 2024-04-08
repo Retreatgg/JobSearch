@@ -32,7 +32,7 @@
 
                             <div class="mb-3">
                                 <div id="datetimepicker1" class="input-append date">
-                                    <label for="endDate" class="form-label">Start date</label>
+                                    <label for="endDate" class="form-label">End date</label>
                                     <input type="date" class="form-control" id="endDate" name="endDate"></input>
                                     <span class="add-on">
             <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>

@@ -34,7 +34,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class FileUtil {
 
-    private static final String UPLOAD_DIR = "data";
+    private static final String UPLOAD_DIR = "data/";
     private final UserDao userDao;
 
     @SneakyThrows
@@ -85,17 +85,16 @@ public class FileUtil {
     public ResponseEntity<?> getOutputFile(String fileName, String subDir, MediaType mediaType) {
         try {
             byte[] image = Files.readAllBytes(Paths.get(UPLOAD_DIR + subDir + "/" + fileName));
-            Resource resource = new ByteArrayResource(image);
 
-            return ResponseEntity.ok()
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"")
-                    .contentLength(resource.contentLength())
-                    .contentType(mediaType)
-                    .body(resource);
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(mediaType);
+            headers.setContentDispositionFormData("attachment", fileName);
+            headers.setContentLength(image.length);
+
+            return new ResponseEntity<>(image, headers, HttpStatus.OK);
         } catch (IOException e) {
             log.error("No file found:", e);
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Image not found");
         }
-
     }
 }

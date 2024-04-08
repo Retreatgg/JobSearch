@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import com.example.demo.dao.CategoryDao;
 import com.example.demo.dto.VacancyDto;
 import com.example.demo.service.CategoryService;
 import com.example.demo.service.VacancyService;

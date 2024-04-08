@@ -58,7 +58,7 @@
                             <a class="nav-link active" aria-current="page" href="/vacancies/active">For applicants</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/resumes">For employers</a>
+                            <a class="nav-link active" aria-current="page" href="/resumes/active">For employers</a>
                         </li>
                     </ul>
                 </div>

@@ -2,14 +2,11 @@ package com.example.demo.controller.api;
 
 import com.example.demo.dto.UserDto;
 import com.example.demo.dto.UserUpdateDto;
-import com.example.demo.service.ResumeService;
 import com.example.demo.service.UserService;
-import com.example.demo.service.VacancyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @RestController("restProfile")
@@ -28,5 +25,10 @@ public class ProfileController {
     @GetMapping("{email}")
     public ResponseEntity<UserDto> getProfile(Authentication authentication, @PathVariable String email) {
         return ResponseEntity.ok(userService.getUserByEmail(authentication, email));
+    }
+
+    @GetMapping("photo/{email}")
+    public ResponseEntity<?> getPhoto(@PathVariable String email) {
+        return ResponseEntity.ok(userService.downloadImage(email));
     }
 }

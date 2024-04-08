@@ -2,10 +2,9 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.EducationInfoDto;
 import com.example.demo.dto.ResumeCreateDto;
+import com.example.demo.dto.ResumeUpdateDto;
 import com.example.demo.dto.WorkExperienceInfoDto;
-import com.example.demo.service.EducationInfoService;
-import com.example.demo.service.ResumeService;
-import com.example.demo.service.WorkExperienceInfoService;
+import com.example.demo.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -23,6 +22,8 @@ public class ResumeController {
     private final ResumeService resumeService;
     private final WorkExperienceInfoService workExperienceInfoService;
     private final EducationInfoService educationInfoService;
+    private final CategoryService categoryService;
+    private final ContactTypeService contactTypeService;
 
     @GetMapping("active")
     public String getAllResumes(
@@ -43,12 +44,12 @@ public class ResumeController {
         model.addAttribute("work_info", workExperienceInfoService.getWorkInfo(id));
         model.addAttribute("educations", educationInfoService.getEducations(id));
 
-
         return "resume/resume";
     }
 
     @GetMapping("add")
-    public String formResume() {
+    public String formResume(Model model) {
+        model.addAttribute("categories", categoryService.categories());
         return "resume/add_resume";
     }
 
@@ -65,6 +66,17 @@ public class ResumeController {
         return "redirect:/vacancies/active";
     }
 
+    @PostMapping("edit")
+    public String editResume(Authentication authentication, ResumeUpdateDto resumeUpdateDto) {
+        return "redirect:/vacancies/active";
+    }
+
+    @GetMapping("edit")
+    public String editResume(Model model) {
+        model.addAttribute("categories", categoryService.categories());
+        return "resume/edit";
+    }
+
     @GetMapping("add/work_info")
     public String addWorkExp() {
         return "resume/add_work_exp";
@@ -73,5 +85,11 @@ public class ResumeController {
     @GetMapping("add/education")
     public String addEducation() {
         return "resume/add_education";
+    }
+
+    @GetMapping("add/contact")
+    public String addContact(Model model) {
+        model.addAttribute("contacts", contactTypeService.getContacts());
+        return "resume/add_contacts";
     }
 }

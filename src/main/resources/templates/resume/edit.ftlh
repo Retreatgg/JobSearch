@@ -4,12 +4,13 @@
         <div class="col-md-6">
             <div class="card shadow">
                 <div class="card-body">
-                    <h5 class="card-title text-center mb-4">Add resume</h5>
-                    <form action="/resumes/add" method="post">
+                    <h5 class="card-title text-center mb-4">Edit resume</h5>
+                    <form action="/resumes/edit" method="post">
                         <div class="mb-3">
                             <label for="title" class="form-label">Title</label>
                             <input type="text" class="form-control" id="title" name="title">
                         </div>
+
                         <div class="mb-3">
                             <label for="accountType" class="form-label">Select category</label>
                             <select class="form-select" aria-label="Default select example" name="category">
@@ -18,6 +19,7 @@
                                 </#list>
                             </select>
                         </div>
+
                         <div class="mb-3">
                             <label for="salary" class="form-label">Salary</label>
                             <input type="number" class="form-control" id="salary" name="salary">

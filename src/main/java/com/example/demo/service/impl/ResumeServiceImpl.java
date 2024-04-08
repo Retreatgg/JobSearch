@@ -166,8 +166,10 @@ public class ResumeServiceImpl implements ResumeService {
 
             resumeDto.getWorkExperienceInfo()
                     .forEach(wei -> workExperienceInfoService.createWorkExperienceInfo(resume.getId(), wei));
-            resumeDto.getEducationInfo().forEach(ei -> educationInfoService.createEducationInfo(resume.getId(), ei));
-            contactInfoService.createContactInfo(resume.getId(), resumeDto.getContacts());
+            resumeDto.getEducationInfo()
+                    .forEach(ei -> educationInfoService.createEducationInfo(resume.getId(), ei));
+            resumeDto.getContacts()
+                    .forEach(ci -> contactInfoService.createContactInfo(resume.getId(), ci));
         }
     }
 

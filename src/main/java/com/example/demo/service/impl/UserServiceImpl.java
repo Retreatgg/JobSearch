@@ -120,7 +120,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResponseEntity<?> downloadImage(String email){
-        String filename = userDao.getAvatarByUserId(email);;
+        String filename = userDao.getAvatarByUserId(email);
         return fileUtil.getOutputFile(filename,"/images", MediaType.IMAGE_JPEG);
     }
 

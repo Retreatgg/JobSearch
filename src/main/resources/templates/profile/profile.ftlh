@@ -19,16 +19,16 @@
                             </div>
                         </#if>
                         <div class="d-flex flex-column align-items-center text-center">
-                            <#if image??>
+
                                 <img src="./images/${image}" alt="User Avatar" class="rounded-circle" width="150">
-                            </#if>
+
                             <div class="mt-3">
                                 <h4>${user.name}</h4>
                                 <div class="row">
                                     <#if user.accountType == "EMPLOYER">
                                         <div class="col-sm-6">
                                             <a class="btn btn-info btn-block" target="__blank"
-                                               href="#">ADD VACANCY</a>
+                                               href="/vacancies/add">ADD VACANCY</a>
                                         </div>
                                     <#else>
                                         <div class="col-sm-6">
@@ -141,7 +141,7 @@
                                             <a href="#" target="__blank" class="btn btn-info">Update</a>
                                         </div>
                                         <div class="col mt-3">
-                                            <a href="#" target="__blank" class="btn btn-info">Edit</a>
+                                            <a href="" target="__blank" class="btn btn-info">Edit</a>
                                         </div>
                                     </div>
                                 </div>
