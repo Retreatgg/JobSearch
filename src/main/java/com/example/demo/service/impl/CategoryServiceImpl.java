@@ -17,6 +17,11 @@ public class CategoryServiceImpl implements CategoryService {
     private final CategoryDao categoryDao;
 
     @Override
+    public Long getCategoryId(String name) {
+        return categoryDao.returnIdByName(name);
+    }
+
+    @Override
     public List<CategoryDto> categories() {
         List<Category> categories = categoryDao.getCategories();
         List<CategoryDto> categoryDtoList = new ArrayList<>();

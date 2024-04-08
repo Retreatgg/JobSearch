@@ -27,11 +27,20 @@ public class VacancyController {
     public String getActiveVacancies(
             Model model,
             @RequestParam(name = "page", defaultValue = "1") String page,
-            @RequestParam(name = "size", defaultValue = "5") String perPage)
+            @RequestParam(name = "size", defaultValue = "5") String perPage,
+            @RequestParam(name = "category", required = false) String category)
     {
-        model.addAttribute("vacancies", vacancyService.getActiveVacancy(page, perPage));
+
+        if(category == null || category.isEmpty()) {
+            model.addAttribute("vacancies", vacancyService.getActiveVacancy(page, perPage, 0));
+        } else {
+            Long categoryId = categoryService.getCategoryId(category);
+            model.addAttribute("vacancies", vacancyService.getActiveVacancy(page, perPage, categoryId));
+        }
+
         model.addAttribute("page", Integer.parseInt(page));
         model.addAttribute("perPage", Integer.parseInt(perPage));
+        model.addAttribute("categories", categoryService.categories());
         return "vacancy/all_active_vacancies";
     }
 

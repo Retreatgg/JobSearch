@@ -9,5 +9,6 @@ import java.util.List;
 @Service
 public interface CategoryService {
 
+    Long getCategoryId(String name);
     List<CategoryDto> categories();
 }

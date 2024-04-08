@@ -14,6 +14,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static com.example.demo.enums.AccountType.APPLICANT;
 import static com.example.demo.enums.AccountType.EMPLOYER;
@@ -42,12 +43,21 @@ public class VacancyServiceImpl implements VacancyService {
     }
 
     @Override
-    public List<VacancyDtoForShow> getActiveVacancy(String page, String perPage) {
+    public List<VacancyDtoForShow> getActiveVacancy(String page, String perPage, long categoryId) {
         int numberPage = Integer.parseInt(page);
         int perPageNumber = Integer.parseInt(perPage);
         int offset = numberPage * perPageNumber;
 
         List<Vacancy> vacancies = vacancyDao.getActiveVacancies(perPageNumber, offset);
+
+        if(categoryId != 0) {
+            List<Vacancy> vacanciesByCategory = vacancies.stream()
+                    .filter(e -> e.getCategoryId() == categoryId)
+                    .toList();
+
+            return transformationForDtoListVacancies(vacanciesByCategory);
+        }
+
         return transformationForDtoListVacancies(vacancies);
     }
 
