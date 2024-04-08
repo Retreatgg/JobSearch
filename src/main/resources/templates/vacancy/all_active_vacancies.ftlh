@@ -23,7 +23,7 @@
     </div>
 
     <#assign maxPage = vacancies?size / perPage?number>
-    <@p.pagination page maxPage>
+    <@p.pagination page=page maxPage=maxPage path="/vacancies/active">
     </@p.pagination>
 
 </@main.layout>

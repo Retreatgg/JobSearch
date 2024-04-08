@@ -3,7 +3,6 @@ package com.example.demo.controller;
 import com.example.demo.dto.EducationInfoDto;
 import com.example.demo.dto.ResumeCreateDto;
 import com.example.demo.dto.WorkExperienceInfoDto;
-import com.example.demo.model.EducationInfo;
 import com.example.demo.service.EducationInfoService;
 import com.example.demo.service.ResumeService;
 import com.example.demo.service.WorkExperienceInfoService;
@@ -25,15 +24,16 @@ public class ResumeController {
     private final WorkExperienceInfoService workExperienceInfoService;
     private final EducationInfoService educationInfoService;
 
-    @GetMapping()
+    @GetMapping("active")
     public String getAllResumes(
             Authentication authentication, Model model,
             @RequestParam(name = "page", defaultValue = "1") String page,
             @RequestParam(name = "size", defaultValue = "5") String perPage)
     {
         model.addAttribute("resumes", resumeService.getAllResumes(authentication, page, perPage));
-        model.addAttribute("page", page);
-        model.addAttribute("perPage", perPage);
+        model.addAttribute("page", Integer.parseInt(page));
+        model.addAttribute("perPage", Integer.parseInt(perPage));
+
         return "resume/all_resumes";
     }
 

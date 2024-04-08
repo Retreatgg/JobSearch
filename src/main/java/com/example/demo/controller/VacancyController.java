@@ -31,7 +31,7 @@ public class VacancyController {
     {
         model.addAttribute("vacancies", vacancyService.getActiveVacancy(page, perPage));
         model.addAttribute("page", Integer.parseInt(page));
-        model.addAttribute("perPage", perPage);
+        model.addAttribute("perPage", Integer.parseInt(perPage));
         return "vacancy/all_active_vacancies";
     }
 
