@@ -1,9 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.EducationInfoDto;
-import com.example.demo.dto.ResumeCreateDto;
-import com.example.demo.dto.ResumeUpdateDto;
-import com.example.demo.dto.WorkExperienceInfoDto;
+import com.example.demo.dto.*;
 import com.example.demo.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -28,12 +25,14 @@ public class ResumeController {
     @GetMapping("active")
     public String getAllResumes(
             Authentication authentication, Model model,
-            @RequestParam(name = "page", defaultValue = "1") String page,
+            @RequestParam(name = "page", defaultValue = "0") String page,
             @RequestParam(name = "size", defaultValue = "5") String perPage)
     {
-        model.addAttribute("resumes", resumeService.getAllResumes(authentication, page, perPage));
+        List<ResumeDto> resumes =  resumeService.getAllResumes(authentication, page, perPage);
+        model.addAttribute("resumes", resumes);
         model.addAttribute("page", Integer.parseInt(page));
         model.addAttribute("perPage", Integer.parseInt(perPage));
+        model.addAttribute("maxPage", resumes.size() / Integer.parseInt(perPage));
 
         return "resume/all_resumes";
     }

@@ -34,7 +34,6 @@
     </div>
 
 
-    <#assign maxPage = resumes?size / perPage?number>
     <@p.pagination page=page maxPage=maxPage path="/resumes/active">
     </@p.pagination>
 </@main.layout>

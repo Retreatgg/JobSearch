@@ -5,7 +5,7 @@
 
     <nav aria-label="Page navigation example">
         <ul class="pagination">
-            <#if page == 0>
+            <#if page lt 1>
                 <li class="page-item">
                     <a class="page-link" href="${path}?page=0" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
@@ -19,9 +19,9 @@
                 </li>
             </#if>
             <li class="page-item"><a class="page-link" href="${path}?page=${page}">${page + 1}</a></li>
-            <#if page == maxPage>
+            <#if page gt maxPage + 1>
                 <li class="page-item">
-                    <a class="page-link" href="${path}?page=${maxPage}" aria-label="Next">
+                    <a class="page-link" href="${path}?page=${page}" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>

@@ -33,7 +33,7 @@ databaseChangeLog:
                   type: varchar(45)
               - column:
                   name: avatar
-                  type: varchar(45)
+                  type: varchar(255)
               - column:
                   name: account_type
                   type: varchar(45)
