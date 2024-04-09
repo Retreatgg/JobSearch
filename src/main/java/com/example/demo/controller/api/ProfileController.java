@@ -27,8 +27,4 @@ public class ProfileController {
         return ResponseEntity.ok(userService.getUserByEmail(authentication, email));
     }
 
-    @GetMapping("photo/{email}")
-    public ResponseEntity<?> getPhoto(@PathVariable String email) {
-        return ResponseEntity.ok(userService.downloadImage(email));
-    }
 }

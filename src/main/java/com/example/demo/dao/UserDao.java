@@ -15,6 +15,7 @@ import java.util.Optional;
 @Component
 @RequiredArgsConstructor
 public class UserDao {
+
     private final JdbcTemplate jdbcTemplate;
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
@@ -114,9 +115,9 @@ public class UserDao {
         );
     }
 
-    public String getAvatarByUserId(String userEmail) {
+    public String getAvatarByUserEmail(String userEmail) {
         String sql = """
-                select avatar from users 
+                select avatar from users
                 where email like ?
                 """;
 

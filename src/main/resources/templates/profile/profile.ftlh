@@ -19,9 +19,7 @@
                             </div>
                         </#if>
                         <div class="d-flex flex-column align-items-center text-center">
-
-                                <img src="./images/${image}" alt="User Avatar" class="rounded-circle" width="150">
-
+                                <img src="/images/download/${user.email}" alt="User Avatar" class="rounded-circle border border-primary" width="150">
                             <div class="mt-3">
                                 <h4>${user.name}</h4>
                                 <div class="row">

@@ -34,7 +34,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class FileUtil {
 
-    private static final String UPLOAD_DIR = "data/";
+    private static final String UPLOAD_DIR = "data";
     private final UserDao userDao;
 
     @SneakyThrows
@@ -42,7 +42,7 @@ public class FileUtil {
         String uuidFile = UUID.randomUUID().toString();
         String resultFileName = uuidFile + "_" + file.getOriginalFilename();
 
-        Path pathDir = Paths.get(UPLOAD_DIR + subDir);
+        Path pathDir = Paths.get(UPLOAD_DIR + "/" + subDir);
         Files.createDirectories(pathDir);
 
         Path filePath = Paths.get(pathDir + "/" + resultFileName);
@@ -58,6 +58,7 @@ public class FileUtil {
 
         return resultFileName;
     }
+
 
     public MultipartFile convertStringToMultipartFile(String avatarString) {
         if (StringUtils.isEmpty(avatarString)) {

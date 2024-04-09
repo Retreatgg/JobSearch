@@ -16,7 +16,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -37,7 +36,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto getUserByEmail(Authentication authentication, String email) {
         User userAuth = fileUtil.getUserByAuth(authentication);
-        if(userAuth.getEmail().equals(email)) {
+        if (userAuth.getEmail().equals(email)) {
             User user = userDao.getUserByEmail(email).orElseThrow(() -> new NoSuchElementException("Can not find User by email:" + email));
             return transformationForDtoSingleUser(user);
         }
@@ -106,7 +105,7 @@ public class UserServiceImpl implements UserService {
         String fileName = fileUtil.saveUploadedFile(userUpdateDto.getAvatar(), "/images");
         user.setAge(userUpdateDto.getAge());
         user.setAvatar(fileName);
-        if(userUpdateDto.getSurname() != null) {
+        if (userUpdateDto.getSurname() != null) {
             user.setSurname(userUpdateDto.getSurname());
         } else {
             user.setSurname("");
@@ -119,9 +118,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResponseEntity<?> downloadImage(String email){
-        String filename = userDao.getAvatarByUserId(email);
-        return fileUtil.getOutputFile(filename,"/images", MediaType.IMAGE_JPEG);
+    public ResponseEntity<?> downloadImage(String email) {
+
+        String file = userDao.getAvatarByUserEmail(email);
+        Optional<User> userOptional = userDao.getUserByEmail(email);
+        if(userOptional.isPresent()) {
+            User user = userOptional.get();
+            String avatar = user.getAvatar();
+            return fileUtil.getOutputFile(avatar, "/images", MediaType.IMAGE_JPEG);
+        }
+
+        return null;
+
     }
 
     private UserDto transformationForDtoSingleUser(User user) {

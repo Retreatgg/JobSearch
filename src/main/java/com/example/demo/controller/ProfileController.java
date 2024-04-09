@@ -6,6 +6,7 @@ import com.example.demo.service.ResumeService;
 import com.example.demo.service.UserService;
 import com.example.demo.service.VacancyService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -47,5 +48,10 @@ public class ProfileController {
         model.addAttribute("image", userService.downloadImage(email));
 
         return "profile/profile";
+    }
+
+    @GetMapping("photo/{email}")
+    public ResponseEntity<?> getPhoto(@PathVariable String email) {
+        return ResponseEntity.ok(userService.downloadImage(email));
     }
 }
