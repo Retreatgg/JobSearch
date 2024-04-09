@@ -1,15 +1,14 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.VacancyDto;
-import com.example.demo.dto.VacancyDtoForShow;
+import com.example.demo.dto.VacancyUpdateDto;
 import com.example.demo.service.CategoryService;
 import com.example.demo.service.VacancyService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("vacancies")
@@ -33,20 +32,16 @@ public class VacancyController {
             @RequestParam(name = "category", required = false) String category)
     {
 
-        List<VacancyDtoForShow> vacancies;
         if(category == null || category.isEmpty()) {
-            vacancies = vacancyService.getActiveVacancy(page, perPage, 0);
-            model.addAttribute("vacancies", vacancies);
+            model.addAttribute("vacancies", vacancyService.getActiveVacancy(page, perPage, 0));
         } else {
             Long categoryId = categoryService.getCategoryId(category);
-            vacancies = vacancyService.getActiveVacancy(page, perPage, categoryId);
-            model.addAttribute("vacancies", vacancies);
+            model.addAttribute("vacancies", vacancyService.getActiveVacancy(page, perPage, categoryId));
         }
 
         model.addAttribute("page", Integer.parseInt(page));
         model.addAttribute("perPage", Integer.parseInt(perPage));
         model.addAttribute("categories", categoryService.categories());
-        model.addAttribute("maxPage", vacancies.size() / Integer.parseInt(perPage));
         return "vacancy/all_active_vacancies";
     }
 
@@ -58,5 +53,24 @@ public class VacancyController {
     @PostMapping("add")
     public String addNewVacancy(VacancyDto vacancyDto) {
         return "vacancy/add_vacancy";
+    }
+
+    @PostMapping("update/{id}")
+    public String update(@PathVariable Long id) {
+        vacancyService.update(id);
+        return "redirect:/profile";
+    }
+
+    @GetMapping("edit/{id}")
+    public String edit(Model model, @PathVariable Long id) {
+        model.addAttribute("categories", categoryService.categories());
+        model.addAttribute("id", id);
+        return "vacancy/edit";
+    }
+
+    @PostMapping("edit/{id}")
+    public String editVacancy(@PathVariable Long id, VacancyUpdateDto vacancyUpdateDto, Authentication auth) {
+        vacancyService.editVacancy(vacancyUpdateDto, id, auth);
+        return "redirect:/profile";
     }
 }

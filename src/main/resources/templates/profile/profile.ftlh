@@ -6,12 +6,12 @@
             <div class="col-md-4 mb-3">
                 <div class="card">
                     <div class="card-body">
-                        <#if message??>
+                        <#if messages??>
                             <div class="card-body">
-                                <a href="/notifications" class="btn btn-danger btn-block mb-3">
+                                <a href="#" class="btn btn-danger btn-block mb-3">
                                     <div class="position-relative">
                                         <div class="position-absolute top-0 start-100 translate-middle bg-danger badge rounded-pill">
-                                            <span>${message.count}</span>
+                                            <span>${messages?size}</span>
                                         </div>
                                         Notifications
                                     </div>
@@ -136,10 +136,10 @@
 
                                     <div class="row">
                                         <div class="col mt-3">
-                                            <a href="#" target="__blank" class="btn btn-info">Update</a>
+                                            <a href="/vacancies/update/${vacancy.id}" target="__blank" class="btn btn-info">Update</a>
                                         </div>
                                         <div class="col mt-3">
-                                            <a href="" target="__blank" class="btn btn-info">Edit</a>
+                                            <a href="/vacancies/edit" target="__blank" class="btn btn-info">Edit</a>
                                         </div>
                                     </div>
                                 </div>
@@ -164,10 +164,10 @@
 
                                     <div class="row">
                                         <div class="col mt-3">
-                                            <a href="#" target="__blank" class="btn btn-info">Update</a>
+                                            <a href="/resumes/update/${resume.id}" target="__blank" class="btn btn-info">Update</a>
                                         </div>
                                         <div class="col mt-3">
-                                            <a href="#" target="__blank" class="btn btn-info">Edit</a>
+                                            <a href="/resumes/edit" target="__blank" class="btn btn-info">Edit</a>
                                         </div>
                                     </div>
                                 </div>

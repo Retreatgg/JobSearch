@@ -9,4 +9,5 @@ import java.util.List;
 public interface RespondedApplicantService {
     void createRespondedApplicant(RespondedApplicantsDto respondedApplicantsDto);
     List<RespondedApplicantsDto> respondedApplicants(long vacancyId);
+    List<Long> getRespondIdByResume(Long resumeId);
 }

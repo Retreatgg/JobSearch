@@ -13,6 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -165,6 +167,14 @@ public class VacancyServiceImpl implements VacancyService {
     public Vacancy getVacancyById(Long id) {
         Optional<Vacancy> vacancyOptional = vacancyDao.getVacancyById(id);
         return vacancyOptional.orElseThrow(() -> new NoSuchElementException("Vacancy by ID: " + id + " is not found"));
+    }
+
+    @Override
+    public void update(Long id) {
+        Vacancy vacancy = getVacancyById(id);
+
+        vacancy.setUpdateTime(LocalDateTime.now());
+        vacancyDao.update(vacancy);
     }
 
 }

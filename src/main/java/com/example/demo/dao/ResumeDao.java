@@ -102,4 +102,12 @@ public class ResumeDao {
         jdbcTemplate.update(sql, resume.getName(), resume.getSalary(),
                 resume.getIsActive(), LocalDateTime.now(), resume.getId());
     }
+
+    public void update(Resume resume) {
+        String sql = """
+                update resumes set update_time = ? where id = ?
+                """;
+
+        jdbcTemplate.update(sql, resume.getUpdateTime(), resume.getId());
+    }
 }

@@ -35,6 +35,7 @@
         </#list>
     </div>
 
+    <#assign maxPage = vacancies?size / perPage?number>
     <@p.pagination page=page maxPage=maxPage path="/vacancies/active">
     </@p.pagination>
 

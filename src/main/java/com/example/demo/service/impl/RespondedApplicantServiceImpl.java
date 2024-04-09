@@ -38,4 +38,9 @@ public class RespondedApplicantServiceImpl implements RespondedApplicantService 
 
         return dtos;
     }
+
+    @Override
+    public List<Long> getRespondIdByResume(Long resumeId) {
+        return respondedApplicantsDao.getRespondIdByResume(resumeId);
+    }
 }

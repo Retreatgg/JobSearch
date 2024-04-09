@@ -140,4 +140,12 @@ public class VacancyDao {
 
         jdbcTemplate.update(sql, vacancy.getId());
     }
+
+    public void update(Vacancy vacancy) {
+        String sql = """
+                update vacancies set UPDATE_DATE = ? where id = ?
+                """;
+
+        jdbcTemplate.update(sql, vacancy.getUpdateTime(), vacancy.getId());
+    }
 }

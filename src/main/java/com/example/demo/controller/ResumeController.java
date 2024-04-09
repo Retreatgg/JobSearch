@@ -1,6 +1,9 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.*;
+import com.example.demo.dto.EducationInfoDto;
+import com.example.demo.dto.ResumeCreateDto;
+import com.example.demo.dto.ResumeUpdateDto;
+import com.example.demo.dto.WorkExperienceInfoDto;
 import com.example.demo.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -28,11 +31,9 @@ public class ResumeController {
             @RequestParam(name = "page", defaultValue = "0") String page,
             @RequestParam(name = "size", defaultValue = "5") String perPage)
     {
-        List<ResumeDto> resumes =  resumeService.getAllResumes(authentication, page, perPage);
-        model.addAttribute("resumes", resumes);
+        model.addAttribute("resumes", resumeService.getAllResumes(authentication, page, perPage));
         model.addAttribute("page", Integer.parseInt(page));
         model.addAttribute("perPage", Integer.parseInt(perPage));
-        model.addAttribute("maxPage", resumes.size() / Integer.parseInt(perPage));
 
         return "resume/all_resumes";
     }
@@ -65,14 +66,16 @@ public class ResumeController {
         return "redirect:/vacancies/active";
     }
 
-    @PostMapping("edit")
-    public String editResume(Authentication authentication, ResumeUpdateDto resumeUpdateDto) {
+    @PostMapping("edit/{id}")
+    public String editResume(Authentication authentication, ResumeUpdateDto resumeUpdateDto, @PathVariable Long id) {
+        resumeService.editResume(resumeUpdateDto, id, authentication);
         return "redirect:/vacancies/active";
     }
 
-    @GetMapping("edit")
-    public String editResume(Model model) {
+    @GetMapping("edit/{id}")
+    public String editResume(Model model, @PathVariable Long id) {
         model.addAttribute("categories", categoryService.categories());
+        model.addAttribute("id", id);
         return "resume/edit";
     }
 
@@ -90,5 +93,11 @@ public class ResumeController {
     public String addContact(Model model) {
         model.addAttribute("contacts", contactTypeService.getContacts());
         return "resume/add_contacts";
+    }
+
+    @PostMapping("update/{id}")
+    public String updateResume(@PathVariable Long id) {
+        resumeService.updateResume(id);
+        return "redirect:/profile";
     }
 }

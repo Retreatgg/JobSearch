@@ -71,11 +71,11 @@ public class ResumeServiceImpl implements ResumeService {
     }
 
     @Override
-    public List<ResumeDto> getResumesByApplicantId(long id, Authentication auth) {
-        String authority = fileUtil.getAuthority(auth);
+    public List<ResumeDto> getResumesByApplicantId(Authentication auth) {
+        User user = fileUtil.getUserByAuth(auth);
 
-        if (authority.equals(String.valueOf(APPLICANT))) {
-            List<Resume> resumes = resumeDao.getResumesByApplicant(id);
+        if (user.getAccountType().equals(String.valueOf(APPLICANT))) {
+            List<Resume> resumes = resumeDao.getResumesByApplicant(user.getId());
             if (resumes != null && !resumes.isEmpty()) {
                 return transformationForListDtoResume(resumes);
             } else {
@@ -171,6 +171,15 @@ public class ResumeServiceImpl implements ResumeService {
             resumeDto.getContacts()
                     .forEach(ci -> contactInfoService.createContactInfo(resume.getId(), ci));
         }
+    }
+
+    @Override
+    public void updateResume(Long id) {
+        Resume resume = resumeDao.getResumeById(id)
+                .orElseThrow(() -> new NoSuchElementException("Resume is not found"));
+
+        resume.setUpdateTime(LocalDateTime.now());
+        resumeDao.update(resume);
     }
 
 

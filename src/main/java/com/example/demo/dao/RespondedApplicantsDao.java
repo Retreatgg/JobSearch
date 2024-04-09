@@ -36,4 +36,12 @@ public class RespondedApplicantsDao {
 
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(RespondedApplicant.class), id);
     }
+
+    public List<Long> getRespondIdByResume(Long resumeId) {
+        String sql = """
+                select id from responded_applicants where resume_id = ?
+                """;
+
+        return jdbcTemplate.queryForList(sql, Long.class, new Object[]{resumeId});
+    }
 }

@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.UserDto;
 import com.example.demo.dto.UserUpdateDto;
+import com.example.demo.service.MessageService;
 import com.example.demo.service.ResumeService;
 import com.example.demo.service.UserService;
 import com.example.demo.service.VacancyService;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import static com.example.demo.enums.AccountType.APPLICANT;
 
 
 @Controller
@@ -26,6 +28,7 @@ public class ProfileController {
     private final UserService userService;
     private final VacancyService vacancyService;
     private final ResumeService resumeService;
+    private final MessageService messageService;
 
     @PostMapping("edit")
     public String editProfile(Authentication authentication, UserUpdateDto updateDto) {
@@ -44,8 +47,11 @@ public class ProfileController {
         UserDto user = userService.getUserByEmail(auth, email);
         model.addAttribute("user", user);
         model.addAttribute("vacancies", vacancyService.getVacanciesByCompanyName(user.getName()));
-        model.addAttribute("resumes", resumeService.getResumesByApplicantId(user.getId(), auth));
+        model.addAttribute("resumes", resumeService.getResumesByApplicantId(auth));
         model.addAttribute("image", userService.downloadImage(email));
+
+        if(user.getAccountType().equals(APPLICANT.toString()))
+            model.addAttribute("messages", messageService.getAllMessages(auth));
 
         return "profile/profile";
     }

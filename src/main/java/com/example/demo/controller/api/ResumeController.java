@@ -34,9 +34,9 @@ public class ResumeController {
         return ResponseEntity.ok(resumeService.getResumesByCategoryId(categoryId, auth));
     }
 
-    @GetMapping("/applicant/{id}")
-    public ResponseEntity<List<ResumeDto>> getResumesByApplicant(@PathVariable long id, Authentication auth) {
-        return ResponseEntity.ok(resumeService.getResumesByApplicantId(id, auth));
+    @GetMapping("/applicant")
+    public ResponseEntity<List<ResumeDto>> getResumesByApplicant( Authentication auth) {
+        return ResponseEntity.ok(resumeService.getResumesByApplicantId(auth));
     }
 
     @GetMapping("{id}")
