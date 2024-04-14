@@ -1,5 +1,5 @@
 <#import "../layot.ftlh" as main>
-<@main.layout>
+<@main.layout script="">
     <div class="filter-result"
          style="box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); background-color: #fff; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
 

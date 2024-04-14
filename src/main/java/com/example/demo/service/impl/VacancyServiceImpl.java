@@ -4,6 +4,7 @@ import com.example.demo.dao.VacancyDao;
 import com.example.demo.dto.*;
 import com.example.demo.model.User;
 import com.example.demo.model.Vacancy;
+import com.example.demo.service.CategoryService;
 import com.example.demo.service.RespondedApplicantService;
 import com.example.demo.service.ResumeService;
 import com.example.demo.service.VacancyService;
@@ -29,6 +30,7 @@ public class VacancyServiceImpl implements VacancyService {
     private final VacancyDao vacancyDao;
     private final RespondedApplicantService respondedApplicantService;
     private final ResumeService resumeService;
+    private final CategoryService categoryService;
 
     private final FileUtil fileUtil;
 
@@ -82,6 +84,8 @@ public class VacancyServiceImpl implements VacancyService {
     public void addVacancy(VacancyDto vacancyDto, Authentication auth) {
         String authority = fileUtil.getAuthority(auth);
         User user = fileUtil.getUserByAuth(auth);
+        Long categoryId = categoryService.getCategoryId(vacancyDto.getCategoryName());
+
 
         if (authority.equalsIgnoreCase(EMPLOYER.toString())) {
             Vacancy vacancy = new Vacancy();
@@ -91,7 +95,7 @@ public class VacancyServiceImpl implements VacancyService {
             vacancy.setDescription(vacancyDto.getDescription());
             vacancy.setExpTo(vacancyDto.getExpTo());
             vacancy.setIsActive(vacancyDto.getIsActive());
-            vacancy.setCategoryId(vacancyDto.getCategoryId());
+            vacancy.setCategoryId(categoryId);
             vacancy.setExpFrom(vacancyDto.getExpFrom());
             vacancy.setName(vacancyDto.getName());
 

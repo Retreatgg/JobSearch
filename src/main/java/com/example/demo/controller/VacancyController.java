@@ -50,9 +50,11 @@ public class VacancyController {
         model.addAttribute("categories", categoryService.categories());
         return "vacancy/add_vacancy";
     }
+
     @PostMapping("add")
     public String addNewVacancy(VacancyDto vacancyDto) {
-        return "vacancy/add_vacancy";
+        System.out.println(vacancyDto);
+        return "redirect:/vacancies/active";
     }
 
     @PostMapping("update/{id}")

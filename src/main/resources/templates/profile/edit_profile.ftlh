@@ -1,5 +1,5 @@
 <#import "../layot.ftlh" as main>
-<@main.layout>
+<@main.layout script="">
     <div class="main-body">
     <div class="row">
         <div class="col-lg-4">

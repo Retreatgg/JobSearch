@@ -17,8 +17,8 @@ public class VacancyDto {
     private String name;
     @NotEmpty
     private String description;
-    @Positive
-    private Long categoryId;
+    @NotEmpty
+    private String categoryName;
 
     @Positive
     private Double salary;

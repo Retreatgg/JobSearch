@@ -1,7 +1,7 @@
 <#import "../layot.ftlh" as main>
 <#import "../paginatton.ftlh" as p>
 
-<@main.layout>
+<@main.layout script="">
     <h3 class="mb-4 mt-2">Vacancies: ${vacancies?size}</h3>
 
     <div class="form-group">

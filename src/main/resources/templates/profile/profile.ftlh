@@ -1,5 +1,5 @@
 <#import "../layot.ftlh" as main>
-<@main.layout>
+<@main.layout script="">
     <div class="main-body mt-5">
 
         <div class="row gutters-sm">

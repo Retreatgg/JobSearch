@@ -1,6 +1,6 @@
 <#import "../layot.ftlh" as main>
 <#import "../paginatton.ftlh" as p>
-<@main.layout>
+<@main.layout script="">
 
     <h3 class="mb-4 mt-2">Resumes: ${resumes?size}</h3>
     <div class="row mt-5">

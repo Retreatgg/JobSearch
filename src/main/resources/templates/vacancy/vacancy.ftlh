@@ -1,6 +1,6 @@
 <#import "../layot.ftlh" as main>
 
-<@main.layout>
+<@main.layout script="">
     <div class="row justify-content-center mt-5">
         <div class="col-lg-8">
             <div class="card shadow mb-5">
