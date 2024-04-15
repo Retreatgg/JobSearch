@@ -1,46 +1,17 @@
-let mainForm = document.getElementById('form');
-let form
+let form = document.getElementById('form');
 
 
 function resumeAddHandler(e) {
     e.preventDefault();
 
     let formData = e.target;
-    let data = new FormData(formData);
-    let educForm = new FormData(document.getElementById('educ'))
-    const educ = {}
-    educForm.forEach((value, key) => {
-        educ[key] = value;
-    })
-
-    const main = {}
-    mainForm.forEach((value, key) => {
-        main[key] = value
-    })
-
-    let expForm = new FormData(document.getElementById('exp'))
-
-    const exp = {}
-    expForm.forEach((value, key) => {
-        exp[key] = value;
-    })
-
-    let contactForm = new FormData(document.getElementById('cont'))
-    const contact = {}
-    contactForm.forEach((value, key) => {
-        contact[key] = value;
-    })
-
-    form = {main, educ, exp, contact}
-
-    let json = JSON.stringify(Object.fromEntries(data));
-
-    console.log(json)
+    let datae = new FormData(formData);
+    let json = JSON.stringify(Object.entries(form))
 
     fetch('/resumes/add', {
         method: 'POST',
-        body: JSON.stringify(form)
+        body: json
     })
 }
 
-mainForm.addEventListener('submit', resumeAddHandler);
+form.addEventListener('submit', resumeAddHandler);

@@ -21,4 +21,13 @@ public class ContactsTypeDao {
 
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(ContactType.class));
     }
+
+    public Long getContactId(String type) {
+        String sql = """
+                select id from contact_types
+                where type = ?
+                """;
+
+        return jdbcTemplate.queryForObject(sql, Long.class, type);
+    }
 }

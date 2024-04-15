@@ -78,7 +78,7 @@ public class ResumeDao {
         jdbcTemplate.update(sql, id);
     }
 
-    public void addResume(Resume resume) {
+    public Long addResume(Resume resume) {
         String sql = """
                 insert into RESUMES(name, salary, is_active, applicant_id, category_id, CREATED_DATE, UPDATE_TIME)
                 values(:name, :salary, :is_active, :applicant_id, :category_id, current_timestamp, current_timestamp())
@@ -92,6 +92,8 @@ public class ResumeDao {
                 .addValue("category_id", resume.getCategoryId())
                 .addValue("created_date", LocalDateTime.now())
                 .addValue("update_time", LocalDateTime.now()));
+
+        return jdbcTemplate.queryForObject("select max(id) from resumes", Long.class);
     }
 
     public void editResume(Resume resume) {

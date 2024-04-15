@@ -48,7 +48,7 @@ public class ResumeServiceImpl implements ResumeService {
 
         String authority = fileUtil.getAuthority(authentication);
 
-        if (authority.equals(String.valueOf(EMPLOYER))) {
+        if (authority.equals(EMPLOYER.toString())) {
             List<Resume> resumes = resumeDao.getAllResumes(sizePageNumber, offset);
             return transformationForListDtoResume(resumes);
         }
@@ -60,7 +60,7 @@ public class ResumeServiceImpl implements ResumeService {
     public ResumeDto getResumesByCategoryId(Long id, Authentication auth) {
         String authority = fileUtil.getAuthority(auth);
 
-        if (authority.equals(String.valueOf(EMPLOYER))) {
+        if (authority.equals(EMPLOYER.toString())) {
             Resume resume = resumeDao.getResumesByCategoryId(id)
                     .orElseThrow(() -> new NoSuchElementException("Resume is not found"));
 
@@ -91,7 +91,7 @@ public class ResumeServiceImpl implements ResumeService {
     public ResumeDto getResumeById(Long id, Authentication auth) {
         String authority = fileUtil.getAuthority(auth);
 
-        if (authority.equals(String.valueOf(EMPLOYER))) {
+        if (authority.equals(EMPLOYER.toString())) {
             Resume resume = resumeDao.getResumeById(id)
                     .orElseThrow(() -> new NoSuchElementException("Can not find Resume by ID:" + id));
             return transformationForSingleDtoResume(resume);
@@ -128,7 +128,7 @@ public class ResumeServiceImpl implements ResumeService {
         String authority = fileUtil.getAuthority(auth);
         User user = fileUtil.getUserByAuth(auth);
 
-        if (authority.equalsIgnoreCase(String.valueOf(APPLICANT))) {
+        if (authority.equals(APPLICANT.toString())) {
             Resume resume = new Resume();
 
             resume.setName(resumeDto.getTitle());
@@ -139,12 +139,14 @@ public class ResumeServiceImpl implements ResumeService {
             resume.setApplicantId(userDao.returnIdByEmail(user.getEmail()));
             resume.setCategoryId(categoryDao.returnIdByName(resumeDto.getCategoryName()));
 
-            resumeDao.addResume(resume);
+            Long resumeId = resumeDao.addResume(resume);
 
             resumeDto.getWorkExperienceInfo()
-                    .forEach(wei -> workExperienceInfoService.createWorkExperienceInfo(resume.getId(), wei));
-            resumeDto.getEducationInfo().forEach(ei -> educationInfoService.createEducationInfo(resume.getId(), ei));
-            contactInfoService.createContactInfo(resume.getId(), resumeDto.getContacts());
+                    .forEach(wei -> workExperienceInfoService.createWorkExperienceInfo(resumeId, wei));
+            resumeDto.getEducationInfo()
+                    .forEach(ei -> educationInfoService.createEducationInfo(resumeId, ei));
+            resumeDto.getContacts()
+                    .forEach(c -> contactInfoService.createContactInfo(resumeId, c));
         }
     }
 
@@ -155,7 +157,7 @@ public class ResumeServiceImpl implements ResumeService {
         Resume resume = resumeDao.getResumeById(id)
                 .orElseThrow(() -> new NoSuchElementException("Resume is not found"));
 
-        if (authority.equalsIgnoreCase(String.valueOf(APPLICANT)) && Objects.equals(resume.getApplicantId(), user.getId())) {
+        if (authority.equalsIgnoreCase(APPLICANT.toString()) && Objects.equals(resume.getApplicantId(), user.getId())) {
 
             resume.setName(resumeDto.getTitle());
             resume.setSalary(resumeDto.getSalary());
