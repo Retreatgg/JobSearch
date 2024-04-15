@@ -2,9 +2,14 @@ package com.example.demo.service.impl;
 
 import com.example.demo.dao.ChatDao;
 import com.example.demo.dto.ChatDto;
+import com.example.demo.dto.SendMessageDto;
 import com.example.demo.model.Chat;
+import com.example.demo.model.User;
 import com.example.demo.service.ChatService;
+import com.example.demo.util.FileUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -16,15 +21,17 @@ import java.util.List;
 public class ChatServiceImpl implements ChatService {
 
     private final ChatDao chatDao;
+    private final FileUtil fileUtil;
 
     @Override
-    public void saveMessage(ChatDto chatDto) {
+    public void saveMessage(Authentication authentication, SendMessageDto sendDto) {
+        User user = fileUtil.getUserByAuth(authentication);
         Chat chat = new Chat();
 
-        chat.setFromUserEmail(chatDto.getFromUserEmail());
-        chat.setMessage(chatDto.getMessage());
+        chat.setFromUserEmail(user.getEmail());
+        chat.setMessage(sendDto.getMessage());
         chat.setSendTime(LocalDateTime.now());
-        chat.setToUserEmail(chatDto.getToUserEmail());
+        chat.setToUserEmail(sendDto.getToUserEmail());
 
         chatDao.saveMessage(chat);
     }
@@ -40,6 +47,7 @@ public class ChatServiceImpl implements ChatService {
                             .fromUserEmail(chat.getFromUserEmail())
                             .toUserEmail(chat.getToUserEmail())
                             .message(chat.getMessage())
+                            .sendTime(chat.getSendTime())
                             .build());
         });
 

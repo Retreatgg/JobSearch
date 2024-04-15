@@ -5,7 +5,7 @@ function resumeAddHandler(e) {
     e.preventDefault();
 
     let formData = e.target;
-    let datae = new FormData(formData);
+    let data = new FormData(formData);
     let json = JSON.stringify(Object.entries(form))
 
     fetch('/resumes/add', {

@@ -1,5 +1,6 @@
 <#import "../layot.ftlh" as main>
-<@main.layout script="">
+    <#assign script><script src="../../static/chat.js"></script></#assign>
+<@main.layout script=script>
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-3">
@@ -11,23 +12,30 @@
             </div>
             <div class="col-md-9">
                 <div class="bg-white border rounded p-3" style="height: 400px; overflow-y: scroll;">
-                    <div class="message">
-                        <strong>${toUser.name}:</strong> Hello, how are you?
-                    </div>
-                    <div class="message">
-                        <strong>You:</strong> Hi John! I'm doing well, thanks for asking.
-                    </div>
+                    <#list recipientMessage as message>
+                        <div class="message">
+                            <strong>${toUser.name}:</strong> ${message.message}
+                        </div>
+                    </#list>
+                    <#list senderMessage as message>
+                        <div class="message">
+                            <strong>You:</strong> ${message.message}.
+                        </div>
+                    </#list>
                 </div>
-                <form class="mt-3">
+                <form id="form" action="/chat/send" method="post">
                     <div class="form-group">
-                        <textarea class="form-control" rows="3" placeholder="Type your message..."></textarea>
+                        <input type="hidden" name="toUserEmail" value="${toUser.email}">
+                        <input class="form-control" name="message" rows="3" placeholder="Type your message..."></input>
                     </div>
-                    <button type="submit" class="btn btn-primary">Send</button>
+                    <button id="btn" type="submit" class="btn btn-primary">Send</button>
                 </form>
+
+                <script>
+
+                </script>
             </div>
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 </@main.layout>
