@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -25,5 +27,22 @@ public class ChatServiceImpl implements ChatService {
         chat.setToUserEmail(chatDto.getToUserEmail());
 
         chatDao.saveMessage(chat);
+    }
+
+    @Override
+    public List<ChatDto> getChats(String toUser, String fromUser) {
+        List<Chat> chats = chatDao.getChats(toUser, fromUser);
+        List<ChatDto> chatList = new ArrayList<>();
+
+        chats.forEach(chat -> {
+            chatList.add(
+                    ChatDto.builder()
+                            .fromUserEmail(chat.getFromUserEmail())
+                            .toUserEmail(chat.getToUserEmail())
+                            .message(chat.getMessage())
+                            .build());
+        });
+
+        return chatList;
     }
 }
