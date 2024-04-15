@@ -11,7 +11,7 @@ public class Chat {
 
     private Long id;
     private String fromUserEmail;
-    private String toFromUser;
+    private String toUserEmail;
+    private String message;
     private LocalDateTime sendTime;
-    private Long respondId;
 }

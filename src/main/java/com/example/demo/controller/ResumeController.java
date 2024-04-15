@@ -50,16 +50,12 @@ public class ResumeController {
     @GetMapping("add")
     public String formResume(Model model) {
         model.addAttribute("categories", categoryService.categories());
+        model.addAttribute("contacts", contactTypeService.getContacts());
         return "resume/add_resume";
     }
 
     @PostMapping("add")
     public String addResume(Authentication authentication, ResumeCreateDto resumeCreateDto) {
-        List<EducationInfoDto> educationInfos = new ArrayList<>();
-        List<WorkExperienceInfoDto> workExperienceInfo = new ArrayList<>();
-
-        resumeCreateDto.setEducationInfo(educationInfos);
-        resumeCreateDto.setWorkExperienceInfo(workExperienceInfo);
         resumeService.addResume(resumeCreateDto, authentication);
         return "redirect:/vacancies/active";
     }
@@ -75,22 +71,6 @@ public class ResumeController {
         model.addAttribute("categories", categoryService.categories());
         model.addAttribute("id", id);
         return "resume/edit";
-    }
-
-    @GetMapping("add/work_info")
-    public String addWorkExp() {
-        return "resume/add_work_exp";
-    }
-
-    @GetMapping("add/education")
-    public String addEducation() {
-        return "resume/add_education";
-    }
-
-    @GetMapping("add/contact")
-    public String addContact(Model model) {
-        model.addAttribute("contacts", contactTypeService.getContacts());
-        return "resume/add_contacts";
     }
 
     @PostMapping("update/{id}")

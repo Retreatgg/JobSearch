@@ -20,12 +20,8 @@ databaseChangeLog:
                   name: to_user_email
                   type: varchar(65)
               - column:
+                  name: message
+                  type: varchar(200)
+              - column:
                   name: send_time
                   type: datetime
-              - column:
-                  name: respond_id
-                  type: long
-                  constraints:
-                    nullable: false
-                    foreignKeyName: fk_respond_chat_id
-                    references: responded_applicants(id)

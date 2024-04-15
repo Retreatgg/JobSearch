@@ -8,7 +8,6 @@ import com.example.demo.service.UserService;
 import com.example.demo.service.VacancyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -59,12 +58,5 @@ public class ProfileController {
     @GetMapping("photo/{email}")
     public ResponseEntity<?> getPhoto(@PathVariable String email) {
         return ResponseEntity.ok(userService.downloadImage(email));
-    }
-
-    @GetMapping("chat")
-    public String chat(Model model) {
-        model.addAttribute("applicant", userService.getUserByEmail("john@example.com"));
-        model.addAttribute("employer", userService.getUserByEmail("datasolutions@example.com"));
-        return "chat/chat";
     }
 }

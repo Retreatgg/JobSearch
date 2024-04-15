@@ -4,15 +4,15 @@
         <div class="row">
             <div class="col-md-3">
                 <div class="bg-light p-3">
-                    <p><strong>Name:</strong> ${employer.name}</p>
-                    <p><strong>Email:</strong> ${employer.email}</p>
-                    <p><strong>Phone:</strong> ${employer.phoneNumber}</p>
+                    <p><strong>Name:</strong> ${toUser.name}</p>
+                    <p><strong>Email:</strong> ${toUser.email}</p>
+                    <p><strong>Phone:</strong> ${toUser.phoneNumber}</p>
                 </div>
             </div>
             <div class="col-md-9">
                 <div class="bg-white border rounded p-3" style="height: 400px; overflow-y: scroll;">
                     <div class="message">
-                        <strong>${employer.name}:</strong> Hello, how are you?
+                        <strong>${toUser.name}:</strong> Hello, how are you?
                     </div>
                     <div class="message">
                         <strong>You:</strong> Hi John! I'm doing well, thanks for asking.
