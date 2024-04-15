@@ -1,0 +1,31 @@
+databaseChangeLog:
+  - changeSet:
+      id: create chat
+      author: Argen
+      changes:
+        - createTable:
+            tableName: chats
+            columns:
+              - column:
+                  name: id
+                  type: long
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: from_user_email
+                  type: varchar(65)
+              - column:
+                  name: to_user_email
+                  type: varchar(65)
+              - column:
+                  name: send_time
+                  type: datetime
+              - column:
+                  name: respond_id
+                  type: long
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_respond_chat_id
+                    references: responded_applicants(id)
