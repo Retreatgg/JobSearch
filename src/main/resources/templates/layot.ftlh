@@ -67,8 +67,9 @@
             </div>
         </nav>
     </header>
-    <#nested>
-
+    <div class="container">
+        <#nested>
+    </div>
     </body>
     </html>
 </#macro>

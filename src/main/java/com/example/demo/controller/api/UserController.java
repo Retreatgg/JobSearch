@@ -17,7 +17,7 @@ public class UserController {
 
     @GetMapping("email/{email}")
     public ResponseEntity<UserDto> getUserByEmail(Authentication authentication, @PathVariable String email) {
-        return ResponseEntity.ok(userService.getUserByEmail(authentication, email));
+        return ResponseEntity.ok(userService.getUserByEmail(email));
     }
 
     @GetMapping("phone/{phoneNumber}")

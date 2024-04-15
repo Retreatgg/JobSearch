@@ -98,6 +98,8 @@ public class VacancyServiceImpl implements VacancyService {
             vacancy.setCategoryId(categoryId);
             vacancy.setExpFrom(vacancyDto.getExpFrom());
             vacancy.setName(vacancyDto.getName());
+            vacancy.setUpdateTime(LocalDateTime.now());
+            vacancy.setCreatedDate(LocalDateTime.now());
 
             vacancyDao.addVacancy(vacancy);
         }

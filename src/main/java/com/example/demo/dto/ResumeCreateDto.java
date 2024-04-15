@@ -27,8 +27,6 @@ public class ResumeCreateDto {
 
     private List<WorkExperienceInfoDto> workExperienceInfo;
     private List<EducationInfoDto> educationInfo;
-    @NotNull
     private ContactInfoDto contacts;
-    @NotNull
     private Boolean isActive;
 }

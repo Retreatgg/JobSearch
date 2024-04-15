@@ -1,12 +1,14 @@
 <#import "../layot.ftlh" as main>
-<@main.layout script="">
+<#assign script><script src="../../static/resume_add.js"></script></#assign>
+
+<@main.layout script=script>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card shadow">
                     <div class="card-body">
                         <h5 class="card-title text-center mb-4">Add Work Experience</h5>
-                        <form action="/resumes/add" method="post">
+                        <form action="/resumes/add" method="post" id="exp">
                             <div class="mb-3">
                                 <label for="years" class="form-label">Years</label>
                                 <input type="number" class="form-control" id="years" name="years">

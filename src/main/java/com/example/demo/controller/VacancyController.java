@@ -52,8 +52,8 @@ public class VacancyController {
     }
 
     @PostMapping("add")
-    public String addNewVacancy(VacancyDto vacancyDto) {
-        System.out.println(vacancyDto);
+    public String addNewVacancy(VacancyDto vacancyDto, Authentication auth) {
+        vacancyService.addVacancy(vacancyDto, auth);
         return "redirect:/vacancies/active";
     }
 

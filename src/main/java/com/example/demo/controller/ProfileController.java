@@ -38,13 +38,13 @@ public class ProfileController {
 
     @GetMapping("edit/{email}")
     public String editProfile(Authentication authentication, Model model, @PathVariable String email) {
-        model.addAttribute("user", userService.getUserByEmail(authentication, email));
+        model.addAttribute("user", userService.getUserByEmail(email));
         return "profile/edit_profile";
     }
 
     @GetMapping("{email}")
     public String getProfile(Authentication auth, Model model, @PathVariable String email) {
-        UserDto user = userService.getUserByEmail(auth, email);
+        UserDto user = userService.getUserByEmail(email);
         model.addAttribute("user", user);
         model.addAttribute("vacancies", vacancyService.getVacanciesByCompanyName(user.getName()));
         model.addAttribute("resumes", resumeService.getResumesByApplicantId(auth));
@@ -59,5 +59,12 @@ public class ProfileController {
     @GetMapping("photo/{email}")
     public ResponseEntity<?> getPhoto(@PathVariable String email) {
         return ResponseEntity.ok(userService.downloadImage(email));
+    }
+
+    @GetMapping("chat")
+    public String chat(Model model) {
+        model.addAttribute("applicant", userService.getUserByEmail("john@example.com"));
+        model.addAttribute("employer", userService.getUserByEmail("datasolutions@example.com"));
+        return "chat/chat";
     }
 }

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 public interface UserService {
 
-    UserDto getUserByEmail(Authentication authentication, String email);
+    UserDto getUserByEmail(String email);
 
     UserDto getUserByPhoneNumber(String phoneNumber);
 

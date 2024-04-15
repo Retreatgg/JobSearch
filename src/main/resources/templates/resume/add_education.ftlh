@@ -1,12 +1,14 @@
 <#import "../layot.ftlh" as main>
-<@main.layout script="">
+<#assign script><script src="../../static/resume_add.js"></script></#assign>
+
+<@main.layout script=script>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card shadow">
                     <div class="card-body">
                         <h5 class="card-title text-center mb-4">Add Education Info</h5>
-                        <form action="/resumes/add" method="post">
+                        <form action="/resumes/add" method="post" id="educ">
                             <div class="mb-3">
                                 <label for="institution" class="form-label">Institution</label>
                                 <input type="text" class="form-control" id="institution" name="institution">
@@ -49,7 +51,7 @@
 
 
                             <div class="text-center">
-                                <button type="submit" class="btn btn-primary">Add education info</button>
+                                <button type="button" class="btn btn-primary"><a href="/resumes/add">Add education info</a></button>
                             </div>
                         </form>
                     </div>

@@ -54,11 +54,9 @@ public class ResumeController {
     }
 
     @PostMapping("add")
-    public String addResume(Authentication authentication, ResumeCreateDto resumeCreateDto, WorkExperienceInfoDto workInfo, EducationInfoDto educ) {
+    public String addResume(Authentication authentication, ResumeCreateDto resumeCreateDto) {
         List<EducationInfoDto> educationInfos = new ArrayList<>();
-        educationInfos.add(educ);
         List<WorkExperienceInfoDto> workExperienceInfo = new ArrayList<>();
-        workExperienceInfo.add(workInfo);
 
         resumeCreateDto.setEducationInfo(educationInfos);
         resumeCreateDto.setWorkExperienceInfo(workExperienceInfo);

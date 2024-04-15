@@ -24,7 +24,7 @@ public class ProfileController {
 
     @GetMapping("{email}")
     public ResponseEntity<UserDto> getProfile(Authentication authentication, @PathVariable String email) {
-        return ResponseEntity.ok(userService.getUserByEmail(authentication, email));
+        return ResponseEntity.ok(userService.getUserByEmail(email));
     }
 
 }
