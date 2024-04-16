@@ -1,6 +1,11 @@
 window.addEventListener('load', () => {
     let url = window.location.href;
-    setInterval(() => fetch(url), 5000);
+    fetch(url)
+        .then(response => {
+            if (response.ok) {
+                setInterval(() => window.location.reload(), 5000)
+            }
+        })
 })
 
 const form = document.getElementById('form');

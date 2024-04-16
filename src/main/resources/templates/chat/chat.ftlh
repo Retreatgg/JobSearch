@@ -30,10 +30,6 @@
                     </div>
                     <button id="btn" type="submit" class="btn btn-primary">Send</button>
                 </form>
-
-                <script>
-
-                </script>
             </div>
         </div>
     </div>
