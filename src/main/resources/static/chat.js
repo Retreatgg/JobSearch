@@ -5,8 +5,28 @@ window.addEventListener('load', () => {
             if (response.ok) {
                 setInterval(() => window.location.reload(), 5000)
             }
-        })
+        }).then(sortMessages)
+
+    sortMessages()
 })
+
+function sortMessages() {
+    const allMessages = document.querySelectorAll('.message');
+
+    const messages = Array.from(allMessages);
+    messages.sort((a, b) => {
+        const firstMessage = new Date(a.getAttribute('data-send-time'));
+        const secondMessage = new Date(b.getAttribute('data-send-time'));
+        return firstMessage - secondMessage;
+    });
+
+    const print = document.getElementById('chat');
+    print.innerHTML = '';
+
+    messages.forEach(message => {
+        print.appendChild(message);
+    });
+}
 
 const form = document.getElementById('form');
 

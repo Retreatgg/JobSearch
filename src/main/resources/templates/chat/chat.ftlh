@@ -11,16 +11,18 @@
                 </div>
             </div>
             <div class="col-md-9">
-                <div class="bg-white border rounded p-3" style="height: 400px; overflow-y: scroll;">
-                    <#list recipientMessage as message>
-                        <div class="message">
-                            <strong>${toUser.name}:</strong> ${message.message}
-                        </div>
-                    </#list>
-                    <#list senderMessage as message>
-                        <div class="message">
-                            <strong>You:</strong> ${message.message}.
-                        </div>
+                <div id="chat" class="bg-white border rounded p-3" style="height: 400px; overflow-y: scroll;">
+                    <#list allMessages as message>
+                        <#if message.toUserEmail == fromUser.email>
+                            <div class="message" data-send-time="${message.sendTime}">
+                                <strong>${toUser.name}:</strong> ${message.message}
+                            </div>
+                            <#else>
+                                <div class="message" data-send-time="${message.sendTime}">
+                                    <strong>You:</strong> ${message.message}.
+                                </div>
+                        </#if>
+
                     </#list>
                 </div>
                 <form id="form" action="/chat/send?toUser=${toUser.id}" method="post">

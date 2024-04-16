@@ -36,7 +36,7 @@ public class ChatDao {
                 select * from chats
                 where to_user_email like ? and from_user_email like ?
                 order by send_time\s
-                limit 5               \s
+                limit 7               \s
                """;
 
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Chat.class), toUser, fromUser);

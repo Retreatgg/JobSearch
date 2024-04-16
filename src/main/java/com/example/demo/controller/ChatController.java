@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.ChatDto;
 import com.example.demo.dto.SendMessageDto;
+import com.example.demo.model.Chat;
 import com.example.demo.model.User;
 import com.example.demo.service.ChatService;
 import com.example.demo.service.UserService;
@@ -13,6 +15,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("chat")
@@ -32,8 +37,11 @@ public class ChatController {
         model.addAttribute("fromUser", userService.getUserByEmail(user.getEmail()));
         model.addAttribute("toUser", userService.getUserByEmail(toUserEmail));
 
-        model.addAttribute("senderMessage", chatService.getChats(toUserEmail, user.getEmail()));
-        model.addAttribute("recipientMessage", chatService.getChats(user.getEmail(), toUserEmail));
+        List<ChatDto> allMessages = new ArrayList<>();
+        allMessages.addAll(chatService.getChats(toUserEmail, user.getEmail()));
+        allMessages.addAll(chatService.getChats(user.getEmail(), toUserEmail));
+
+        model.addAttribute("allMessages", allMessages);
         return "chat/chat";
     }
 
