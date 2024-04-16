@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.dto.ResumeCreateDto;
 import com.example.demo.dto.ResumeDto;
+import com.example.demo.dto.ResumeResponseDto;
 import com.example.demo.dto.ResumeUpdateDto;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
@@ -21,5 +22,5 @@ public interface ResumeService {
     void editResume(ResumeUpdateDto resumeDto, long id, Authentication auth);
 
     void updateResume(Long id);
-    List<ResumeDto> getResponsesResumes(Long userId, Authentication authentication);
+    List<ResumeResponseDto> getResponsesResumes(Long userId, Authentication authentication);
 }

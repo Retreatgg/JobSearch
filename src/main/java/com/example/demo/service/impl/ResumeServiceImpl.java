@@ -3,10 +3,7 @@ package com.example.demo.service.impl;
 import com.example.demo.dao.CategoryDao;
 import com.example.demo.dao.ResumeDao;
 import com.example.demo.dao.UserDao;
-import com.example.demo.dto.RespondedApplicantsDto;
-import com.example.demo.dto.ResumeCreateDto;
-import com.example.demo.dto.ResumeDto;
-import com.example.demo.dto.ResumeUpdateDto;
+import com.example.demo.dto.*;
 import com.example.demo.model.Resume;
 import com.example.demo.model.User;
 import com.example.demo.service.*;
@@ -37,6 +34,8 @@ public class ResumeServiceImpl implements ResumeService {
     private final EducationInfoService educationInfoService;
     private final ContactInfoService contactInfoService;
     private final RespondedApplicantService respondedApplicantService;
+
+    private final VacancyService vacancyService;
     private final FileUtil fileUtil;
 
     @Override
@@ -180,17 +179,40 @@ public class ResumeServiceImpl implements ResumeService {
     }
 
     @Override
-    public List<ResumeDto> getResponsesResumes(Long userId, Authentication authentication) {
+    public List<ResumeResponseDto> getResponsesResumes(Long userId, Authentication authentication) {
         List<RespondedApplicantsDto> responses = respondedApplicantService.getResponsesByApplicantId(userId);
-        List<ResumeDto> resumes = new ArrayList<>();
+        List<ResumeResponseDto> resumes = new ArrayList<>();
+        List<Long> employersId = new ArrayList<>();
 
-        responses.forEach(response -> {
-            resumes.add(getResumeById(response.getResumeId(), authentication));
-        });
+        responses.forEach(response ->
+            employersId.add(
+                    vacancyService.getAuthorIdByVacancy(response.getVacancyId()))
+        );
+
+
+        for (int i = 0; i < responses.size(); i++) {
+            RespondedApplicantsDto response = responses.get(i);
+            Long employerId = employersId.get(i);
+
+            ResumeDto resume = getResumeById(response.getResumeId(), authentication);
+
+            ResumeResponseDto resumeResponse = ResumeResponseDto.builder()
+                    .employerId(employerId)
+                    .applicant(resume.getApplicant())
+                    .updateTime(resume.getUpdateTime())
+                    .createdDate(resume.getCreatedDate())
+                    .categoryId(resume.getCategoryId())
+                    .id(resume.getId())
+                    .isActive(resume.getIsActive())
+                    .name(resume.getName())
+                    .salary(resume.getSalary())
+                    .build();
+
+            resumes.add(resumeResponse);
+        }
 
         return resumes;
     }
-
 
     private ResumeDto transformationForSingleDtoResume(Resume resume) {
         return ResumeDto.builder()

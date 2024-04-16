@@ -83,6 +83,15 @@ public class UserDao {
         return jdbcTemplate.queryForObject(sql, Long.class, email);
     }
 
+    public String getEmailById(Long userId) {
+        String sql = """
+                select email from users
+                where id = ?
+                """;
+
+        return jdbcTemplate.queryForObject(sql, String.class, userId);
+    }
+
     public void createUser(User user) {
         String sql = """
                 insert into users(name, surname, age, email, password, phone_number, avatar, account_type, ENABLED)

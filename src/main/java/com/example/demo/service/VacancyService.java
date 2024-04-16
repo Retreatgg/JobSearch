@@ -19,9 +19,8 @@ public interface VacancyService {
     void addVacancy(VacancyDto vacancyDto, Authentication auth);
     void editVacancy(VacancyUpdateDto vacancyDto, long vacancyId, Authentication auth);
     List<VacancyDtoForShow> getVacanciesByCompanyName(String name);
-    void respond(Long id, Authentication authentication);
-
     Vacancy getVacancyById(Long id);
-
     void update(Long id);
+
+    Long getAuthorIdByVacancy(Long vacancyId);
 }

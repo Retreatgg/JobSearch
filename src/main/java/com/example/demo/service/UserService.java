@@ -19,4 +19,5 @@ public interface UserService {
     void createUser(UserCreateDto userCreateDto);
     void editProfile(UserUpdateDto userUpdateDto, Authentication auth);
     ResponseEntity<?> downloadImage(String email);
+    String getUserEmailById(Long id);
 }

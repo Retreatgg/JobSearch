@@ -134,6 +134,11 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    @Override
+    public String getUserEmailById(Long id) {
+        return userDao.getEmailById(id);
+    }
+
     private UserDto transformationForDtoSingleUser(User user) {
         return UserDto.builder()
                 .id(user.getId())

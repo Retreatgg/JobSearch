@@ -23,7 +23,7 @@
                         </div>
                     </#list>
                 </div>
-                <form id="form" action="/chat/send" method="post">
+                <form id="form" action="/chat/send?toUser=${toUser.id}" method="post">
                     <div class="form-group">
                         <input type="hidden" name="toUserEmail" value="${toUser.email}">
                         <input class="form-control" name="message" rows="3" placeholder="Type your message..."></input>

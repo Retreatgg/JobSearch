@@ -11,6 +11,8 @@ import com.example.demo.service.VacancyService;
 import com.example.demo.util.FileUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
@@ -28,11 +30,10 @@ import static com.example.demo.enums.AccountType.EMPLOYER;
 public class VacancyServiceImpl implements VacancyService {
 
     private final VacancyDao vacancyDao;
-    private final RespondedApplicantService respondedApplicantService;
-    private final ResumeService resumeService;
     private final CategoryService categoryService;
 
     private final FileUtil fileUtil;
+
 
     @Override
     public List<VacancyDtoForShow> getAllVacancies() {
@@ -135,23 +136,6 @@ public class VacancyServiceImpl implements VacancyService {
         return transformationForDtoListVacancies(vacancies);
     }
 
-    @Override
-    public void respond(Long id, Authentication authentication) {
-        String authority = fileUtil.getAuthority(authentication);
-
-        if (authority.equals(APPLICANT.toString())) {
-            ResumeDto resume = resumeService.getResumeById(id, authentication);
-            RespondedApplicantsDto respondedApplicantsDto = RespondedApplicantsDto.builder()
-                    .vacancyId(id)
-                    .resumeId(resume.getId())
-                    .confirmation(false)
-                    .build();
-
-            respondedApplicantService.createRespondedApplicant(respondedApplicantsDto);
-        }
-
-    }
-
     private List<VacancyDtoForShow> transformationForDtoListVacancies(List<Vacancy> vacancies) {
         List<VacancyDtoForShow> dtos = new ArrayList<>();
         vacancies.forEach(e -> dtos.add(VacancyDtoForShow.builder()
@@ -181,6 +165,11 @@ public class VacancyServiceImpl implements VacancyService {
 
         vacancy.setUpdateTime(LocalDateTime.now());
         vacancyDao.update(vacancy);
+    }
+
+    @Override
+    public Long getAuthorIdByVacancy(Long vacancyId) {
+        return vacancyDao.getAuthorIdByVacancy(vacancyId);
     }
 
 }

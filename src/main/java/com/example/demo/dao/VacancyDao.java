@@ -148,4 +148,13 @@ public class VacancyDao {
 
         jdbcTemplate.update(sql, vacancy.getUpdateTime(), vacancy.getId());
     }
+
+    public Long getAuthorIdByVacancy(Long vacancyId) {
+        String sql = """
+                select author_id from vacancies
+                where id = ?
+                """;
+
+        return jdbcTemplate.queryForObject(sql, Long.class, vacancyId);
+    }
 }

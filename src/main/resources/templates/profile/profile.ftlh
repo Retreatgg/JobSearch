@@ -231,7 +231,7 @@
 
                             <div class="row">
                                 <div class="col mt-3">
-                                    <a href="/chat/open?email=${user.email}" target="__blank" class="btn btn-info">To chat</a>
+                                    <a href="/chat/open?toUser=${resume.employerId}" target="__blank" class="btn btn-info">To chat</a>
                                 </div>
                             </div>
                         </div>
