@@ -8,14 +8,28 @@
                     <div class="card-body">
                         <#if messages??>
                             <div class="card-body">
-                                <a href="#" class="btn btn-danger btn-block mb-3">
+                                <button onclick="callResponses();" type="button" class="btn btn-danger btn-block mb-3">
                                     <div class="position-relative">
                                         <div class="position-absolute top-0 start-100 translate-middle bg-danger badge rounded-pill">
                                             <span>${messages?size}</span>
                                         </div>
-                                        Notifications
+                                        Responses
                                     </div>
-                                </a>
+                                </button>
+                            </div>
+
+                            <div class="modal shadow-lg" id="modal">
+                                <div class="modal-dialog modal-dialog-centered modal-lg">
+                                    <div class="modal-content bg-light border-primary">
+                                        <div class="modal-header bg-primary text-white">
+                                            <h5 class="modal-title">Responses</h5>
+                                            <button type="button" class="btn-close" onclick="closeModal();" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div id="body-modal" class="modal-body">
+
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </#if>
                         <div class="d-flex flex-column align-items-center text-center">
@@ -179,5 +193,62 @@
         </#if>
 
     </div>
+
+
+    <script>
+        const modal = document.getElementById('modal');
+        const close = document.getElementById('close');
+        const body = document.getElementById('body-modal');
+        let cards;
+
+        function callResponses() {
+            modal.classList.add('show');
+            modal.style.display = 'block';
+            if (cards) {
+                body.removeChild(cards);
+            }
+            makeCard();
+        }
+
+        function makeCard() {
+            cards = document.createElement('div');
+            cards.className = 'row';
+
+            let h3 = document.createElement('h3');
+            h3.innerText = 'My resumes with responses';
+            cards.appendChild(h3)
+            cards.innerHTML =
+                `
+                <h3>My resumes with responses</h3>
+                <#list activeResumesWithResponses as resume>
+                <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
+                    <div class="card border-0 bg-light rounded shadow">
+                        <div class="card-body p-4">
+                            <h5>${resume.name}</h5>
+                            <div class="mt-3">
+                                <span class="text-muted d-block"></span>
+                            </div>
+
+                            <div class="row">
+                                <div class="col mt-3">
+                                    <a href="/chat/open?email=${user.email}" target="__blank" class="btn btn-info">To chat</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </#list>
+            </div>
+                `
+            body.appendChild(cards);
+        }
+
+        function closeModal(cards) {
+            modal.classList.remove('show')
+            modal.style.display = 'none'
+            body.removeChild(cards);
+        }
+
+    </script>
 </@main.layout>
 

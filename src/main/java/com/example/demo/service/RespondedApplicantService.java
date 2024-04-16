@@ -10,4 +10,5 @@ public interface RespondedApplicantService {
     void createRespondedApplicant(RespondedApplicantsDto respondedApplicantsDto);
     List<RespondedApplicantsDto> respondedApplicants(long vacancyId);
     List<Long> getRespondIdByResume(Long resumeId);
+    List<RespondedApplicantsDto> getResponsesByApplicantId(Long applicantId);
 }

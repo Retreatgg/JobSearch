@@ -21,4 +21,5 @@ public interface ResumeService {
     void editResume(ResumeUpdateDto resumeDto, long id, Authentication auth);
 
     void updateResume(Long id);
+    List<ResumeDto> getResponsesResumes(Long userId, Authentication authentication);
 }

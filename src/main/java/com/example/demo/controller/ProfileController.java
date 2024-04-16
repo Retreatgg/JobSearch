@@ -44,13 +44,16 @@ public class ProfileController {
     @GetMapping("{email}")
     public String getProfile(Authentication auth, Model model, @PathVariable String email) {
         UserDto user = userService.getUserByEmail(email);
+
         model.addAttribute("user", user);
         model.addAttribute("vacancies", vacancyService.getVacanciesByCompanyName(user.getName()));
         model.addAttribute("resumes", resumeService.getResumesByApplicantId(auth));
         model.addAttribute("image", userService.downloadImage(email));
 
-        if(user.getAccountType().equals(APPLICANT.toString()))
+        if(user.getAccountType().equals(APPLICANT.toString())) {
             model.addAttribute("messages", messageService.getAllMessages(auth));
+            model.addAttribute("activeResumesWithResponses", resumeService.getResponsesResumes(user.getId(), auth));
+        }
 
         return "profile/profile";
     }

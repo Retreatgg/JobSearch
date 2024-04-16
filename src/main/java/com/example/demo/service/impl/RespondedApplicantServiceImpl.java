@@ -43,4 +43,20 @@ public class RespondedApplicantServiceImpl implements RespondedApplicantService 
     public List<Long> getRespondIdByResume(Long resumeId) {
         return respondedApplicantsDao.getRespondIdByResume(resumeId);
     }
+
+    @Override
+    public List<RespondedApplicantsDto> getResponsesByApplicantId(Long applicantId) {
+        List<RespondedApplicant> responses = respondedApplicantsDao.getResponsesByApplicantId(applicantId);
+        List<RespondedApplicantsDto> responseDto = new ArrayList<>();
+
+        responses.forEach(response -> {
+            responseDto.add(RespondedApplicantsDto.builder()
+                            .vacancyId(response.getVacancyId())
+                            .resumeId(response.getResumeId())
+                            .confirmation(response.getConfirmation())
+                    .build());
+        });
+
+        return responseDto;
+    }
 }

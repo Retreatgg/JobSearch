@@ -44,4 +44,14 @@ public class RespondedApplicantsDao {
 
         return jdbcTemplate.queryForList(sql, Long.class, new Object[]{resumeId});
     }
+    
+    public List<RespondedApplicant> getResponsesByApplicantId(Long resumeId) {
+        String sql = """
+                select * from RESPONDED_APPLICANTS ra
+                join resumes r on ra.resume_id = r.id
+                where r.applicant_id = ? and r.is_active = true;              
+                """;
+        
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(RespondedApplicant.class), resumeId);
+    }
 }

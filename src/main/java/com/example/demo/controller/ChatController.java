@@ -1,9 +1,9 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.ChatDto;
 import com.example.demo.dto.SendMessageDto;
 import com.example.demo.model.User;
 import com.example.demo.service.ChatService;
+import com.example.demo.service.ResumeService;
 import com.example.demo.service.UserService;
 import com.example.demo.util.FileUtil;
 import lombok.RequiredArgsConstructor;
@@ -21,20 +21,21 @@ public class ChatController {
 
     private final ChatService chatService;
     private final UserService userService;
-    private final FileUtil fileUtil;
 
-    @GetMapping("")
+    @GetMapping("open")
     public String openChat(Model model) {
+
         model.addAttribute("toUser", userService.getUserByEmail("john@example.com"));
         model.addAttribute("fromUser", userService.getUserByEmail("techinnovators@example.com"));
         model.addAttribute("senderMessage", chatService.getChats("techinnovators@example.com", "john@example.com"));
         model.addAttribute("recipientMessage", chatService.getChats("john@example.com", "techinnovators@example.com"));
+
         return "chat/chat";
     }
 
     @PostMapping("send")
     public String sendMessage(Authentication authentication, SendMessageDto message) {
         chatService.saveMessage(authentication, message);
-        return "redirect:/chat";
+        return "redirect:/chat/open";
     }
 }

@@ -3,15 +3,13 @@ package com.example.demo.service.impl;
 import com.example.demo.dao.CategoryDao;
 import com.example.demo.dao.ResumeDao;
 import com.example.demo.dao.UserDao;
+import com.example.demo.dto.RespondedApplicantsDto;
 import com.example.demo.dto.ResumeCreateDto;
 import com.example.demo.dto.ResumeDto;
 import com.example.demo.dto.ResumeUpdateDto;
 import com.example.demo.model.Resume;
 import com.example.demo.model.User;
-import com.example.demo.service.ContactInfoService;
-import com.example.demo.service.EducationInfoService;
-import com.example.demo.service.ResumeService;
-import com.example.demo.service.WorkExperienceInfoService;
+import com.example.demo.service.*;
 import com.example.demo.util.FileUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -38,6 +36,7 @@ public class ResumeServiceImpl implements ResumeService {
     private final WorkExperienceInfoService workExperienceInfoService;
     private final EducationInfoService educationInfoService;
     private final ContactInfoService contactInfoService;
+    private final RespondedApplicantService respondedApplicantService;
     private final FileUtil fileUtil;
 
     @Override
@@ -89,15 +88,11 @@ public class ResumeServiceImpl implements ResumeService {
 
     @Override
     public ResumeDto getResumeById(Long id, Authentication auth) {
-        String authority = fileUtil.getAuthority(auth);
+        Resume resume = resumeDao.getResumeById(id)
+                .orElseThrow(() -> new NoSuchElementException("Can not find Resume by ID:" + id));
 
-        if (authority.equals(EMPLOYER.toString())) {
-            Resume resume = resumeDao.getResumeById(id)
-                    .orElseThrow(() -> new NoSuchElementException("Can not find Resume by ID:" + id));
-            return transformationForSingleDtoResume(resume);
-        }
+        return transformationForSingleDtoResume(resume);
 
-        throw new IllegalArgumentException("Your role is not appropriate");
     }
 
     @Override
@@ -182,6 +177,18 @@ public class ResumeServiceImpl implements ResumeService {
 
         resume.setUpdateTime(LocalDateTime.now());
         resumeDao.update(resume);
+    }
+
+    @Override
+    public List<ResumeDto> getResponsesResumes(Long userId, Authentication authentication) {
+        List<RespondedApplicantsDto> responses = respondedApplicantService.getResponsesByApplicantId(userId);
+        List<ResumeDto> resumes = new ArrayList<>();
+
+        responses.forEach(response -> {
+            resumes.add(getResumeById(response.getResumeId(), authentication));
+        });
+
+        return resumes;
     }
 
 

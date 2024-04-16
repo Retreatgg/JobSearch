@@ -1,3 +1,7 @@
+window.addEventListener('load', () => {
+    setInterval(() => fetch('/chat/open'), 5000);
+})
+
 const form = document.getElementById('form');
 
 function chatHandler(e) {
@@ -14,4 +18,4 @@ function chatHandler(e) {
     })
 }
 
-form.addEventListener('click', chatHandler)
+form.addEventListener('submit', chatHandler)
