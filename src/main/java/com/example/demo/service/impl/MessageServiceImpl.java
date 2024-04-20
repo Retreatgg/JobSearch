@@ -50,21 +50,24 @@ public class MessageServiceImpl implements MessageService {
             listWithId.addAll(
                     respondedApplicantService.getRespondIdByResume(e.getId()));
         }); */
+        if(resumes != null) {
 
-        for (var resume : resumes) {
-            List<Long> respondId = respondedApplicantService.getRespondIdByResume(resume.getId());
-            if (respondId != null) {
-                listWithId.addAll(
-                        respondedApplicantService.getRespondIdByResume(resume.getId())
-                );
+            for (var resume : resumes) {
+                List<Long> respondId = respondedApplicantService.getRespondIdByResume(resume.getId());
+                if (respondId != null) {
+                    listWithId.addAll(
+                            respondedApplicantService.getRespondIdByResume(resume.getId())
+                    );
+                }
             }
+
+
+            listWithId.forEach(id -> {
+                messages.addAll(getMessages(id));
+            });
+
+            return messages;
         }
-
-
-        listWithId.forEach(id -> {
-            messages.addAll(getMessages(id));
-        });
-
-        return messages;
+        return null;
     }
 }

@@ -155,6 +155,9 @@
                                         <div class="col mt-3">
                                             <a href="/vacancies/edit" target="__blank" class="btn btn-info">Edit</a>
                                         </div>
+                                        <div class="col mt-3">
+                                            <a href="/vacancies/${vacancy.id}" target="__blank" class="btn btn-info">Update</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -182,6 +185,9 @@
                                         </div>
                                         <div class="col mt-3">
                                             <a href="/resumes/edit" target="__blank" class="btn btn-info">Edit</a>
+                                        </div>
+                                        <div class="col mt-3">
+                                            <a href="/resumes/${resume.id}" target="__blank" class="btn btn-info">About resume</a>
                                         </div>
                                     </div>
                                 </div>
