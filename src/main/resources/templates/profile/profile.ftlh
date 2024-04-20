@@ -20,8 +20,8 @@
 
                             <div class="modal shadow-lg" id="modal">
                                 <div class="modal-dialog modal-dialog-centered modal-lg">
-                                    <div class="modal-content bg-light border-primary">
-                                        <div class="modal-header bg-primary text-white">
+                                    <div class="modal-content bg-light border-danger">
+                                        <div class="modal-header bg-danger text-white">
                                             <h5 class="modal-title">Responses</h5>
                                             <button type="button" class="btn-close" onclick="closeModal();" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>

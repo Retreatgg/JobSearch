@@ -6,13 +6,12 @@ import com.example.demo.service.MessageService;
 import com.example.demo.service.ResumeService;
 import com.example.demo.service.UserService;
 import com.example.demo.service.VacancyService;
+import com.example.demo.util.UserUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -28,6 +27,7 @@ public class ProfileController {
     private final VacancyService vacancyService;
     private final ResumeService resumeService;
     private final MessageService messageService;
+    private final UserUtil userUtil;
 
     @PostMapping("edit")
     public String editProfile(Authentication authentication, UserUpdateDto updateDto) {
@@ -36,13 +36,15 @@ public class ProfileController {
     }
 
     @GetMapping("edit/{email}")
-    public String editProfile(Authentication authentication, Model model, @PathVariable String email) {
+    public String editProfile(Authentication auth, Model model) {
+        String email = userUtil.getUserByAuth(auth).getEmail();
         model.addAttribute("user", userService.getUserByEmail(email));
         return "profile/edit_profile";
     }
 
-    @GetMapping("{email}")
-    public String getProfile(Authentication auth, Model model, @PathVariable String email) {
+    @GetMapping("")
+    public String getProfile(Authentication auth, Model model) {
+        String email = userUtil.getUserByAuth(auth).getEmail();
         UserDto user = userService.getUserByEmail(email);
 
         model.addAttribute("user", user);
@@ -56,10 +58,5 @@ public class ProfileController {
         }
 
         return "profile/profile";
-    }
-
-    @GetMapping("photo/{email}")
-    public ResponseEntity<?> getPhoto(@PathVariable String email) {
-        return ResponseEntity.ok(userService.downloadImage(email));
     }
 }

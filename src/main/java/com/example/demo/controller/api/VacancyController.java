@@ -20,6 +20,7 @@
 @RequiredArgsConstructor
 @RequestMapping("api/vacancies")
 public class VacancyController {
+
     private final VacancyService vacancyService;
     private final RespondedApplicantService respondedApplicantService;
 

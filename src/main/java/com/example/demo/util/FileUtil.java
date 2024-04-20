@@ -35,7 +35,6 @@ import java.util.UUID;
 public class FileUtil {
 
     private static final String UPLOAD_DIR = "data";
-    private final UserDao userDao;
 
     @SneakyThrows
     public String saveUploadedFile(MultipartFile file, String subDir) {
@@ -69,19 +68,6 @@ public class FileUtil {
 
         return new MockMultipartFile(avatarString, bytes) ;
     }
-
-    public User getUserByAuth(Authentication auth) {
-        UserDetails userDetails = (UserDetails) auth.getPrincipal();
-        String email = userDetails.getUsername();
-        Optional<User> userOptional = userDao.getUserByEmail(email);
-        return userOptional.orElseThrow(() -> new NoSuchElementException("User is not found"));
-    }
-
-    public String getAuthority(Authentication authentication) {
-        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-        return authorities.isEmpty() ? "" : authorities.iterator().next().getAuthority();
-    }
-
 
     public ResponseEntity<?> getOutputFile(String fileName, String subDir, MediaType mediaType) {
         try {

@@ -8,6 +8,7 @@ import com.example.demo.model.Resume;
 import com.example.demo.model.User;
 import com.example.demo.service.*;
 import com.example.demo.util.FileUtil;
+import com.example.demo.util.UserUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -36,7 +37,7 @@ public class ResumeServiceImpl implements ResumeService {
     private final RespondedApplicantService respondedApplicantService;
 
     private final VacancyService vacancyService;
-    private final FileUtil fileUtil;
+    private final UserUtil userUtil;
 
     @Override
     public List<ResumeDto> getAllResumes(Authentication authentication, String page, String perPage) {
@@ -44,7 +45,7 @@ public class ResumeServiceImpl implements ResumeService {
         int sizePageNumber = Integer.parseInt(perPage);
         int offset = numberPage * sizePageNumber;
 
-        String authority = fileUtil.getAuthority(authentication);
+        String authority = userUtil.getAuthority(authentication);
 
         if (authority.equals(EMPLOYER.toString())) {
             List<Resume> resumes = resumeDao.getAllResumes(sizePageNumber, offset);
@@ -56,7 +57,7 @@ public class ResumeServiceImpl implements ResumeService {
 
     @Override
     public ResumeDto getResumesByCategoryId(Long id, Authentication auth) {
-        String authority = fileUtil.getAuthority(auth);
+        String authority = userUtil.getAuthority(auth);
 
         if (authority.equals(EMPLOYER.toString())) {
             Resume resume = resumeDao.getResumesByCategoryId(id)
@@ -70,7 +71,7 @@ public class ResumeServiceImpl implements ResumeService {
 
     @Override
     public List<ResumeDto> getResumesByApplicantId(Authentication auth) {
-        User user = fileUtil.getUserByAuth(auth);
+        User user = userUtil.getUserByAuth(auth);
 
         if (user.getAccountType().equals(String.valueOf(APPLICANT))) {
             List<Resume> resumes = resumeDao.getResumesByApplicant(user.getId());
@@ -96,7 +97,7 @@ public class ResumeServiceImpl implements ResumeService {
 
     @Override
     public boolean deleteResumeById(Long id, Authentication auth) {
-        User user = fileUtil.getUserByAuth(auth);
+        User user = userUtil.getUserByAuth(auth);
 
         if (!user.getAccountType().equals(String.valueOf(APPLICANT))) {
             return false;
@@ -119,8 +120,8 @@ public class ResumeServiceImpl implements ResumeService {
 
     @Override
     public void addResume(ResumeCreateDto resumeDto, Authentication auth) {
-        String authority = fileUtil.getAuthority(auth);
-        User user = fileUtil.getUserByAuth(auth);
+        String authority = userUtil.getAuthority(auth);
+        User user = userUtil.getUserByAuth(auth);
 
         if (authority.equals(APPLICANT.toString())) {
             Resume resume = new Resume();
@@ -146,8 +147,8 @@ public class ResumeServiceImpl implements ResumeService {
 
     @Override
     public void editResume(ResumeUpdateDto resumeDto, long id, Authentication auth) {
-        String authority = fileUtil.getAuthority(auth);
-        User user = fileUtil.getUserByAuth(auth);
+        String authority = userUtil.getAuthority(auth);
+        User user = userUtil.getUserByAuth(auth);
         Resume resume = resumeDao.getResumeById(id)
                 .orElseThrow(() -> new NoSuchElementException("Resume is not found"));
 

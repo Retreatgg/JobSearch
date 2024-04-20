@@ -5,23 +5,16 @@ import com.example.demo.dto.*;
 import com.example.demo.model.User;
 import com.example.demo.model.Vacancy;
 import com.example.demo.service.CategoryService;
-import com.example.demo.service.RespondedApplicantService;
-import com.example.demo.service.ResumeService;
 import com.example.demo.service.VacancyService;
-import com.example.demo.util.FileUtil;
+import com.example.demo.util.UserUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
-import java.util.stream.Collectors;
 
-import static com.example.demo.enums.AccountType.APPLICANT;
 import static com.example.demo.enums.AccountType.EMPLOYER;
 
 @Slf4j
@@ -32,7 +25,7 @@ public class VacancyServiceImpl implements VacancyService {
     private final VacancyDao vacancyDao;
     private final CategoryService categoryService;
 
-    private final FileUtil fileUtil;
+    private final UserUtil userUtil;
 
 
     @Override
@@ -68,7 +61,7 @@ public class VacancyServiceImpl implements VacancyService {
 
     @Override
     public void deleteVacancyById(Long id, Authentication auth) {
-        User user = fileUtil.getUserByAuth(auth);
+        User user = userUtil.getUserByAuth(auth);
         if (user.getAccountType().equals(EMPLOYER.toString())) {
             Vacancy vacancy = getVacancyById(id);
 
@@ -83,8 +76,8 @@ public class VacancyServiceImpl implements VacancyService {
 
     @Override
     public void addVacancy(VacancyDto vacancyDto, Authentication auth) {
-        String authority = fileUtil.getAuthority(auth);
-        User user = fileUtil.getUserByAuth(auth);
+        String authority = userUtil.getAuthority(auth);
+        User user = userUtil.getUserByAuth(auth);
         Long categoryId = categoryService.getCategoryId(vacancyDto.getCategoryName());
 
 
@@ -110,7 +103,7 @@ public class VacancyServiceImpl implements VacancyService {
 
     @Override
     public void editVacancy(VacancyUpdateDto vacancyDto, long vacancyId, Authentication auth) {
-        String authority = fileUtil.getAuthority(auth);
+        String authority = userUtil.getAuthority(auth);
 
         if (authority.equals(EMPLOYER.toString())) {
 

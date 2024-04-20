@@ -2,11 +2,10 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.ChatDto;
 import com.example.demo.dto.SendMessageDto;
-import com.example.demo.model.Chat;
 import com.example.demo.model.User;
 import com.example.demo.service.ChatService;
 import com.example.demo.service.UserService;
-import com.example.demo.util.FileUtil;
+import com.example.demo.util.UserUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -26,13 +25,13 @@ public class ChatController {
 
     private final ChatService chatService;
     private final UserService userService;
-    private final FileUtil fileUtil;
+    private final UserUtil userUtil;
 
 
     @GetMapping("open")
     public String openChat(Model model, @RequestParam(name = "toUser") Long toUserId, Authentication authentication) {
 
-        User user = fileUtil.getUserByAuth(authentication);
+        User user = userUtil.getUserByAuth(authentication);
         String toUserEmail = userService.getUserEmailById(toUserId);
         model.addAttribute("fromUser", userService.getUserByEmail(user.getEmail()));
         model.addAttribute("toUser", userService.getUserByEmail(toUserEmail));

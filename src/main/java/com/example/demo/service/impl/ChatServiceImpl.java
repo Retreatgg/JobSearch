@@ -6,10 +6,9 @@ import com.example.demo.dto.SendMessageDto;
 import com.example.demo.model.Chat;
 import com.example.demo.model.User;
 import com.example.demo.service.ChatService;
-import com.example.demo.util.FileUtil;
+import com.example.demo.util.UserUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -21,11 +20,11 @@ import java.util.List;
 public class ChatServiceImpl implements ChatService {
 
     private final ChatDao chatDao;
-    private final FileUtil fileUtil;
+    private final UserUtil userUtil;
 
     @Override
     public void saveMessage(Authentication authentication, SendMessageDto sendDto) {
-        User user = fileUtil.getUserByAuth(authentication);
+        User user = userUtil.getUserByAuth(authentication);
         Chat chat = new Chat();
 
         chat.setFromUserEmail(user.getEmail());

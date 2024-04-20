@@ -1,18 +1,13 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.EducationInfoDto;
 import com.example.demo.dto.ResumeCreateDto;
 import com.example.demo.dto.ResumeUpdateDto;
-import com.example.demo.dto.WorkExperienceInfoDto;
 import com.example.demo.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor

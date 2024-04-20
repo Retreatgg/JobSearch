@@ -9,6 +9,7 @@ import com.example.demo.model.User;
 import com.example.demo.service.UserRoleService;
 import com.example.demo.service.UserService;
 import com.example.demo.util.FileUtil;
+import com.example.demo.util.UserUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -30,6 +31,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserDao userDao;
     private final FileUtil fileUtil;
+    private final UserUtil userUtil;
     private final PasswordEncoder encoder;
     private final UserRoleService userRoleService;
 
@@ -102,7 +104,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void editProfile(UserUpdateDto userUpdateDto, Authentication auth) {
-        User user = fileUtil.getUserByAuth(auth);
+        User user = userUtil.getUserByAuth(auth);
 
         String fileName = fileUtil.saveUploadedFile(userUpdateDto.getAvatar(), "/images");
         user.setAge(userUpdateDto.getAge());
