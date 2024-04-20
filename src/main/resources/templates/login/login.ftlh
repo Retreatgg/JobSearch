@@ -8,7 +8,7 @@
                          class="img-fluid" alt="Sample image">
                 </div>
                 <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-                    <form class="mt-5">
+                    <form class="mt-5" id="login-form">
 
                         <div data-mdb-input-init class="form-outline mb-4">
                             <input type="email" id="form3Example3" class="form-control form-control-lg"
@@ -34,5 +34,19 @@
             </div>
         </div>
     </section>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', onLoginHandler);
+        let user = {}
+
+        function onLoginHandler(e) {
+            const form = e.target;
+            const userFormData = new FormData(form);
+            user = Object.fromEntries(userFormData);
+            let userJson = JSON.stringify(user)
+
+            localStorage.setItem('user', userJson);
+        }
+    </script>
 
 </@main.layout>
