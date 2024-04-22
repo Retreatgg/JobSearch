@@ -18,12 +18,12 @@
 
                         <div data-mdb-input-init class="form-outline mb-3">
                             <input type="password" id="form3Example4" class="form-control form-control-lg"
-                                   placeholder="Enter password" name="password"/>
+                                   placeholder="Enter password" name="password" autocomplete="on"/>
                             <label class="form-label" for="form3Example4">Password</label>
                         </div>
 
                         <div class="text-center text-lg-start mt-4 pt-2">
-                            <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg"
+                            <button id="btn" type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg"
                                     style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
                             <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="/users/register"
                                                                                               class="link-danger">Register</a></p>
@@ -36,16 +36,34 @@
     </section>
 
     <script>
-        document.getElementById('login-form').addEventListener('submit', onLoginHandler);
-        let user = {}
-
+        let form = document.getElementById('login-form')
+        form.addEventListener('submit', onLoginHandler)
+        
         function onLoginHandler(e) {
-            const form = e.target;
-            const userFormData = new FormData(form);
-            user = Object.fromEntries(userFormData);
-            let userJson = JSON.stringify(user)
+            e.preventDefault()
 
-            localStorage.setItem('user', userJson);
+            let target = e.target
+            let data = new FormData(target)
+            let user = Object.fromEntries(data)
+
+            fetch('/api/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(user)
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Ошибка при отправке запроса: ' + response.status);
+                    }
+                    localStorage.setItem('user', userJson);
+                    window.location.href = '/vacancies/active'
+                })
+                .catch(error => {
+                    console.error('Ошибка:', error);
+                });
+
         }
     </script>
 

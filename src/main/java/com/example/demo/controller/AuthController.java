@@ -3,16 +3,15 @@ package com.example.demo.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("login")
-public class LoginController {
+@RequestMapping("auth")
+public class AuthController {
 
-    @GetMapping("")
-    public String loginForm() {
+    @GetMapping("login")
+    public String login() {
         return "login/login";
     }
 }

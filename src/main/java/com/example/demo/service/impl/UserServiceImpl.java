@@ -1,20 +1,19 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.dao.UserDao;
-import com.example.demo.dto.UserCreateDto;
-import com.example.demo.dto.UserDto;
-import com.example.demo.dto.UserRoleDto;
-import com.example.demo.dto.UserUpdateDto;
+import com.example.demo.dto.*;
 import com.example.demo.model.User;
 import com.example.demo.service.UserRoleService;
 import com.example.demo.service.UserService;
 import com.example.demo.util.FileUtil;
 import com.example.demo.util.UserUtil;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -141,11 +140,20 @@ public class UserServiceImpl implements UserService {
         return userDao.getEmailById(id);
     }
 
+    @Override
+    public void login(UserLoginDto user) {
+        UserDto userFromData = getUserByEmail(user.getEmail());
+        if(!encoder.matches(user.getPassword(), userFromData.getPassword())) {
+            throw new IllegalArgumentException("Incorrect password");
+        }
+    }
+
     private UserDto transformationForDtoSingleUser(User user) {
         return UserDto.builder()
                 .id(user.getId())
                 .name(user.getName())
                 .surname(user.getSurname())
+                .password(user.getPassword())
                 .email(user.getEmail())
                 .age(user.getAge())
                 .avatar(fileUtil.convertStringToMultipartFile(user.getAvatar()))

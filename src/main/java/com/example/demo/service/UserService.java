@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.dto.UserCreateDto;
 import com.example.demo.dto.UserDto;
+import com.example.demo.dto.UserLoginDto;
 import com.example.demo.dto.UserUpdateDto;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
@@ -20,4 +21,6 @@ public interface UserService {
     void editProfile(UserUpdateDto userUpdateDto, Authentication auth);
     ResponseEntity<?> downloadImage(String email);
     String getUserEmailById(Long id);
+
+    void login(UserLoginDto user);
 }
