@@ -53,13 +53,13 @@ public class ResumeController {
     public String addResume(Authentication authentication, ResumeCreateDto resumeCreateDto) {
         System.out.println(authentication);
         resumeService.addResume(resumeCreateDto, authentication);
-        return "redirect:/vacancies/active";
+        return "redirect:/";
     }
 
     @PostMapping("edit/{id}")
     public String editResume(Authentication authentication, ResumeUpdateDto resumeUpdateDto, @PathVariable Long id) {
         resumeService.editResume(resumeUpdateDto, id, authentication);
-        return "redirect:/vacancies/active";
+        return "redirect:/";
     }
 
     @GetMapping("edit/{id}")

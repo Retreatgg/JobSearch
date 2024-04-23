@@ -23,6 +23,6 @@ public class UserController {
     @PostMapping("register")
     public String createUser(UserCreateDto user) {
         userService.createUser(user);
-        return "redirect:/vacancies/active";
+        return "redirect:/";
     }
 }

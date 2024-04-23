@@ -6,7 +6,7 @@
 
     <div class="form-group">
         <label for="categoryFilter">Select category:</label>
-        <form action="/vacancies/active" method="get">
+        <form action="/" method="get">
             <select class="form-control" id="categoryFilter" name="category">
                 <option value="">Categories</option>
                 <#list categories as category>
@@ -36,7 +36,7 @@
     </div>
 
     <#assign maxPage = vacancies?size / perPage?number>
-    <@p.pagination page=page maxPage=maxPage path="/vacancies/active">
+    <@p.pagination page=page maxPage=maxPage path="/">
     </@p.pagination>
 
 </@main.layout>

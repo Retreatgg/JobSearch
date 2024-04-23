@@ -55,7 +55,7 @@
                 .then(response => {
                     if (response.ok) {
                         localStorage.setItem('user', userJson);
-                        window.location.href = '/vacancies/active'
+                        window.location.href = '/'
                     } else {
                         throw new Error('Error: ' + response.status);
                     }
