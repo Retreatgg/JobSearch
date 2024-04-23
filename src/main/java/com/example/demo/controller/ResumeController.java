@@ -51,6 +51,7 @@ public class ResumeController {
 
     @PostMapping("add")
     public String addResume(Authentication authentication, ResumeCreateDto resumeCreateDto) {
+        System.out.println(authentication);
         resumeService.addResume(resumeCreateDto, authentication);
         return "redirect:/vacancies/active";
     }

@@ -51,7 +51,8 @@ public class SecurityConfig {
                  .logout(AbstractHttpConfigurer::disable)
                  .csrf(AbstractHttpConfigurer::disable)
                  .authorizeHttpRequests(authorize -> authorize
-                         .requestMatchers(HttpMethod.POST, "/resumes/**").hasAuthority("APPLICANT")
+                         //.requestMatchers(HttpMethod.POST, "/resumes/**").hasAuthority("APPLICANT")
+                        // .requestMatchers(HttpMethod.GET, "/resumes/add").hasAnyAuthority("APPLICANT")
                          .requestMatchers(HttpMethod.DELETE, "/resumes/**").hasAuthority("APPLICANT")
                          .requestMatchers(HttpMethod.PUT, "/resumes/**").hasAuthority("APPLICANT")
                          .requestMatchers(HttpMethod.PUT, "/vacancies/**").hasAuthority("EMPLOYER")
