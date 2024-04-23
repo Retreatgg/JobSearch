@@ -25,6 +25,6 @@ public class ResumeCreateDto {
 
     private List<WorkExperienceInfoDto> workExperienceInfo = new ArrayList<>();
     private List<EducationInfoDto> educationInfo = new ArrayList<>();
-    private List<ContactInfoDto> contacts = new ArrayList<>();
+    private ContactInfoDto[] contacts = new ContactInfoDto[5];
     private Boolean isActive;
 }

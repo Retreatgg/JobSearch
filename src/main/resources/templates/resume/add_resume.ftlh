@@ -32,6 +32,15 @@
                             <input type="text" hidden="hidden" class="form-control" aria-label="Is active" name="isActive">
                         </div>
 
+                        <h5 class="text-center mt-3">Add contacts</h5>
+                        <#assign index = 0>
+                            <#list contacts as contact>
+                                <input type="hidden" class="form-control" id="contacts[${index}].type" name="contacts[${index}].type" value="${contact.type}">
+                                <label for="contacts[${index}].value" class="form-label">${contact.type}</label>
+                                <input type="text" class="form-control" id="contacts[${index}`].value" name="contacts[${index}].value">
+                                <#assign index++>
+                            </#list>
+
                         <div id="moreInfo"></div>
 
                         <div class="row mt-3 mb-3">
@@ -41,10 +50,6 @@
 
                             <div class="col-sm-4">
                                 <button id="educInfo" type="button">ADD EDUCATION INFO</button>
-                            </div>
-
-                            <div class="col-sm-4">
-                                <button id="contactsInfo" type="button">ADD CONTACTS</button>
                             </div>
                         </div>
 
@@ -64,7 +69,6 @@
         const more = document.getElementById('moreInfo');
         let educIndex = -1;
         let workIndex = -1;
-        let contactIndex = -1;
 
         function addRemoveButton(parent, element) {
             const removeButton = document.createElement('button');
@@ -136,30 +140,6 @@
 
             form.insertBefore(divEduc, more.nextSibling);
             addRemoveButton(form, divEduc)
-        })
-
-         let contactBtn = document.getElementById('contactsInfo');
-
-        contactBtn.addEventListener('click', () => {
-            let contactDiv = document.createElement('div');
-            contactDiv.className = "mb-3"
-            contactIndex++
-
-            contactDiv.innerHTML = `
-                            <h5 class="text-center mt-3">Add contacts</h5>
-                            <label for="contacts[`+contactIndex+`].type" class="form-label">Select contact</label>
-                            <select class="form-select" aria-label="Default select example" id="contacts[`+contactIndex+`].type" name="contacts[`+contactIndex+`].type">
-                                <#list contacts as contact>
-                                    <option value="${contact.type}">${contact.type}</option>
-                                </#list>
-                            </select>
-
-                            <label for="contacts[`+contactIndex+`].value" class="form-label">Value</label>
-                            <input type="text" class="form-control" id="contacts[`+contactIndex+`].value" name="contacts[`+contactIndex+`].value">
-`
-
-            form.insertBefore(contactDiv, more.nextSibling);
-            addRemoveButton(form, contactDiv)
         })
 
     </script>

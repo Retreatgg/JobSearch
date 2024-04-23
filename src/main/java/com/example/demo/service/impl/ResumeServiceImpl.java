@@ -140,8 +140,10 @@ public class ResumeServiceImpl implements ResumeService {
                     .forEach(wei -> workExperienceInfoService.createWorkExperienceInfo(resumeId, wei));
             resumeDto.getEducationInfo()
                     .forEach(ei -> educationInfoService.createEducationInfo(resumeId, ei));
-            resumeDto.getContacts()
-                    .forEach(c -> contactInfoService.createContactInfo(resumeId, c));
+
+            for(var contact : resumeDto.getContacts()) {
+                if(!contact.getValue().equals("")) contactInfoService.createContactInfo(resumeId, contact);
+            }
         }
     }
 
