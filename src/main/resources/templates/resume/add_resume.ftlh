@@ -37,7 +37,11 @@
                             <#list contacts as contact>
                                 <input type="hidden" class="form-control" id="contacts[${index}].type" name="contacts[${index}].type" value="${contact.type}">
                                 <label for="contacts[${index}].value" class="form-label">${contact.type}</label>
-                                <input type="text" class="form-control" id="contacts[${index}`].value" name="contacts[${index}].value">
+                                <#if contact.type == "Email">
+                                    <input type="email" class="form-control" id="contacts[${index}`].value" name="contacts[${index}].value">
+                                <#else>
+                                    <input type="text" class="form-control" id="contacts[${index}`].value" name="contacts[${index}].value">
+                                </#if>
                                 <#assign index++>
                             </#list>
 
