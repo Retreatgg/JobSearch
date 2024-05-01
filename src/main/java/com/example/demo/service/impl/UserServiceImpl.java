@@ -3,17 +3,16 @@ package com.example.demo.service.impl;
 import com.example.demo.dao.UserDao;
 import com.example.demo.dto.*;
 import com.example.demo.model.User;
+import com.example.demo.repository.UserRepository;
 import com.example.demo.service.UserRoleService;
 import com.example.demo.service.UserService;
 import com.example.demo.util.FileUtil;
 import com.example.demo.util.UserUtil;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -28,11 +27,11 @@ import static com.example.demo.enums.AccountType.EMPLOYER;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    private final UserDao userDao;
     private final FileUtil fileUtil;
     private final UserUtil userUtil;
     private final PasswordEncoder encoder;
     private final UserRoleService userRoleService;
+    private final UserRepository userRepository;
 
     @Override
     public UserDto getUserByEmail(String email) {
@@ -41,7 +40,7 @@ public class UserServiceImpl implements UserService {
 
         } */
 
-        User user = userDao.getUserByEmail(email).orElseThrow(() -> new NoSuchElementException("Can not find User by email:" + email));
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new NoSuchElementException("Can not find User by email:" + email));
         return transformationForDtoSingleUser(user);
 
         // throw new IllegalArgumentException("Not your profile");
@@ -49,42 +48,42 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto getUserByPhoneNumber(String phoneNumber) {
-        Optional<User> user = userDao.getUserByPhoneNumber(phoneNumber);
+        Optional<User> user = userRepository.findByPhoneNumber(phoneNumber);
         return user.map(this::transformationForDtoSingleUser)
                 .orElseThrow(() -> new NoSuchElementException("Can not find User by phone number: " + phoneNumber));
     }
 
     @Override
     public Boolean isUserExistsByEmail(String email) {
-        return userDao.isUserExistsByEmail(email);
+        Optional<User> user = userRepository.findByEmail(email);
+        return user.isPresent();
     }
 
     @Override
     public void createUser(UserCreateDto userCreateDto) {
+        User newUser;
         if (isUserExistsByEmail(userCreateDto.getEmail())) {
             throw new IllegalArgumentException("User with email " + userCreateDto.getEmail() + " already exists");
         }
 
-        User user = new User();
-        user.setAge(userCreateDto.getAge());
-        user.setName(userCreateDto.getName());
-        user.setAvatar("unnamed.jpeg");
-        user.setEmail(userCreateDto.getEmail());
-        user.setSurname(userCreateDto.getSurname());
-        user.setPassword(encoder.encode(userCreateDto.getPassword()));
-        user.setPhoneNumber(userCreateDto.getPhoneNumber());
-        user.setEnabled(true);
-        user.setAccountType(userCreateDto.getAccountType());
+        User user = User.builder()
+                .accountType(userCreateDto.getAccountType())
+                .enabled(true)
+                .age(userCreateDto.getAge())
+                .avatar("unnamed.jpg")
+                .email(userCreateDto.getEmail())
+                .name(userCreateDto.getName())
+                .surname(userCreateDto.getSurname())
+                .phoneNumber(userCreateDto.getPhoneNumber())
+                .password(encoder.encode(userCreateDto.getPassword()))
+                .build();
 
         String accountType = userCreateDto.getAccountType();
         if (accountType.equals(APPLICANT.toString()) || accountType.equals(EMPLOYER.toString())) {
-            userDao.createUser(user);
+             newUser = userRepository.save(user);
         } else {
             throw new NoSuchElementException("No such role");
         }
-
-        User newUser = userDao.getUserByEmail(user.getEmail())
-                .orElseThrow(() -> new NoSuchElementException("Can not find User by email:" + user.getEmail()));
 
         if (userCreateDto.getAccountType().equals(String.valueOf(APPLICANT))) {
             UserRoleDto userRoleDto = UserRoleDto.builder()
@@ -117,14 +116,13 @@ public class UserServiceImpl implements UserService {
         user.setPassword(encoder.encode(userUpdateDto.getPassword()));
         user.setPhoneNumber(userUpdateDto.getPhoneNumber());
 
-        userDao.editProfile(user);
+        //userDao.editProfile(user);
+
     }
 
     @Override
     public ResponseEntity<?> downloadImage(String email) {
-
-        String file = userDao.getAvatarByUserEmail(email);
-        Optional<User> userOptional = userDao.getUserByEmail(email);
+        Optional<User> userOptional = userRepository.findByEmail(email);
         if(userOptional.isPresent()) {
             User user = userOptional.get();
             String avatar = user.getAvatar();
@@ -137,7 +135,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String getUserEmailById(Long id) {
-        return userDao.getEmailById(id);
+        return userRepository.findById(id).get().getEmail();
     }
 
     @Override
