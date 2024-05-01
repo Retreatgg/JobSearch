@@ -14,7 +14,7 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class ContactsInfoDao {
-    private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+    /*private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     private final JdbcTemplate jdbcTemplate;
 
     public void createContactsInfo(ContactInfo contactInfo) {
@@ -25,7 +25,7 @@ public class ContactsInfoDao {
 
         namedParameterJdbcTemplate.update(sql, new MapSqlParameterSource()
                 .addValue("contact_value", contactInfo.getValue())
-                .addValue("type_id", contactInfo.getTypeId())
+                .addValue("type_id", contactInfo.getType())
                 .addValue("resume_id", contactInfo.getResumeId())
         );
     }
@@ -37,6 +37,6 @@ public class ContactsInfoDao {
                 """;
 
         jdbcTemplate.update(sql, id);
-    }
+    }*/
 
 }

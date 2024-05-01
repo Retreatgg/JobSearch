@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 public class UserRoleDao {
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    public void createRoleForUser(UserRole userRole) {
+    /* public void createRoleForUser(UserRole userRole) {
         String sql = """
                 insert into user_role(user_id, role_id)
                 values(:user_id, :role_id)
@@ -21,5 +21,5 @@ public class UserRoleDao {
                 .addValue("user_id", userRole.getUserId())
                 .addValue("role_id", userRole.getRoleId())
         );
-    }
+    } */
 }

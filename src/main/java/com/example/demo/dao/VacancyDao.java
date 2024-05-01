@@ -20,7 +20,7 @@ public class VacancyDao {
     private final JdbcTemplate jdbcTemplate;
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    public List<Vacancy> getAllVacancies() {
+    /* public List<Vacancy> getAllVacancies() {
         String sql = """
                 select * from vacancies
                 """;
@@ -156,5 +156,5 @@ public class VacancyDao {
                 """;
 
         return jdbcTemplate.queryForObject(sql, Long.class, vacancyId);
-    }
+    } */
 }

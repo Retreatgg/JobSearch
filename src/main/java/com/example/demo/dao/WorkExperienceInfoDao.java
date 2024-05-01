@@ -17,7 +17,7 @@ public class WorkExperienceInfoDao {
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     private final JdbcTemplate jdbcTemplate;
 
-    public void createWorkExperienceInfo(WorkExperienceInfo workExperienceInfo) {
+    /* public void createWorkExperienceInfo(WorkExperienceInfo workExperienceInfo) {
         String sql = """
                 insert into work_experience_info(resume_id, years, company_name, position, responsibilities)
                 values (:resume_id, :years, :company_name, :position, :responsibilities)
@@ -47,6 +47,6 @@ public class WorkExperienceInfoDao {
                 """;
 
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(WorkExperienceInfo.class), id);
-    }
+    } */
 
 }

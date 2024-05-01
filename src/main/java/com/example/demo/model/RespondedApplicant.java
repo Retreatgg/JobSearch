@@ -1,13 +1,32 @@
 package com.example.demo.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.util.List;
 
 @Getter
 @Setter
+@Entity
+@Table(name = "responed_applicants")
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class RespondedApplicant {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long resumeId;
-    private Long vacancyId;
+
+    @ManyToOne
+    @JoinColumn(name = "resume_id")
+    private Resume resume;
+
+    @ManyToOne
+    @JoinColumn(name = "vacancy_id")
+    private Vacancy vacancy;
     private Boolean confirmation;
+
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "respondedApplicants")
+    private List<Message> messages;
 }

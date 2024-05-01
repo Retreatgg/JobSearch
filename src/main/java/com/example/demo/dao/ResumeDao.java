@@ -19,7 +19,7 @@ public class ResumeDao {
     private final JdbcTemplate jdbcTemplate;
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    public List<Resume> getAllResumes(int perPage, int offset) {
+  /*  public List<Resume> getAllResumes(int perPage, int offset) {
         String sql = """
                 select * from resumes
                 where is_active = true
@@ -111,5 +111,5 @@ public class ResumeDao {
                 """;
 
         jdbcTemplate.update(sql, resume.getUpdateTime(), resume.getId());
-    }
+    }*/
 }

@@ -16,7 +16,7 @@ public class RespondedApplicantsDao {
     private final JdbcTemplate jdbcTemplate;
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    public void createRespondedApplicants(RespondedApplicant respondedApplicantsDto) {
+  /*  public void createRespondedApplicants(RespondedApplicant respondedApplicantsDto) {
         String sql = """
                 insert into RESPONDED_APPLICANTS(resume_id, vacancy_id, confirmation) 
                 VALUES ( :resume_id, :VACANCY_ID, :CONFIRMATION )
@@ -53,5 +53,5 @@ public class RespondedApplicantsDao {
                 """;
         
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(RespondedApplicant.class), resumeId);
-    }
+    }*/
 }
