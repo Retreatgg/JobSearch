@@ -5,6 +5,7 @@ import com.example.demo.dto.ChatDto;
 import com.example.demo.dto.SendMessageDto;
 import com.example.demo.model.Chat;
 import com.example.demo.model.User;
+import com.example.demo.repository.ChatRepository;
 import com.example.demo.service.ChatService;
 import com.example.demo.util.UserUtil;
 import lombok.RequiredArgsConstructor;
@@ -19,25 +20,25 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ChatServiceImpl implements ChatService {
 
-    private final ChatDao chatDao;
     private final UserUtil userUtil;
+    private final ChatRepository chatRepository;
 
     @Override
     public void saveMessage(Authentication authentication, SendMessageDto sendDto) {
         User user = userUtil.getUserByAuth(authentication);
-        Chat chat = new Chat();
+        Chat chat = Chat.builder()
+                .fromUserEmail(user.getEmail())
+                .toUserEmail(sendDto.getToUserEmail())
+                .message(sendDto.getMessage())
+                .sendTime(LocalDateTime.now())
+                .build();
 
-        chat.setFromUserEmail(user.getEmail());
-        chat.setMessage(sendDto.getMessage());
-        chat.setSendTime(LocalDateTime.now());
-        chat.setToUserEmail(sendDto.getToUserEmail());
-
-        chatDao.saveMessage(chat);
+        chatRepository.save(chat);
     }
 
     @Override
     public List<ChatDto> getChats(String toUser, String fromUser) {
-        List<Chat> chats = chatDao.getChats(toUser, fromUser);
+        List<Chat> chats = chatRepository.findByToUserAndFromUser(toUser, fromUser);
         List<ChatDto> chatList = new ArrayList<>();
 
         chats.forEach(chat -> {

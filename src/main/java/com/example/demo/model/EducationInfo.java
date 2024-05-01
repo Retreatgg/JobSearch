@@ -8,6 +8,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Entity
+@Builder
 @Table(name = "education_info")
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

@@ -1,9 +1,10 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.dao.ContactsInfoDao;
-import com.example.demo.dao.ContactsTypeDao;
 import com.example.demo.dto.ContactInfoDto;
 import com.example.demo.model.ContactInfo;
+import com.example.demo.repository.ContactTypeRepository;
+import com.example.demo.repository.ContactsInfoRepository;
+import com.example.demo.repository.ResumeRepository;
 import com.example.demo.service.ContactInfoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,22 +13,23 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ContactInfoServiceImpl implements ContactInfoService {
 
-    private final ContactsInfoDao contactsInfoDao;
-    private final ContactsTypeDao contactsTypeDao;
+    private final ContactsInfoRepository contactsInfoRepository;
+    private final ResumeRepository resumeRepository;
+    private final ContactTypeRepository contactTypeRepository;
 
     @Override
     public void createContactInfo(Long id, ContactInfoDto contactInfoDto) {
-        ContactInfo contactInfo = new ContactInfo();
-        contactInfo.setResumeId(id);
-        contactInfo.setValue(contactInfoDto.getValue());
-        Long typeId = contactsTypeDao.getContactId(contactInfoDto.getType());
-        contactInfo.setTypeId(typeId);
+        ContactInfo contactInfo = ContactInfo.builder()
+                .resume(resumeRepository.findById(id).get())
+                .value(contactInfoDto.getValue())
+                .type(contactTypeRepository.findByType(contactInfoDto.getType()).get())
+                .build();
 
-        contactsInfoDao.createContactsInfo(contactInfo);
+        contactsInfoRepository.save(contactInfo);
     }
 
     @Override
     public void delete(long id) {
-        contactsInfoDao.deleteContactInfo(id);
+        contactsInfoRepository.deleteById(id);
     }
 }

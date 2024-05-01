@@ -3,6 +3,8 @@ package com.example.demo.service.impl;
 import com.example.demo.dao.EducationInfoDao;
 import com.example.demo.dto.EducationInfoDto;
 import com.example.demo.model.EducationInfo;
+import com.example.demo.repository.EducationInfoRepository;
+import com.example.demo.repository.ResumeRepository;
 import com.example.demo.service.EducationInfoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,28 +17,30 @@ import java.util.List;
 public class EducationInfoServiceImpl implements EducationInfoService {
 
     private final EducationInfoDao educationInfoDao;
+    private final ResumeRepository resumeRepository;
+    private final EducationInfoRepository educationInfoRepository;
 
     @Override
     public void createEducationInfo(Long id, EducationInfoDto educationInfoDto) {
-        EducationInfo educationInfo = new EducationInfo();
-        educationInfo.setResumeId(id);
-        educationInfo.setDegree(educationInfoDto.getDegree());
-        educationInfo.setProgram(educationInfoDto.getProgram());
-        educationInfo.setInstitution(educationInfoDto.getInstitution());
-        educationInfo.setStartDate(educationInfoDto.getStartDate());
-        educationInfo.setEndDate(educationInfoDto.getEndDate());
+        EducationInfo educationInfo = EducationInfo.builder()
+                .degree(educationInfoDto.getDegree())
+                .endDate(educationInfoDto.getEndDate())
+                .institution(educationInfoDto.getInstitution())
+                .program(educationInfoDto.getProgram())
+                .resumeId(resumeRepository.findById(id).get())
+                .build();
 
-        educationInfoDao.createEducationInfo(educationInfo);
+        educationInfoRepository.save(educationInfo);
     }
 
     @Override
     public void delete(long id) {
-        educationInfoDao.delete(id);
+        educationInfoRepository.deleteById(id);
     }
 
     @Override
     public List<EducationInfoDto> getEducations(Long resumeId) {
-        List<EducationInfo> educationInfos = educationInfoDao.getEducations(resumeId);
+        List<EducationInfo> educationInfos = educationInfoRepository.findByResumeId(resumeId);
         List<EducationInfoDto> educationInfoDtos = new ArrayList<>();
 
         educationInfos.forEach(e -> {

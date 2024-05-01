@@ -1,14 +1,14 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.dao.MessageDao;
 import com.example.demo.dto.MessageDto;
-import com.example.demo.dto.ResumeDto;
 import com.example.demo.model.Message;
+import com.example.demo.model.Resume;
 import com.example.demo.model.User;
+import com.example.demo.repository.MessageRepository;
+import com.example.demo.repository.RespondedApplicantsRepository;
+import com.example.demo.repository.ResumeRepository;
 import com.example.demo.service.MessageService;
-import com.example.demo.service.RespondedApplicantService;
-import com.example.demo.service.ResumeService;
-import com.example.demo.util.FileUtil;
+import com.example.demo.util.UserUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
@@ -20,13 +20,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MessageServiceImpl implements MessageService {
 
-    private final MessageDao messageDao;
-    private final ResumeService resumeService;
-    private final FileUtil fileUtil;
-    private final RespondedApplicantService respondedApplicantService;
+    private final MessageRepository messageRepository;
+    private final ResumeRepository resumeRepository;
+    private final UserUtil userUtil;
+    private final RespondedApplicantsRepository respondedApplicantsRepository;
 
     public List<MessageDto> getMessages(Long respondId) {
-        List<Message> messages = messageDao.getMessagesByRespondId(respondId);
+        List<Message> messages = messageRepository.findByRespondApplicantId(respondId);
         List<MessageDto> messageDtos = new ArrayList<>();
 
         messages.forEach(e -> {
@@ -40,23 +40,19 @@ public class MessageServiceImpl implements MessageService {
     }
 
     public List<MessageDto> getAllMessages(Authentication authentication) {
+        User user = userUtil.getUserByAuth(authentication);
         List<MessageDto> messages = new ArrayList<>();
 
-        List<ResumeDto> resumes = resumeService.getResumesByApplicantId(authentication);
+        List<Resume> resumes = resumeRepository.findByApplicantId(user.getId());
         List<Long> listWithId = new ArrayList<>();
 
-
-       /* resumes.forEach(e -> {
-            listWithId.addAll(
-                    respondedApplicantService.getRespondIdByResume(e.getId()));
-        }); */
         if(resumes != null) {
 
             for (var resume : resumes) {
-                List<Long> respondId = respondedApplicantService.getRespondIdByResume(resume.getId());
+                List<Long> respondId = respondedApplicantsRepository.findByResumeId(resume.getId());
                 if (respondId != null) {
                     listWithId.addAll(
-                            respondedApplicantService.getRespondIdByResume(resume.getId())
+                            respondedApplicantsRepository.findByResumeId(resume.getId())
                     );
                 }
             }

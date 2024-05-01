@@ -1,8 +1,8 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.dao.ContactsTypeDao;
 import com.example.demo.dto.ContactTypeDto;
 import com.example.demo.model.ContactType;
+import com.example.demo.repository.ContactTypeRepository;
 import com.example.demo.service.ContactTypeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,12 +14,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ContactTypeServiceImpl implements ContactTypeService {
 
-    private final ContactsTypeDao contactsTypeDao;
+    private final ContactTypeRepository contactTypeRepository;
 
     @Override
     public List<ContactTypeDto> getContacts() {
         List<ContactTypeDto> contactTypeDtos = new ArrayList<>();
-        List<ContactType> contactTypes = contactsTypeDao.getContacts();
+        List<ContactType> contactTypes = contactTypeRepository.findAll();
 
         contactTypes.forEach(e -> {
             contactTypeDtos.add(ContactTypeDto.builder()

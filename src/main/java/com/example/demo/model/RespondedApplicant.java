@@ -8,6 +8,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
+@Builder
 @Table(name = "responed_applicants")
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

@@ -6,6 +6,7 @@ import lombok.*;
 @Getter
 @Setter
 @Entity
+@Builder
 @Table(name = "contacts_info")
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
