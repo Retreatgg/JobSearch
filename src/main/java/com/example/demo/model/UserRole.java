@@ -6,19 +6,19 @@ import lombok.*;
 @Getter
 @Setter
 @Entity
-@Table(name = "user_tole")
+@Builder
+@Table(name = "user_role")
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@IdClass(UserRoleId.class)
 public class UserRole {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
 
+    @Id
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Authority role;

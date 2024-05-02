@@ -1,16 +1,14 @@
 package com.example.demo.dto;
 
 import jakarta.validation.constraints.*;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 
 @Data
 @Builder
 @Getter
 @Setter
+@NoArgsConstructor
 public class UserDto {
     private Long id;
     @NotEmpty

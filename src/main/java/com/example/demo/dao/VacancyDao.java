@@ -45,7 +45,7 @@ public class VacancyDao {
                 """;
 
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Vacancy.class), id);
-    }
+    }*/
 
     public List<Vacancy> getActiveVacancies(int perPage, int offset) {
         String sql = """
@@ -57,7 +57,7 @@ public class VacancyDao {
 
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Vacancy.class), perPage, offset);
     }
-
+/*
     public Optional<Vacancy> getVacancyById(Long id) {
         String sql = """
                 select * from vacancies

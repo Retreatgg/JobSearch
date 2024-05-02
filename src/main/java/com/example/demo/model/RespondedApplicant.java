@@ -9,7 +9,7 @@ import java.util.List;
 @Setter
 @Entity
 @Builder
-@Table(name = "responed_applicants")
+@Table(name = "responded_applicants")
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class RespondedApplicant {

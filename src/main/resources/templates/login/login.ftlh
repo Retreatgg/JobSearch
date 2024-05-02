@@ -8,7 +8,7 @@
                          class="img-fluid" alt="Sample image">
                 </div>
                 <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-                    <form class="mt-5" id="login-form">
+                    <form class="mt-5" id="login-form" action="/auth/login" method="post">
 
                         <div data-mdb-input-init class="form-outline mb-4">
                             <input type="email" id="form3Example3" class="form-control form-control-lg"

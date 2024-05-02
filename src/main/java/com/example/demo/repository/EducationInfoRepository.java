@@ -10,6 +10,9 @@ import java.util.List;
 @Repository
 public interface EducationInfoRepository extends JpaRepository<EducationInfo, Long> {
 
-    @Query("select ei from EducationInfo ei where ei.resumeId = :resumeId")
+    @Query("select ei from EducationInfo ei where ei.resume.id = :resumeId")
     List<EducationInfo> findByResumeId(Long resumeId);
+
+    @Query("delete from EducationInfo c where c.resume.id = :id")
+    void deleteByResumeId(Long id);
 }

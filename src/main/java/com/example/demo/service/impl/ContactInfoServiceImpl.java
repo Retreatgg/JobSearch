@@ -21,7 +21,7 @@ public class ContactInfoServiceImpl implements ContactInfoService {
     public void createContactInfo(Long id, ContactInfoDto contactInfoDto) {
         ContactInfo contactInfo = ContactInfo.builder()
                 .resume(resumeRepository.findById(id).get())
-                .value(contactInfoDto.getValue())
+                .contactValue(contactInfoDto.getValue())
                 .type(contactTypeRepository.findByType(contactInfoDto.getType()).get())
                 .build();
 

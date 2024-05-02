@@ -14,29 +14,5 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class ContactsInfoDao {
-    /*private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
-    private final JdbcTemplate jdbcTemplate;
-
-    public void createContactsInfo(ContactInfo contactInfo) {
-        String sql = """
-                insert into contacts_info(contact_value, type_id, resume_id)
-                values(:contact_value, :type_id, :resume_id)
-                """;
-
-        namedParameterJdbcTemplate.update(sql, new MapSqlParameterSource()
-                .addValue("contact_value", contactInfo.getValue())
-                .addValue("type_id", contactInfo.getType())
-                .addValue("resume_id", contactInfo.getResumeId())
-        );
-    }
-
-    public void deleteContactInfo(long id) {
-        String sql = """
-                delete from contacts_info
-                where RESUME_ID = ?
-                """;
-
-        jdbcTemplate.update(sql, id);
-    }*/
 
 }

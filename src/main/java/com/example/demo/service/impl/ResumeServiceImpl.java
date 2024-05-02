@@ -4,8 +4,10 @@ import com.example.demo.dao.CategoryDao;
 import com.example.demo.dao.ResumeDao;
 import com.example.demo.dao.UserDao;
 import com.example.demo.dto.*;
+import com.example.demo.model.RespondedApplicant;
 import com.example.demo.model.Resume;
 import com.example.demo.model.User;
+import com.example.demo.repository.*;
 import com.example.demo.service.*;
 import com.example.demo.util.FileUtil;
 import com.example.demo.util.UserUtil;
@@ -29,12 +31,13 @@ import static com.example.demo.enums.AccountType.EMPLOYER;
 public class ResumeServiceImpl implements ResumeService {
 
     private final ResumeDao resumeDao;
-    private final UserDao userDao;
-    private final CategoryDao categoryDao;
+    private final ResumeRepository resumeRepository;
+    private final UserRepository userRepository;
+    private final RespondedApplicantsRepository respondedApplicantsRepository;
+    private final CategoryRepository categoryRepository;
     private final WorkExperienceInfoService workExperienceInfoService;
     private final EducationInfoService educationInfoService;
     private final ContactInfoService contactInfoService;
-    private final RespondedApplicantService respondedApplicantService;
 
     private final VacancyService vacancyService;
     private final UserUtil userUtil;
@@ -60,8 +63,7 @@ public class ResumeServiceImpl implements ResumeService {
         String authority = userUtil.getAuthority(auth);
 
         if (authority.equals(EMPLOYER.toString())) {
-            Resume resume = resumeDao.getResumesByCategoryId(id)
-                    .orElseThrow(() -> new NoSuchElementException("Resume is not found"));
+            Resume resume = resumeRepository.findByCategoryId(id).orElseThrow(() -> new NoSuchElementException("Resume is not found"));
 
             return transformationForSingleDtoResume(resume);
         }
@@ -74,7 +76,7 @@ public class ResumeServiceImpl implements ResumeService {
         User user = userUtil.getUserByAuth(auth);
 
         if (user.getAccountType().equals(String.valueOf(APPLICANT))) {
-            List<Resume> resumes = resumeDao.getResumesByApplicant(user.getId());
+            List<Resume> resumes = resumeRepository.findByApplicantId(user.getId());
             if (resumes != null && !resumes.isEmpty()) {
                 return transformationForListDtoResume(resumes);
             } else {
@@ -88,7 +90,7 @@ public class ResumeServiceImpl implements ResumeService {
 
     @Override
     public ResumeDto getResumeById(Long id, Authentication auth) {
-        Resume resume = resumeDao.getResumeById(id)
+        Resume resume = resumeRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Can not find Resume by ID:" + id));
 
         return transformationForSingleDtoResume(resume);
@@ -103,15 +105,14 @@ public class ResumeServiceImpl implements ResumeService {
             return false;
         }
 
-        Resume resume = resumeDao.getResumeById(id)
+        Resume resume = resumeRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Can not find Resume by ID:" + id));
 
-        if (Objects.equals(resume.getApplicantId(), user.getId())) {
-            resumeDao.deleteResumeById(id);
+        if (Objects.equals(resume.getApplicant().getId(), user.getId())) {
+            resumeRepository.deleteById(id);
             contactInfoService.delete(id);
             workExperienceInfoService.delete(id);
             educationInfoService.delete(id);
-
             return true;
         }
 
@@ -124,25 +125,26 @@ public class ResumeServiceImpl implements ResumeService {
         User user = userUtil.getUserByAuth(auth);
 
         if (authority.equals(APPLICANT.toString())) {
-            Resume resume = new Resume();
+            Resume resume = Resume.builder()
+                    .name(resumeDto.getTitle())
+                    .salary(resumeDto.getSalary())
+                    .isActive(resumeDto.getIsActive())
+                    .createdDate(LocalDateTime.now())
+                    .updateTime(LocalDateTime.now())
+                    .applicant(userRepository.findByEmail(user.getEmail()).get())
+                    .category(categoryRepository.findByName(resumeDto.getCategoryName()).get())
 
-            resume.setName(resumeDto.getTitle());
-            resume.setSalary(resumeDto.getSalary());
-            resume.setIsActive(resumeDto.getIsActive());
-            resume.setCreatedDate(LocalDateTime.now());
-            resume.setUpdateTime(LocalDateTime.now());
-            resume.setApplicantId(userDao.returnIdByEmail(user.getEmail()));
-            resume.setCategoryId(categoryDao.returnIdByName(resumeDto.getCategoryName()));
+                    .build();
 
-            Long resumeId = resumeDao.addResume(resume);
+            Resume newResume = resumeRepository.save(resume);
 
             resumeDto.getWorkExperienceInfo()
-                    .forEach(wei -> workExperienceInfoService.createWorkExperienceInfo(resumeId, wei));
+                    .forEach(wei -> workExperienceInfoService.createWorkExperienceInfo(newResume.getId(), wei));
             resumeDto.getEducationInfo()
-                    .forEach(ei -> educationInfoService.createEducationInfo(resumeId, ei));
+                    .forEach(ei -> educationInfoService.createEducationInfo(newResume.getId(), ei));
 
             for(var contact : resumeDto.getContacts()) {
-                if(!contact.getValue().equals("")) contactInfoService.createContactInfo(resumeId, contact);
+                if(!contact.getValue().equals("")) contactInfoService.createContactInfo(newResume.getId(), contact);
             }
         }
     }
@@ -151,17 +153,17 @@ public class ResumeServiceImpl implements ResumeService {
     public void editResume(ResumeUpdateDto resumeDto, long id, Authentication auth) {
         String authority = userUtil.getAuthority(auth);
         User user = userUtil.getUserByAuth(auth);
-        Resume resume = resumeDao.getResumeById(id)
+        Resume resume = resumeRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Resume is not found"));
 
-        if (authority.equalsIgnoreCase(APPLICANT.toString()) && Objects.equals(resume.getApplicantId(), user.getId())) {
+        if (authority.equalsIgnoreCase(APPLICANT.toString()) && Objects.equals(resume.getApplicant().getId(), user.getId())) {
 
             resume.setName(resumeDto.getTitle());
             resume.setSalary(resumeDto.getSalary());
             resume.setIsActive(resumeDto.getIsActive());
-            resume.setCategoryId(categoryDao.returnIdByName(resumeDto.getCategoryName()));
+            resume.setCategory(categoryRepository.findByName(resumeDto.getCategoryName()).get());
 
-            resumeDao.editResume(resume);
+           // resumeDao.editResume(resume);
 
             resumeDto.getWorkExperienceInfo()
                     .forEach(wei -> workExperienceInfoService.createWorkExperienceInfo(resume.getId(), wei));
@@ -174,30 +176,30 @@ public class ResumeServiceImpl implements ResumeService {
 
     @Override
     public void updateResume(Long id) {
-        Resume resume = resumeDao.getResumeById(id)
+        Resume resume = resumeRepository.findByCategoryId(id)
                 .orElseThrow(() -> new NoSuchElementException("Resume is not found"));
 
         resume.setUpdateTime(LocalDateTime.now());
-        resumeDao.update(resume);
+        //resumeDao.update(resume);
     }
 
     @Override
     public List<ResumeResponseDto> getResponsesResumes(Long userId, Authentication authentication) {
-        List<RespondedApplicantsDto> responses = respondedApplicantService.getResponsesByApplicantId(userId);
+        List<RespondedApplicant> responses = respondedApplicantsRepository.findResponsesByApplicantId(userId);
         List<ResumeResponseDto> resumes = new ArrayList<>();
         List<Long> employersId = new ArrayList<>();
 
         responses.forEach(response ->
             employersId.add(
-                    vacancyService.getAuthorIdByVacancy(response.getVacancyId()))
+                    vacancyService.getAuthorIdByVacancy(response.getVacancy().getId()))
         );
 
 
         for (int i = 0; i < responses.size(); i++) {
-            RespondedApplicantsDto response = responses.get(i);
+            RespondedApplicant response = responses.get(i);
             Long employerId = employersId.get(i);
 
-            ResumeDto resume = getResumeById(response.getResumeId(), authentication);
+            ResumeDto resume = getResumeById(response.getResume().getId(), authentication);
 
             ResumeResponseDto resumeResponse = ResumeResponseDto.builder()
                     .employerId(employerId)
@@ -223,8 +225,8 @@ public class ResumeServiceImpl implements ResumeService {
                 .name(resume.getName())
                 .salary(resume.getSalary())
                 .isActive(resume.getIsActive())
-                .categoryId(resume.getCategoryId())
-                .applicant(resume.getApplicantId())
+                .categoryId(resume.getCategory().getId())
+                .applicant(resume.getApplicant().getId())
                 .createdDate(resume.getCreatedDate())
                 .updateTime(resume.getUpdateTime())
                 .build();
@@ -238,8 +240,8 @@ public class ResumeServiceImpl implements ResumeService {
                     .name(e.getName())
                     .salary(e.getSalary())
                     .isActive(e.getIsActive())
-                    .categoryId(e.getCategoryId())
-                    .applicant(e.getApplicantId())
+                    .categoryId(e.getCategory().getId())
+                    .applicant(e.getApplicant().getId())
                     .createdDate(e.getCreatedDate())
                     .updateTime(e.getUpdateTime())
                     .build());

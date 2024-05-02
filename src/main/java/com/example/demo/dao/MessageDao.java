@@ -14,11 +14,4 @@ public class MessageDao {
 
     private final JdbcTemplate jdbcTemplate;
 
-    public List<Message> getMessagesByRespondId(Long respondId) {
-        String sql = """
-                select * from messages where responded_applicants = ?
-                """;
-
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Message.class), respondId);
-    }
 }

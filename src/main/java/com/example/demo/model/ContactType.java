@@ -8,7 +8,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "contact_type")
+@Table(name = "contact_types")
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ContactType {

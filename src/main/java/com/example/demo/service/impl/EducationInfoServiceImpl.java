@@ -27,7 +27,7 @@ public class EducationInfoServiceImpl implements EducationInfoService {
                 .endDate(educationInfoDto.getEndDate())
                 .institution(educationInfoDto.getInstitution())
                 .program(educationInfoDto.getProgram())
-                .resumeId(resumeRepository.findById(id).get())
+                .resume(resumeRepository.findById(id).get())
                 .build();
 
         educationInfoRepository.save(educationInfo);

@@ -9,6 +9,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
+@Builder
 @Table(name = "vacancies")
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -38,7 +39,7 @@ public class Vacancy {
 
     @Column(name = "created_date")
     private LocalDateTime createdDate;
-    @Column(name = "update_time")
+    @Column(name = "update_date")
     private LocalDateTime updateTime;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "vacancy")

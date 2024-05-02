@@ -4,6 +4,7 @@ import com.example.demo.dao.VacancyDao;
 import com.example.demo.dto.*;
 import com.example.demo.model.User;
 import com.example.demo.model.Vacancy;
+import com.example.demo.repository.VacancyRepository;
 import com.example.demo.service.CategoryService;
 import com.example.demo.service.VacancyService;
 import com.example.demo.util.UserUtil;
@@ -23,6 +24,7 @@ import static com.example.demo.enums.AccountType.EMPLOYER;
 public class VacancyServiceImpl implements VacancyService {
 
     private final VacancyDao vacancyDao;
+    private final VacancyRepository vacancyRepository;
     private final CategoryService categoryService;
 
     private final UserUtil userUtil;
@@ -30,13 +32,13 @@ public class VacancyServiceImpl implements VacancyService {
 
     @Override
     public List<VacancyDtoForShow> getAllVacancies() {
-        List<Vacancy> vacancies = vacancyDao.getAllVacancies();
+        List<Vacancy> vacancies = vacancyRepository.findAll();
         return transformationForDtoListVacancies(vacancies);
     }
 
     @Override
     public List<VacancyDtoForShow> getVacanciesByCategory(String name) {
-        List<Vacancy> vacancies = vacancyDao.getVacanciesByCategory(name);
+        List<Vacancy> vacancies = vacancyRepository.findByCategoryName(name);
         return transformationForDtoListVacancies(vacancies);
     }
 
@@ -50,7 +52,7 @@ public class VacancyServiceImpl implements VacancyService {
 
         if(categoryId != 0) {
             List<Vacancy> vacanciesByCategory = vacancies.stream()
-                    .filter(e -> e.getCategoryId() == categoryId)
+                    .filter(e -> e.getCategory().getId() == categoryId)
                     .toList();
 
             return transformationForDtoListVacancies(vacanciesByCategory);
@@ -65,8 +67,8 @@ public class VacancyServiceImpl implements VacancyService {
         if (user.getAccountType().equals(EMPLOYER.toString())) {
             Vacancy vacancy = getVacancyById(id);
 
-            if (Objects.equals(vacancy.getAuthorId(), user.getId())) {
-                vacancyDao.deleteVacancyById(id);
+            if (Objects.equals(vacancy.getAuthor().getId(), user.getId())) {
+                vacancyRepository.deleteById(id);
             }
         } else {
             throw new NoSuchElementException("User with ID " + user.getId() + " not authorized to delete vacancy with ID " + id);
@@ -78,24 +80,22 @@ public class VacancyServiceImpl implements VacancyService {
     public void addVacancy(VacancyDto vacancyDto, Authentication auth) {
         String authority = userUtil.getAuthority(auth);
         User user = userUtil.getUserByAuth(auth);
-        Long categoryId = categoryService.getCategoryId(vacancyDto.getCategoryName());
-
 
         if (authority.equalsIgnoreCase(EMPLOYER.toString())) {
-            Vacancy vacancy = new Vacancy();
+            Vacancy vacancy = Vacancy.builder()
+                    .salary(vacancyDto.getSalary())
+                    .createdDate(LocalDateTime.now())
+                    .updateTime(LocalDateTime.now())
+                    .name(vacancyDto.getName())
+                    .expTo(vacancyDto.getExpTo())
+                    .expFrom(vacancyDto.getExpFrom())
+                    .isActive(vacancyDto.getIsActive())
+                    .description(vacancyDto.getDescription())
+                    .author(user)
+                    .category(categoryService.findByName(vacancyDto.getCategoryName()))
+                    .build();
 
-            vacancy.setAuthorId(user.getId());
-            vacancy.setSalary(vacancyDto.getSalary());
-            vacancy.setDescription(vacancyDto.getDescription());
-            vacancy.setExpTo(vacancyDto.getExpTo());
-            vacancy.setIsActive(vacancyDto.getIsActive());
-            vacancy.setCategoryId(categoryId);
-            vacancy.setExpFrom(vacancyDto.getExpFrom());
-            vacancy.setName(vacancyDto.getName());
-            vacancy.setUpdateTime(LocalDateTime.now());
-            vacancy.setCreatedDate(LocalDateTime.now());
-
-            vacancyDao.addVacancy(vacancy);
+            vacancyRepository.save(vacancy);
         }
 
     }
@@ -114,9 +114,9 @@ public class VacancyServiceImpl implements VacancyService {
             vacancy.setIsActive(vacancyDto.getIsActive());
             vacancy.setName(vacancyDto.getName());
             vacancy.setExpFrom(vacancyDto.getExpFrom());
-            vacancy.setCategoryId(vacancyDto.getCategoryId());
+            vacancy.setCategory(categoryService.findById(vacancyDto.getCategoryId()));
 
-            vacancyDao.editVacancy(vacancy);
+            //vacancyDao.editVacancy(vacancy);
         } else {
             throw new NoSuchElementException("User not authorized to edit vacancy");
         }
@@ -125,7 +125,7 @@ public class VacancyServiceImpl implements VacancyService {
 
     @Override
     public List<VacancyDtoForShow> getVacanciesByCompanyName(String name) {
-        List<Vacancy> vacancies = vacancyDao.getVacanciesByCompanyName(name);
+        List<Vacancy> vacancies = vacancyRepository.findByCompanyName(name);
         return transformationForDtoListVacancies(vacancies);
     }
 
@@ -137,8 +137,8 @@ public class VacancyServiceImpl implements VacancyService {
                 .description(e.getDescription())
                 .expTo(e.getExpTo())
                 .expFrom(e.getExpFrom())
-                .authorId(e.getAuthorId())
-                .categoryId(e.getCategoryId())
+                .authorId(e.getAuthor().getId())
+                .categoryId(e.getCategory().getId())
                 .salary(e.getSalary())
                 .isActive(e.getIsActive())
                 .build()));
@@ -148,7 +148,7 @@ public class VacancyServiceImpl implements VacancyService {
 
     @Override
     public Vacancy getVacancyById(Long id) {
-        Optional<Vacancy> vacancyOptional = vacancyDao.getVacancyById(id);
+        Optional<Vacancy> vacancyOptional = vacancyRepository.findById(id);
         return vacancyOptional.orElseThrow(() -> new NoSuchElementException("Vacancy by ID: " + id + " is not found"));
     }
 
@@ -157,12 +157,12 @@ public class VacancyServiceImpl implements VacancyService {
         Vacancy vacancy = getVacancyById(id);
 
         vacancy.setUpdateTime(LocalDateTime.now());
-        vacancyDao.update(vacancy);
+       // vacancyDao.update(vacancy);
     }
 
     @Override
     public Long getAuthorIdByVacancy(Long vacancyId) {
-        return vacancyDao.getAuthorIdByVacancy(vacancyId);
+        return vacancyRepository.findById(vacancyId).get().getAuthor().getId();
     }
 
 }

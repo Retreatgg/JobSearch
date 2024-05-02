@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
 
@@ -48,7 +49,15 @@ public class SecurityConfig {
          http
                  .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                  .httpBasic(Customizer.withDefaults())
-                 .logout(AbstractHttpConfigurer::disable)
+                 .formLogin(form -> form
+                         .loginPage("/auth/login")
+                         .loginProcessingUrl("/auth/login")
+                         .defaultSuccessUrl("/")
+                         .failureUrl("/auth/login?error=true")
+                         .permitAll())
+                 .logout(logout -> logout
+                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                         .permitAll())
                  .csrf(AbstractHttpConfigurer::disable)
                  .authorizeHttpRequests(authorize -> authorize
                          //.requestMatchers(HttpMethod.POST, "/resumes/**").hasAuthority("APPLICANT")

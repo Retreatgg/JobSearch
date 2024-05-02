@@ -18,7 +18,7 @@ public class Message {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "responed_applicants")
+    @JoinColumn(name = "responded_applicants")
     private RespondedApplicant respondedApplicants;
     private String content;
     private LocalDateTime timestamp;

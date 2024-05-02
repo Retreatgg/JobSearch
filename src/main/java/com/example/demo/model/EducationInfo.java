@@ -20,7 +20,7 @@ public class EducationInfo {
 
     @ManyToOne
     @JoinColumn(name = "resume_id")
-    private Resume resumeId;
+    private Resume resume;
     private String institution;
     private String program;
 

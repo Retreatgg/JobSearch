@@ -23,5 +23,6 @@ public class ContactInfo {
     @ManyToOne
     @JoinColumn(name = "resume_id")
     private Resume resume;
-    private String value;
+    @Column(name = "contact_value")
+    private String contactValue;
 }

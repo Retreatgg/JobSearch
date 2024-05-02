@@ -1,6 +1,5 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.dao.ChatDao;
 import com.example.demo.dto.ChatDto;
 import com.example.demo.dto.SendMessageDto;
 import com.example.demo.model.Chat;

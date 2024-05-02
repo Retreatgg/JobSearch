@@ -1,6 +1,5 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.dao.RespondedApplicantsDao;
 import com.example.demo.dto.RespondedApplicantsDto;
 import com.example.demo.model.RespondedApplicant;
 import com.example.demo.repository.RespondedApplicantsRepository;
@@ -17,10 +16,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RespondedApplicantServiceImpl implements RespondedApplicantService {
 
-    private final RespondedApplicantsDao respondedApplicantsDao;
     private final RespondedApplicantsRepository respondedApplicantsRepository;
     private final ResumeRepository resumeRepository;
     private final VacancyRepository vacancyRepository;
+
     @Override
     public void createRespondedApplicant(RespondedApplicantsDto respondedApplicantsDto) {
         RespondedApplicant respondedApplicant = RespondedApplicant.builder()

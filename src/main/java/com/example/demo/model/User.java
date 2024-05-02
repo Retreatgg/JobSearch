@@ -35,7 +35,7 @@ public class User {
     private List<Resume> resumes;
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "user")
-    private List<UserRole> userRoles;
+    private UserRole userRoles;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "author")
     private List<Vacancy> vacancies;
