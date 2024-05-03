@@ -1,6 +1,5 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.dao.CategoryDao;
 import com.example.demo.dto.CategoryDto;
 import com.example.demo.model.Category;
 import com.example.demo.repository.CategoryRepository;

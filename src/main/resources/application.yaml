@@ -10,6 +10,7 @@ spring:
 
   mvc:
     static-path-pattern: /static/**
+    log-request-details: false
 
   liquibase:
     change-log: classpath:/db/changelog/master.yaml
@@ -17,12 +18,22 @@ spring:
     hibernate:
       ddl-auto: validate
 
+    properties:
+      hibernate:
+        generate_statistics: true
+        format_sql: true
+    show-sql: true
+
 logging:
   level:
     root: info
+    org:
+      hibernate:
+        stat: debug
+        type: trace
 
-    #pattern:
-    #console: "%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n"
+    sql: trace
+    web: debug
 
   file:
     name: logs/spring.log

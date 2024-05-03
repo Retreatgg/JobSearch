@@ -51,8 +51,8 @@ public class ResumeServiceImpl implements ResumeService {
         String authority = userUtil.getAuthority(authentication);
 
         if (authority.equals(EMPLOYER.toString())) {
-            List<Resume> resumes = resumeDao.getAllResumes(sizePageNumber, offset);
-            return transformationForListDtoResume(resumes);
+           // List<Resume> resumes = resumeDao.getAllResumes(sizePageNumber, offset);
+           // return transformationForListDtoResume(resumes);
         }
 
         throw new IllegalArgumentException("Your role is not appropriate");
@@ -143,8 +143,8 @@ public class ResumeServiceImpl implements ResumeService {
             resumeDto.getEducationInfo()
                     .forEach(ei -> educationInfoService.createEducationInfo(newResume.getId(), ei));
 
-            for(var contact : resumeDto.getContacts()) {
-                if(!contact.getValue().equals("")) contactInfoService.createContactInfo(newResume.getId(), contact);
+            for (var contact : resumeDto.getContacts()) {
+                if (!contact.getValue().equals("")) contactInfoService.createContactInfo(newResume.getId(), contact);
             }
         }
     }
@@ -163,7 +163,7 @@ public class ResumeServiceImpl implements ResumeService {
             resume.setIsActive(resumeDto.getIsActive());
             resume.setCategory(categoryRepository.findByName(resumeDto.getCategoryName()).get());
 
-           // resumeDao.editResume(resume);
+            resumeRepository.save(resume);
 
             resumeDto.getWorkExperienceInfo()
                     .forEach(wei -> workExperienceInfoService.createWorkExperienceInfo(resume.getId(), wei));
@@ -176,11 +176,11 @@ public class ResumeServiceImpl implements ResumeService {
 
     @Override
     public void updateResume(Long id) {
-        Resume resume = resumeRepository.findByCategoryId(id)
-                .orElseThrow(() -> new NoSuchElementException("Resume is not found"));
+        Resume resume = resumeRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Resume not found"));
 
         resume.setUpdateTime(LocalDateTime.now());
-        //resumeDao.update(resume);
+        resumeRepository.save(resume);
     }
 
     @Override
@@ -190,8 +190,8 @@ public class ResumeServiceImpl implements ResumeService {
         List<Long> employersId = new ArrayList<>();
 
         responses.forEach(response ->
-            employersId.add(
-                    vacancyService.getAuthorIdByVacancy(response.getVacancy().getId()))
+                employersId.add(
+                        vacancyService.getAuthorIdByVacancy(response.getVacancy().getId()))
         );
 
 

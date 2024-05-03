@@ -43,6 +43,6 @@ public class Vacancy {
     private LocalDateTime updateTime;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "vacancy")
-    private List<RespondedApplicant> contactInfos;
+    private List<RespondedApplicant> respondedApplicants;
 
 }

@@ -116,7 +116,7 @@ public class VacancyServiceImpl implements VacancyService {
             vacancy.setExpFrom(vacancyDto.getExpFrom());
             vacancy.setCategory(categoryService.findById(vacancyDto.getCategoryId()));
 
-            //vacancyDao.editVacancy(vacancy);
+           vacancyRepository.save(vacancy);
         } else {
             throw new NoSuchElementException("User not authorized to edit vacancy");
         }
@@ -157,7 +157,7 @@ public class VacancyServiceImpl implements VacancyService {
         Vacancy vacancy = getVacancyById(id);
 
         vacancy.setUpdateTime(LocalDateTime.now());
-       // vacancyDao.update(vacancy);
+       vacancyRepository.save(vacancy);
     }
 
     @Override

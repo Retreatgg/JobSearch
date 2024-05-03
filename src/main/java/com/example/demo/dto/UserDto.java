@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class UserDto {
     private Long id;
     @NotEmpty

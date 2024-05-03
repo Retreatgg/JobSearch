@@ -45,7 +45,7 @@
             let user = Object.fromEntries(data)
             let userJson = JSON.stringify(user)
 
-            await fetch('/api/auth/login', {
+            await fetch('/auth/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
