@@ -1,15 +1,12 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.dao.CategoryDao;
 import com.example.demo.dao.ResumeDao;
-import com.example.demo.dao.UserDao;
 import com.example.demo.dto.*;
 import com.example.demo.model.RespondedApplicant;
 import com.example.demo.model.Resume;
 import com.example.demo.model.User;
 import com.example.demo.repository.*;
 import com.example.demo.service.*;
-import com.example.demo.util.FileUtil;
 import com.example.demo.util.UserUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -76,7 +73,7 @@ public class ResumeServiceImpl implements ResumeService {
         User user = userUtil.getUserByAuth(auth);
 
         if (user.getAccountType().equals(String.valueOf(APPLICANT))) {
-            List<Resume> resumes = resumeRepository.findByApplicantId(user.getId());
+            List<Resume> resumes = resumeRepository.findAllByApplicantId(user.getId());
             if (resumes != null && !resumes.isEmpty()) {
                 return transformationForListDtoResume(resumes);
             } else {
@@ -185,7 +182,7 @@ public class ResumeServiceImpl implements ResumeService {
 
     @Override
     public List<ResumeResponseDto> getResponsesResumes(Long userId, Authentication authentication) {
-        List<RespondedApplicant> responses = respondedApplicantsRepository.findResponsesByApplicantId(userId);
+        List<RespondedApplicant> responses = respondedApplicantsRepository.findAllByResumeApplicantId(userId);
         List<ResumeResponseDto> resumes = new ArrayList<>();
         List<Long> employersId = new ArrayList<>();
 

@@ -24,11 +24,6 @@ public class VacancyController {
     private final VacancyService vacancyService;
     private final RespondedApplicantService respondedApplicantService;
 
-    @GetMapping("")
-    public ResponseEntity<List<VacancyDtoForShow>> getAllVacancies() {
-        return ResponseEntity.ok(vacancyService.getAllVacancies());
-    }
-
     @GetMapping("responded-vacancy/{id}")
     public ResponseEntity<List<RespondedApplicantsDto>> getRespondedVacancies(@PathVariable long id) {
         return ResponseEntity.ok(respondedApplicantService.respondedApplicants(id));

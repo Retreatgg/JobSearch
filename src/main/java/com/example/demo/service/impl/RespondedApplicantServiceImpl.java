@@ -53,7 +53,7 @@ public class RespondedApplicantServiceImpl implements RespondedApplicantService 
 
     @Override
     public List<RespondedApplicantsDto> getResponsesByApplicantId(Long applicantId) {
-        List<RespondedApplicant> responses = respondedApplicantsRepository.findResponsesByApplicantId(applicantId);
+        List<RespondedApplicant> responses = respondedApplicantsRepository.findAllByResumeApplicantId(applicantId);
         List<RespondedApplicantsDto> responseDto = new ArrayList<>();
 
         responses.forEach(response -> {

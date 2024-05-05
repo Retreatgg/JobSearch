@@ -1,9 +1,14 @@
 package com.example.demo.controller;
 
 
+import com.example.demo.model.Vacancy;
 import com.example.demo.service.CategoryService;
 import com.example.demo.service.VacancyService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,20 +26,10 @@ public class MainController {
     @GetMapping
     public String getActiveVacancies(
             Model model,
-            @RequestParam(name = "page", defaultValue = "0") String page,
-            @RequestParam(name = "size", defaultValue = "5") String perPage,
-            @RequestParam(name = "category", required = false) String category)
+            @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable)
     {
-
-        if(category == null || category.isEmpty()) {
-            model.addAttribute("vacancies", vacancyService.getActiveVacancy(page, perPage, 0));
-        } else {
-            Long categoryId = categoryService.getCategoryId(category);
-            model.addAttribute("vacancies", vacancyService.getActiveVacancy(page, perPage, categoryId));
-        }
-
-        model.addAttribute("page", Integer.parseInt(page));
-        model.addAttribute("perPage", Integer.parseInt(perPage));
+        Page<Vacancy> page = vacancyService.getAllVacancies(pageable);
+        model.addAttribute("page", page);
         model.addAttribute("categories", categoryService.categories());
         return "vacancy/all_active_vacancies";
     }

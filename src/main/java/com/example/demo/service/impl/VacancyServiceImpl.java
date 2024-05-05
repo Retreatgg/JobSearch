@@ -10,6 +10,8 @@ import com.example.demo.service.VacancyService;
 import com.example.demo.util.UserUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
@@ -31,9 +33,9 @@ public class VacancyServiceImpl implements VacancyService {
 
 
     @Override
-    public List<VacancyDtoForShow> getAllVacancies() {
-        List<Vacancy> vacancies = vacancyRepository.findAll();
-        return transformationForDtoListVacancies(vacancies);
+    public Page<Vacancy> getAllVacancies(Pageable pageable) {
+        Page<Vacancy> vacancies = vacancyRepository.findAll(pageable);
+        return vacancies;
     }
 
     @Override

@@ -12,7 +12,7 @@
 
                         <div data-mdb-input-init class="form-outline mb-4">
                             <input type="email" id="form3Example3" class="form-control form-control-lg"
-                                   placeholder="Enter a valid email address" name="email"/>
+                                   placeholder="Enter a valid email address" name="username"/>
                             <label class="form-label" for="form3Example3">Email address</label>
                         </div>
 
@@ -33,38 +33,85 @@
         </div>
     </section>
 
+
     <script>
         let form = document.getElementById('login-form')
-        form.addEventListener('submit', onLoginHandler)
 
-        async function onLoginHandler(e) {
-            e.preventDefault()
+        // form.addEventListener('submit', onLoginHandler)
 
-            let target = e.target
+        function onLoginHandler(event) {
+            event.preventDefault()
+
+            let target = event.target
             let data = new FormData(target)
             let user = Object.fromEntries(data)
-            let userJson = JSON.stringify(user)
 
-            await fetch('/auth/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(user)
-            })
-                .then(response => {
-                    if (response.ok) {
-                        localStorage.setItem('user', userJson);
-                        window.location.href = '/'
-                    } else {
-                        throw new Error('Error: ' + response.status);
-                    }
-                })
-                .catch(error => {
-                    console.log(error)
-                });
+            let headers = new Headers()
+            headers.set('Authorization', 'Basic ' + btoa(user.email + ':' + user.password))
+
+            fetchAuthorized(headers)
+            // let userJson = JSON.stringify(user)
+            // localStorage.setItem('user', userJson)
+            // window.location.href = 'http://localhost:8089/'
+
         }
 
+        async function fetchAuthorized(auth) {
+            try {
+                await makeRequest('http://localhost:8089/api/auth/login', updateOptions({
+                    method: 'post',
+                    headers: auth
+                }));
+            } catch (e) {
+                alert(e)
+            }
+        }
+
+        // btoa()
+        // atob()
+
+        function makeHeaders() {
+            let user = restoreUser()
+            // console.log(user);
+
+            let headers = new Headers()
+            headers.set('Content-Type', 'application/json')
+            if (user) {
+                headers.set('Authorization', 'Basic ' + btoa(user.email + ':' + user.password))
+            }
+            return headers
+        }
+
+        async function makeRequest(url, options) {
+            let settings = options || requestSettings
+            let response = await fetch(url, settings)
+
+            if (response.ok) {
+                return await response.json()
+            } else {
+                let err = new Error(response.status.toString())
+                err.response = response
+                console.log(err);
+                throw err
+            }
+        }
+
+        function updateOptions(options) {
+            console.log(options);
+            let update = {...options}
+            update.mode = 'cors'
+            update.headers = makeHeaders()
+            return update
+        }
+
+        const requestSettings = {
+            method: 'get',
+            headers: makeHeaders()
+        }
+
+        function restoreUser() {
+            return JSON.parse(localStorage.getItem('user'))
+        }
     </script>
 
 </@main.layout>

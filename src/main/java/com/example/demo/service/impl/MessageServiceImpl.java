@@ -26,7 +26,7 @@ public class MessageServiceImpl implements MessageService {
     private final RespondedApplicantsRepository respondedApplicantsRepository;
 
     public List<MessageDto> getMessages(Long respondId) {
-        List<Message> messages = messageRepository.findByRespondApplicantId(respondId);
+        List<Message> messages = messageRepository.findAllByRespondedApplicantsId(respondId);
         List<MessageDto> messageDtos = new ArrayList<>();
 
         messages.forEach(e -> {
@@ -43,16 +43,16 @@ public class MessageServiceImpl implements MessageService {
         User user = userUtil.getUserByAuth(authentication);
         List<MessageDto> messages = new ArrayList<>();
 
-        List<Resume> resumes = resumeRepository.findByApplicantId(user.getId());
+        List<Resume> resumes = resumeRepository.findAllByApplicantId(user.getId());
         List<Long> listWithId = new ArrayList<>();
 
         if(resumes != null) {
 
             for (var resume : resumes) {
-                List<Long> respondId = respondedApplicantsRepository.findByResumeId(resume.getId());
+                List<Long> respondId = respondedApplicantsRepository.findRespondedApplicantIdByResumeId(resume.getId());
                 if (respondId != null) {
                     listWithId.addAll(
-                            respondedApplicantsRepository.findByResumeId(resume.getId())
+                            respondedApplicantsRepository.findRespondedApplicantIdByResumeId(resume.getId())
                     );
                 }
             }

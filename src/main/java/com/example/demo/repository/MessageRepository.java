@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface MessageRepository extends JpaRepository<Message, Long> {
 
-    @Query("select m from Message m where m.respondedApplicants = :respondId")
-    List<Message> findByRespondApplicantId(Long respondId);
+
+    List<Message> findAllByRespondedApplicantsId(Long respondId);
 }

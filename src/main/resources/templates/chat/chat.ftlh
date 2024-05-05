@@ -1,5 +1,5 @@
 <#import "../layot.ftlh" as main>
-    <#assign script><script src="../../static/chat.js"></script></#assign>
+<#assign script><script src="../../static/chat.js"></script></#assign>
 <@main.layout script=script>
     <div class="container mt-5">
         <div class="row">

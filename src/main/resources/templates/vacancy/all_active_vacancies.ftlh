@@ -2,7 +2,7 @@
 <#import "../paginatton.ftlh" as p>
 
 <@main.layout script="">
-    <h3 class="mb-4 mt-2">Vacancies: ${vacancies?size}</h3>
+
 
     <div class="form-group">
         <label for="categoryFilter">Select category:</label>
@@ -18,7 +18,7 @@
     </div>
 
     <div class="row">
-        <#list vacancies as vacancy>
+        <#list page.content as vacancy>
             <div class="col-lg-4 col-md-6 col-12 mt-4">
                 <div class="card border-0 bg-light rounded shadow">
                     <div class="card-body">
@@ -27,7 +27,7 @@
                             <span class="text-muted d-block">$ ${vacancy.salary}</span>
                         </div>
                         <div class="job-right my-4 flex-shrink-0">
-                            <a href="${vacancy.id}" class="btn btn-light">More info</a>
+                            <a href="/vacancies/${vacancy.id}" class="btn btn-light">More info</a>
                         </div>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
         </#list>
     </div>
 
-    <#assign maxPage = vacancies?size / perPage?number>
+    <#assign maxPage = page.content?size / 1>
     <@p.pagination page=page maxPage=maxPage path="/">
     </@p.pagination>
 

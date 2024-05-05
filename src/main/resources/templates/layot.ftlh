@@ -63,7 +63,7 @@
                             <a class="nav-link active" aria-current="page" href="/resumes/active">For employers</a>
                         </li>
                         <li class="nav-item ms-auto">
-                            <a class="nav-link active" aria-current="page" href="/login">Log In</a>
+                            <a class="nav-link active" aria-current="page" href="/auth/login">Log In</a>
                         </li>
                     </ul>
                 </div>

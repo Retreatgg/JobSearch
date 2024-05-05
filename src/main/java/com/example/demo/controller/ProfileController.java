@@ -44,6 +44,7 @@ public class ProfileController {
 
     @GetMapping("")
     public String getProfile(Authentication auth, Model model) {
+
         String email = userUtil.getUserByAuth(auth).getEmail();
         UserDto user = userService.getUserByEmail(email);
 
