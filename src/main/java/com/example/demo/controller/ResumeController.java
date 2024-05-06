@@ -65,7 +65,7 @@ public class ResumeController {
     @PostMapping("edit/{id}")
     public String editResume(Authentication authentication, ResumeUpdateDto resumeUpdateDto, @PathVariable Long id) {
         resumeService.editResume(resumeUpdateDto, id, authentication);
-        return "redirect:/";
+        return "redirect:/profile";
     }
 
     @GetMapping("edit/{id}")
@@ -80,4 +80,5 @@ public class ResumeController {
         resumeService.updateResume(id);
         return "redirect:/profile";
     }
+
 }

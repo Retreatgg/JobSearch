@@ -33,7 +33,7 @@
                             </div>
                         </#if>
                         <div class="d-flex flex-column align-items-center text-center">
-                                <img src="/images/download/${user.email}" alt="User Avatar" class="rounded-circle border border-primary" width="150">
+                            <img src="/images/download/${user.email}" alt="User Avatar" class="rounded-circle border border-primary" width="150">
                             <div class="mt-3">
                                 <h4>${user.name}</h4>
                                 <div class="row">
@@ -136,9 +136,8 @@
 
         <#if user.accountType == "EMPLOYER">
             <#if vacancies??>
-                <h3>My vacancies</h3>
+                <h3 class="mt-5">My vacancies</h3>
                 <div class="row">
-
                     <#list vacancies as vacancy>
                         <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
                             <div class="card border-0 bg-light rounded shadow">
@@ -148,20 +147,31 @@
                                         <span class="text-muted d-block">${vacancy.description}</span>
                                     </div>
 
-                                    <div class="row">
-                                        <div class="col mt-3">
-                                            <a href="/vacancies/update/${vacancy.id}" target="__blank" class="btn btn-info">Update</a>
+                                    <div class="row mt-3">
+                                        <div class="col">
+                                            <button id="btn-update" class="btn btn-info btn-block">Update</button>
                                         </div>
-                                        <div class="col mt-3">
-                                            <a href="/vacancies/edit" target="__blank" class="btn btn-info">Edit</a>
+                                        <div class="col">
+                                            <a href="/vacancies/edit/${vacancy.id}" target="__blank" class="btn btn-info btn-block">Edit</a>
                                         </div>
-                                        <div class="col mt-3">
-                                            <a href="/vacancies/${vacancy.id}" target="__blank" class="btn btn-info">Update</a>
+                                        <div class="col">
+                                            <a href="/vacancies/${vacancy.id}" target="__blank" class="btn btn-info btn-block">Details</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+                        <script>
+                            const btnUpdate = document.getElementById('btn-update');
+
+                            btnUpdate.addEventListener('click', () => {
+                                fetch("vacancies/update/${vacancy.id}", {
+                                    method: 'POST'
+                                })
+                            })
+
+                        </script>
                     </#list>
                 </div>
             </#if>
@@ -169,7 +179,7 @@
         <#if user.accountType == "APPLICANT">
             <#if resumes??>
                 <div class="row">
-                    <h3>My resumes</h3>
+                    <h3 class="mt-5">My resumes</h3>
                     <#list resumes as resume>
                         <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
                             <div class="card border-0 bg-light rounded shadow">
@@ -179,20 +189,31 @@
                                         <span class="text-muted d-block"></span>
                                     </div>
 
-                                    <div class="row">
-                                        <div class="col mt-3">
-                                            <a href="/resumes/update/${resume.id}" target="__blank" class="btn btn-info">Update</a>
+                                    <div class="row mt-3">
+                                        <div class="col">
+                                            <button id="btn-update" class="btn btn-info btn-block">Update</button>
                                         </div>
-                                        <div class="col mt-3">
-                                            <a href="/resumes/edit" target="__blank" class="btn btn-info">Edit</a>
+                                        <div class="col">
+                                            <a href="/resumes/edit/${resume.id}" target="__blank" class="btn btn-info btn-block">Edit</a>
                                         </div>
-                                        <div class="col mt-3">
-                                            <a href="/resumes/${resume.id}" target="__blank" class="btn btn-info">About resume</a>
+                                        <div class="col">
+                                            <a href="/resumes/${resume.id}" target="__blank" class="btn btn-info btn-block">Details</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+                        <script>
+                            const btnUpdate = document.getElementById('btn-update');
+
+                            btnUpdate.addEventListener('click', () => {
+                                fetch("resumes/update/${resume.id}", {
+                                    method: 'POST'
+                                })
+                            })
+
+                        </script>
                     </#list>
                 </div>
             </#if>
@@ -225,7 +246,6 @@
             cards.appendChild(h3)
             cards.innerHTML =
                 `
-                <h3>My resumes with responses</h3>
                 <#list activeResumesWithResponses as resume>
                 <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
                     <div class="card border-0 bg-light rounded shadow">
@@ -235,9 +255,9 @@
                                 <span class="text-muted d-block"></span>
                             </div>
 
-                            <div class="row">
-                                <div class="col mt-3">
-                                    <a href="/chat/open?toUser=${resume.employerId}" target="__blank" class="btn btn-info">To chat</a>
+                            <div class="row mt-3">
+                                <div class="col">
+                                    <a href="/chat/open?toUser=${resume.employerId}" target="__blank" class="btn btn-info btn-block">To chat</a>
                                 </div>
                             </div>
                         </div>
@@ -257,4 +277,3 @@
 
     </script>
 </@main.layout>
-

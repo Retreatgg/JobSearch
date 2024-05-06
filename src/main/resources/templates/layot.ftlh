@@ -9,10 +9,10 @@
               integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
               crossorigin="anonymous">
 
-        ${script}
         <style>
             body {
-                background-color: #f8f9fa;
+                background-color: #f5f5f5;
+                font-family: Arial, sans-serif;
             }
 
             .navbar {
@@ -22,25 +22,31 @@
 
             .navbar-brand {
                 color: #343a40;
+                font-weight: bold;
+                font-size: 1.5rem;
             }
 
             .nav-link {
-                color: #6c757d;
+                color: #343a40;
+                font-weight: bold;
+                transition: color 0.3s;
             }
 
             .nav-link:hover {
-                color: #495057;
+                color: #28a745;
             }
 
             .btn-outline-success {
-                color: #28a745;
-                border-color: #28a745;
-            }
-
-            .btn-outline-success:hover {
                 color: #ffffff;
                 background-color: #28a745;
                 border-color: #28a745;
+                font-weight: bold;
+                transition: background-color 0.3s;
+            }
+
+            .btn-outline-success:hover {
+                background-color: #218838;
+                border-color: #1e7e34;
             }
         </style>
     </head>
@@ -57,20 +63,20 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 flex-fill">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/">For applicants</a>
+                            <a class="nav-link" href="/">For applicants</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/resumes/active">For employers</a>
+                            <a class="nav-link" href="/resumes/active">For employers</a>
                         </li>
                         <li class="nav-item ms-auto">
-                            <a class="nav-link active" aria-current="page" href="/auth/login">Log In</a>
+                            <a class="nav-link btn btn-outline-success" href="/auth/login">Log In</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container mt-4">
         <#nested>
     </div>
     </body>

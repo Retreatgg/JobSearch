@@ -116,8 +116,7 @@ public class UserServiceImpl implements UserService {
         user.setPassword(encoder.encode(userUpdateDto.getPassword()));
         user.setPhoneNumber(userUpdateDto.getPhoneNumber());
 
-        //userDao.editProfile(user);
-
+        userRepository.save(user);
     }
 
     @Override

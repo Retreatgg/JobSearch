@@ -161,13 +161,6 @@ public class ResumeServiceImpl implements ResumeService {
             resume.setCategory(categoryRepository.findByName(resumeDto.getCategoryName()).get());
 
             resumeRepository.save(resume);
-
-            resumeDto.getWorkExperienceInfo()
-                    .forEach(wei -> workExperienceInfoService.createWorkExperienceInfo(resume.getId(), wei));
-            resumeDto.getEducationInfo()
-                    .forEach(ei -> educationInfoService.createEducationInfo(resume.getId(), ei));
-            resumeDto.getContacts()
-                    .forEach(ci -> contactInfoService.createContactInfo(resume.getId(), ci));
         }
     }
 
