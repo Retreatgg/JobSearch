@@ -35,8 +35,8 @@
         </#list>
     </div>
 
-    <#assign maxPage = page.content?size / 1>
-    <@p.pagination page=page maxPage=maxPage path="/">
+    <#assign maxPage = page.content?size / pageSize>
+    <@p.pagination page=pageNumber maxPage=maxPage path="/">
     </@p.pagination>
 
 </@main.layout>

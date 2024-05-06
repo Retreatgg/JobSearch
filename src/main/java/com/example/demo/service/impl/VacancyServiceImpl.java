@@ -11,6 +11,7 @@ import com.example.demo.util.UserUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
@@ -33,9 +34,11 @@ public class VacancyServiceImpl implements VacancyService {
 
 
     @Override
-    public Page<Vacancy> getAllVacancies(Pageable pageable) {
-        Page<Vacancy> vacancies = vacancyRepository.findAll(pageable);
-        return vacancies;
+    public Page<VacancyDtoForShow> getAllVacancies(Pageable pageable) {
+        Page<Vacancy> pageableVacancies = vacancyRepository.findAll(pageable);
+        List<Vacancy> vacancies = pageableVacancies.getContent();
+        List<VacancyDtoForShow> dtoForShows = transformationForDtoListVacancies(vacancies);
+        return new PageImpl<>(dtoForShows);
     }
 
     @Override

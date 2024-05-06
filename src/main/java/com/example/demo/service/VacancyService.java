@@ -13,7 +13,7 @@ import java.util.List;
 
 @Service
 public interface VacancyService {
-    Page<Vacancy> getAllVacancies(Pageable pageable);
+    Page<VacancyDtoForShow> getAllVacancies(Pageable pageable);
 
     List<VacancyDtoForShow> getVacanciesByCategory(String name);
     List<VacancyDtoForShow> getActiveVacancy(String page, String perPage, long categoryId);

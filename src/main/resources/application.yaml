@@ -27,13 +27,7 @@ spring:
 logging:
   level:
     root: info
-    org:
-      hibernate:
-        stat: debug
-        type: trace
 
-    sql: trace
-    web: debug
 
   file:
     name: logs/spring.log
