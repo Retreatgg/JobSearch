@@ -4,6 +4,8 @@ import com.example.demo.dto.ResumeCreateDto;
 import com.example.demo.dto.ResumeDto;
 import com.example.demo.dto.ResumeResponseDto;
 import com.example.demo.dto.ResumeUpdateDto;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +13,7 @@ import java.util.List;
 
 @Service
 public interface ResumeService {
-    List<ResumeDto> getAllResumes(Authentication authentication, String perPage, String page);
+    Page<ResumeDto> getAllResumes(Authentication authentication, Pageable pageable);
     ResumeDto getResumesByCategoryId(Long id, Authentication auth);
     List<ResumeDto> getResumesByApplicantId(Authentication auth);
 

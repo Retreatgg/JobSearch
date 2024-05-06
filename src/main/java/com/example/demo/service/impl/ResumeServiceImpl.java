@@ -10,6 +10,9 @@ import com.example.demo.service.*;
 import com.example.demo.util.UserUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
@@ -40,16 +43,13 @@ public class ResumeServiceImpl implements ResumeService {
     private final UserUtil userUtil;
 
     @Override
-    public List<ResumeDto> getAllResumes(Authentication authentication, String page, String perPage) {
-        int numberPage = Integer.parseInt(page);
-        int sizePageNumber = Integer.parseInt(perPage);
-        int offset = numberPage * sizePageNumber;
-
+    public Page<ResumeDto> getAllResumes(Authentication authentication, Pageable pageable) {
         String authority = userUtil.getAuthority(authentication);
 
         if (authority.equals(EMPLOYER.toString())) {
-           // List<Resume> resumes = resumeDao.getAllResumes(sizePageNumber, offset);
-           // return transformationForListDtoResume(resumes);
+           Page<Resume> resumesPageable = resumeRepository.findAll(pageable);
+           List<Resume> resumes = resumesPageable.getContent();
+           return new PageImpl<>(transformationForListDtoResume(resumes));
         }
 
         throw new IllegalArgumentException("Your role is not appropriate");

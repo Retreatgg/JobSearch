@@ -20,7 +20,7 @@
             </div>
         </div>
 
-        <#if work_info??>
+        <#if work_info?size != 0>
             <div class="job-box">
                 <h6 class="text-center text-md-left">Work Experience:</h6>
                 <ul class="list-unstyled">
@@ -41,7 +41,7 @@
             </div>
         </#if>
 
-        <#if educations??>
+        <#if educations?size != 0>
             <div class="job-box mt-5">
                 <h6 class="text-center text-md-left">My educations:</h6>
                 <ul class="list-unstyled">

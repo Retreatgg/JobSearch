@@ -6,6 +6,10 @@ import com.example.demo.dto.ResumeUpdateDto;
 import com.example.demo.service.ResumeService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -20,12 +24,11 @@ public class ResumeController {
     private final ResumeService resumeService;
 
     @GetMapping()
-    public ResponseEntity<List<ResumeDto>> getAllResumes(
+    public ResponseEntity<Page<ResumeDto>> getAllResumes(
             Authentication authentication,
-            @RequestParam(name = "page", defaultValue = "1") String page,
-            @RequestParam(name = "size", defaultValue = "5") String perPage)
+            @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable)
     {
-        return ResponseEntity.ok(resumeService.getAllResumes(authentication, page, perPage));
+        return ResponseEntity.ok(resumeService.getAllResumes(authentication, pageable));
     }
 
     @GetMapping("/category/{categoryId}")

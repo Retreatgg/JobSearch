@@ -1,9 +1,14 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.ResumeCreateDto;
+import com.example.demo.dto.ResumeDto;
 import com.example.demo.dto.ResumeUpdateDto;
 import com.example.demo.service.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,12 +28,13 @@ public class ResumeController {
     @GetMapping("active")
     public String getAllResumes(
             Authentication authentication, Model model,
-            @RequestParam(name = "page", defaultValue = "0") String page,
-            @RequestParam(name = "size", defaultValue = "5") String perPage)
+            @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable)
     {
-        model.addAttribute("resumes", resumeService.getAllResumes(authentication, page, perPage));
-        model.addAttribute("page", Integer.parseInt(page));
-        model.addAttribute("perPage", Integer.parseInt(perPage));
+        Page<ResumeDto> page = resumeService.getAllResumes(authentication, pageable);
+
+        model.addAttribute("page", page);
+        model.addAttribute("pageNumber", pageable.getPageNumber());
+        model.addAttribute("pageSize", pageable.getPageSize());
 
         return "resume/all_resumes";
     }

@@ -2,12 +2,12 @@
 <#import "../paginatton.ftlh" as p>
 <@main.layout script="">
 
-    <h3 class="mb-4 mt-2">Resumes: ${resumes?size}</h3>
+    <h3 class="mb-4 mt-2">Resumes: ${page.totalElements}</h3>
     <div class="row mt-5">
         <div class="col-lg-10 mx-auto">
             <div class="career-search mb-60">
 
-                <#list resumes as resume>
+                <#list page.content as resume>
                     <div class="filter-result" style="box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); background-color: #fff; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
 
                         <div class="job-box d-md-flex align-items-center justify-content-between mb-30">
@@ -33,8 +33,8 @@
         </div>
     </div>
 
-
-    <#assign maxPage = resumes?size / perPage?number>
-    <@p.pagination page=page maxPage=maxPage path="/resumes/active">
+    <#assign maxPage = page.content?size / pageSize>
+    <@p.pagination page=pageNumber maxPage=maxPage path="/resumes/active">
     </@p.pagination>
+
 </@main.layout>
