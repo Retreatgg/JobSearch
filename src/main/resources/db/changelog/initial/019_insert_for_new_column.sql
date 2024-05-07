@@ -1,0 +1,15 @@
+update VACANCIES set COUNT_RESPONSES = 4 where id = 1;
+update VACANCIES set COUNT_RESPONSES = 3 where id = 2;
+update VACANCIES set COUNT_RESPONSES = 1 where id = 3;
+update VACANCIES set COUNT_RESPONSES = 1 where id = 4;
+update VACANCIES set COUNT_RESPONSES = 1 where id = 5;
+update VACANCIES set COUNT_RESPONSES = 0 where id = 6;
+update VACANCIES set COUNT_RESPONSES = 0 where id = 7;
+update VACANCIES set COUNT_RESPONSES = 0 where id = 8;
+update VACANCIES set COUNT_RESPONSES = 0 where id = 9;
+update VACANCIES set COUNT_RESPONSES = 0 where id = 10;
+update VACANCIES set COUNT_RESPONSES = 0 where id = 11;
+update VACANCIES set COUNT_RESPONSES = 0 where id = 12;
+update VACANCIES set COUNT_RESPONSES = 0 where id = 13;
+update VACANCIES set COUNT_RESPONSES = 0 where id = 14;
+update VACANCIES set COUNT_RESPONSES = 0 where id = 15;

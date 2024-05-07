@@ -27,7 +27,7 @@ public class AuthController {
     @GetMapping("register")
     public String register(Model model) {
         model.addAttribute("userDto", new UserDto());
-        return "/auth/register";
+        return "/user/create_user";
     }
 
     @PostMapping("register")

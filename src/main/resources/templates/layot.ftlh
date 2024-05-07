@@ -36,19 +36,6 @@
             .nav-link:hover {
                 color: #28a745;
             }
-
-            .btn-outline-success {
-                color: #ffffff;
-                background-color: #28a745;
-                border-color: #28a745;
-                font-weight: bold;
-                transition: background-color 0.3s;
-            }
-
-            .btn-outline-success:hover {
-                background-color: #218838;
-                border-color: #1e7e34;
-            }
         </style>
     </head>
     <body>
@@ -64,10 +51,10 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" href="/">For applicants</a>
+                            <a class="nav-link" href="/">Companies</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/resumes/active">For employers</a>
+                            <a class="nav-link" href="/resumes/active">Employers</a>
                         </li>
                     </ul>
 

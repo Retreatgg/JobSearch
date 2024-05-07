@@ -2,6 +2,7 @@ package com.example.demo.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Formula;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -42,7 +43,13 @@ public class Vacancy {
     @Column(name = "update_date")
     private LocalDateTime updateTime;
 
+    @Column(name = "count_responses")
+    @Formula(value = "SELECT COUNT(ra.id) FROM responded_applicants ra WHERE ra.vacancy_id = id")
+    private Long countResponses;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "vacancy")
     private List<RespondedApplicant> respondedApplicants;
+
+
 
 }

@@ -21,7 +21,8 @@
             <li class="page-item"><a class="page-link" href="${path}?page=${page}">${page + 1}</a></li>
             <#if page gt maxPage + 1>
                 <li class="page-item disabled">
-                    <a class="page-link" href="${path}?page=${page}" aria-label="Next">
+                    <a class="page-link"
+                       href="${path}?page=${page}" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>

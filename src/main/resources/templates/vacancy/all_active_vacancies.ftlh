@@ -15,11 +15,15 @@
                 </select>
                 <button type="submit" class="btn btn-primary mt-3">Search</button>
             </form>
-            <select class="form-control" id="categoryFilter" name="sort">
-                <option value="">Sort by</option>
-                <option value="${page.sort}">Publication date</option>
-            </select>
-            <button type="submit" class="btn btn-primary mt-3">Accept</button>
+            <form action="/" method="get">
+                <select class="form-control" id="sortFilter" name="sort">
+                    <option value="">Sort by</option>
+                    <option value="updateTime">Publication date</option>
+                    <option value="countResponses">Count responses</option>
+                </select>
+                <button type="submit" class="btn btn-primary mt-3">Sort</button>
+            </form>
+
 
         </div>
 
@@ -31,6 +35,9 @@
                             <h5 class="card-title">${vacancy.name}</h5>
                             <div class="mt-3">
                                 <span class="text-muted d-block">$ ${vacancy.salary}</span>
+                            </div>
+                            <div class="mt-3">
+                                <span class="text-muted d-block">Count responses: ${vacancy.countResponses}</span>
                             </div>
                             <div class="job-right my-4 flex-shrink-0">
                                 <a href="/vacancies/${vacancy.id}" class="btn btn-light">More info</a>

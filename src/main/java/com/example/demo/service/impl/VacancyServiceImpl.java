@@ -1,11 +1,13 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.dao.VacancyDao;
-import com.example.demo.dto.*;
+import com.example.demo.dto.VacancyDto;
+import com.example.demo.dto.VacancyDtoForShow;
+import com.example.demo.dto.VacancyUpdateDto;
 import com.example.demo.model.User;
 import com.example.demo.model.Vacancy;
 import com.example.demo.repository.VacancyRepository;
 import com.example.demo.service.CategoryService;
+import com.example.demo.service.RespondedApplicantService;
 import com.example.demo.service.VacancyService;
 import com.example.demo.util.UserUtil;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +28,7 @@ import static com.example.demo.enums.AccountType.EMPLOYER;
 @RequiredArgsConstructor
 public class VacancyServiceImpl implements VacancyService {
 
-    private final VacancyDao vacancyDao;
+    private final RespondedApplicantService respondedApplicantService;
     private final VacancyRepository vacancyRepository;
     private final CategoryService categoryService;
 
@@ -34,37 +36,24 @@ public class VacancyServiceImpl implements VacancyService {
 
 
     @Override
-    public Page<VacancyDtoForShow> getAllVacancies(Pageable pageable) {
+    public Page<VacancyDtoForShow> getAllVacancies(Pageable pageable, Long categoryId) {
+
         Page<Vacancy> pageableVacancies = vacancyRepository.findAll(pageable);
         List<Vacancy> vacancies = pageableVacancies.getContent();
-        List<VacancyDtoForShow> dtoForShows = transformationForDtoListVacancies(vacancies);
-        return new PageImpl<>(dtoForShows);
-    }
 
-    @Override
-    public List<VacancyDtoForShow> getVacanciesByCategory(String name) {
-        List<Vacancy> vacancies = vacancyRepository.findByCategoryName(name);
-        return transformationForDtoListVacancies(vacancies);
-    }
-
-    @Override
-    public List<VacancyDtoForShow> getActiveVacancy(String page, String perPage, long categoryId) {
-        int numberPage = Integer.parseInt(page);
-        int perPageNumber = Integer.parseInt(perPage);
-        int offset = numberPage * perPageNumber;
-
-        List<Vacancy> vacancies = vacancyDao.getActiveVacancies(perPageNumber, offset);
-
-        if(categoryId != 0) {
+        if (categoryId != 0) {
             List<Vacancy> vacanciesByCategory = vacancies.stream()
                     .filter(e -> e.getCategory().getId() == categoryId)
                     .toList();
 
-            return transformationForDtoListVacancies(vacanciesByCategory);
+            List<VacancyDtoForShow> dtoForShows = transformationForDtoListVacancies(vacanciesByCategory);
+            return new PageImpl<>(dtoForShows);
         }
 
-        return transformationForDtoListVacancies(vacancies);
+        List<VacancyDtoForShow> dtoForShows = transformationForDtoListVacancies(vacancies);
+        return new PageImpl<>(dtoForShows);
     }
+
 
     @Override
     public void deleteVacancyById(Long id, Authentication auth) {
@@ -121,7 +110,7 @@ public class VacancyServiceImpl implements VacancyService {
             vacancy.setExpFrom(vacancyDto.getExpFrom());
             vacancy.setCategory(categoryService.findById(vacancyDto.getCategoryId()));
 
-           vacancyRepository.save(vacancy);
+            vacancyRepository.save(vacancy);
         } else {
             throw new NoSuchElementException("User not authorized to edit vacancy");
         }
@@ -137,7 +126,7 @@ public class VacancyServiceImpl implements VacancyService {
     private List<VacancyDtoForShow> transformationForDtoListVacancies(List<Vacancy> vacancies) {
         List<VacancyDtoForShow> dtos = new ArrayList<>();
         vacancies.forEach(e -> dtos.add(VacancyDtoForShow.builder()
-                        .id(e.getId())
+                .id(e.getId())
                 .name(e.getName())
                 .description(e.getDescription())
                 .expTo(e.getExpTo())
@@ -146,6 +135,7 @@ public class VacancyServiceImpl implements VacancyService {
                 .categoryId(e.getCategory().getId())
                 .salary(e.getSalary())
                 .isActive(e.getIsActive())
+                .countResponses(respondedApplicantService.getCountResponsesByVacancyId(e.getId()))
                 .build()));
 
         return dtos;
@@ -162,17 +152,12 @@ public class VacancyServiceImpl implements VacancyService {
         Vacancy vacancy = getVacancyById(id);
 
         vacancy.setUpdateTime(LocalDateTime.now());
-       vacancyRepository.save(vacancy);
+        vacancyRepository.save(vacancy);
     }
 
     @Override
     public Long getAuthorIdByVacancy(Long vacancyId) {
         return vacancyRepository.findById(vacancyId).get().getAuthor().getId();
-    }
-
-    @Override
-    public void respond(Long id) {
-
     }
 
 }

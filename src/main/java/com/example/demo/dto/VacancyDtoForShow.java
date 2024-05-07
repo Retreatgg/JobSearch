@@ -16,5 +16,6 @@ public class VacancyDtoForShow {
     private Integer expTo;
     private Boolean isActive;
     private Long authorId;
+    private Long countResponses;
 
 }

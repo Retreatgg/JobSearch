@@ -2,6 +2,7 @@ package com.example.demo.service.impl;
 
 import com.example.demo.dto.RespondedApplicantsDto;
 import com.example.demo.model.RespondedApplicant;
+import com.example.demo.model.Vacancy;
 import com.example.demo.repository.RespondedApplicantsRepository;
 import com.example.demo.repository.ResumeRepository;
 import com.example.demo.repository.VacancyRepository;
@@ -22,6 +23,7 @@ public class RespondedApplicantServiceImpl implements RespondedApplicantService 
 
     @Override
     public void createRespondedApplicant(RespondedApplicantsDto respondedApplicantsDto) {
+        Vacancy vacancy = vacancyRepository.findById(respondedApplicantsDto.getVacancyId()).get();
         RespondedApplicant respondedApplicant = RespondedApplicant.builder()
                 .confirmation(respondedApplicantsDto.getConfirmation())
                 .resume(resumeRepository.findById(respondedApplicantsDto.getResumeId()).get())
@@ -29,6 +31,8 @@ public class RespondedApplicantServiceImpl implements RespondedApplicantService 
                 .build();
 
         respondedApplicantsRepository.save(respondedApplicant);
+        vacancy.setCountResponses(vacancy.getCountResponses() + 1);
+        vacancyRepository.save(vacancy);
     }
 
     @Override
@@ -47,23 +51,8 @@ public class RespondedApplicantServiceImpl implements RespondedApplicantService 
     }
 
     @Override
-    public List<Long> getRespondIdByResume(Long resumeId) {
-        return respondedApplicantsRepository.findIdByResumeId(resumeId);
+    public Long getCountResponsesByVacancyId(Long vacancyId) {
+        return respondedApplicantsRepository.countRespondedApplicantByVacancyId(vacancyId);
     }
 
-    @Override
-    public List<RespondedApplicantsDto> getResponsesByApplicantId(Long applicantId) {
-        List<RespondedApplicant> responses = respondedApplicantsRepository.findAllByResumeApplicantId(applicantId);
-        List<RespondedApplicantsDto> responseDto = new ArrayList<>();
-
-        responses.forEach(response -> {
-            responseDto.add(RespondedApplicantsDto.builder()
-                            .vacancyId(response.getVacancy().getId())
-                            .resumeId(response.getResume().getId())
-                            .confirmation(response.getConfirmation())
-                    .build());
-        });
-
-        return responseDto;
-    }
 }

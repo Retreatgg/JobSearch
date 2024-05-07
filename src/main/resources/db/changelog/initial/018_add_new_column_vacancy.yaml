@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: Update table vacancies
+      author: Argen
+      changes:
+        - addColumn:
+            tableName: vacancies
+            columns:
+              - column:
+                  name: count_responses
+                  type: long
