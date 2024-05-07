@@ -40,6 +40,7 @@ public class ChatController {
         allMessages.addAll(chatService.getChats(toUserEmail, user.getEmail()));
         allMessages.addAll(chatService.getChats(user.getEmail(), toUserEmail));
 
+        model.addAttribute("auth", authentication);
         model.addAttribute("allMessages", allMessages);
         return "chat/chat";
     }

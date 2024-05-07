@@ -35,6 +35,7 @@ public class ResumeController {
         model.addAttribute("page", page);
         model.addAttribute("pageNumber", pageable.getPageNumber());
         model.addAttribute("pageSize", pageable.getPageSize());
+        model.addAttribute("auth", authentication);
 
         return "resume/all_resumes";
     }
@@ -44,6 +45,7 @@ public class ResumeController {
         model.addAttribute("resume", resumeService.getResumeById(id, authentication));
         model.addAttribute("work_info", workExperienceInfoService.getWorkInfo(id));
         model.addAttribute("educations", educationInfoService.getEducations(id));
+        model.addAttribute("auth", authentication);
 
         return "resume/resume";
     }

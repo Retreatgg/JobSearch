@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.UserDto;
 import com.example.demo.dto.UserUpdateDto;
+import com.example.demo.model.User;
 import com.example.demo.service.MessageService;
 import com.example.demo.service.ResumeService;
 import com.example.demo.service.UserService;
@@ -38,6 +39,7 @@ public class ProfileController {
     @GetMapping("edit/{email}")
     public String editProfile(Authentication auth, Model model) {
         String email = userUtil.getUserByAuth(auth).getEmail();
+        model.addAttribute("auth", auth);
         model.addAttribute("user", userService.getUserByEmail(email));
         return "profile/edit_profile";
     }
@@ -52,6 +54,7 @@ public class ProfileController {
         model.addAttribute("vacancies", vacancyService.getVacanciesByCompanyName(user.getName()));
         model.addAttribute("resumes", resumeService.getResumesByApplicantId(auth));
         model.addAttribute("image", userService.downloadImage(email));
+        model.addAttribute("auth", auth);
 
         if(user.getAccountType().equals(APPLICANT.toString())) {
             model.addAttribute("messages", messageService.getAllMessages(auth));
@@ -59,5 +62,11 @@ public class ProfileController {
         }
 
         return "profile/profile";
+    }
+
+    @GetMapping("responses")
+    public String getResponses(Authentication auth) {
+        User user = userUtil.getUserByAuth(auth);
+        return "profile/responses";
     }
 }

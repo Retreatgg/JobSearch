@@ -1,3 +1,4 @@
+<#import "spring.ftl" as spring>
 <#macro layout script>
     <!DOCTYPE html>
     <html lang="en">
@@ -61,19 +62,27 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 flex-fill">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
                             <a class="nav-link" href="/">For applicants</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/resumes/active">For employers</a>
                         </li>
-                        <li class="nav-item ms-auto">
-                            <a class="nav-link btn btn-outline-success" href="/auth/login">Log In</a>
-                        </li>
                     </ul>
+
+                    <div class="ms-auto">
+                        <#if auth??>
+                            <a href="/profile" class="btn btn-outline-info m-2">Profile</a>
+                            <a href="/logout" class="btn btn-outline-info m-2" id="logout">Logout</a>
+                        <#else>
+                            <a href="/auth/login" class="btn btn-outline-info m-2">Login</a>
+                            <a href="/auth/register" class="btn btn-outline-info m-2">Register</a>
+                        </#if>
+                    </div>
                 </div>
             </div>
+
         </nav>
     </header>
     <div class="container mt-4">

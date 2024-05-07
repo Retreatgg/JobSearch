@@ -15,6 +15,12 @@
                 </select>
                 <button type="submit" class="btn btn-primary mt-3">Search</button>
             </form>
+            <select class="form-control" id="categoryFilter" name="sort">
+                <option value="">Sort by</option>
+                <option value="${page.sort}">Publication date</option>
+            </select>
+            <button type="submit" class="btn btn-primary mt-3">Accept</button>
+
         </div>
 
         <div class="row">
