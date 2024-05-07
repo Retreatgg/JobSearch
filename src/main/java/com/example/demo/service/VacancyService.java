@@ -26,4 +26,6 @@ public interface VacancyService {
     void update(Long id);
 
     Long getAuthorIdByVacancy(Long vacancyId);
+
+    void respond(Long id);
 }

@@ -15,9 +15,6 @@
                     </ul>
                 </div>
             </div>
-            <div class="job-right my-4 flex-shrink-0">
-                <a href="#" class="btn btn-light">Respond</a>
-            </div>
         </div>
 
         <#if work_info?size != 0>

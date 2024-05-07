@@ -170,4 +170,9 @@ public class VacancyServiceImpl implements VacancyService {
         return vacancyRepository.findById(vacancyId).get().getAuthor().getId();
     }
 
+    @Override
+    public void respond(Long id) {
+
+    }
+
 }
