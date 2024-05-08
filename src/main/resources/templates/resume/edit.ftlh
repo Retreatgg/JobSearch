@@ -6,6 +6,9 @@
                 <div class="card-body">
                     <h5 class="card-title text-center mb-4">Edit resume</h5>
                     <form action="/resumes/edit/${id}" method="post">
+                        <#if _csrf??>
+                            <input type="hidden" name="${(_csrf.parameterName)!'csrf-param-name'}" value="${(_csrf.token)!'csrf-token'}" />
+                        </#if>
                         <div class="mb-3">
                             <label for="title" class="form-label">Title</label>
                             <input type="text" class="form-control" id="title" name="title">

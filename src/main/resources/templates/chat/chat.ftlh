@@ -27,6 +27,9 @@
                 </div>
                 <form id="form" action="/chat/send?toUser=${toUser.id}" method="post">
                     <div class="form-group">
+                        <#if _csrf??>
+                            <input type="hidden" name="${(_csrf.parameterName)!'csrf-param-name'}" value="${(_csrf.token)!'csrf-token'}" />
+                        </#if>
                         <input type="hidden" name="toUserEmail" value="${toUser.email}">
                         <input class="form-control" name="message" rows="3" placeholder="Type your message..."></input>
                     </div>

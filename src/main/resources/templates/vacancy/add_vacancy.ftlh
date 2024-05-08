@@ -9,6 +9,9 @@
                 <div class="card-body">
                     <h5 class="card-title text-center mb-4">Add vacancy</h5>
                     <form id="form" action="/vacancies/add" method="post">
+                        <#if _csrf??>
+                            <input type="hidden" name="${(_csrf.parameterName)!'csrf-param-name'}" value="${(_csrf.token)!'csrf-token'}" />
+                        </#if>
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
                             <input type="text" class="form-control" id="name" name="name">

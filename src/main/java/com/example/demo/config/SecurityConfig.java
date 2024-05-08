@@ -29,7 +29,6 @@ public class SecurityConfig {
                  .logout(logout -> logout
                          .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                          .permitAll())
-                 .csrf(AbstractHttpConfigurer::disable)
                  .authorizeHttpRequests(authorize -> authorize
                          .requestMatchers(HttpMethod.POST, "/resumes/**").hasAuthority("APPLICANT")
                          .requestMatchers(HttpMethod.GET, "/resumes/add").hasAuthority("APPLICANT")
