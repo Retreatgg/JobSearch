@@ -50,13 +50,17 @@ function chatHandler(e) {
     })
 }
 
-function makeHeaders (){
+function makeHeaders() {
     let user = restoreUser()
     console.log(user)
     let headers = new Headers()
-    headers.set('Content-Type','application/json')
-    if(user){
-        headers.set(  'Authorization', 'Basic ' + btoa(user.email + ':' + user.password))
+    headers.set('Content-Type', 'application/json')
+    let header = document.head.querySelector("[property~=_csrf_header][content]").content;
+    let token = document.head.querySelector("[property~=_csrf_token][content]").content;
+    if (user) {
+        headers.set('Authorization', 'Basic ' + btoa(user.email + ':' + user.password))
+
+        headers.set(header, token)
         console.log(headers)
     }
     return headers

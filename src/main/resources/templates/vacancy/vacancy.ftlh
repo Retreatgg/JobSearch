@@ -95,9 +95,15 @@
         }
 
         async function fetchToRespond(resumeId) {
+            let headers = new Headers()
+            if(${_csrf??}) {
+                headers.set(`${_csrf.headerName}', '${_csrf.token}`)
+            }
+
             console.log("Resume ID:", resumeId);
             await fetch('/vacancies/respond/' + ${vacancy.id} + '?resumeId=' + resumeId, {
-                method: 'POST'
+                method: 'POST',
+                headers
             })
         }
 

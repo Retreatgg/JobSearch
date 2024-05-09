@@ -40,8 +40,6 @@
     <script>
         let form = document.getElementById('login-form')
 
-        // form.addEventListener('submit', onLoginHandler)
-
         function onLoginHandler(event) {
             event.preventDefault()
 
@@ -51,11 +49,11 @@
 
             let headers = new Headers()
             headers.set('Authorization', 'Basic ' + btoa(user.email + ':' + user.password))
+            if(${_csrf??}) {
+                headers.set('${_csrf.headerName}', '${_csrf.token}')
+            }
 
             fetchAuthorized(headers)
-            // let userJson = JSON.stringify(user)
-            // localStorage.setItem('user', userJson)
-            // window.location.href = 'http://localhost:8089/'
 
         }
 
@@ -70,15 +68,15 @@
             }
         }
 
-        // btoa()
-        // atob()
 
         function makeHeaders() {
             let user = restoreUser()
-            // console.log(user);
 
             let headers = new Headers()
             headers.set('Content-Type', 'application/json')
+            if(${_csrf??}) {
+                headers.set('${_csrf.headerName}', '${_csrf.token}')
+            }
             if (user) {
                 headers.set('Authorization', 'Basic ' + btoa(user.email + ':' + user.password))
             }
