@@ -1,6 +1,5 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.dao.UserRoleDao;
 import com.example.demo.dto.UserRoleDto;
 import com.example.demo.model.UserRole;
 import com.example.demo.repository.AuthorityRepository;
