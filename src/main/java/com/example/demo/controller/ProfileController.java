@@ -64,9 +64,4 @@ public class ProfileController {
         return "profile/profile";
     }
 
-    @GetMapping("responses")
-    public String getResponses(Authentication auth) {
-        User user = userUtil.getUserByAuth(auth);
-        return "profile/responses";
-    }
 }

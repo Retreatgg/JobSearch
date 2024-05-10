@@ -20,7 +20,7 @@ public class ResumeResponseDto {
     private Double salary;
     @NotEmpty
     private Boolean isActive;
-    private LocalDateTime createdDate;
-    private LocalDateTime updateTime;
+    private String createdDate;
+    private String updateTime;
     private Long employerId;
 }

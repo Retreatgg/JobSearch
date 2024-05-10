@@ -147,6 +147,8 @@
                                     <h5>${vacancy.name}</h5>
                                     <div class="mt-3">
                                         <span class="text-muted d-block">${vacancy.description}</span>
+                                        <span class="mt-2 text-muted d-block"><strong>Created date</strong>: ${vacancy.createdDate}</span>
+                                        <span class="mt-2 text-muted d-block"><strong>Update date</strong>: ${vacancy.updateDate}</span>
                                     </div>
 
                                     <div class="row mt-3">
@@ -180,6 +182,8 @@
                                     <h5>${resume.name}</h5>
                                     <div class="mt-3">
                                         <span class="text-muted d-block"></span>
+                                        <span class="mt-2 text-muted d-block"><strong>Created date</strong>: ${resume.createdDate}</span>
+                                        <span class="mt-2 text-muted d-block"><strong>Update date</strong>: ${resume.updateTime}</span>
                                     </div>
 
                                     <div class="row mt-3">

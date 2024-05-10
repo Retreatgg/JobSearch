@@ -17,5 +17,7 @@ public class VacancyDtoForShow {
     private Boolean isActive;
     private Long authorId;
     private Long countResponses;
+    private String createdDate;
+    private String updateDate;
 
 }

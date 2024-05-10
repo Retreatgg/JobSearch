@@ -17,6 +17,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -38,9 +39,10 @@ public class ResumeServiceImpl implements ResumeService {
     private final WorkExperienceInfoService workExperienceInfoService;
     private final EducationInfoService educationInfoService;
     private final ContactInfoService contactInfoService;
-
     private final VacancyService vacancyService;
     private final UserUtil userUtil;
+
+    private final DateTimeFormatter formatters = DateTimeFormatter.ofPattern("d/MM/uuuu");
 
     @Override
     public Page<ResumeDto> getAllResumes(Authentication authentication, Pageable pageable) {
@@ -217,8 +219,8 @@ public class ResumeServiceImpl implements ResumeService {
                 .isActive(resume.getIsActive())
                 .categoryId(resume.getCategory().getId())
                 .applicant(resume.getApplicant().getId())
-                .createdDate(resume.getCreatedDate())
-                .updateTime(resume.getUpdateTime())
+                .createdDate(resume.getCreatedDate().format(formatters))
+                .updateTime(resume.getUpdateTime().format(formatters))
                 .build();
     }
 
@@ -232,8 +234,8 @@ public class ResumeServiceImpl implements ResumeService {
                     .isActive(e.getIsActive())
                     .categoryId(e.getCategory().getId())
                     .applicant(e.getApplicant().getId())
-                    .createdDate(e.getCreatedDate())
-                    .updateTime(e.getUpdateTime())
+                    .createdDate(e.getCreatedDate().format(formatters))
+                    .updateTime(e.getUpdateTime().format(formatters))
                     .build());
         });
 

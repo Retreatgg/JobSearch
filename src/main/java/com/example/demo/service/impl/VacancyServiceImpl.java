@@ -18,7 +18,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import static com.example.demo.enums.AccountType.EMPLOYER;
@@ -31,8 +33,9 @@ public class VacancyServiceImpl implements VacancyService {
     private final RespondedApplicantService respondedApplicantService;
     private final VacancyRepository vacancyRepository;
     private final CategoryService categoryService;
-
     private final UserUtil userUtil;
+
+    private final DateTimeFormatter formatters = DateTimeFormatter.ofPattern("d/MM/uuuu");
 
 
     @Override
@@ -136,6 +139,8 @@ public class VacancyServiceImpl implements VacancyService {
                 .salary(e.getSalary())
                 .isActive(e.getIsActive())
                 .countResponses(respondedApplicantService.getCountResponsesByVacancyId(e.getId()))
+                        .createdDate(e.getCreatedDate().format(formatters))
+                        .updateDate(e.getUpdateTime().format(formatters))
                 .build()));
 
         return dtos;
