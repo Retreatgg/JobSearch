@@ -23,7 +23,8 @@
                                     <div class="modal-content bg-light border-danger">
                                         <div class="modal-header bg-danger text-white">
                                             <h5 class="modal-title">Responses</h5>
-                                            <button type="button" class="btn-close" onclick="closeModal();" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <button type="button" class="btn-close" onclick="closeModal();"
+                                                    data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div id="body-modal" class="modal-body">
 
@@ -33,7 +34,8 @@
                             </div>
                         </#if>
                         <div class="d-flex flex-column align-items-center text-center">
-                            <img src="/images/download/${user.email}" alt="User Avatar" class="rounded-circle border border-primary" width="150">
+                            <img src="/images/download/${user.email}" alt="User Avatar"
+                                 class="rounded-circle border border-primary" width="150">
                             <div class="mt-3">
                                 <h4>${user.name}</h4>
                                 <div class="row">
@@ -149,29 +151,20 @@
 
                                     <div class="row mt-3">
                                         <div class="col">
-                                            <button id="btn-update" class="btn btn-info btn-block">Update</button>
+                                            <button data-target="${vacancy.id}" class="btn btn-info btn-block btn-update-vacancies">Update</button>
                                         </div>
                                         <div class="col">
-                                            <a href="/vacancies/edit/${vacancy.id}" target="__blank" class="btn btn-info btn-block">Edit</a>
+                                            <a href="/vacancies/edit/${vacancy.id}" target="__blank"
+                                               class="btn btn-info btn-block">Edit</a>
                                         </div>
                                         <div class="col">
-                                            <a href="/vacancies/${vacancy.id}" target="__blank" class="btn btn-info btn-block">Details</a>
+                                            <a href="/vacancies/${vacancy.id}" target="__blank"
+                                               class="btn btn-info btn-block">Details</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        <script>
-                            const btnUpdate = document.getElementById('btn-update');
-
-                            btnUpdate.addEventListener('click', () => {
-                                fetch("vacancies/update/${vacancy.id}", {
-                                    method: 'POST'
-                                })
-                            })
-
-                        </script>
                     </#list>
                 </div>
             </#if>
@@ -191,29 +184,20 @@
 
                                     <div class="row mt-3">
                                         <div class="col">
-                                            <button id="btn-update" class="btn btn-info btn-block">Update</button>
+                                            <button data-target="${resume.id}" class="btn btn-info btn-block btn-update-resumes">Update</button>
                                         </div>
                                         <div class="col">
-                                            <a href="/resumes/edit/${resume.id}" target="__blank" class="btn btn-info btn-block">Edit</a>
+                                            <a href="/resumes/edit/${resume.id}" target="__blank"
+                                               class="btn btn-info btn-block">Edit</a>
                                         </div>
                                         <div class="col">
-                                            <a href="/resumes/${resume.id}" target="__blank" class="btn btn-info btn-block">Details</a>
+                                            <a href="/resumes/${resume.id}" target="__blank"
+                                               class="btn btn-info btn-block">Details</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        <script>
-                            const btnUpdate = document.getElementById('btn-update');
-
-                            btnUpdate.addEventListener('click', () => {
-                                fetch("resumes/update/${resume.id}", {
-                                    method: 'POST'
-                                })
-                            })
-
-                        </script>
                     </#list>
                 </div>
             </#if>
@@ -223,6 +207,40 @@
 
 
     <script>
+        const btnUpdateVacancies = document.querySelectorAll('.btn-update-vacancies');
+
+        let headers = new Headers()
+
+        let header = document.head.querySelector("[name~=_csrf_header][content]").content;
+        let token = document.head.querySelector("[name~=_csrf_token][content]").content;
+
+        headers.set(header, token)
+
+        btnUpdateVacancies.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const vacancyId = btn.getAttribute('data-target');
+                console.log(vacancyId)
+                fetch("/vacancies/update/" + vacancyId, {
+                    method: 'POST',
+                    headers
+                })
+            });
+        });
+
+        const btnUpdateResumes = document.querySelectorAll('.btn-update-resumes');
+
+        btnUpdateResumes.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const resumeId = btn.getAttribute('data-target');
+                console.log(resumeId)
+                fetch("/resumes/update/" + resumeId, {
+                    method: 'POST',
+                    headers
+                })
+            });
+        });
+
+
         const modal = document.getElementById('modal');
         const close = document.getElementById('close');
         const body = document.getElementById('body-modal');
@@ -246,7 +264,8 @@
             cards.appendChild(h3)
             cards.innerHTML =
                 `
-                <#list activeResumesWithResponses as resume>
+                <#if activeResumesWithResponses??>
+                    <#list activeResumesWithResponses as resume>
                 <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
                     <div class="card border-0 bg-light rounded shadow">
                         <div class="card-body p-4">
@@ -264,6 +283,7 @@
                     </div>
                 </div>
                 </#list>
+                </#if>
             </div>
                 `
             body.appendChild(cards);

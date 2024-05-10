@@ -22,13 +22,12 @@ function makeHeaders (){
     console.log(user)
     let headers = new Headers()
     headers.set('Content-Type','application/json')
-    let header = document.head.querySelector("[property~=_csrf_header][content]").content;
-    let token = document.head.querySelector("[property~=_csrf_token][content]").content;
+    let header = document.head.querySelector("[name~=_csrf_header][content]").content;
+    let token = document.head.querySelector("[name~=_csrf_token][content]").content;
+
+    headers.set(header, token)
     if (user) {
         headers.set('Authorization', 'Basic ' + btoa(user.email + ':' + user.password))
-
-        headers.set(header, token)
-        console.log(headers)
     }
     return headers
 }
