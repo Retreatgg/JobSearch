@@ -4,6 +4,7 @@ import com.example.demo.dto.ResumeCreateDto;
 import com.example.demo.dto.ResumeDto;
 import com.example.demo.dto.ResumeUpdateDto;
 import com.example.demo.service.*;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -58,10 +59,10 @@ public class ResumeController {
     }
 
     @PostMapping("add")
-    public String addResume(Authentication authentication, ResumeCreateDto resumeCreateDto) {
+    public String addResume(Authentication authentication, @Valid ResumeCreateDto resumeCreateDto) {
         System.out.println(authentication);
         resumeService.addResume(resumeCreateDto, authentication);
-        return "redirect:/";
+        return "redirect:/profile";
     }
 
     @PostMapping("edit/{id}")

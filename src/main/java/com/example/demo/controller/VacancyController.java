@@ -10,6 +10,7 @@ import com.example.demo.service.RespondedApplicantService;
 import com.example.demo.service.ResumeService;
 import com.example.demo.service.VacancyService;
 import com.example.demo.util.UserUtil;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -54,9 +55,9 @@ public class VacancyController {
     }
 
     @PostMapping("add")
-    public String addNewVacancy(VacancyDto vacancyDto, Authentication auth) {
+    public String addNewVacancy(@Valid VacancyDto vacancyDto, Authentication auth) {
         vacancyService.addVacancy(vacancyDto, auth);
-        return "redirect:/";
+        return "redirect:/profile";
     }
 
     @PostMapping("update/{id}")

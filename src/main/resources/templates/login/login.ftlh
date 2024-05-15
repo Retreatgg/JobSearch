@@ -37,82 +37,82 @@
     </section>
 
 
-    <script>
-        let form = document.getElementById('login-form')
+<#--    <script>-->
+<#--        let form = document.getElementById('login-form')-->
 
-        function onLoginHandler(event) {
-            event.preventDefault()
+<#--        function onLoginHandler(event) {-->
+<#--            event.preventDefault()-->
 
-            let target = event.target
-            let data = new FormData(target)
-            let user = Object.fromEntries(data)
+<#--            let target = event.target-->
+<#--            let data = new FormData(target)-->
+<#--            let user = Object.fromEntries(data)-->
 
-            let headers = new Headers()
-            headers.set('Authorization', 'Basic ' + btoa(user.email + ':' + user.password))
-            if(${_csrf??}) {
-                headers.set('${_csrf.headerName}', '${_csrf.token}')
-            }
+<#--            let headers = new Headers()-->
+<#--            headers.set('Authorization', 'Basic ' + btoa(user.email + ':' + user.password))-->
+<#--            if(${_csrf??}) {-->
+<#--                headers.set('${_csrf.headerName}', '${_csrf.token}')-->
+<#--            }-->
 
-            fetchAuthorized(headers)
+<#--            fetchAuthorized(headers)-->
 
-        }
+<#--        }-->
 
-        async function fetchAuthorized(auth) {
-            try {
-                await makeRequest('http://localhost:8089/api/auth/login', updateOptions({
-                    method: 'post',
-                    headers: auth
-                }));
-            } catch (e) {
-                alert(e)
-            }
-        }
+<#--        async function fetchAuthorized(auth) {-->
+<#--            try {-->
+<#--                await makeRequest('http://localhost:8089/api/auth/login', updateOptions({-->
+<#--                    method: 'post',-->
+<#--                    headers: auth-->
+<#--                }));-->
+<#--            } catch (e) {-->
+<#--                alert(e)-->
+<#--            }-->
+<#--        }-->
 
 
-        function makeHeaders() {
-            let user = restoreUser()
+<#--        function makeHeaders() {-->
+<#--            let user = restoreUser()-->
 
-            let headers = new Headers()
-            headers.set('Content-Type', 'application/json')
-            if(${_csrf??}) {
-                headers.set('${_csrf.headerName}', '${_csrf.token}')
-            }
-            if (user) {
-                headers.set('Authorization', 'Basic ' + btoa(user.email + ':' + user.password))
-            }
-            return headers
-        }
+<#--            let headers = new Headers()-->
+<#--            headers.set('Content-Type', 'application/json')-->
+<#--            if(${_csrf??}) {-->
+<#--                headers.set('${_csrf.headerName}', '${_csrf.token}')-->
+<#--            }-->
+<#--            if (user) {-->
+<#--                headers.set('Authorization', 'Basic ' + btoa(user.email + ':' + user.password))-->
+<#--            }-->
+<#--            return headers-->
+<#--        }-->
 
-        async function makeRequest(url, options) {
-            let settings = options || requestSettings
-            let response = await fetch(url, settings)
+<#--        async function makeRequest(url, options) {-->
+<#--            let settings = options || requestSettings-->
+<#--            let response = await fetch(url, settings)-->
 
-            if (response.ok) {
-                return await response.json()
-            } else {
-                let err = new Error(response.status.toString())
-                err.response = response
-                console.log(err);
-                throw err
-            }
-        }
+<#--            if (response.ok) {-->
+<#--                return await response.json()-->
+<#--            } else {-->
+<#--                let err = new Error(response.status.toString())-->
+<#--                err.response = response-->
+<#--                console.log(err);-->
+<#--                throw err-->
+<#--            }-->
+<#--        }-->
 
-        function updateOptions(options) {
-            console.log(options);
-            let update = {...options}
-            update.mode = 'cors'
-            update.headers = makeHeaders()
-            return update
-        }
+<#--        function updateOptions(options) {-->
+<#--            console.log(options);-->
+<#--            let update = {...options}-->
+<#--            update.mode = 'cors'-->
+<#--            update.headers = makeHeaders()-->
+<#--            return update-->
+<#--        }-->
 
-        const requestSettings = {
-            method: 'get',
-            headers: makeHeaders()
-        }
+<#--        const requestSettings = {-->
+<#--            method: 'get',-->
+<#--            headers: makeHeaders()-->
+<#--        }-->
 
-        function restoreUser() {
-            return JSON.parse(localStorage.getItem('user'))
-        }
-    </script>
+<#--        function restoreUser() {-->
+<#--            return JSON.parse(localStorage.getItem('user'))-->
+<#--        }-->
+<#--    </script>-->
 
 </@main.layout>

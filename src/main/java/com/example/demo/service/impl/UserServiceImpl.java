@@ -70,7 +70,7 @@ public class UserServiceImpl implements UserService {
                 .accountType(userCreateDto.getAccountType())
                 .enabled(true)
                 .age(userCreateDto.getAge())
-                .avatar("unnamed.jpg")
+                .avatar("unnamed.jpeg")
                 .email(userCreateDto.getEmail())
                 .name(userCreateDto.getName())
                 .surname(userCreateDto.getSurname())
