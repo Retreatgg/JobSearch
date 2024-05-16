@@ -32,23 +32,29 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <#assign
+                known = SPRING_SECURITY_CONTEXT??
+                >
+                <#if known>
+                    <#assign
+                    user = SPRING_SECURITY_CONTEXT.authentication.principal
+                    role = user.getAuthorities()[0]
+                    >
+                    <#if role == "EMPLOYER">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/resumes/active">Employers</a>
+                            </li>
+                    </#if>
+
+                </#if>
+
                     <li class="nav-item">
                         <a class="nav-link" href="/">Companies</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/resumes/active">Employers</a>
                     </li>
                 </ul>
 
                 <div class="ms-auto">
-                    <#assign
-                    known = SPRING_SECURITY_CONTEXT??
-                    >
                     <#if known>
-                        <#assign
-                        user = SPRING_SECURITY_CONTEXT.authentication.principal
-                        name = user.getUsername()
-                        >
                         <a href="/profile" class="btn btn-outline-info m-2">Profile</a>
                         <a href="/logout" class="btn btn-outline-info m-2" id="logout">Logout</a>
                     <#else>

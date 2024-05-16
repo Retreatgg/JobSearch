@@ -41,15 +41,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto getUserByEmail(String email) {
-        /* User userAuth = fileUtil.getUserByAuth(authentication);
-        /*if (userAuth.getEmail().equals(email)) {
-
-        } */
-
         User user = userRepository.findByEmail(email).orElseThrow(() -> new NoSuchElementException("Can not find User by email:" + email));
         return transformationForDtoSingleUser(user);
-
-        // throw new IllegalArgumentException("Not your profile");
     }
 
     @Override
@@ -144,7 +137,7 @@ public class UserServiceImpl implements UserService {
     }
 
     private void updateResetPasswordToken(String token, String email) {
-        User user = userRepository.findByEmail(email).orElseThrow(() -> new NoSuchElementException("Could not find any user with the email " + email));
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("Could not find any user with the email " + email));
         user.setResetPasswordToken(token);
         userRepository.saveAndFlush(user);
     }
@@ -175,7 +168,7 @@ public class UserServiceImpl implements UserService {
         String email = request.getParameter("email");
         String token = UUID.randomUUID().toString();
         updateResetPasswordToken(token, email);
-        String passwordLink = Utility.getSiteURL(request) + "auth/reset_password?token=" + token;
+        String passwordLink = Utility.getSiteURL(request) + "/auth/reset_password?token=" + token;
         emailService.sendEmail(email, passwordLink);
     }
 
