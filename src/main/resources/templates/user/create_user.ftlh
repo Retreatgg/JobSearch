@@ -6,7 +6,7 @@
                 <div class="card shadow">
                     <div class="card-body">
                         <h5 class="card-title text-center mb-4">Registration Form</h5>
-                        <form action="/users/register" method="post">
+                        <form action="/auth/register" method="post">
                             <#if _csrf??>
                                 <input type="hidden" name="${(_csrf.parameterName)!'csrf-param-name'}" value="${(_csrf.token)!'csrf-token'}" />
                             </#if>
@@ -31,6 +31,7 @@
                                        <input type="text" class="form-control" id="name" name="name">
                                    </div>
                                    <input type="hidden" name="accountType" value="EMPLOYER">
+                                   <input type="hidden" name="surname" value=" ">
 
                                    <div class="mb-3">
                                        <label for="age" class="form-label">Company Age</label>

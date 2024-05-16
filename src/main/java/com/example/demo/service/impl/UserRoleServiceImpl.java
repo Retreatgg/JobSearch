@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -27,5 +29,10 @@ public class UserRoleServiceImpl implements UserRoleService {
                 .build();
 
         userRoleRepository.save(userRole);
+    }
+
+    @Override
+    public List<UserRole> findByUserEmail(String email) {
+        return userRoleRepository.findByUserEmail(email);
     }
 }

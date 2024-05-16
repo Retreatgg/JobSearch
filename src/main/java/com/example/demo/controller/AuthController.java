@@ -5,6 +5,7 @@ import com.example.demo.dto.UserDto;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
 import jakarta.mail.MessagingException;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.HttpServerErrorException;
 
 import java.io.UnsupportedEncodingException;
 
@@ -46,13 +48,14 @@ public class AuthController {
     }
 
     @PostMapping("register")
-    public String register(@Valid UserCreateDto userDto, BindingResult bindingResult, Model model) {
+    public String register(@Valid UserCreateDto userDto, BindingResult bindingResult, Model model, HttpServletRequest request) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("userDto", userDto);
-            return "redirect:/auth/register";
+            return "redirect:/auth/register?role=" + userDto.getAccountType().toLowerCase();
         }
-        userService.createUser(userDto);
-        return "redirect:/";
+        userService.createUser(userDto, request);
+
+        return "redirect:/profile";
     }
 
     @GetMapping("forgot_password")

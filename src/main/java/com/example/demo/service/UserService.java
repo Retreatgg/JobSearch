@@ -23,7 +23,7 @@ public interface UserService {
     UserDto getUserByPhoneNumber(String phoneNumber);
 
     Boolean isUserExistsByEmail(String email);
-    void createUser(UserCreateDto userCreateDto);
+    void createUser(UserCreateDto userCreateDto, HttpServletRequest request);
     void editProfile(UserUpdateDto userUpdateDto, Authentication auth);
     ResponseEntity<?> downloadImage(String email);
     String getUserEmailById(Long id);

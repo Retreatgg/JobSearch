@@ -1,31 +1,39 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.dto.*;
+import com.example.demo.model.Authority;
 import com.example.demo.model.User;
+import com.example.demo.model.UserRole;
 import com.example.demo.repository.UserRepository;
+import com.example.demo.service.AuthorityService;
 import com.example.demo.service.UserRoleService;
 import com.example.demo.service.UserService;
 import com.example.demo.util.FileUtil;
 import com.example.demo.util.UserUtil;
 import com.example.demo.util.Utility;
 import jakarta.mail.MessagingException;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.io.UnsupportedEncodingException;
-import java.util.NoSuchElementException;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static com.example.demo.enums.AccountType.APPLICANT;
 import static com.example.demo.enums.AccountType.EMPLOYER;
+import static com.fasterxml.jackson.databind.type.LogicalType.Collection;
 
 @Slf4j
 @Service
@@ -38,6 +46,7 @@ public class UserServiceImpl implements UserService {
     private final UserRoleService userRoleService;
     private final UserRepository userRepository;
     private final EmailServiceImpl emailService;
+    private final AuthorityService authorityService;
 
     @Override
     public UserDto getUserByEmail(String email) {
@@ -59,11 +68,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void createUser(UserCreateDto userCreateDto) {
+    public void createUser(UserCreateDto userCreateDto, HttpServletRequest request) {
         User newUser;
         if (isUserExistsByEmail(userCreateDto.getEmail())) {
             throw new IllegalArgumentException("User with email " + userCreateDto.getEmail() + " already exists");
         }
+
+        String encodedPassword = encoder.encode(userCreateDto.getPassword());
 
         User user = User.builder()
                 .accountType(userCreateDto.getAccountType())
@@ -74,8 +85,10 @@ public class UserServiceImpl implements UserService {
                 .name(userCreateDto.getName())
                 .surname(userCreateDto.getSurname())
                 .phoneNumber(userCreateDto.getPhoneNumber())
-                .password(encoder.encode(userCreateDto.getPassword()))
+                .password(encodedPassword)
                 .build();
+
+
 
         String accountType = userCreateDto.getAccountType();
         if (accountType.equals(APPLICANT.toString()) || accountType.equals(EMPLOYER.toString())) {
@@ -97,7 +110,17 @@ public class UserServiceImpl implements UserService {
                     .build();
             userRoleService.createRoleForUser(userRoleDto);
         }
+
+        user.setAuthorities(setAuthoritiesUser(newUser.getEmail()));
+
+        try {
+            request.login(userCreateDto.getEmail(), userCreateDto.getPassword());
+        } catch (ServletException e) {
+            e.printStackTrace();
+        }
+
     }
+
 
     @Override
     public void editProfile(UserUpdateDto userUpdateDto, Authentication auth) {
@@ -170,6 +193,16 @@ public class UserServiceImpl implements UserService {
         updateResetPasswordToken(token, email);
         String passwordLink = Utility.getSiteURL(request) + "/auth/reset_password?token=" + token;
         emailService.sendEmail(email, passwordLink);
+    }
+
+    private List<Authority> setAuthoritiesUser(String email) {
+        List<UserRole> userRoles = userRoleService.findByUserEmail(email);
+        List<Authority> authorities = new ArrayList();
+        userRoles.forEach(u -> {
+            authorities.add(authorityService.findById(u.getRole().getId()));
+        });
+
+        return authorities;
     }
 
     private UserDto transformationForDtoSingleUser(User user) {
