@@ -1,6 +1,5 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.dao.UserDao;
 import com.example.demo.dto.*;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
@@ -8,16 +7,22 @@ import com.example.demo.service.UserRoleService;
 import com.example.demo.service.UserService;
 import com.example.demo.util.FileUtil;
 import com.example.demo.util.UserUtil;
+import com.example.demo.util.Utility;
+import jakarta.mail.MessagingException;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.io.UnsupportedEncodingException;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.UUID;
 
 import static com.example.demo.enums.AccountType.APPLICANT;
 import static com.example.demo.enums.AccountType.EMPLOYER;
@@ -32,6 +37,7 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder encoder;
     private final UserRoleService userRoleService;
     private final UserRepository userRepository;
+    private final EmailServiceImpl emailService;
 
     @Override
     public UserDto getUserByEmail(String email) {
@@ -137,12 +143,40 @@ public class UserServiceImpl implements UserService {
         return userRepository.findById(id).get().getEmail();
     }
 
+    private void updateResetPasswordToken(String token, String email) {
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new NoSuchElementException("Could not find any user with the email " + email));
+        user.setResetPasswordToken(token);
+        userRepository.saveAndFlush(user);
+    }
+
+    @Override
+    public User getByResetPasswordToken(String token) {
+        return userRepository.findByResetPasswordToken(token).orElseThrow(() -> new NoSuchElementException("User not found"));
+    }
+
+    @Override
+    public void updatePassword(User user, String newPassword) {
+        String encodedPassword = encoder.encode(newPassword);
+        user.setPassword(encodedPassword);
+        user.setResetPasswordToken(null);
+        userRepository.saveAndFlush(user);
+    }
+
     @Override
     public void login(UserLoginDto user) {
         UserDto userFromData = getUserByEmail(user.getEmail());
         if(!encoder.matches(user.getPassword(), userFromData.getPassword())) {
             throw new IllegalArgumentException("Incorrect password");
         }
+    }
+
+    @Override
+    public void makeResetPasswdLink(HttpServletRequest request) throws UsernameNotFoundException, UnsupportedEncodingException, MessagingException {
+        String email = request.getParameter("email");
+        String token = UUID.randomUUID().toString();
+        updateResetPasswordToken(token, email);
+        String passwordLink = Utility.getSiteURL(request) + "auth/reset_password?token=" + token;
+        emailService.sendEmail(email, passwordLink);
     }
 
     private UserDto transformationForDtoSingleUser(User user) {

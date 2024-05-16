@@ -8,6 +8,21 @@ spring:
     password: qwerty
     driver-class-name: org.h2.Driver
 
+
+  mail:
+    host: smtp.gmail.com
+    username: devargenpm@gmail.com
+    password: vcfs pusq zeeo ncuq
+    port: 587
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls.enable: true
+
+  freemarker:
+    expose-session-attributes: true
+
   mvc:
     static-path-pattern: /static/**
     log-request-details: false

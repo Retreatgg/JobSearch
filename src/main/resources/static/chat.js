@@ -22,9 +22,9 @@ function chatHandler(e) {
             if (!response.ok) {
                 throw new Error(`Chat submission failed with status ${response.status}`);
             }
-            console.log('Chat message sent successfully');
+            console.log('Chat message.ftlh sent successfully');
         })
-        .catch(error => console.error('Error sending chat message:', error));
+        .catch(error => console.error('Error sending chat message.ftlh:', error));
 }
 
 function makeHeaders() {

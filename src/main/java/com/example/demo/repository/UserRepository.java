@@ -11,6 +11,7 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findByEmail(String email);
+    Optional<User> findByResetPasswordToken(String token);
 
     @Query("select u from User u where u.phoneNumber like :phoneNumber")
     Optional<User> findByPhoneNumber(String phoneNumber);
