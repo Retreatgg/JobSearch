@@ -32,9 +32,17 @@ public class AuthController {
     }
 
     @GetMapping("register")
-    public String register(Model model) {
+    public String register(Model model, @RequestParam(name = "role") String role) {
         model.addAttribute("userDto", new UserDto());
+        if(role.equals("applicant")) {
+            model.addAttribute("applicant", true);
+        }
         return "/user/create_user";
+    }
+
+    @GetMapping("choose")
+    public String chooseRole() {
+        return "user/choose_role";
     }
 
     @PostMapping("register")

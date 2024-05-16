@@ -59,7 +59,7 @@
                         <a href="/logout" class="btn btn-outline-info m-2" id="logout">Logout</a>
                     <#else>
                         <a href="/auth/login" class="btn btn-outline-info m-2">Login</a>
-                        <a href="/auth/register" class="btn btn-outline-info m-2">Register</a>
+                        <a href="/auth/choose" class="btn btn-outline-info m-2">Register</a>
                     </#if>
                 </div>
             </div>
