@@ -103,16 +103,25 @@ public class VacancyServiceImpl implements VacancyService {
         String authority = userUtil.getAuthority(auth);
 
         if (authority.equals(EMPLOYER.toString())) {
-
             Vacancy vacancy = getVacancyById(vacancyId);
-            vacancy.setExpTo(vacancyDto.getExpTo());
-            vacancy.setSalary(vacancyDto.getSalary());
-            vacancy.setDescription(vacancyDto.getDescription());
-            vacancy.setIsActive(vacancyDto.getIsActive());
-            vacancy.setName(vacancyDto.getName());
-            vacancy.setExpFrom(vacancyDto.getExpFrom());
-            vacancy.setCategory(categoryService.findById(vacancyDto.getCategoryId()));
-
+            if(vacancyDto.getExpTo() != null) {
+                vacancy.setExpTo(vacancyDto.getExpTo());
+            }
+            if(vacancyDto.getExpFrom() != null) {
+                vacancy.setExpFrom(vacancy.getExpFrom());
+            }
+            if(vacancyDto.getDescription() != null) {
+                vacancy.setDescription(vacancyDto.getDescription());
+            }
+            if(vacancyDto.getIsActive() != null) {
+                vacancy.setIsActive(vacancyDto.getIsActive());
+            }
+            if(vacancyDto.getName() != null) {
+                vacancy.setName(vacancyDto.getName());
+            }
+            if(vacancyDto.getCategoryId() != null) {
+                vacancy.setCategory(categoryService.findById(vacancyDto.getCategoryId()));
+            }
             vacancyRepository.save(vacancy);
         } else {
             throw new NoSuchElementException("User not authorized to edit vacancy");

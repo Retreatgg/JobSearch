@@ -41,7 +41,6 @@ public class ProfileController {
     @GetMapping("edit")
     public String editProfile(Authentication auth, Model model) {
         String email = userUtil.getUserByAuth(auth).getEmail();
-        model.addAttribute("auth", auth);
         model.addAttribute("user", userService.getUserByEmail(email));
         return "profile/edit_profile";
     }
@@ -56,7 +55,6 @@ public class ProfileController {
         model.addAttribute("vacancies", vacancyService.getVacanciesByCompanyName(user.getName()));
         model.addAttribute("resumes", resumeService.getResumesByApplicantId(auth));
         model.addAttribute("image", userService.downloadImage(email));
-        model.addAttribute("auth", auth);
 
         if(user.getAccountType().equals(APPLICANT.toString())) {
             model.addAttribute("messages", messageService.getAllMessages(auth));

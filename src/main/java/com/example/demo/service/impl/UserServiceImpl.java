@@ -102,17 +102,25 @@ public class UserServiceImpl implements UserService {
     public void editProfile(UserUpdateDto userUpdateDto, Authentication auth) {
         User user = userUtil.getUserByAuth(auth);
 
-        String fileName = fileUtil.saveUploadedFile(userUpdateDto.getAvatar(), "/images");
-        user.setAge(userUpdateDto.getAge());
-        user.setAvatar(fileName);
+        if(userUpdateDto.getAge() != null) {
+            user.setAge(userUpdateDto.getAge());
+        }
+        if(userUpdateDto.getAvatar() != null) {
+            String fileName = fileUtil.saveUploadedFile(userUpdateDto.getAvatar(), "/images");
+            user.setAvatar(fileName);
+        }
         if (userUpdateDto.getSurname() != null) {
             user.setSurname(userUpdateDto.getSurname());
-        } else {
-            user.setSurname("");
         }
-        user.setName(userUpdateDto.getName());
-        user.setPassword(encoder.encode(userUpdateDto.getPassword()));
-        user.setPhoneNumber(userUpdateDto.getPhoneNumber());
+        if(userUpdateDto.getName() != null) {
+            user.setName(userUpdateDto.getName());
+        }
+        if(userUpdateDto.getPassword() != null) {
+            user.setPassword(encoder.encode(userUpdateDto.getPassword()));
+        }
+        if(userUpdateDto.getPhoneNumber() != null) {
+            user.setPhoneNumber(userUpdateDto.getPhoneNumber());
+        }
 
         userRepository.save(user);
     }

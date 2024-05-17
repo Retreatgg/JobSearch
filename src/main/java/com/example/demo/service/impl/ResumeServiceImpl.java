@@ -157,10 +157,18 @@ public class ResumeServiceImpl implements ResumeService {
 
         if (authority.equalsIgnoreCase(APPLICANT.toString()) && Objects.equals(resume.getApplicant().getId(), user.getId())) {
 
-            resume.setName(resumeDto.getTitle());
-            resume.setSalary(resumeDto.getSalary());
-            resume.setIsActive(resumeDto.getIsActive());
-            resume.setCategory(categoryRepository.findByName(resumeDto.getCategoryName()).get());
+            if(resumeDto.getTitle() != null) {
+                resume.setName(resumeDto.getTitle());
+            }
+            if(resumeDto.getSalary() != null) {
+                resume.setSalary(resumeDto.getSalary());
+            }
+            if(resumeDto.getIsActive() != null) {
+                resume.setIsActive(resumeDto.getIsActive());
+            }
+            if(resumeDto.getCategoryName() != null) {
+                resume.setCategory(categoryRepository.findByName(resumeDto.getCategoryName()).get());
+            }
 
             resumeRepository.save(resume);
         }
