@@ -1,4 +1,5 @@
 <#import "../layot.ftlh" as main>
+
 <@main.layout script="">
     <div class="row justify-content-center">
         <div class="col-md-6">
@@ -16,6 +17,7 @@
                         <div class="mb-3">
                             <label for="categoryName" class="form-label">Select category</label>
                             <select class="form-select" aria-label="Default select example" name="categoryName">
+                                <option value="">Categories</option>
                                 <#list categories as category>
                                     <option value="${category.name}">${category.name}</option>
                                 </#list>
@@ -37,26 +39,26 @@
 
                         <h5 class="text-center mt-3">Add contacts</h5>
                         <#assign index = 0>
-                            <#list contacts as contact>
-                                <input type="hidden" class="form-control" id="contacts[${index}].type" name="contacts[${index}].type" value="${contact.type}">
-                                <label for="contacts[${index}].value" class="form-label">${contact.type}</label>
-                                <#if contact.type == "Email">
-                                    <input type="email" class="form-control" id="contacts[${index}`].value" name="contacts[${index}].value">
-                                <#else>
-                                    <input type="text" class="form-control" id="contacts[${index}`].value" name="contacts[${index}].value">
-                                </#if>
-                                <#assign index++>
-                            </#list>
+                        <#list contacts as contact>
+                            <input type="hidden" class="form-control" id="contacts[${index}].type" name="contacts[${index}].type" value="${contact.type}">
+                            <label for="contacts[${index}].value" class="form-label">${contact.type}</label>
+                            <#if contact.type == "Email">
+                                <input type="email" class="form-control" id="contacts[${index}`].value" name="contacts[${index}].value">
+                            <#else>
+                                <input type="text" class="form-control" id="contacts[${index}`].value" name="contacts[${index}].value">
+                            </#if>
+                            <#assign index++>
+                        </#list>
 
                         <div id="moreInfo"></div>
 
                         <div class="row mt-3 mb-3">
                             <div class="col-sm-4">
-                                <button id="workExp" type="button">ADD WORK EXPERIENCE INFO</button>
+                                <button id="workExp" type="button" class="btn btn-primary">ADD WORK EXPERIENCE INFO</button>
                             </div>
 
                             <div class="col-sm-4">
-                                <button id="educInfo" type="button">ADD EDUCATION INFO</button>
+                                <button id="educInfo" type="button" class="btn btn-primary">ADD EDUCATION INFO</button>
                             </div>
                         </div>
 
@@ -70,7 +72,6 @@
     </div>
 
     <script>
-
         const btn = document.getElementById('workExp');
         const form = document.getElementById('form');
         const more = document.getElementById('moreInfo');
@@ -139,7 +140,7 @@
 
                                 <div id="datetimepicker1" class="input-append date">
                                     <label for="educationInfo[`+educIndex+`].endDate" class="form-label">End date</label>
-                                    <input type="date" class="form-control" id="educationInfo[educIndex].endDate" name="educationInfo[`+educIndex+`].endDate"></input>
+                                    <input type="date" class="form-control" id="educationInfo[`+educIndex+`].endDate" name="educationInfo[`+educIndex+`].endDate"></input>
                                     <span class="add-on">
             <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
         </span>
@@ -151,3 +152,4 @@
 
     </script>
 </@main.layout>
+

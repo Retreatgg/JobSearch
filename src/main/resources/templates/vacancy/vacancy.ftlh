@@ -96,11 +96,10 @@
 
         async function fetchToRespond(resumeId) {
             let headers = new Headers()
-            if(${_csrf??}) {
-                headers.set(`${_csrf.headerName}', '${_csrf.token}`)
-            }
+            <#if _csrf??>
+            headers.set('${_csrf.headerName}', '${_csrf.token}')
+            </#if>
 
-            console.log("Resume ID:", resumeId);
             await fetch('/vacancies/respond/' + ${vacancy.id} + '?resumeId=' + resumeId, {
                 method: 'POST',
                 headers
@@ -109,3 +108,4 @@
 
     </script>
 </@main.layout>
+</html>

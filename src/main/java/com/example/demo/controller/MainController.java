@@ -1,21 +1,20 @@
 package com.example.demo.controller;
 
 
-import com.example.demo.dto.VacancyDtoForShow;
 import com.example.demo.service.CategoryService;
 import com.example.demo.service.VacancyService;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("")
@@ -29,13 +28,11 @@ public class MainController {
     public String getActiveVacancies(
             Model model,
             @RequestParam(name = "category", required = false) String category,
-            @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable,
-            Authentication auth)
-    {
+            @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable) {
 
         Sort sort = pageable.getSort();
-        if(!sort.isEmpty()) {
-            if(category == null || category.isEmpty()) {
+        if (!sort.isEmpty()) {
+            if (category == null || category.isEmpty()) {
                 model.addAttribute("page", vacancyService.getAllVacancies(pageable, 0L));
             } else {
                 Long categoryId = categoryService.getCategoryId(category);
@@ -44,10 +41,17 @@ public class MainController {
             model.addAttribute("pageSize", pageable.getPageSize());
             model.addAttribute("pageNumber", pageable.getPageNumber());
             model.addAttribute("categories", categoryService.categories());
-        }
-
-        if(auth != null) {
-            model.addAttribute("auth", auth);
+            if (category != null) {
+                model.addAttribute("category", category);
+            }
+            if (sort != null) {
+                List<String> sorts = new ArrayList();
+                sort.forEach(e -> {
+                    sorts.add(e.getProperty());
+                });
+                sort.forEach(Sort.Order::getProperty);
+                model.addAttribute("sort", sorts.get(0));
+            }
         }
 
         return "vacancy/all_active_vacancies";

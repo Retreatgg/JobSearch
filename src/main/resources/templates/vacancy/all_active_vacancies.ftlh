@@ -58,8 +58,16 @@
         <div class="row mt-4 justify-content-center">
             <div class="col-lg-6">
                 <#assign maxPage = page.content?size / pageSize>
-                <@p.pagination page=pageNumber maxPage=maxPage path="/">
-                </@p.pagination>
+                <#if category??>
+                    <@p.pagination page=pageNumber maxPage=maxPage path="/" category=category sort=""></@p.pagination>
+                <#elseif sort??>
+                    <@p.pagination page=pageNumber maxPage=maxPage path="/" category="" sort=sort></@p.pagination>
+                <#elseif sort?? && category??>
+                    <@p.pagination page=pageNumber maxPage=maxPage path="/" category=category sort=sort></@p.pagination>
+                <#else>
+                    <@p.pagination page=pageNumber maxPage=maxPage path="/" category="" sort=""></@p.pagination>
+                </#if>
+
             </div>
         </div>
     </div>

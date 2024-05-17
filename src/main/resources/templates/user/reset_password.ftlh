@@ -7,7 +7,6 @@
         </#if>
     </div>
 
-
     <div class="py-5 h-100">
         <div class="row d-flex align-items-center justify-content-center h-100">
             <div class="col-md-7 col-lg-5 col-xl-5">
