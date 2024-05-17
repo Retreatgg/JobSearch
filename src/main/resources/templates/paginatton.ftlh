@@ -9,14 +9,12 @@
 
             <#if sort??>
                 <#assign queryParams = queryParams + ["sort=${sort}"]>
-            <#else>
-                <#assign queryParams = queryParams + ["sort="]>
+            <#elseif category == "">
             </#if>
 
             <#if category??>
                 <#assign queryParams = queryParams + ["category=${category}"]>
-            <#else>
-                <#assign queryParams = queryParams + ["category="]>
+            <#elseif category == "">
             </#if>
 
             <#assign queryString = queryParams?join("&")>

@@ -34,7 +34,7 @@
     </div>
 
     <#assign maxPage = page.content?size / pageSize>
-    <@p.pagination page=pageNumber maxPage=maxPage path="/resumes/active">
+    <@p.pagination page=pageNumber maxPage=maxPage path="/resumes/active" category="" sort="">
     </@p.pagination>
 
 </@main.layout>
