@@ -17,48 +17,52 @@
             </div>
         </div>
 
-        <#if work_info?size != 0>
-            <div class="job-box">
-                <h6 class="text-center text-md-left">Work Experience:</h6>
-                <ul class="list-unstyled">
-                    <#list work_info as work>
-                        <li>
-                            <hr>
-                            <i class="zmdi zmdi-money mr-2"><span
-                                        class="font-weight-bold">Company: ${work.companyName}<br></span></i>
-                            <i class="zmdi zmdi-money mr-2"><span
-                                        class="font-weight-bold">Position: ${work.position}<br> </span></i>
-                            <i class="zmdi zmdi-money mr-2"><span
-                                        class="font-weight-bold">Years: ${work.years}<br> </span></i>
-                            <i class="zmdi zmdi-money mr-2"><span
-                                        class="font-weight-bold">Responsibilities: ${work.responsibilities}</span></i>
-                        </li>
-                    </#list>
-                </ul>
-            </div>
+        <#if work_info??>
+           <#if work_info?size gt 0>
+               <div class="job-box">
+                   <h6 class="text-center text-md-left">Work Experience:</h6>
+                   <ul class="list-unstyled">
+                       <#list work_info as work>
+                           <li>
+                               <hr>
+                               <i class="zmdi zmdi-money mr-2"><span
+                                           class="font-weight-bold">Company: ${work.companyName}<br></span></i>
+                               <i class="zmdi zmdi-money mr-2"><span
+                                           class="font-weight-bold">Position: ${work.position}<br> </span></i>
+                               <i class="zmdi zmdi-money mr-2"><span
+                                           class="font-weight-bold">Years: ${work.years}<br> </span></i>
+                               <i class="zmdi zmdi-money mr-2"><span
+                                           class="font-weight-bold">Responsibilities: ${work.responsibilities}</span></i>
+                           </li>
+                       </#list>
+                   </ul>
+               </div>
+           </#if>
         </#if>
 
-        <#if educations?size != 0>
-            <div class="job-box mt-5">
-                <h6 class="text-center text-md-left">My educations:</h6>
-                <ul class="list-unstyled">
-                    <#list educations as education>
-                        <li>
-                            <hr>
-                            <i class="zmdi zmdi-money mr-2"><span
-                                        class="font-weight-bold">Institution: ${education.institution}<br></span></i>
-                            <i class="zmdi zmdi-money mr-2"><span
-                                        class="font-weight-bold">Program: ${education.program}<br> </span></i>
-                            <i class="zmdi zmdi-money mr-2"><span
-                                        class="font-weight-bold">Degree: ${education.degree}<br> </span></i>
-                            <i class="zmdi zmdi-money mr-2"><span
-                                        class="font-weight-bold">Start date: ${education.startDate}<br></span></i>
-                            <i class="zmdi zmdi-money mr-2"><span
-                                        class="font-weight-bold">End date: ${education.endDate} </span></i>
-                        </li>
-                    </#list>
-                </ul>
-            </div>
+        <#if educations??>
+            <#if educations?size gt 0>
+                <div class="job-box mt-5">
+                    <h6 class="text-center text-md-left">My educations:</h6>
+                    <ul class="list-unstyled">
+                        <#list educations as education>
+                            <li>
+                                <hr>
+                                <i class="zmdi zmdi-money mr-2"><span
+                                            class="font-weight-bold">Institution: ${education.institution}<br></span></i>
+                                <i class="zmdi zmdi-money mr-2"><span
+                                            class="font-weight-bold">Program: ${education.program}<br> </span></i>
+                                <i class="zmdi zmdi-money mr-2"><span
+                                            class="font-weight-bold">Degree: ${education.degree}<br> </span></i>
+                                <i class="zmdi zmdi-money mr-2"><span
+                                            class="font-weight-bold">Start date: ${education.startDate}<br></span></i>
+                                <i class="zmdi zmdi-money mr-2"><span
+                                            class="font-weight-bold">End date: ${education.endDate} </span></i>
+                            </li>
+                        </#list>
+                    </ul>
+                </div>
+            </#if>
         </#if>
     </div>
 </@main.layout>
