@@ -10,6 +10,7 @@
             padding: 20px;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
         }
+
         .role-selection a {
             display: block;
             margin-bottom: 15px;
@@ -19,11 +20,12 @@
             text-align: center;
             border-radius: 5px;
             transition: background-color 0.3s ease;
+            text-decoration: none;
         }
+
         .role-selection a:hover {
             background-color: #0056b3;
             color: #fff;
-            text-decoration: none;
         }
     </style>
 
@@ -32,5 +34,4 @@
         <a href="/auth/register?role=employer">Company</a>
         <a href="/auth/register?role=applicant">Applicant</a>
     </div>
-
 </@main.layout>

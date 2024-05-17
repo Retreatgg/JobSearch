@@ -74,8 +74,6 @@ public class UserServiceImpl implements UserService {
             throw new IllegalArgumentException("User with email " + userCreateDto.getEmail() + " already exists");
         }
 
-        String encodedPassword = encoder.encode(userCreateDto.getPassword());
-
         User user = User.builder()
                 .accountType(userCreateDto.getAccountType())
                 .enabled(true)
@@ -85,40 +83,18 @@ public class UserServiceImpl implements UserService {
                 .name(userCreateDto.getName())
                 .surname(userCreateDto.getSurname())
                 .phoneNumber(userCreateDto.getPhoneNumber())
-                .password(encodedPassword)
+                .password(encoder.encode(userCreateDto.getPassword()))
                 .build();
 
-
-
         String accountType = userCreateDto.getAccountType();
-        if (accountType.equals(APPLICANT.toString()) || accountType.equals(EMPLOYER.toString())) {
-             newUser = userRepository.save(user);
-        } else {
-            throw new NoSuchElementException("No such role");
-        }
-
-        if (userCreateDto.getAccountType().equals(String.valueOf(APPLICANT))) {
-            UserRoleDto userRoleDto = UserRoleDto.builder()
-                    .roleId(2L)
-                    .userId(newUser.getId())
-                    .build();
-            userRoleService.createRoleForUser(userRoleDto);
-        } else if (userCreateDto.getAccountType().equals(String.valueOf(EMPLOYER))) {
-            UserRoleDto userRoleDto = UserRoleDto.builder()
-                    .userId(newUser.getId())
-                    .roleId(1L)
-                    .build();
-            userRoleService.createRoleForUser(userRoleDto);
-        }
-
+        newUser = setRole(accountType, user);
         user.setAuthorities(setAuthoritiesUser(newUser.getEmail()));
 
         try {
             request.login(userCreateDto.getEmail(), userCreateDto.getPassword());
         } catch (ServletException e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
         }
-
     }
 
 
@@ -203,6 +179,31 @@ public class UserServiceImpl implements UserService {
         });
 
         return authorities;
+    }
+
+    private User setRole(String accountType, User user) {
+        User newUser;
+        if (accountType.equals(APPLICANT.toString()) || accountType.equals(EMPLOYER.toString())) {
+            newUser = userRepository.save(user);
+        } else {
+            throw new NoSuchElementException("No such role");
+        }
+
+        if (accountType.equals(String.valueOf(APPLICANT))) {
+            UserRoleDto userRoleDto = UserRoleDto.builder()
+                    .roleId(2L)
+                    .userId(newUser.getId())
+                    .build();
+            userRoleService.createRoleForUser(userRoleDto);
+        } else if (accountType.equals(String.valueOf(EMPLOYER))) {
+            UserRoleDto userRoleDto = UserRoleDto.builder()
+                    .userId(newUser.getId())
+                    .roleId(1L)
+                    .build();
+            userRoleService.createRoleForUser(userRoleDto);
+        }
+
+        return newUser;
     }
 
     private UserDto transformationForDtoSingleUser(User user) {

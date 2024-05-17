@@ -4,30 +4,37 @@
 <@main.layout script="">
 
     <div class="container mt-4">
-        <div class="form-group">
-            <label for="categoryFilter">Select category:</label>
-            <form action="/" method="get">
-                <select class="form-control" id="categoryFilter" name="category">
-                    <option value="">Categories</option>
-                    <#list categories as category>
-                        <option value="${category.name}">${category.name}</option>
-                    </#list>
-                </select>
-                <button type="submit" class="btn btn-primary mt-3">Search</button>
-            </form>
-            <form action="/" method="get">
-                <select class="form-control" id="sortFilter" name="sort">
-                    <option value="">Sort by</option>
-                    <option value="updateTime">Publication date</option>
-                    <option value="countResponses">Count responses</option>
-                </select>
-                <button type="submit" class="btn btn-primary mt-3">Sort</button>
-            </form>
-
-
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <form action="/" method="get">
+                    <div class="mb-3">
+                        <label for="categoryFilter" class="form-label">Select category:</label>
+                        <select class="form-select" id="categoryFilter" name="category">
+                            <option value="">Categories</option>
+                            <#list categories as category>
+                                <option value="${category.name}">${category.name}</option>
+                            </#list>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+            </div>
+            <div class="col-lg-6">
+                <form action="/" method="get">
+                    <div class="mb-3">
+                        <label for="sortFilter" class="form-label">Sort by:</label>
+                        <select class="form-select" id="sortFilter" name="sort">
+                            <option value="">Sort by</option>
+                            <option value="updateTime">Publication date</option>
+                            <option value="countResponses">Count responses</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Sort</button>
+                </form>
+            </div>
         </div>
 
-        <div class="row">
+        <div class="row mt-4">
             <#list page.content as vacancy>
                 <div class="col-lg-4 col-md-6 col-12 mt-4">
                     <div class="card border-0 bg-light rounded shadow">
@@ -39,7 +46,7 @@
                             <div class="mt-3">
                                 <span class="text-muted d-block">Count responses: ${vacancy.countResponses}</span>
                             </div>
-                            <div class="job-right my-4 flex-shrink-0">
+                            <div class="mt-3">
                                 <a href="/vacancies/${vacancy.id}" class="btn btn-light">More info</a>
                             </div>
                         </div>
@@ -48,9 +55,13 @@
             </#list>
         </div>
 
-        <#assign maxPage = page.content?size / pageSize>
-        <@p.pagination page=pageNumber maxPage=maxPage path="/">
-        </@p.pagination>
+        <div class="row mt-4 justify-content-center">
+            <div class="col-lg-6">
+                <#assign maxPage = page.content?size / pageSize>
+                <@p.pagination page=pageNumber maxPage=maxPage path="/">
+                </@p.pagination>
+            </div>
+        </div>
     </div>
 
 </@main.layout>

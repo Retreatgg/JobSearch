@@ -1,106 +1,59 @@
 <#import "../layot.ftlh" as main>
+
 <@main.layout script="">
-    <div class="main-body">
-    <div class="row">
-        <div class="col-lg-4">
-            <div class="card">
-                <div class="card-body">
-                    <div class="d-flex flex-column align-items-center text-center">
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card border-0 shadow">
+                    <div class="card-body text-center">
                         <#if user.avatar??>
-                            <img src="${user.avatar}" alt="User Avatar">
+                            <img src="/images/download/${user.email}" alt="User Avatar" class="rounded-circle mb-3" style="width: 150px; height: 150px;">
                         </#if>
-                            <h4>${user.name} ${user.surname}</h4>
-                        </div>
+                        <h4 class="mb-0">${user.name} ${user.surname}</h4>
                     </div>
                     <hr class="my-4">
                 </div>
             </div>
-        </div>
-        <div class="col-lg-8">
-            <div class="card">
-                <div class="card-body">
-                    <form action="/profile/edit" method="POST" enctype="multipart/form-data">
-                        <#if _csrf??>
-                            <input type="hidden" name="${(_csrf.parameterName)!'csrf-param-name'}" value="${(_csrf.token)!'csrf-token'}" />
-                        </#if>
-                        <#if user.accountType == "APPLICANT">
-                            <div class="row mb-3">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Name</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <input type="text" class="form-control" name="name">
-                                </div>
+            <div class="col-lg-8">
+                <div class="card border-0 shadow">
+                    <div class="card-body">
+                        <form action="/profile/edit" method="POST" enctype="multipart/form-data">
+                            <#if _csrf??>
+                                <input type="hidden" name="${(_csrf.parameterName)!'csrf-param-name'}" value="${(_csrf.token)!'csrf-token'}" />
+                            </#if>
+                            <div class="mb-3">
+                                <label for="inputName" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="inputName" name="name">
                             </div>
-                            <div class="row mb-3">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Surname</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <input type="text" class="form-control" name="surname">
-                                </div>
+                            <div class="mb-3">
+                                <label for="inputSurname" class="form-label">Surname</label>
+                                <input type="text" class="form-control" id="inputSurname" name="surname">
                             </div>
-                        <#else>
-                            <div class="row mb-3">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Company Name</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <input type="text" class="form-control" name="name">
-                                </div>
+                            <div class="mb-3">
+                                <label for="inputPassword" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="inputPassword" name="password">
                             </div>
-                        </#if>
-                        <div class="row mb-3">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">Password</h6>
+                            <div class="mb-3">
+                                <label for="inputPhoneNumber" class="form-label">Phone</label>
+                                <input type="text" class="form-control" id="inputPhoneNumber" name="phoneNumber">
                             </div>
-                            <div class="col-sm-9 text-secondary">
-                                <input type="text" class="form-control" name="password">
+                            <div class="mb-3">
+                                <#if user.accountType == "APPLICANT">
+                                    <label for="inputAge" class="form-label">Age</label>
+                                <#else>
+                                    <label for="inputCompanyAge" class="form-label">Company age</label>
+                                </#if>
+                                <input type="number" class="form-control" id="inputAge" name="age">
                             </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">Phone</h6>
+                            <div class="mb-3">
+                                <label for="inputAvatar" class="form-label">Upload avatar</label>
+                                <input type="file" class="form-control" id="inputAvatar" name="avatar">
                             </div>
-                            <div class="col-sm-9 text-secondary">
-                                <input type="text" class="form-control" name="phoneNumber">
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
-                        </div>
-                        <#if user.accountType == "APPLICANT">
-                            <div class="row mb-3">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Age</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <input type="number" class="form-control" name="age">
-                                </div>
-                            </div>
-                        <#else>
-                            <div class="row mb-3">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Company age</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <input type="number" class="form-control" name="age">
-                                </div>
-                            </div>
-                        </#if>
-                        <div class="row mb-3">
-                            <div class="col-sm-3">
-                                <h6 class="mb-0">Upload avatar</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                                <input type="file" class="form-control" name="avatar">
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-sm-3"></div>
-                            <div class="col-sm-9 text-secondary">
-                                <button type="submit" class="btn btn-primary px-4">Submit</button>
-                            </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
