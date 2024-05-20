@@ -14,6 +14,8 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
               crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
         <style>
             body {
                 background-color: #f8f9fa;
@@ -73,6 +75,16 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/"><@spring.message "layout.companies"/></a>
                     </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <@spring.message "layout.change.lang"/>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="?lang=ru"><@spring.message "layout.ru"/></a></li>
+                            <li><a class="dropdown-item" href="?lang=en"><@spring.message "layout.en"/></a></li>
+                        </ul>
+                    </li>
                 </ul>
                 <div class="ms-auto">
                     <#if known>
@@ -82,6 +94,7 @@
                         <a href="/auth/login" class="btn btn-outline-info m-2"><@spring.message "layout.login"/></a>
                         <a href="/auth/choose" class="btn btn-outline-info m-2"><@spring.message "layout.register"/></a>
                     </#if>
+
                 </div>
             </div>
         </div>
