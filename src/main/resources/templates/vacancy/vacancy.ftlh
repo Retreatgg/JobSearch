@@ -1,6 +1,6 @@
 <#import "../layot.ftlh" as main>
 
-<@main.layout script="">
+<@main.layout script="" ; spring>
     <div class="row justify-content-center mt-5">
         <div class="col-lg-8">
             <div class="card shadow mb-5">
@@ -9,9 +9,9 @@
                     <h5 class="card-title">${vacancy.name}</h5>
                     <p class="card-text">${vacancy.description}</p>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><strong>Salary:</strong> $${vacancy.salary} per year</li>
-                        <li class="list-group-item"><strong>Experience:</strong> ${vacancy.expFrom} - ${vacancy.expTo}
-                            years
+                        <li class="list-group-item"><strong><@spring.message "vacancy.salary"/>:</strong> $${vacancy.salary} <@spring.message "vacancy.per.years"/></li>
+                        <li class="list-group-item"><strong><@spring.message "vacancy.experiences"/>:</strong> ${vacancy.expFrom} - ${vacancy.expTo}
+                            <@spring.message "vacancy.years"/>
                         </li>
                     </ul>
 
@@ -19,7 +19,7 @@
                 </div>
                 <#if auth??>
                     <div class="job-right my-4 flex-shrink-0">
-                        <button class="btn btn-light" onclick="callResponses()">Respond</button>
+                        <button class="btn btn-light" onclick="callResponses()"><@spring.message "vacancy.respond"/></button>
                     </div>
                 </#if>
             </div>
@@ -29,7 +29,7 @@
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content bg-light border-danger">
                     <div class="modal-header bg-danger text-white">
-                        <h5 class="modal-title">Resumes</h5>
+                        <h5 class="modal-title"><@spring.message "vacancy.respond.resumes"/></h5>
                         <button type="button" class="btn-close" onclick="closeModal();" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                     </div>
@@ -108,4 +108,3 @@
 
     </script>
 </@main.layout>
-</html>

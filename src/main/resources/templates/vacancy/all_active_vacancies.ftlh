@@ -1,35 +1,35 @@
 <#import "../layot.ftlh" as main>
 <#import "../paginatton.ftlh" as p>
 
-<@main.layout script="">
+<@main.layout script="" ; spring>
 
     <div class="container mt-4">
         <div class="row justify-content-center">
             <div class="col-lg-6">
                 <form action="/" method="get">
                     <div class="mb-3">
-                        <label for="categoryFilter" class="form-label">Select category:</label>
+                        <label for="categoryFilter" class="form-label"><@spring.message "all.vacancies.select.category"/>:</label>
                         <select class="form-select" id="categoryFilter" name="category">
-                            <option value="">Categories</option>
+                            <option value=""><@spring.message "all.vacancies.categories"/></option>
                             <#list categories as category>
                                 <option value="${category.name}">${category.name}</option>
                             </#list>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">Search</button>
+                    <button type="submit" class="btn btn-primary"><@spring.message "all.vacancies.search"/></button>
                 </form>
             </div>
             <div class="col-lg-6">
                 <form action="/" method="get">
                     <div class="mb-3">
-                        <label for="sortFilter" class="form-label">Sort by:</label>
+                        <label for="sortFilter" class="form-label"><@spring.message "all.vacancies.sort.by"/>:</label>
                         <select class="form-select" id="sortFilter" name="sort">
                             <option value="">Sort by</option>
-                            <option value="updateTime">Publication date</option>
-                            <option value="countResponses">Count responses</option>
+                            <option value="updateTime"><@spring.message "all.vacancies.sort.publication.date"/></option>
+                            <option value="countResponses"><@spring.message "all.vacancies.sort.responses"/></option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">Sort</button>
+                    <button type="submit" class="btn btn-primary"><@spring.message "all.vacancies.sort"/></button>
                 </form>
             </div>
         </div>
@@ -44,10 +44,10 @@
                                 <span class="text-muted d-block">$ ${vacancy.salary}</span>
                             </div>
                             <div class="mt-3">
-                                <span class="text-muted d-block">Count responses: ${vacancy.countResponses}</span>
+                                <span class="text-muted d-block"><@spring.message "all.vacancies.count.responses"/>: ${vacancy.countResponses}</span>
                             </div>
                             <div class="mt-3">
-                                <a href="/vacancies/${vacancy.id}" class="btn btn-light">More info</a>
+                                <a href="/vacancies/${vacancy.id}" class="btn btn-light"><@spring.message "all.vacancies.more.info"/></a>
                             </div>
                         </div>
                     </div>

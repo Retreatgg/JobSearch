@@ -1,39 +1,39 @@
 <#import "../layot.ftlh" as main>
-<@main.layout script="">
+<@main.layout script="" ; spring>
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card shadow">
                 <div class="card-body">
-                    <h5 class="card-title text-center mb-4">Add vacancy</h5>
+                    <h5 class="card-title text-center mb-4"><@spring.message "vacancy.edit.edit"/></h5>
                     <form action="/resumes/edit/${id}" method="post">
                         <#if _csrf??>
                             <input type="hidden" name="${(_csrf.parameterName)!'csrf-param-name'}" value="${(_csrf.token)!'csrf-token'}" />
                         </#if>
                         <div class="mb-3">
-                            <label for="name" class="form-label">Name</label>
+                            <label for="name" class="form-label"><@spring.message "vacancy.name"/></label>
                             <input type="text" class="form-control" id="name" name="name">
                         </div>
                         <div class="mb-3">
-                            <label for="description" class="form-label">Description</label>
+                            <label for="description" class="form-label"><@spring.message "vacancy.description"/></label>
                             <input type="text" class="form-control" id="description" name="description">
                         </div>
                         <div class="mb-3">
-                            <label for="salary" class="form-label">Salary</label>
+                            <label for="salary" class="form-label"><@spring.message "vacancy.salary"/></label>
                             <input type="number" class="form-control" id="salary" name="salary">
                         </div>
 
                         <div class="mb-3">
-                            <label for="expFrom" class="form-label">Experience from</label>
+                            <label for="expFrom" class="form-label"><@spring.message "vacancy.exp.from"/></label>
                             <input type="number" class="form-control" id="expFrom" name="expFrom">
                         </div>
 
                         <div class="mb-3">
-                            <label for="expTo" class="form-label">Experience to</label>
+                            <label for="expTo" class="form-label"><@spring.message "vacancy.exp.to"/></label>
                             <input type="number" class="form-control" id="expTo" name="expTo">
                         </div>
 
                         <div class="mb-3">
-                            <label for="categoryId" class="form-label">Categories</label>
+                            <label for="categoryId" class="form-label"><@spring.message "vacancy.categories"/></label>
                             <select class="form-select" aria-label="Default select example" id="categoryId" name="categoryId">
                                 <#list categories as category>
                                     <option value="${category.name}">${category.name}</option>
@@ -49,7 +49,7 @@
                         </div>
 
                         <div class="text-center">
-                            <button type="submit" class="btn btn-primary">Edit vacancy</button>
+                            <button type="submit" class="btn btn-primary"><@spring.message "vacancy.edit.btn"/></button>
                         </div>
                     </form>
                 </div>
