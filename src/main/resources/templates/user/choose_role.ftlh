@@ -1,5 +1,5 @@
 <#import "../layot.ftlh" as main>
-<@main.layout script="">
+<@main.layout script="" ; spring>
 
     <style>
         .role-selection {
@@ -30,8 +30,8 @@
     </style>
 
     <div class="role-selection mt-5">
-        <h2 class="text-center mb-4">Choose your role</h2>
-        <a href="/auth/register?role=employer">Company</a>
-        <a href="/auth/register?role=applicant">Applicant</a>
+        <h2 class="text-center mb-4"><@spring.message "user.choose.role"/></h2>
+        <a href="/auth/register?role=employer"><@spring.message "user.choose.company"/></a>
+        <a href="/auth/register?role=applicant"><@spring.message "user.choose.applicant"/></a>
     </div>
 </@main.layout>

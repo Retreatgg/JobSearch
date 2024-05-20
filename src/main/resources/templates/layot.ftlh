@@ -66,21 +66,21 @@
                         <#assign role = user.getAuthorities()[0]>
                         <#if role == "EMPLOYER">
                             <li class="nav-item">
-                                <a class="nav-link" href="/resumes/active">Employers</a>
+                                <a class="nav-link" href="/resumes/active"><@spring.message "layout.resumes"/></a>
                             </li>
                         </#if>
                     </#if>
                     <li class="nav-item">
-                        <a class="nav-link" href="/">Companies</a>
+                        <a class="nav-link" href="/"><@spring.message "layout.companies"/></a>
                     </li>
                 </ul>
                 <div class="ms-auto">
                     <#if known>
-                        <a href="/profile" class="btn btn-outline-info m-2">Profile</a>
-                        <a href="/logout" class="btn btn-outline-info m-2" id="logout">Logout</a>
+                        <a href="/profile" class="btn btn-outline-info m-2"><@spring.message "layout.profile"/></a>
+                        <a href="/logout" class="btn btn-outline-info m-2" id="logout"><@spring.message "layout.logout"/></a>
                     <#else>
-                        <a href="/auth/login" class="btn btn-outline-info m-2">Login</a>
-                        <a href="/auth/choose" class="btn btn-outline-info m-2">Register</a>
+                        <a href="/auth/login" class="btn btn-outline-info m-2"><@spring.message "layout.login"/></a>
+                        <a href="/auth/choose" class="btn btn-outline-info m-2"><@spring.message "layout.register"/></a>
                     </#if>
                 </div>
             </div>

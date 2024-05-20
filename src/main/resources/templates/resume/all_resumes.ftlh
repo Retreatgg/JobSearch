@@ -1,8 +1,8 @@
 <#import "../layot.ftlh" as main>
 <#import "../paginatton.ftlh" as p>
-<@main.layout script="">
+<@main.layout script="" ; spring>
 
-    <h3 class="mb-4 mt-2">Resumes: ${page.totalElements}</h3>
+    <h3 class="mb-4 mt-2"><@spring.message "all.resumes.resumes"/>: ${page.totalElements}</h3>
     <div class="row mt-5">
         <div class="col-lg-10 mx-auto">
             <div class="career-search mb-60">
@@ -23,7 +23,7 @@
                                 </div>
                             </div>
                             <div class="job-right my-4 flex-shrink-0">
-                                <a href="/resumes/${resume.id}" class="btn btn-light">More info</a>
+                                <a href="/resumes/${resume.id}" class="btn btn-light"><@spring.message "all.resumes.more.info"/></a>
                             </div>
                         </div>
                     </div>

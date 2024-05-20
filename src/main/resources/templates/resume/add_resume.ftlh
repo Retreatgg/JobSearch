@@ -1,30 +1,30 @@
 <#import "../layot.ftlh" as main>
 
-<@main.layout script="">
+<@main.layout script="" ; spring>
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card shadow">
                 <div class="card-body">
-                    <h5 class="card-title text-center mb-4">Add resume</h5>
+                    <h5 class="card-title text-center mb-4"><@spring.message "resume.add.add"/></h5>
                     <form id="form" action="/resumes/add" method="post">
                         <#if _csrf??>
                             <input type="hidden" name="${(_csrf.parameterName)!'csrf-param-name'}" value="${(_csrf.token)!'csrf-token'}" />
                         </#if>
                         <div class="mb-3">
-                            <label for="title" class="form-label">Title</label>
+                            <label for="title" class="form-label"><@spring.message "resume.add.title"/></label>
                             <input type="text" class="form-control" id="title" name="title">
                         </div>
                         <div class="mb-3">
-                            <label for="categoryName" class="form-label">Select category</label>
+                            <label for="categoryName" class="form-label"><@spring.message "resume.add.select.category"/></label>
                             <select class="form-select" aria-label="Default select example" name="categoryName">
-                                <option value="">Categories</option>
+                                <option value=""><@spring.message "resume.add.categories"/></option>
                                 <#list categories as category>
                                     <option value="${category.name}">${category.name}</option>
                                 </#list>
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="salary" class="form-label">Salary</label>
+                            <label for="salary" class="form-label"><@spring.message "resume.add.salary"/></label>
                             <input type="number" class="form-control" id="salary" name="salary">
                         </div>
 
@@ -32,12 +32,12 @@
                             <div class="input-group-text">
                                 <input class="form-check-input mt-0" type="checkbox" value="true"
                                        aria-label="Checkbox for following text input" name="isActive">
-                                <span>Is Active</span>
+                                <span><@spring.message "resume.add.is.active"/></span>
                             </div>
                             <input type="text" hidden="hidden" class="form-control" aria-label="Is active" name="isActive">
                         </div>
 
-                        <h5 class="text-center mt-3">Add contacts</h5>
+                        <h5 class="text-center mt-3"><@spring.message "resume.add.add.contact"/></h5>
                         <#assign index = 0>
                         <#list contacts as contact>
                             <input type="hidden" class="form-control" id="contacts[${index}].type" name="contacts[${index}].type" value="${contact.type}">
@@ -54,16 +54,16 @@
 
                         <div class="row mt-3 mb-3">
                             <div class="col-sm-4">
-                                <button id="workExp" type="button" class="btn btn-primary">ADD WORK EXPERIENCE INFO</button>
+                                <button id="workExp" type="button" class="btn btn-primary"><@spring.message "resume.add.work.exp"/></button>
                             </div>
 
                             <div class="col-sm-4">
-                                <button id="educInfo" type="button" class="btn btn-primary">ADD EDUCATION INFO</button>
+                                <button id="educInfo" type="button" class="btn btn-primary"><@spring.message "resume.add.educations"/></button>
                             </div>
                         </div>
 
                         <div class="text-center">
-                            <button type="submit" class="btn btn-primary">Add resume</button>
+                            <button type="submit" class="btn btn-primary"><@spring.message "resume.add.btn"/></button>
                         </div>
                     </form>
                 </div>
@@ -95,7 +95,7 @@
             div.className = "mb-3"
             workIndex++
 
-            div.innerHTML = `<h5 class="text-center mt-3">Add work experience</h5>
+            div.innerHTML = `<h5 class="text-center mt-3"><@spring.message "resume.add.work.exp.title"/></h5>
                             <label for="workExperienceInfo[`+workIndex+`].years" class="form-label">Years</label>
                             <input type="number" class="form-control" id="workExperienceInfo[`+workIndex+`].years" name="workExperienceInfo[`+workIndex+`].years">
 
@@ -119,7 +119,7 @@
             divEduc.className = "mb-3"
             educIndex++
 
-            divEduc.innerHTML = `<h5 class="text-center mt-3">Add education info</h5>
+            divEduc.innerHTML = `<h5 class="text-center mt-3"><@spring.message "resume.add.educations.title"/></h5>
 
                                 <label for="educationInfo[`+educIndex+`].institution" class="form-label">Institution</label>
                                 <input type="text" class="form-control" id="educationInfo[`+educIndex+`].institution" name="educationInfo[`+educIndex+`].institution">

@@ -1,5 +1,5 @@
 <#import "../layot.ftlh" as main>
-<@main.layout script="">
+<@main.layout script="" ; spring>
 
     <style>
         body {
@@ -92,7 +92,7 @@
                             <div class="position-relative">
                                 <button onclick="callResponses();" type="button"
                                         class="btn btn-custom btn-block mb-3 rounded-btn position-relative">
-                                    Responses
+                                     <@spring.message "profile.responses"/>
                                     <span class="badge badge-danger badge-pill">${messages?size}</span>
                                 </button>
                             </div>
@@ -104,17 +104,17 @@
                             <#if user.accountType == "EMPLOYER">
                                 <div class="col-sm-6">
                                     <a class="btn btn-custom btn-block rounded-btn" target="__blank"
-                                       href="/vacancies/add">ADD VACANCY</a>
+                                       href="/vacancies/add"><@spring.message "profile.add.vacancies"/></a>
                                 </div>
                             <#else>
                                 <div class="col-sm-6">
                                     <a class="btn btn-custom btn-block rounded-btn" target="__blank"
-                                       href="/resumes/add">ADD RESUME</a>
+                                       href="/resumes/add"><@spring.message "profile.add.resumes"/></a>
                                 </div>
                             </#if>
                             <div class="col-sm-6">
                                 <a class="btn btn-custom btn-block rounded-btn" target="__blank"
-                                   href="/profile/edit">EDIT PROFILE</a>
+                                   href="/profile/edit"><@spring.message "profile.edit"/></a>
                             </div>
                         </div>
                     </div>
@@ -126,7 +126,7 @@
                         <#if user.accountType == "APPLICANT">
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Full Name</h6>
+                                    <h6 class="mb-0"><@spring.message "profile.full.name"/></h6>
                                 </div>
                                 <div class="col-sm-9 info-text">
                                     ${user.name} ${user.surname}
@@ -135,7 +135,7 @@
                         <#else>
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Company Name</h6>
+                                    <h6 class="mb-0"><@spring.message "profile.company.name"/></h6>
                                 </div>
                                 <div class="col-sm-9 info-text">
                                     ${user.name}
@@ -146,7 +146,7 @@
                         <#if user.accountType == "APPLICANT">
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Age</h6>
+                                    <h6 class="mb-0"><@spring.message "profile.age.employer"/></h6>
                                 </div>
                                 <div class="col-sm-9 info-text">
                                     ${user.age}
@@ -155,7 +155,7 @@
                         <#else>
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Company Age</h6>
+                                    <h6 class="mb-0"><@spring.message "profile.age.company"/></h6>
                                 </div>
                                 <div class="col-sm-9 info-text">
                                     ${user.age}
@@ -169,7 +169,7 @@
 
         <#if user.accountType == "EMPLOYER">
             <#if vacancies??>
-                <h3 class="mt-5">My Vacancies</h3>
+                <h3 class="mt-5"><@spring.message "profile.my.vacancies"/></h3>
                 <div class="row vacancies-resumes">
                     <#list vacancies as vacancy>
                         <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
@@ -178,23 +178,23 @@
                                     <h5>${vacancy.name}</h5>
                                     <div class="mt-3">
                                         <span class="text-muted d-block">${vacancy.description}</span>
-                                        <span class="mt-2 text-muted d-block"><strong>Created date</strong>: ${vacancy.createdDate}</span>
-                                        <span class="mt-2 text-muted d-block"><strong>Update date</strong>: ${vacancy.updateDate}</span>
+                                        <span class="mt-2 text-muted d-block"><strong><@spring.message "profile.created.date"/></strong>: ${vacancy.createdDate}</span>
+                                        <span class="mt-2 text-muted d-block"><strong><@spring.message "profile.update.date"/></strong>: ${vacancy.updateDate}</span>
                                     </div>
                                     <div class="row mt-3">
                                         <div class="col">
                                             <button data-target="${vacancy.id}"
                                                     class="btn btn-custom btn-block rounded-btn btn-update-vacancies">
-                                                Update
+                                                <@spring.message "profile.update.vacancy"/>
                                             </button>
                                         </div>
                                         <div class="col">
                                             <a href="/vacancies/edit/${vacancy.id}" target="__blank"
-                                               class="btn btn-custom btn-block rounded-btn">Edit</a>
+                                               class="btn btn-custom btn-block rounded-btn"><@spring.message "profile.edit.vacancy"/></a>
                                         </div>
                                         <div class="col">
                                             <a href="/vacancies/${vacancy.id}" target="__blank"
-                                               class="btn btn-custom btn-block rounded-btn">Details</a>
+                                               class="btn btn-custom btn-block rounded-btn"><@spring.message "profile.vacancy.details"/></a>
                                         </div>
                                     </div>
                                 </div>
@@ -206,7 +206,7 @@
         </#if>
         <#if user.accountType == "APPLICANT">
             <#if resumes??>
-                <h3 class="mt-5">My Resumes</h3>
+                <h3 class="mt-5"><@spring.message "profile.my.resumes"/></h3>
                 <div class="row vacancies-resumes">
                     <#list resumes as resume>
                         <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
@@ -215,23 +215,23 @@
                                     <h5>${resume.name}</h5>
                                     <div class="mt-3">
                                         <span class="text-muted d-block"></span>
-                                        <span class="mt-2 text-muted d-block"><strong>Created date</strong>: ${resume.createdDate}</span>
-                                        <span class="mt-2 text-muted d-block"><strong>Update date</strong>: ${resume.updateTime}</span>
+                                        <span class="mt-2 text-muted d-block"><strong><@spring.message "profile.created.date"/></strong>: ${resume.createdDate}</span>
+                                        <span class="mt-2 text-muted d-block"><strong><@spring.message "profile.update.date"/></strong>: ${resume.updateTime}</span>
                                     </div>
                                     <div class="row mt-3">
                                         <div class="col">
                                             <button data-target="${resume.id}"
                                                     class="btn btn-custom btn-block rounded-btn btn-update-resumes">
-                                                Update
+                                                <@spring.message "profile.update.resume"/>
                                             </button>
                                         </div>
                                         <div class="col">
                                             <a href="/resumes/edit/${resume.id}" target="__blank"
-                                               class="btn btn-custom btn-block rounded-btn">Edit</a>
+                                               class="btn btn-custom btn-block rounded-btn"><@spring.message "profile.edit.resume"/></a>
                                         </div>
                                         <div class="col">
                                             <a href="/resumes/${resume.id}" target="__blank"
-                                               class="btn btn-custom btn-block rounded-btn">Details</a>
+                                               class="btn btn-custom btn-block rounded-btn"><@spring.message "profile.resume.details"/></a>
                                         </div>
                                     </div>
                                 </div>
@@ -247,7 +247,7 @@
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title text-white" id="modalTitle">Responses</h5>
+                    <h5 class="modal-title text-white" id="modalTitle"><@spring.message "profile.responses"/></h5>
                     <button type="button" onclick="closeModal()" class="close text-white" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -322,7 +322,7 @@
                                     </div>
                                     <div class="row mt-3">
                                         <div class="col">
-                                            <a href="/chat/open?toUser=${resume.employerId}" target="__blank" class="btn btn-custom btn-block rounded-btn">To chat</a>
+                                            <a href="/chat/open?toUser=${resume.employerId}" target="__blank" class="btn btn-custom btn-block rounded-btn"><@spring.message "profile.to.chat"/></a>
                                         </div>
                                     </div>
                                 </div>

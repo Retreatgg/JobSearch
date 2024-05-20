@@ -1,5 +1,5 @@
 <#import "../layot.ftlh" as main>
-<@main.layout script="">
+<@main.layout script="" ; spring>
     <style>
         body {
             background-color: #f4f7fa;
@@ -86,25 +86,24 @@
 
                         <div class="form-outline mb-4">
                             <input type="email" id="form3Example3" class="form-control form-control-lg"
-                                   placeholder="Enter a valid email address" name="username"/>
+                                   placeholder="<@spring.message "login.enter.email"></@spring.message>" name="username"/>
                             <label class="form-label" for="form3Example3"></label>
                         </div>
 
                         <div class="form-outline mb-3">
                             <input type="password" id="form3Example4" class="form-control form-control-lg"
-                                   placeholder="Enter password" name="password" autocomplete="on"/>
+                                   placeholder="<@spring.message "login.enter.password"></@spring.message>" name="password" autocomplete="on"/>
                             <label class="form-label" for="form3Example4"></label>
                         </div>
 
                         <div class="text-center text-lg-start mt-4 pt-2">
                             <button id="btn" type="submit" class="btn btn-primary btn-lg"
-                                    style="padding-left: 2.5rem; padding-right: 2.5rem;">Login
+                                    style="padding-left: 2.5rem; padding-right: 2.5rem;"><@spring.message "login.login"></@spring.message>
                             </button>
-                            <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="/auth/choose"
-                                                                                              class="link-danger">Register</a>
+                            <p class="small fw-bold mt-2 pt-1 mb-0"><@spring.message "login.haven't.account"></@spring.message> <a href="/auth/choose"
+                                                                                              class="link-danger"><@spring.message "login.register"></@spring.message></a>
                             </p>
-                            <p class="small fw-bold mt-2 pt-1 mb-0"><a href="/auth/forgot_password">Forgot
-                                    password?</a></p>
+                            <p class="small fw-bold mt-2 pt-1 mb-0"><a href="/auth/forgot_password"><@spring.message "login.forgot.password"></@spring.message></a></p>
                         </div>
                     </form>
                 </div>

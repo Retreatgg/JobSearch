@@ -1,14 +1,14 @@
 <#import "../layot.ftlh" as main>
 <#assign script><script src="../../static/chat.js"></script></#assign>
-<@main.layout script=script>
+<@main.layout script=script ; spring>
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-3">
                 <div class="card border-0 shadow">
                     <div class="card-body">
-                        <p><strong>Name:</strong> ${toUser.name}</p>
-                        <p><strong>Email:</strong> ${toUser.email}</p>
-                        <p><strong>Phone:</strong> ${toUser.phoneNumber}</p>
+                        <p><strong><@spring.message "chat.name"/>:</strong> ${toUser.name}</p>
+                        <p><strong><@spring.message "chat.email"/>:</strong> ${toUser.email}</p>
+                        <p><strong><@spring.message "chat.phone"/>:</strong> ${toUser.phoneNumber}</p>
                     </div>
                 </div>
             </div>
@@ -25,7 +25,7 @@
                             <#else>
                                 <div class="message mb-3">
                                     <div class="bg-primary text-white p-3 rounded" data-send-time="${message.sendTime}">
-                                        <strong>You:</strong> ${message.message}
+                                        <strong><@spring.message "chat.you"/>:</strong> ${message.message}
                                     </div>
                                 </div>
                             </#if>
@@ -38,9 +38,9 @@
                             <input type="hidden" name="${(_csrf.parameterName)!'csrf-param-name'}" value="${(_csrf.token)!'csrf-token'}" />
                         </#if>
                         <input type="hidden" name="toUserEmail" value="${toUser.email}">
-                        <textarea class="form-control" name="message" rows="3" placeholder="Type your message..."></textarea>
+                        <textarea class="form-control" name="message" rows="3" placeholder="$<@spring.message "chat.type.your.message"/>"></textarea>
                     </div>
-                    <button id="btn" type="submit" class="btn btn-primary">Send</button>
+                    <button id="btn" type="submit" class="btn btn-primary"><@spring.message "chat.send"/></button>
                 </form>
             </div>
         </div>

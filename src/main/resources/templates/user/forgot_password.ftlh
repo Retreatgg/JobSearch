@@ -1,5 +1,5 @@
 <#import "../layot.ftlh" as main>
-<@main.layout "">
+<@main.layout "" ; spring>
 
     <h2>Forgot Password</h2>
     <#if error??>
@@ -18,15 +18,15 @@
                     </#if>
                     <div class="form-outline  border border-secondary rounded p-3">
                         <div>
-                            <p>We will be sending a reset password link to your email.</p>
+                            <p><@spring.message "user.forgot.password.text"/>.</p>
                         </div>
                         <div>
                             <p>
                                 <input type="email" name="email" class="form-control"
-                                       placeholder="Enter your e-mail" required autofocus/>
+                                       placeholder="<@spring.message "user.forgot.password.enter.email"/>" required autofocus/>
                             </p>
                             <p class="text-center">
-                                <input type="submit" value="Send" class="btn btn-primary"/>
+                                <input type="submit" value="<@spring.message "user.forgot.password.btn"/>" class="btn btn-primary"/>
                             </p>
                         </div>
                     </div>
