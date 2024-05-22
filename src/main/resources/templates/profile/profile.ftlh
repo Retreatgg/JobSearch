@@ -196,6 +196,10 @@
                                             <a href="/vacancies/${vacancy.id}" target="__blank"
                                                class="btn btn-custom btn-block rounded-btn"><@spring.message "profile.vacancy.details"/></a>
                                         </div>
+                                        <div class="col">
+                                            <a href="/vacancies/responses/${vacancy.id}" target="__blank"
+                                               class="btn btn-custom btn-block rounded-btn">Responses</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

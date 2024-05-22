@@ -26,4 +26,7 @@ public interface RespondedApplicantsRepository extends JpaRepository<RespondedAp
 
     Long countRespondedApplicantByVacancyId(Long vacancyId);
     Boolean existsByVacancyAndResumeAndConfirmation(Vacancy vacancy, Resume resume, Boolean confirmation);
+
+    @Query("select ra.resume from RespondedApplicant ra where ra.vacancy.id = :vacancyId")
+    List<Resume> findResumeByVacancyId(Long vacancyId);
 }

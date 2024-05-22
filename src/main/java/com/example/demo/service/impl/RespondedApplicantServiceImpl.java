@@ -1,6 +1,7 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.dto.RespondedApplicantsDto;
+import com.example.demo.dto.ResumeDto;
 import com.example.demo.model.RespondedApplicant;
 import com.example.demo.model.Resume;
 import com.example.demo.model.Vacancy;
@@ -9,6 +10,7 @@ import com.example.demo.repository.ResumeRepository;
 import com.example.demo.repository.VacancyRepository;
 import com.example.demo.service.RespondedApplicantService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -16,11 +18,11 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class RespondedApplicantServiceImpl implements RespondedApplicantService {
 
-    private static final Logger log = LoggerFactory.getLogger(RespondedApplicantServiceImpl.class);
     private final RespondedApplicantsRepository respondedApplicantsRepository;
     private final ResumeRepository resumeRepository;
     private final VacancyRepository vacancyRepository;
@@ -66,6 +68,27 @@ public class RespondedApplicantServiceImpl implements RespondedApplicantService 
     @Override
     public Long getCountResponsesByVacancyId(Long vacancyId) {
         return respondedApplicantsRepository.countRespondedApplicantByVacancyId(vacancyId);
+    }
+
+    @Override
+    public List<ResumeDto> findResumeByVacancyId(Long id) {
+        List<Resume> resumes = respondedApplicantsRepository.findResumeByVacancyId(id);
+        List<ResumeDto> list = new ArrayList<>();
+
+        resumes.forEach(r -> {
+            list.add(ResumeDto.builder()
+                            .applicant(r.getApplicant().getId())
+                            .id(r.getId())
+                            .categoryId(r.getCategory().getId())
+                            .createdDate(r.getCreatedDate().toString())
+                            .name(r.getName())
+                            .salary(r.getSalary())
+                            .isActive(r.getIsActive())
+                            .updateTime(r.getUpdateTime().toString())
+                    .build());
+        });
+
+        return list;
     }
 
 }

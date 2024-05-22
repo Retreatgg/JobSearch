@@ -3,10 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.dto.UserDto;
 import com.example.demo.dto.UserUpdateDto;
 import com.example.demo.model.User;
-import com.example.demo.service.MessageService;
-import com.example.demo.service.ResumeService;
-import com.example.demo.service.UserService;
-import com.example.demo.service.VacancyService;
+import com.example.demo.service.*;
 import com.example.demo.util.UserUtil;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +27,7 @@ public class ProfileController {
     private final VacancyService vacancyService;
     private final ResumeService resumeService;
     private final MessageService messageService;
+    private final RespondedApplicantService respondedApplicantService;
     private final UserUtil userUtil;
 
     @PostMapping("edit")

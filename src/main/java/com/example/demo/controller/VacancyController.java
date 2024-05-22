@@ -32,6 +32,7 @@ public class VacancyController {
     private final RespondedApplicantService respondedApplicantService;
     private final UserUtil userUtil;
 
+
     @GetMapping("{id}")
     public String getVacancy(Model model, @PathVariable Long id, Authentication auth) {
         model.addAttribute("vacancy", vacancyService.getVacancyById(id));
@@ -47,7 +48,6 @@ public class VacancyController {
         }
         return "vacancy/vacancy";
     }
-
     @GetMapping("add")
     public String addVacancy(Model model) {
         model.addAttribute("categories", categoryService.categories());
@@ -94,5 +94,13 @@ public class VacancyController {
 
         respondedApplicantService.createRespondedApplicant(respond);
         return "redirect:/";
+    }
+
+    @GetMapping("responses/{id}")
+    public String getResponsesByVacancyId(Authentication auth, Model model, @PathVariable Long id) {
+        User user = userUtil.getUserByAuth(auth);
+        List<ResumeDto> resumes = respondedApplicantService.findResumeByVacancyId(id);
+        model.addAttribute("resumes", resumes);
+        return "profile/responses";
     }
 }
