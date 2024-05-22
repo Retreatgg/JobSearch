@@ -5,7 +5,7 @@
         <div class="career-search mb-60">
 
             <#if resumes?size == 0>
-                <p>На данную вакансию отсутствуют отклики</p>
+                <p><@spring.message "profile.responses.text"/></p>
             <#else>
                 <#list resumes as resume>
                     <div class="filter-result" style="box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); background-color: #fff; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
@@ -23,7 +23,7 @@
                                 </div>
                             </div>
                             <div class="job-right my-4 flex-shrink-0">
-                                <a href="/chat/open?toUser=${resume.applicant}" class="btn btn-light">Chat</a>
+                                <a href="/chat/open?toUser=${resume.applicant}" class="btn btn-light"><@spring.message "profile.responses.chat"/></a>
                             </div>
                         </div>
                     </div>

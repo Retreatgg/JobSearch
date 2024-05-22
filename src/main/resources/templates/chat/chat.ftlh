@@ -38,7 +38,7 @@
                             <input type="hidden" name="${(_csrf.parameterName)!'csrf-param-name'}" value="${(_csrf.token)!'csrf-token'}" />
                         </#if>
                         <input type="hidden" name="toUserEmail" value="${toUser.email}">
-                        <textarea class="form-control" name="message" rows="3" placeholder="$<@spring.message "chat.type.your.message"/>"></textarea>
+                        <textarea class="form-control" name="message" rows="3" placeholder="<@spring.message "chat.type.your.message"/>"></textarea>
                     </div>
                     <button id="btn" type="submit" class="btn btn-primary"><@spring.message "chat.send"/></button>
                 </form>
