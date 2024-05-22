@@ -11,7 +11,7 @@
                         </#if>
                         <div class="mb-3">
                             <label for="title" class="form-label"><@spring.message "resume.edit.title"/></label>
-                            <input type="text" class="form-control" id="title" name="title">
+                            <input type="text" class="form-control" id="title" value="${resume.name}" name="title">
                         </div>
 
                         <div class="mb-3">
@@ -25,7 +25,7 @@
 
                         <div class="mb-3">
                             <label for="salary" class="form-label"><@spring.message "resume.edit.salary"/></label>
-                            <input type="number" class="form-control" id="salary" name="salary">
+                            <input type="number" class="form-control" id="salary" value="${resume.salary}" name="salary">
                         </div>
 
                         <div class="input-group mb-3">

@@ -70,6 +70,7 @@ public class VacancyController {
     public String edit(Model model, @PathVariable Long id) {
         model.addAttribute("categories", categoryService.categories());
         model.addAttribute("id", id);
+        model.addAttribute("vacancy", vacancyService.getVacancyById(id));
         return "vacancy/edit";
     }
 

@@ -75,6 +75,7 @@ public class ResumeController {
     public String editResume(Model model, @PathVariable Long id) {
         model.addAttribute("categories", categoryService.categories());
         model.addAttribute("id", id);
+        model.addAttribute("resume", resumeService.findById(id));
         return "resume/edit";
     }
 

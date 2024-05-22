@@ -11,25 +11,25 @@
                         </#if>
                         <div class="mb-3">
                             <label for="name" class="form-label"><@spring.message "vacancy.name"/></label>
-                            <input type="text" class="form-control" id="name" name="name">
+                            <input type="text" class="form-control" id="name" value="${vacancy.name}" name="name">
                         </div>
                         <div class="mb-3">
                             <label for="description" class="form-label"><@spring.message "vacancy.description"/></label>
-                            <input type="text" class="form-control" id="description" name="description">
+                            <input type="text" class="form-control" id="description" value="${vacancy.description}" name="description">
                         </div>
                         <div class="mb-3">
                             <label for="salary" class="form-label"><@spring.message "vacancy.salary"/></label>
-                            <input type="number" class="form-control" id="salary" name="salary">
+                            <input type="number" class="form-control" id="salary" value="${vacancy.salary}" name="salary">
                         </div>
 
                         <div class="mb-3">
                             <label for="expFrom" class="form-label"><@spring.message "vacancy.exp.from"/></label>
-                            <input type="number" class="form-control" id="expFrom" name="expFrom">
+                            <input type="number" class="form-control" id="expFrom" value="${vacancy.expFrom}" name="expFrom">
                         </div>
 
                         <div class="mb-3">
                             <label for="expTo" class="form-label"><@spring.message "vacancy.exp.to"/></label>
-                            <input type="number" class="form-control" id="expTo" name="expTo">
+                            <input type="number" class="form-control" value="${vacancy.expTo}" id="expTo" name="expTo">
                         </div>
 
                         <div class="mb-3">
