@@ -1,11 +1,14 @@
 package com.example.demo.repository;
 
 import com.example.demo.model.RespondedApplicant;
+import com.example.demo.model.Resume;
+import com.example.demo.model.Vacancy;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface RespondedApplicantsRepository extends JpaRepository<RespondedApplicant, Long> {
@@ -22,4 +25,5 @@ public interface RespondedApplicantsRepository extends JpaRepository<RespondedAp
     List<RespondedApplicant> findAllByResumeApplicantId(Long resumeId);
 
     Long countRespondedApplicantByVacancyId(Long vacancyId);
+    Boolean existsByVacancyAndResumeAndConfirmation(Vacancy vacancy, Resume resume, Boolean confirmation);
 }

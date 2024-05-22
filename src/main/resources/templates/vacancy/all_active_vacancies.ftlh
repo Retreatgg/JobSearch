@@ -24,7 +24,7 @@
                     <div class="mb-3">
                         <label for="sortFilter" class="form-label"><@spring.message "all.vacancies.sort.by"/>:</label>
                         <select class="form-select" id="sortFilter" name="sort">
-                            <option value="">Sort by</option>
+                            <option value=""><@spring.message "all.vacancies.sort.by"/></option>
                             <option value="updateTime"><@spring.message "all.vacancies.sort.publication.date"/></option>
                             <option value="countResponses"><@spring.message "all.vacancies.sort.responses"/></option>
                         </select>

@@ -31,10 +31,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(NoSuchElementException.class)
-    public String notFoundHandler(Model model, HttpServletRequest request) {
-        model.addAttribute("status", HttpStatus.NOT_FOUND.value());
-        model.addAttribute("reason", HttpStatus.NOT_FOUND.getReasonPhrase());
-        model.addAttribute("details", request);
+    public String notFoundHandler() {
         return "errors/error";
     }
 }

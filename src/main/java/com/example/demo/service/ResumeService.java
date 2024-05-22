@@ -4,6 +4,7 @@ import com.example.demo.dto.ResumeCreateDto;
 import com.example.demo.dto.ResumeDto;
 import com.example.demo.dto.ResumeResponseDto;
 import com.example.demo.dto.ResumeUpdateDto;
+import com.example.demo.model.Resume;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
@@ -25,4 +26,6 @@ public interface ResumeService {
 
     void updateResume(Long id);
     List<ResumeResponseDto> getResponsesResumes(Long userId, Authentication authentication);
+
+    Resume findById(Long resumeId);
 }

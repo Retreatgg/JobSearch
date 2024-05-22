@@ -10,6 +10,7 @@ import com.example.demo.service.*;
 import com.example.demo.util.UserUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -31,7 +32,6 @@ import static com.example.demo.enums.AccountType.EMPLOYER;
 @RequiredArgsConstructor
 public class ResumeServiceImpl implements ResumeService {
 
-    private final ResumeDao resumeDao;
     private final ResumeRepository resumeRepository;
     private final UserRepository userRepository;
     private final RespondedApplicantsRepository respondedApplicantsRepository;
@@ -39,6 +39,7 @@ public class ResumeServiceImpl implements ResumeService {
     private final WorkExperienceInfoService workExperienceInfoService;
     private final EducationInfoService educationInfoService;
     private final ContactInfoService contactInfoService;
+    @Lazy
     private final VacancyService vacancyService;
     private final UserUtil userUtil;
 
@@ -49,9 +50,9 @@ public class ResumeServiceImpl implements ResumeService {
         String authority = userUtil.getAuthority(authentication);
 
         if (authority.equals(EMPLOYER.toString())) {
-           Page<Resume> resumesPageable = resumeRepository.findAll(pageable);
-           List<Resume> resumes = resumesPageable.getContent();
-           return new PageImpl<>(transformationForListDtoResume(resumes));
+            Page<Resume> resumesPageable = resumeRepository.findAll(pageable);
+            List<Resume> resumes = resumesPageable.getContent();
+            return new PageImpl<>(transformationForListDtoResume(resumes));
         }
 
         throw new IllegalArgumentException("Your role is not appropriate");
@@ -157,16 +158,16 @@ public class ResumeServiceImpl implements ResumeService {
 
         if (authority.equalsIgnoreCase(APPLICANT.toString()) && Objects.equals(resume.getApplicant().getId(), user.getId())) {
 
-            if(resumeDto.getTitle() != null) {
+            if (resumeDto.getTitle() != null) {
                 resume.setName(resumeDto.getTitle());
             }
-            if(resumeDto.getSalary() != null) {
+            if (resumeDto.getSalary() != null) {
                 resume.setSalary(resumeDto.getSalary());
             }
-            if(resumeDto.getIsActive() != null) {
+            if (resumeDto.getIsActive() != null) {
                 resume.setIsActive(resumeDto.getIsActive());
             }
-            if(resumeDto.getCategoryName() != null) {
+            if (resumeDto.getCategoryName() != null) {
                 resume.setCategory(categoryRepository.findByName(resumeDto.getCategoryName()).get());
             }
 
@@ -217,6 +218,11 @@ public class ResumeServiceImpl implements ResumeService {
         }
 
         return resumes;
+    }
+
+    @Override
+    public Resume findById(Long resumeId) {
+        return resumeRepository.findById(resumeId).orElseThrow(() -> new NoSuchElementException("Resume is not found by ID" + resumeId));
     }
 
     private ResumeDto transformationForSingleDtoResume(Resume resume) {

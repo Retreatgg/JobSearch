@@ -12,6 +12,7 @@ import com.example.demo.service.VacancyService;
 import com.example.demo.util.UserUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -172,6 +173,11 @@ public class VacancyServiceImpl implements VacancyService {
     @Override
     public Long getAuthorIdByVacancy(Long vacancyId) {
         return vacancyRepository.findById(vacancyId).get().getAuthor().getId();
+    }
+
+    @Override
+    public void save(Vacancy vacancy) {
+        vacancyRepository.save(vacancy);
     }
 
 }

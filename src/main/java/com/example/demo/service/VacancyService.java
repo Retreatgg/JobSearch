@@ -24,4 +24,5 @@ public interface VacancyService {
 
     Long getAuthorIdByVacancy(Long vacancyId);
 
+    void save(Vacancy vacancy);
 }
