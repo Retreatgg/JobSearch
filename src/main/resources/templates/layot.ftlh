@@ -92,7 +92,7 @@
                         <a href="/logout" class="btn btn-outline-info m-2" id="logout"><@spring.message "layout.logout"/></a>
                     <#else>
                         <a href="/auth/login" class="btn btn-outline-info m-2"><@spring.message "layout.login"/></a>
-                        <a href="/auth/choose" class="btn btn-outline-info m-2"><@spring.message "layout.register"/></a>
+                        <a href="/auth/register" class="btn btn-outline-info m-2"><@spring.message "layout.register"/></a>
                     </#if>
 
                 </div>

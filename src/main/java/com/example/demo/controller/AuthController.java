@@ -34,24 +34,15 @@ public class AuthController {
     }
 
     @GetMapping("register")
-    public String register(Model model, @RequestParam(name = "role") String role) {
+    public String register(Model model) {
         model.addAttribute("userDto", new UserDto());
-        if(role.equals("applicant")) {
-            model.addAttribute("applicant", true);
-        }
-        return "/user/create_user";
-    }
-
-    @GetMapping("choose")
-    public String chooseRole() {
-        return "user/choose_role";
+        return "/user/register";
     }
 
     @PostMapping("register")
     public String register(@Valid UserCreateDto userDto, BindingResult bindingResult, Model model, HttpServletRequest request) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("userDto", userDto);
-            return "redirect:/auth/register?role=" + userDto.getAccountType().toLowerCase();
         }
         userService.createUser(userDto, request);
 
