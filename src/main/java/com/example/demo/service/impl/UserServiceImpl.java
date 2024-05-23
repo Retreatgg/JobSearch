@@ -74,11 +74,18 @@ public class UserServiceImpl implements UserService {
             throw new IllegalArgumentException("User with email " + userCreateDto.getEmail() + " already exists");
         }
 
+        String photo = "";
+        if(userCreateDto.getPhoto().getOriginalFilename().equals("")) {
+            photo = "unnamed.jpeg";
+        } else {
+            photo = fileUtil.saveUploadedFile(userCreateDto.getPhoto(), "/images");
+        }
+
         User user = User.builder()
                 .accountType(userCreateDto.getAccountType())
                 .enabled(true)
                 .age(userCreateDto.getAge())
-                .avatar("unnamed.jpeg")
+                .avatar(photo)
                 .email(userCreateDto.getEmail())
                 .name(userCreateDto.getName())
                 .surname(userCreateDto.getSurname())

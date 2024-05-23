@@ -52,7 +52,7 @@
 
                         <div class="mb-3">
                             <label for="profilePicture" class="form-label"><@spring.message "user.create.your.photo"/></label>
-                            <input type="file" class="form-control" id="profilePicture" name="profilePicture">
+                            <input type="file" class="form-control" id="profilePicture" name="photo">
                         </div>
 
                         <div class="text-center">
