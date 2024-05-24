@@ -43,10 +43,13 @@
                         </div>
                         <div class="input-group mb-3">
                             <div class="input-group-text">
-                                <input class="form-check-input mt-0" type="checkbox" value="true" aria-label="Checkbox for following text input" name="isActive">
+                                <input class="form-check-input mt-0" type="checkbox" value="true"
+                                       aria-label="Checkbox for following text input" name="isActive">
+                                <span><@spring.message "vacancy.add.is.active"/></span>
                             </div>
                             <input type="text" hidden="hidden" class="form-control" aria-label="Is active" name="isActive">
                         </div>
+
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary"><@spring.message "vacancy.add.btn"/></button>
                         </div>

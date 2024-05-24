@@ -75,7 +75,7 @@ public class VacancyController {
     }
 
     @PostMapping("edit/{id}")
-    public String editVacancy(@PathVariable Long id, VacancyUpdateDto vacancyUpdateDto, Authentication auth) {
+    public String editVacancy(@PathVariable Long id, @Valid VacancyUpdateDto vacancyUpdateDto, Authentication auth) {
         vacancyService.editVacancy(vacancyUpdateDto, id, auth);
         return "redirect:/profile";
     }
@@ -99,8 +99,13 @@ public class VacancyController {
     @GetMapping("responses/{id}")
     public String getResponsesByVacancyId(Authentication auth, Model model, @PathVariable Long id) {
         User user = userUtil.getUserByAuth(auth);
-        List<ResumeDto> resumes = respondedApplicantService.findResumeByVacancyId(id);
-        model.addAttribute("resumes", resumes);
-        return "profile/responses";
+        Long authorVacancyId = vacancyService.getAuthorIdByVacancy(id);
+        if(user.getId() == authorVacancyId) {
+            List<ResumeDto> resumes = respondedApplicantService.findResumeByVacancyId(id);
+            model.addAttribute("resumes", resumes);
+            return "profile/responses";
+        } else {
+            return "errors/error";
+        }
     }
 }

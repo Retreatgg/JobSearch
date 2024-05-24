@@ -21,38 +21,40 @@
 
                         <div class="mb-3">
                             <label for="name" class="form-label" id="usernameLabel"><@spring.message "user.create.your.name"/></label>
-                            <input type="text" class="form-control" id="name" name="name" required>
+                            <@spring.formInput "userDto.name" 'id="name" class="form-control form-control-lg" value="${userDto.name!""}"'/>
                         </div>
 
                         <input type="hidden" id="accountType" name="accountType" value="APPLICANT">
 
                         <div class="mb-3" id="applicantSurname">
                             <label for="surname" class="form-label"><@spring.message "user.create.your.surname"/></label>
-                            <input type="text" class="form-control" id="surname" name="surname">
+                            <@spring.formInput "userDto.surname" 'id="surname" class="form-control form-control-lg" value="${userDto.surname!""}"'/>
                         </div>
 
                         <div class="mb-3">
                             <label for="age" id="age" class="form-label"><@spring.message "user.create.your.age"/></label>
-                            <input type="number" class="form-control" id="age" name="age">
+                            <@spring.formInput "userDto.age" 'id="age" class="form-control form-control-lg" value="${userDto.age!""}"'/>
                         </div>
 
                         <div class="mb-3">
                             <label for="email" class="form-label"><@spring.message "user.create.your.email"/></label>
-                            <input type="email" class="form-control" id="email" name="email" required>
+                            <@spring.formInput "userDto.email" 'id="email" class="form-control form-control-lg" value="${userDto.email!""}"'/>
                         </div>
 
                         <div class="mb-3">
                             <label for="password" class="form-label"><@spring.message "user.create.your.password"/></label>
-                            <input type="password" class="form-control" id="password" name="password">
+                            <@spring.formPasswordInput "userDto.password" 'id="password" class="form-control form-control-lg" value="${userDto.password!""}"'/>
                         </div>
+
                         <div class="mb-3">
                             <label for="phoneNumber" class="form-label"><@spring.message "user.create.your.phone.number"/></label>
-                            <input type="text" class="form-control" id="phoneNumber" name="phoneNumber">
+                            <@spring.formInput "userDto.phoneNumber" 'id="phoneNumber" class="form-control form-control-lg" value="${userDto.phoneNumber!""}"'/>
                         </div>
 
                         <div class="mb-3">
                             <label for="profilePicture" class="form-label"><@spring.message "user.create.your.photo"/></label>
                             <input type="file" class="form-control" id="profilePicture" name="photo">
+                            <@spring.showErrors ', ' 'error'/>
                         </div>
 
                         <div class="text-center">

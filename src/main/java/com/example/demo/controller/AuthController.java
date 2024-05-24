@@ -35,7 +35,7 @@ public class AuthController {
 
     @GetMapping("register")
     public String register(Model model) {
-        model.addAttribute("userDto", new UserDto());
+        model.addAttribute("userDto", new UserCreateDto());
         return "/user/register";
     }
 
@@ -43,6 +43,7 @@ public class AuthController {
     public String register(@Valid UserCreateDto userDto, BindingResult bindingResult, Model model, HttpServletRequest request) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("userDto", userDto);
+            return "/user/register";
         }
         userService.createUser(userDto, request);
 
