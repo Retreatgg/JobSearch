@@ -81,8 +81,8 @@
                             <@spring.message "layout.change.lang"/>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="?lang=ru"><@spring.message "layout.ru"/></a></li>
-                            <li><a class="dropdown-item" href="?lang=en"><@spring.message "layout.en"/></a></li>
+                            <li><a class="dropdown-item" href="?lang=ru" onclick="changeLanguage('ru')"><@spring.message "layout.ru"/></a></li>
+                            <li><a class="dropdown-item" href="?lang=en"  onclick="changeLanguage('en')"><@spring.message "layout.en"/></a></li>
                         </ul>
                     </li>
                 </ul>
@@ -104,9 +104,23 @@
     </div>
     </body>
 
-<script>
+    <script>
+        function changeLanguage(lang) {
+            let headers = new Headers;
+            headers.set('Content-Type', 'application/json');
+            let header = document.head.querySelector("[name~=_csrf_header][content]").content;
+            let token = document.head.querySelector("[name~=_csrf_token][content]").content;
 
-</script>
+            headers.set(header, token);
+            fetch('/profile/change_language', {
+                method: 'POST',
+                headers,
+                body: new URLSearchParams({ lang: lang })
+            }).then(() => {
+                window.location.reload();
+            });
+        }
+    </script>
     </html>
 
 </#macro>

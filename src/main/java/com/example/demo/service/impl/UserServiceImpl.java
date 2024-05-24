@@ -16,6 +16,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.LocaleUtils;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -184,6 +185,11 @@ public class UserServiceImpl implements UserService {
         updateResetPasswordToken(token, email);
         String passwordLink = Utility.getSiteURL(request) + "/auth/reset_password?token=" + token;
         emailService.sendEmail(email, passwordLink);
+    }
+
+    @Override
+    public Locale getUserLocale(String selectedLanguage) {
+        return LocaleUtils.toLocale(selectedLanguage);
     }
 
     private List<Authority> setAuthoritiesUser(String email) {

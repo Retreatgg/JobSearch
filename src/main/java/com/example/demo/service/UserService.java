@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Locale;
 
 @Service
 public interface UserService {
@@ -35,4 +36,6 @@ public interface UserService {
     void login(UserLoginDto user);
 
     void makeResetPasswdLink(HttpServletRequest request) throws UsernameNotFoundException, UnsupportedEncodingException, MessagingException;
+
+    Locale getUserLocale(String selectedLanguage);
 }

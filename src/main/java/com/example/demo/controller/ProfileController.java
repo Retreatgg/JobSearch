@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.dto.UserDto;
 import com.example.demo.dto.UserUpdateDto;
 import com.example.demo.model.User;
+import com.example.demo.repository.UserRepository;
 import com.example.demo.service.*;
 import com.example.demo.util.UserUtil;
 import jakarta.validation.Valid;
@@ -10,10 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import static com.example.demo.enums.AccountType.APPLICANT;
 
@@ -29,6 +27,7 @@ public class ProfileController {
     private final MessageService messageService;
     private final RespondedApplicantService respondedApplicantService;
     private final UserUtil userUtil;
+    private final UserRepository userRepository;
 
     @PostMapping("edit")
     public String editProfile(Authentication authentication, @Valid UserUpdateDto updateDto) {
@@ -60,6 +59,21 @@ public class ProfileController {
         }
 
         return "profile/profile";
+    }
+
+
+    @PostMapping("change_language")
+    public String changeLanguage(Authentication auth, @RequestBody String lang) {
+        if(auth != null) {
+            User user = userUtil.getUserByAuth(auth);
+            String[] parts = lang.split("=");
+            if (parts.length == 2) {
+                String paramLang = parts[1];
+                user.setSelectedLanguage(paramLang);
+                userRepository.save(user);
+            }
+        }
+        return "redirect:/";
     }
 
 }
