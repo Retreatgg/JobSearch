@@ -29,4 +29,6 @@ public interface RespondedApplicantsRepository extends JpaRepository<RespondedAp
 
     @Query("select ra.resume from RespondedApplicant ra where ra.vacancy.id = :vacancyId")
     List<Resume> findResumeByVacancyId(Long vacancyId);
+    @Query("select ra.vacancy from RespondedApplicant ra where ra.resume.id = :resumeId")
+    List<Vacancy> findVacancyByResumeId(Long resumeId);
 }

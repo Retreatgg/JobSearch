@@ -3,7 +3,10 @@ package com.example.demo.controller;
 import com.example.demo.dto.ResumeCreateDto;
 import com.example.demo.dto.ResumeDto;
 import com.example.demo.dto.ResumeUpdateDto;
+import com.example.demo.dto.VacancyDto;
+import com.example.demo.model.User;
 import com.example.demo.service.*;
+import com.example.demo.util.UserUtil;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -15,6 +18,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("resumes")
@@ -23,8 +28,10 @@ public class ResumeController {
     private final ResumeService resumeService;
     private final WorkExperienceInfoService workExperienceInfoService;
     private final EducationInfoService educationInfoService;
+    private final RespondedApplicantService respondedApplicantService;
     private final CategoryService categoryService;
     private final ContactTypeService contactTypeService;
+    private final UserUtil userUtil;
 
     @GetMapping("active")
     public String getAllResumes(
@@ -83,6 +90,19 @@ public class ResumeController {
     public String updateResume(@PathVariable Long id) {
         resumeService.updateResume(id);
         return "redirect:/profile";
+    }
+
+    @GetMapping("responses/{id}")
+    public String getResponsesByVacancyId(Authentication auth, Model model, @PathVariable Long id) {
+        User user = userUtil.getUserByAuth(auth);
+        Long authorResumeId = resumeService.getAuthorIdByResume(id);
+        if(user.getId() == authorResumeId) {
+            List<VacancyDto> vacancies = respondedApplicantService.findVacancyByRusumeId(id);
+            model.addAttribute("vacancies", vacancies);
+            return "profile/responses";
+        } else {
+            return "errors/error";
+        }
     }
 
 

@@ -225,6 +225,11 @@ public class ResumeServiceImpl implements ResumeService {
         return resumeRepository.findById(resumeId).orElseThrow(() -> new NoSuchElementException("Resume is not found by ID" + resumeId));
     }
 
+    @Override
+    public Long getAuthorIdByResume(Long resumeId) {
+        return resumeRepository.findById(resumeId).get().getApplicant().getId();
+    }
+
     private ResumeDto transformationForSingleDtoResume(Resume resume) {
         return ResumeDto.builder()
                 .id(resume.getId())

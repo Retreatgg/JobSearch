@@ -28,4 +28,6 @@ public interface ResumeService {
     List<ResumeResponseDto> getResponsesResumes(Long userId, Authentication authentication);
 
     Resume findById(Long resumeId);
+
+    Long getAuthorIdByResume(Long id);
 }

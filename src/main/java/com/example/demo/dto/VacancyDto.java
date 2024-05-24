@@ -1,5 +1,6 @@
 package com.example.demo.dto;
 
+import com.example.demo.model.User;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -19,6 +20,7 @@ public class VacancyDto {
     private String description;
     @NotEmpty
     private String categoryName;
+    private User author;
 
     @Positive
     private Double salary;

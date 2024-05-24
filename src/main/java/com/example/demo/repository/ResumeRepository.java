@@ -15,4 +15,5 @@ public interface ResumeRepository extends JpaRepository<Resume, Long> {
 
     @Query("select r from Resume r where r.category.id = :id")
     Optional<Resume> findByCategoryId(Long id);
+
 }

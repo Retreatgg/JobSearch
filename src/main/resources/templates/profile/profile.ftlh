@@ -198,7 +198,7 @@
                                         </div>
                                         <div class="col">
                                             <a href="/vacancies/responses/${vacancy.id}" target="__blank"
-                                               class="btn btn-custom btn-block rounded-btn">Responses</a>
+                                               class="btn btn-custom btn-block rounded-btn"><@spring.message "user.profile.responses"/></a>
                                         </div>
                                     </div>
                                 </div>
@@ -234,6 +234,10 @@
                                                class="btn btn-custom btn-block rounded-btn"><@spring.message "profile.edit.resume"/></a>
                                         </div>
                                         <div class="col">
+                                            <div class="col">
+                                                <a href="/resumes/responses/${resume.id}" target="__blank"
+                                                   class="btn btn-custom btn-block rounded-btn"><@spring.message "user.profile.responses"/></a>
+                                            </div>
                                             <a href="/resumes/${resume.id}" target="__blank"
                                                class="btn btn-custom btn-block rounded-btn"><@spring.message "profile.resume.details"/></a>
                                         </div>

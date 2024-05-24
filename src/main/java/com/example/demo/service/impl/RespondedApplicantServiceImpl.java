@@ -2,6 +2,7 @@ package com.example.demo.service.impl;
 
 import com.example.demo.dto.RespondedApplicantsDto;
 import com.example.demo.dto.ResumeDto;
+import com.example.demo.dto.VacancyDto;
 import com.example.demo.model.RespondedApplicant;
 import com.example.demo.model.Resume;
 import com.example.demo.model.Vacancy;
@@ -85,6 +86,27 @@ public class RespondedApplicantServiceImpl implements RespondedApplicantService 
                             .salary(r.getSalary())
                             .isActive(r.getIsActive())
                             .updateTime(r.getUpdateTime().toString())
+                    .build());
+        });
+
+        return list;
+    }
+
+    @Override
+    public List<VacancyDto> findVacancyByRusumeId(Long id) {
+        List<Vacancy> vacancies = respondedApplicantsRepository.findVacancyByResumeId(id);
+        List<VacancyDto> list = new ArrayList<>();
+
+        vacancies.forEach(v -> {
+            list.add(VacancyDto.builder()
+                            .categoryName(v.getCategory().getName())
+                            .description(v.getDescription())
+                            .author(v.getAuthor())
+                            .expFrom(v.getExpFrom())
+                            .expTo(v.getExpTo())
+                            .isActive(v.getIsActive())
+                            .name(v.getName())
+                            .salary(v.getSalary())
                     .build());
         });
 
