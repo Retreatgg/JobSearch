@@ -7,7 +7,8 @@
                     <h5 class="card-title text-center mb-4"><@spring.message "vacancy.edit.edit"/></h5>
                     <form action="/resumes/edit/${id}" method="post">
                         <#if _csrf??>
-                            <input type="hidden" name="${(_csrf.parameterName)!'csrf-param-name'}" value="${(_csrf.token)!'csrf-token'}" />
+                            <input type="hidden" name="${(_csrf.parameterName)!'csrf-param-name'}"
+                                   value="${(_csrf.token)!'csrf-token'}"/>
                         </#if>
                         <div class="mb-3">
                             <label for="name" class="form-label"><@spring.message "vacancy.name"/></label>
@@ -15,16 +16,19 @@
                         </div>
                         <div class="mb-3">
                             <label for="description" class="form-label"><@spring.message "vacancy.description"/></label>
-                            <input type="text" class="form-control" id="description" value="${vacancy.description}" name="description">
+                            <input type="text" class="form-control" id="description" value="${vacancy.description}"
+                                   name="description">
                         </div>
                         <div class="mb-3">
                             <label for="salary" class="form-label"><@spring.message "vacancy.salary"/></label>
-                            <input type="number" class="form-control" id="salary" value="${vacancy.salary}" name="salary">
+                            <input type="number" class="form-control" id="salary" value="${vacancy.salary}"
+                                   name="salary">
                         </div>
 
                         <div class="mb-3">
                             <label for="expFrom" class="form-label"><@spring.message "vacancy.exp.from"/></label>
-                            <input type="number" class="form-control" id="expFrom" value="${vacancy.expFrom}" name="expFrom">
+                            <input type="number" class="form-control" id="expFrom" value="${vacancy.expFrom}"
+                                   name="expFrom">
                         </div>
 
                         <div class="mb-3">
@@ -34,7 +38,8 @@
 
                         <div class="mb-3">
                             <label for="categoryId" class="form-label"><@spring.message "vacancy.categories"/></label>
-                            <select class="form-select" aria-label="Default select example" id="categoryId" name="categoryId">
+                            <select class="form-select" aria-label="Default select example" id="categoryId"
+                                    name="categoryId">
                                 <#list categories as category>
                                     <option value="${category.name}">${category.name}</option>
                                 </#list>
@@ -42,10 +47,17 @@
                         </div>
 
                         <div class="input-group mb-3">
-                            <div class="input-group-text">
-                                <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
-                            </div>
-                            <input type="text" hidden="hidden" class="form-control" aria-label="Is active" name="isActive">
+                            <#if vacancy.isActive == true>
+                                <div class="input-group-text">
+                                    <input checked class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
+                                </div>
+                                <input type="text" hidden="hidden" class="form-control" aria-label="Is active" name="isActive">
+                            <#else>
+                                <div class="input-group-text">
+                                    <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
+                                </div>
+                                <input type="text" hidden="hidden" class="form-control" aria-label="Is active" name="isActive">
+                            </#if>
                         </div>
 
                         <div class="text-center">

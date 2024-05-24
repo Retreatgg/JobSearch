@@ -25,7 +25,6 @@ public class ProfileController {
     private final VacancyService vacancyService;
     private final ResumeService resumeService;
     private final MessageService messageService;
-    private final RespondedApplicantService respondedApplicantService;
     private final UserUtil userUtil;
     private final UserRepository userRepository;
 
