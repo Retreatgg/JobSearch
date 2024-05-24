@@ -38,6 +38,9 @@ public class User{
     @Column(name = "reset_password_token")
     private String resetPasswordToken;
 
+    @Column(name = "selected_language")
+    private String selectedLanguage;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "applicant")
     private List<Resume> resumes;
 
