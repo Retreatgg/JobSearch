@@ -8,9 +8,9 @@
             <#assign queryParams = []>
 
             <#if sort??>
-                <#assign queryParams = queryParams + ["sort=${sort}"]>
+                <#assign queryParams = queryrams + ["sort=${sort}"]>
             <#elseif category == "">
-            </#if>
+            </#if>Pa
 
             <#if category??>
                 <#assign queryParams = queryParams + ["category=${category}"]>

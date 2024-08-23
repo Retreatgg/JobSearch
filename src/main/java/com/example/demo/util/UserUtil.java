@@ -1,6 +1,5 @@
 package com.example.demo.util;
 
-import com.example.demo.dao.UserDao;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
 import lombok.RequiredArgsConstructor;

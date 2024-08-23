@@ -35,7 +35,7 @@ public class AuthUserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        var user = userRepository.findByEmail(username)
+        com.example.demo.model.User user = userRepository.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User is not found"));
 
         return new User(user.getEmail(), user.getPassword(), getAuthorities(user.getAuthorities()));

@@ -1,7 +1,7 @@
 <#import "../layot.ftlh" as main>
 <@main.layout "" ; spring>
 
-    <h2>Forgot Password</h2>
+    <h2><@spring.message "user.forgot.password.title"/></h2>
     <#if error??>
         <b class="text-danger text-center">${error}</b>
     </#if>

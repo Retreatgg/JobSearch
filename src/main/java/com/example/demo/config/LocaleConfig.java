@@ -1,8 +1,6 @@
 package com.example.demo.config;
 
-import com.example.demo.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -21,7 +19,7 @@ public class LocaleConfig implements WebMvcConfigurer {
     }
 
     private LocaleChangeInterceptor localeChangeInterceptor() {
-        var loc = new LocaleChangeInterceptor();
+        LocaleChangeInterceptor loc = new LocaleChangeInterceptor();
         loc.setParamName("lang");
         return loc;
     }

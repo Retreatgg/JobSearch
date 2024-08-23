@@ -48,7 +48,7 @@ public class MessageServiceImpl implements MessageService {
 
         if(resumes != null) {
 
-            for (var resume : resumes) {
+            for (Resume resume : resumes) {
                 List<Long> respondId = respondedApplicantsRepository.findRespondedApplicantIdByResumeId(resume.getId());
                 if (respondId != null) {
                     listWithId.addAll(

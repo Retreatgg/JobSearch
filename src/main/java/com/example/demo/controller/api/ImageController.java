@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("images")
 public class ImageController {
 
-    private final UserService userService;
+//    private final UserService userService;
 
-    @GetMapping("download/{email}")
-    public ResponseEntity<?> download(@PathVariable String email) {
-        return userService.downloadImage(email);
-    }
+//    @GetMapping("download/{email}")
+//    public ResponseEntity<?> download(@PathVariable String email) {
+//        return userService.downloadImage(email);
+//    }
 
 }

@@ -29,10 +29,10 @@ public class ResumeDao {
     }
 
     public void update(Resume resume) {
-        String sql = """
-                update resumes set update_time = ? where id = ?
-                """;
-
-        jdbcTemplate.update(sql, resume.getUpdateTime(), resume.getId());
+//        String sql = """
+//                update resumes set update_time = ? where id = ?
+//                """;
+//
+//        jdbcTemplate.update(sql, resume.getUpdateTime(), resume.getId());
     }
 }

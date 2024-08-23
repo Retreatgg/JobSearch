@@ -2,6 +2,7 @@ package com.example.demo.service.impl;
 
 import com.example.demo.dao.ResumeDao;
 import com.example.demo.dto.*;
+import com.example.demo.model.ContactInfo;
 import com.example.demo.model.RespondedApplicant;
 import com.example.demo.model.Resume;
 import com.example.demo.model.User;
@@ -143,7 +144,7 @@ public class ResumeServiceImpl implements ResumeService {
             resumeDto.getEducationInfo()
                     .forEach(ei -> educationInfoService.createEducationInfo(newResume.getId(), ei));
 
-            for (var contact : resumeDto.getContacts()) {
+            for (ContactInfoDto contact : resumeDto.getContacts()) {
                 if (!contact.getValue().equals("")) contactInfoService.createContactInfo(newResume.getId(), contact);
             }
         }

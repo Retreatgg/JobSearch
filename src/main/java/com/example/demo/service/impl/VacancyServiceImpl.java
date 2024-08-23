@@ -3,6 +3,7 @@ package com.example.demo.service.impl;
 import com.example.demo.dto.VacancyDto;
 import com.example.demo.dto.VacancyDtoForShow;
 import com.example.demo.dto.VacancyUpdateDto;
+import com.example.demo.mapper.VacancyMapper;
 import com.example.demo.model.User;
 import com.example.demo.model.Vacancy;
 import com.example.demo.repository.VacancyRepository;
@@ -12,17 +13,15 @@ import com.example.demo.service.VacancyService;
 import com.example.demo.util.UserUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Objects;
 
 import static com.example.demo.enums.AccountType.EMPLOYER;
 
@@ -35,27 +34,16 @@ public class VacancyServiceImpl implements VacancyService {
     private final VacancyRepository vacancyRepository;
     private final CategoryService categoryService;
     private final UserUtil userUtil;
+    private final VacancyMapper vacancyMapper;
+
 
     private final DateTimeFormatter formatters = DateTimeFormatter.ofPattern("d/MM/uuuu");
 
 
     @Override
-    public Page<VacancyDtoForShow> getAllVacancies(Pageable pageable, Long categoryId) {
-
-        Page<Vacancy> pageableVacancies = vacancyRepository.findAll(pageable);
-        List<Vacancy> vacancies = pageableVacancies.getContent();
-
-        if (categoryId != 0) {
-            List<Vacancy> vacanciesByCategory = vacancies.stream()
-                    .filter(e -> e.getCategory().getId() == categoryId)
-                    .toList();
-
-            List<VacancyDtoForShow> dtoForShows = transformationForDtoListVacancies(vacanciesByCategory);
-            return new PageImpl<>(dtoForShows);
-        }
-
-        List<VacancyDtoForShow> dtoForShows = transformationForDtoListVacancies(vacancies);
-        return new PageImpl<>(dtoForShows);
+    public List<VacancyDtoForShow> getAllVacancies() {
+        List<Vacancy> vacancies = vacancyRepository.findAll();
+        return vacancyMapper.toListVacancyDtoShow(vacancies);
     }
 
 
@@ -63,7 +51,7 @@ public class VacancyServiceImpl implements VacancyService {
     public void deleteVacancyById(Long id, Authentication auth) {
         User user = userUtil.getUserByAuth(auth);
         if (user.getAccountType().equals(EMPLOYER.toString())) {
-            Vacancy vacancy = getVacancyById(id);
+            Vacancy vacancy = findById(id);
 
             if (Objects.equals(vacancy.getAuthor().getId(), user.getId())) {
                 vacancyRepository.deleteById(id);
@@ -104,7 +92,7 @@ public class VacancyServiceImpl implements VacancyService {
         String authority = userUtil.getAuthority(auth);
 
         if (authority.equals(EMPLOYER.toString())) {
-            Vacancy vacancy = getVacancyById(vacancyId);
+            Vacancy vacancy = findById(vacancyId);
             if(vacancyDto.getExpTo() != null) {
                 vacancy.setExpTo(vacancyDto.getExpTo());
             }
@@ -157,14 +145,14 @@ public class VacancyServiceImpl implements VacancyService {
     }
 
     @Override
-    public Vacancy getVacancyById(Long id) {
-        Optional<Vacancy> vacancyOptional = vacancyRepository.findById(id);
-        return vacancyOptional.orElseThrow(() -> new NoSuchElementException("Vacancy by ID: " + id + " is not found"));
+    public VacancyDto getVacancyById(Long id) {
+        Vacancy vacancy = vacancyRepository.findById(id).orElseThrow();
+        return vacancyMapper.toDto(vacancy);
     }
 
     @Override
     public void update(Long id) {
-        Vacancy vacancy = getVacancyById(id);
+        Vacancy vacancy = findById(id);
 
         vacancy.setUpdateTime(LocalDateTime.now());
         vacancyRepository.save(vacancy);
@@ -180,4 +168,7 @@ public class VacancyServiceImpl implements VacancyService {
         vacancyRepository.save(vacancy);
     }
 
+    private Vacancy findById(Long id) {
+        return vacancyRepository.findById(id).orElseThrow();
+    }
 }

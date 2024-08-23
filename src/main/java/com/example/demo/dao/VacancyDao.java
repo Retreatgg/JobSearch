@@ -48,12 +48,7 @@ public class VacancyDao {
     }*/
 
     public List<Vacancy> getActiveVacancies(int perPage, int offset) {
-        String sql = """
-                select * from VACANCIES
-                where IS_ACTIVE = true
-                limit ?
-                offset ?
-                """;
+        String sql = " select * from VACANCIES where IS_ACTIVE = true limit ? offset ?";
 
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Vacancy.class), perPage, offset);
     }

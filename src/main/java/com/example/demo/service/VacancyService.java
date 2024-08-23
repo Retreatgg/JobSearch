@@ -13,13 +13,13 @@ import java.util.List;
 
 @Service
 public interface VacancyService {
-    Page<VacancyDtoForShow> getAllVacancies(Pageable pageable, Long categoryId);
+    List<VacancyDtoForShow> getAllVacancies();
 
     void deleteVacancyById(Long id, Authentication auth);
     void addVacancy(VacancyDto vacancyDto, Authentication auth);
     void editVacancy(VacancyUpdateDto vacancyDto, long vacancyId, Authentication auth);
     List<VacancyDtoForShow> getVacanciesByCompanyName(String name);
-    Vacancy getVacancyById(Long id);
+    VacancyDto getVacancyById(Long id);
     void update(Long id);
 
     Long getAuthorIdByVacancy(Long vacancyId);
