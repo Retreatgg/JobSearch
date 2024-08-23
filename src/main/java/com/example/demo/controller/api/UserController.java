@@ -10,7 +10,7 @@
  import org.springframework.web.bind.annotation.RequestMapping;
  import org.springframework.web.bind.annotation.RestController;
 
-@RestController("restUser")
+@RestController()
 @RequiredArgsConstructor
 @RequestMapping("api/users")
 public class UserController {

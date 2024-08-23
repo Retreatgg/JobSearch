@@ -22,7 +22,7 @@ public interface UserService {
     UserDto getUserByEmail(String email);
 
     UserDto getUserByPhoneNumber(String phoneNumber);
-
+    User getUserById(Long id);
     Boolean isUserExistsByEmail(String email);
     void createUser(UserCreateDto userCreateDto, HttpServletRequest request);
     void editProfile(UserUpdateDto userUpdateDto, Authentication auth);

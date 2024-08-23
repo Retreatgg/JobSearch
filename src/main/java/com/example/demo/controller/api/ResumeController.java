@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController("restResume")
+@RestController()
 @RequiredArgsConstructor
 @RequestMapping("api/resumes")
 public class ResumeController {
@@ -31,7 +31,7 @@ public class ResumeController {
         return ResponseEntity.ok(resumeService.getAllResumes(authentication, pageable));
     }
 
-    @GetMapping("/category/{categoryId}")
+    @GetMapping("/categories/{categoryId}")
     public ResponseEntity<ResumeDto> getResumeByCategoryId(@PathVariable long categoryId, Authentication auth) {
         return ResponseEntity.ok(resumeService.getResumesByCategoryId(categoryId, auth));
     }

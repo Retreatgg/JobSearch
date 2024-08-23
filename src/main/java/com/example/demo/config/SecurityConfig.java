@@ -17,32 +17,32 @@ public class SecurityConfig {
     @Bean
      public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
          http
-                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
+                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                  .httpBasic(Customizer.withDefaults())
-                 .formLogin(form -> form
-                         .loginPage("/auth/login")
-                         .loginProcessingUrl("/auth/login")
-                         .defaultSuccessUrl("/profile")
-                         .failureUrl("/auth/login?error=true")
-                         .permitAll())
-                 .logout(logout -> logout
-                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                         .permitAll())
+//                 .formLogin(form -> form
+//                         .loginPage("/auth/login")
+//                         .loginProcessingUrl("/auth/login")
+//                         .defaultSuccessUrl("/profile")
+//                         .failureUrl("/auth/login?error=true")
+//                         .permitAll())
+//                 .logout(logout -> logout
+//                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+//                         .permitAll())
                  .authorizeHttpRequests(authorize -> authorize
-                         .requestMatchers(HttpMethod.POST, "/resumes/**").hasAuthority("APPLICANT")
-                         .requestMatchers(HttpMethod.GET, "/resumes/add").hasAuthority("APPLICANT")
-                         .requestMatchers(HttpMethod.DELETE, "/resumes/**").hasAuthority("APPLICANT")
-                         .requestMatchers(HttpMethod.PUT, "/resumes/**").hasAuthority("APPLICANT")
-                         .requestMatchers(HttpMethod.PUT, "/vacancies/**").hasAuthority("EMPLOYER")
-                         .requestMatchers(HttpMethod.DELETE, "/vacancies/**").hasAuthority("EMPLOYER")
-                         .requestMatchers(HttpMethod.POST, "/vacancies/respond/**").hasAuthority("APPLICANT")
-                         .requestMatchers(HttpMethod.POST, "/vacancies/**").hasAuthority("EMPLOYER")
-                         .requestMatchers(HttpMethod.GET, "/vacancies/add").hasAuthority("EMPLOYER")
-                         .requestMatchers(HttpMethod.GET, "/resumes/active").hasAuthority("EMPLOYER")
-                         .requestMatchers("/chat/**").hasAnyAuthority("EMPLOYER", "APPLICANT")
-                         .requestMatchers("/profile/**").hasAnyAuthority("APPLICANT", "EMPLOYER")
-                         .requestMatchers(HttpMethod.GET, "/profile/responses/**").hasAuthority("EMPLOYER")
-                         .requestMatchers(HttpMethod.GET, "/").permitAll()
+//                         .requestMatchers(HttpMethod.POST, "/resumes/**").hasAuthority("APPLICANT")
+//                         .requestMatchers(HttpMethod.GET, "/resumes/add").hasAuthority("APPLICANT")
+//                         .requestMatchers(HttpMethod.DELETE, "/resumes/**").hasAuthority("APPLICANT")
+//                         .requestMatchers(HttpMethod.PUT, "/resumes/**").hasAuthority("APPLICANT")
+//                         .requestMatchers(HttpMethod.PUT, "/vacancies/**").hasAuthority("EMPLOYER")
+//                         .requestMatchers(HttpMethod.DELETE, "/vacancies/**").hasAuthority("EMPLOYER")
+//                         .requestMatchers(HttpMethod.POST, "/vacancies/respond/**").hasAuthority("APPLICANT")
+//                         .requestMatchers(HttpMethod.POST, "/vacancies/**").hasAuthority("EMPLOYER")
+//                         .requestMatchers(HttpMethod.GET, "/vacancies/add").hasAuthority("EMPLOYER")
+//                         .requestMatchers(HttpMethod.GET, "/resumes/active").hasAuthority("EMPLOYER")
+//                         .requestMatchers("/chat/**").hasAnyAuthority("EMPLOYER", "APPLICANT")
+//                         .requestMatchers("/profile/**").hasAnyAuthority("APPLICANT", "EMPLOYER")
+//                         .requestMatchers(HttpMethod.GET, "/profile/responses/**").hasAuthority("EMPLOYER")
+//                         .requestMatchers(HttpMethod.GET, "/").permitAll()
                          .anyRequest().permitAll())
                  .exceptionHandling(Customizer.withDefaults());
 
