@@ -31,6 +31,11 @@ public class ResumeController {
         return ResponseEntity.ok(resumeService.getAllResumes(authentication, pageable));
     }
 
+    @PutMapping("{id}")
+    public ResponseEntity<ResumeDto> editResume(@PathVariable Long id, @RequestBody ResumeUpdateDto resumeUpdateDto) {
+        return resumeService.editResume(resumeUpdateDto, id);
+    }
+
     @GetMapping("/categories/{categoryId}")
     public ResponseEntity<ResumeDto> getResumeByCategoryId(@PathVariable long categoryId, Authentication auth) {
         return ResponseEntity.ok(resumeService.getResumesByCategoryId(categoryId, auth));
@@ -46,21 +51,19 @@ public class ResumeController {
         return ResponseEntity.ok(resumeService.getResumeById(id, auth));
     }
 
-    @DeleteMapping("{id}")
-    public ResponseEntity<?> deleteResumeById(@PathVariable long id, Authentication auth) {
-        return ResponseEntity.ok(resumeService.deleteResumeById(id, auth));
-    }
+//    @DeleteMapping("{id}")
+//    public ResponseEntity<?> deleteResumeById(@PathVariable long id, Authentication auth) {
+//        return ResponseEntity.ok(resumeService.deleteResumeById(id, auth));
+//    }
 
     @PostMapping("")
-    public HttpStatus addResume(@RequestBody @Valid ResumeCreateDto resumeDto, Authentication auth) {
-        resumeService.addResume(resumeDto, auth);
-        return HttpStatus.OK;
+    public ResponseEntity<ResumeDto> addResume(@RequestBody @Valid ResumeCreateDto resumeDto, Authentication auth) {
+        return resumeService.addResume(resumeDto);
     }
 
-    @PutMapping("{id}")
-    public HttpStatus editResume(@RequestBody @Valid ResumeUpdateDto resumeDto, Authentication auth, @PathVariable long id) {
-        resumeService.editResume(resumeDto, id, auth);
-        return HttpStatus.OK;
+    @PatchMapping("update/{id}")
+    public ResponseEntity<ResumeDto> updateResume(@PathVariable Long id) {
+        return resumeService.updateResume(id);
     }
 
 

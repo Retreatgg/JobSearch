@@ -2,6 +2,7 @@ package com.example.demo.service.impl;
 
 import com.example.demo.dao.ResumeDao;
 import com.example.demo.dto.*;
+import com.example.demo.mapper.ResumeMapper;
 import com.example.demo.model.ContactInfo;
 import com.example.demo.model.RespondedApplicant;
 import com.example.demo.model.Resume;
@@ -15,6 +16,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
@@ -42,9 +44,12 @@ public class ResumeServiceImpl implements ResumeService {
     private final ContactInfoService contactInfoService;
     @Lazy
     private final VacancyService vacancyService;
+    private final ResumeService resumeService;
     private final UserUtil userUtil;
 
     private final DateTimeFormatter formatters = DateTimeFormatter.ofPattern("d/MM/uuuu");
+    private final ResumeMapper resumeMapper;
+    private final UserService userService;
 
     @Override
     public Page<ResumeDto> getAllResumes(Authentication authentication, Pageable pageable) {
@@ -97,92 +102,82 @@ public class ResumeServiceImpl implements ResumeService {
         return transformationForSingleDtoResume(resume);
 
     }
+//
+//    @Override
+//    public boolean deleteResumeById(Long id) {
+//        Resume resume = resumeRepository.findById(id)
+//                .orElseThrow(() -> new NoSuchElementException("Can not find Resume by ID:" + id));
+//
+//
+//        resumeRepository.deleteById(id);
+//        contactInfoService.delete(id);
+//        workExperienceInfoService.delete(id);
+//        educationInfoService.delete(id);
+//
+//
+//    }
 
     @Override
-    public boolean deleteResumeById(Long id, Authentication auth) {
-        User user = userUtil.getUserByAuth(auth);
+    public ResponseEntity<ResumeDto> addResume(ResumeCreateDto resumeDto) {
+        Resume resume = Resume.builder()
+                .name(resumeDto.getTitle())
+                .salary(resumeDto.getSalary())
+                .isActive(resumeDto.getIsActive())
+                .createdDate(LocalDateTime.now())
+                .updateTime(LocalDateTime.now())
+                .applicant(userService.getUserById(1L))
+                .category(categoryRepository.findByName(resumeDto.getCategoryName()).get())
+                .build();
 
-        if (!user.getAccountType().equals(String.valueOf(APPLICANT))) {
-            return false;
+        Resume newResume = resumeRepository.save(resume);
+
+        resumeDto.getWorkExperienceInfo()
+                .forEach(wei -> workExperienceInfoService.createWorkExperienceInfo(newResume.getId(), wei));
+        resumeDto.getEducationInfo()
+                .forEach(ei -> educationInfoService.createEducationInfo(newResume.getId(), ei));
+
+        for (ContactInfoDto contact : resumeDto.getContacts()) {
+            if (!contact.getValue().equals("")) contactInfoService.createContactInfo(newResume.getId(), contact);
         }
 
-        Resume resume = resumeRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("Can not find Resume by ID:" + id));
-
-        if (Objects.equals(resume.getApplicant().getId(), user.getId())) {
-            resumeRepository.deleteById(id);
-            contactInfoService.delete(id);
-            workExperienceInfoService.delete(id);
-            educationInfoService.delete(id);
-            return true;
-        }
-
-        throw new IllegalArgumentException("Your role is not appropriate");
+        return ResponseEntity.ok(resumeMapper.toDto(newResume));
     }
 
     @Override
-    public void addResume(ResumeCreateDto resumeDto, Authentication auth) {
-        String authority = userUtil.getAuthority(auth);
-        User user = userUtil.getUserByAuth(auth);
-
-        if (authority.equals(APPLICANT.toString())) {
-            Resume resume = Resume.builder()
-                    .name(resumeDto.getTitle())
-                    .salary(resumeDto.getSalary())
-                    .isActive(resumeDto.getIsActive())
-                    .createdDate(LocalDateTime.now())
-                    .updateTime(LocalDateTime.now())
-                    .applicant(userRepository.findByEmail(user.getEmail()).get())
-                    .category(categoryRepository.findByName(resumeDto.getCategoryName()).get())
-
-                    .build();
-
-            Resume newResume = resumeRepository.save(resume);
-
-            resumeDto.getWorkExperienceInfo()
-                    .forEach(wei -> workExperienceInfoService.createWorkExperienceInfo(newResume.getId(), wei));
-            resumeDto.getEducationInfo()
-                    .forEach(ei -> educationInfoService.createEducationInfo(newResume.getId(), ei));
-
-            for (ContactInfoDto contact : resumeDto.getContacts()) {
-                if (!contact.getValue().equals("")) contactInfoService.createContactInfo(newResume.getId(), contact);
-            }
-        }
-    }
-
-    @Override
-    public void editResume(ResumeUpdateDto resumeDto, long id, Authentication auth) {
-        String authority = userUtil.getAuthority(auth);
-        User user = userUtil.getUserByAuth(auth);
+    public ResponseEntity<ResumeDto> editResume(ResumeUpdateDto resumeDto, long id) {
+//        String authority = userUtil.getAuthority(auth);
+//        User user = userUtil.getUserByAuth(auth);
         Resume resume = resumeRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Resume is not found"));
 
-        if (authority.equalsIgnoreCase(APPLICANT.toString()) && Objects.equals(resume.getApplicant().getId(), user.getId())) {
+//        if (authority.equalsIgnoreCase(APPLICANT.toString()) && Objects.equals(resume.getApplicant().getId(), user.getId())) {
 
-            if (resumeDto.getTitle() != null) {
-                resume.setName(resumeDto.getTitle());
-            }
-            if (resumeDto.getSalary() != null) {
-                resume.setSalary(resumeDto.getSalary());
-            }
-            if (resumeDto.getIsActive() != null) {
-                resume.setIsActive(resumeDto.getIsActive());
-            }
-            if (resumeDto.getCategoryName() != null) {
-                resume.setCategory(categoryRepository.findByName(resumeDto.getCategoryName()).get());
-            }
-
-            resumeRepository.save(resume);
+        if (resumeDto.getTitle() != null) {
+            resume.setName(resumeDto.getTitle());
         }
+        if (resumeDto.getSalary() != null) {
+            resume.setSalary(resumeDto.getSalary());
+        }
+        if (resumeDto.getIsActive() != null) {
+            resume.setIsActive(resumeDto.getIsActive());
+        }
+        if (resumeDto.getCategoryName() != null) {
+            resume.setCategory(categoryRepository.findByName(resumeDto.getCategoryName()).get());
+        }
+
+        Resume editedResume = resumeRepository.save(resume);
+        return ResponseEntity.ok(resumeMapper.toDto(editedResume));
+//        }
     }
 
     @Override
-    public void updateResume(Long id) {
+    public ResponseEntity<ResumeDto> updateResume(Long id) {
         Resume resume = resumeRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Resume not found"));
 
         resume.setUpdateTime(LocalDateTime.now());
-        resumeRepository.save(resume);
+        Resume updatedResume = resumeRepository.save(resume);
+        return ResponseEntity.ok(resumeMapper.toDto(updatedResume));
     }
 
     @Override
