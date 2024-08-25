@@ -20,8 +20,6 @@ public class VacancyDto {
     private String description;
     @NotEmpty
     private String categoryName;
-    private User author;
-
     @Positive
     private Double salary;
     @Positive

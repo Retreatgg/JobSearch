@@ -101,7 +101,6 @@ public class RespondedApplicantServiceImpl implements RespondedApplicantService 
             list.add(VacancyDto.builder()
                             .categoryName(v.getCategory().getName())
                             .description(v.getDescription())
-                            .author(v.getAuthor())
                             .expFrom(v.getExpFrom())
                             .expTo(v.getExpTo())
                             .isActive(v.getIsActive())

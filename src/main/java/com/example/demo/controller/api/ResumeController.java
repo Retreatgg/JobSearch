@@ -12,10 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController()
 @RequiredArgsConstructor
@@ -25,45 +22,40 @@ public class ResumeController {
 
     @GetMapping()
     public ResponseEntity<Page<ResumeDto>> getAllResumes(
-            Authentication authentication,
             @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable)
     {
-        return ResponseEntity.ok(resumeService.getAllResumes(authentication, pageable));
+        return ResponseEntity.ok(resumeService.getAllResumes(pageable));
     }
 
     @PutMapping("{id}")
     public ResponseEntity<ResumeDto> editResume(@PathVariable Long id, @RequestBody ResumeUpdateDto resumeUpdateDto) {
-        return resumeService.editResume(resumeUpdateDto, id);
+        return resumeService.edit(resumeUpdateDto, id);
     }
 
     @GetMapping("/categories/{categoryId}")
-    public ResponseEntity<ResumeDto> getResumeByCategoryId(@PathVariable long categoryId, Authentication auth) {
-        return ResponseEntity.ok(resumeService.getResumesByCategoryId(categoryId, auth));
-    }
-
-    @GetMapping("/applicant")
-    public ResponseEntity<List<ResumeDto>> getResumesByApplicant( Authentication auth) {
-        return ResponseEntity.ok(resumeService.getResumesByApplicantId(auth));
+    public ResponseEntity<ResumeDto> getResumeByCategoryId(@PathVariable long categoryId) {
+        return ResponseEntity.ok(resumeService.getResumesByCategoryId(categoryId));
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<?> getResumeById(@PathVariable long id, Authentication auth) {
-        return ResponseEntity.ok(resumeService.getResumeById(id, auth));
+    public ResponseEntity<?> getResumeById(@PathVariable long id) {
+        return ResponseEntity.ok(resumeService.getResumeById(id));
     }
 
-//    @DeleteMapping("{id}")
-//    public ResponseEntity<?> deleteResumeById(@PathVariable long id, Authentication auth) {
-//        return ResponseEntity.ok(resumeService.deleteResumeById(id, auth));
-//    }
+    @DeleteMapping("{id}")
+    public HttpStatus deleteResumeById(@PathVariable Long id) {
+        resumeService.delete(id);
+        return HttpStatus.OK;
+    }
 
     @PostMapping("")
-    public ResponseEntity<ResumeDto> addResume(@RequestBody @Valid ResumeCreateDto resumeDto, Authentication auth) {
-        return resumeService.addResume(resumeDto);
+    public ResponseEntity<ResumeDto> addResume(@RequestBody @Valid ResumeCreateDto resumeDto) {
+        return resumeService.add(resumeDto);
     }
 
-    @PatchMapping("update/{id}")
+    @PatchMapping("{id}")
     public ResponseEntity<ResumeDto> updateResume(@PathVariable Long id) {
-        return resumeService.updateResume(id);
+        return resumeService.update(id);
     }
 
 

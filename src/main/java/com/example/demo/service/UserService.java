@@ -9,8 +9,6 @@ import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.io.UnsupportedEncodingException;
@@ -25,7 +23,7 @@ public interface UserService {
     User getUserById(Long id);
     Boolean isUserExistsByEmail(String email);
     void createUser(UserCreateDto userCreateDto, HttpServletRequest request);
-    void editProfile(UserUpdateDto userUpdateDto, Authentication auth);
+    void editProfile(UserUpdateDto userUpdateDto);
     ResponseEntity<?> downloadImage(String email);
     String getUserEmailById(Long id);
 
@@ -35,7 +33,7 @@ public interface UserService {
 
     void login(UserLoginDto user);
 
-    void makeResetPasswdLink(HttpServletRequest request) throws UsernameNotFoundException, UnsupportedEncodingException, MessagingException;
+//    void makeResetPasswdLink(HttpServletRequest request) throws, UnsupportedEncodingException, MessagingException;
 
     Locale getUserLocale(String selectedLanguage);
 }

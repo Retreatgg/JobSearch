@@ -1,25 +1,17 @@
 package com.example.demo.controller.api;
 
-import com.example.demo.dto.*;
-import com.example.demo.model.User;
-import com.example.demo.model.Vacancy;
+import com.example.demo.dto.RespondedApplicantsDto;
+import com.example.demo.dto.VacancyDto;
+import com.example.demo.dto.VacancyDtoForShow;
+import com.example.demo.dto.VacancyUpdateDto;
 import com.example.demo.service.RespondedApplicantService;
 import com.example.demo.service.VacancyService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import static com.example.demo.enums.AccountType.APPLICANT;
 
 @RestController()
 @RequiredArgsConstructor
@@ -45,8 +37,9 @@ public class VacancyController {
     }
 
     @DeleteMapping("{id}")
-    public void deleteVacancyById(@PathVariable long id, Authentication auth) {
-        vacancyService.deleteVacancyById(id, auth);
+    public ResponseEntity<?> deleteVacancyById(@PathVariable long id) {
+        vacancyService.deleteVacancyById(id);
+        return ResponseEntity.ok("Vacancy successfully was deleted");
     }
 
     @GetMapping("companies/{name}")
@@ -55,8 +48,8 @@ public class VacancyController {
     }
 
     @PostMapping("")
-    public ResponseEntity<VacancyDtoForShow> addNewVacancy(@Valid VacancyDto vacancyDto, Authentication auth) {
-        return vacancyService.addVacancy(vacancyDto, auth);
+    public ResponseEntity<VacancyDtoForShow> addNewVacancy(@RequestBody @Valid VacancyDto vacancyDto) {
+        return vacancyService.addVacancy(vacancyDto);
     }
 
     @PatchMapping("{id}")
@@ -65,8 +58,8 @@ public class VacancyController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<VacancyDtoForShow> editVacancy(@PathVariable Long id, @Valid VacancyUpdateDto vacancyUpdateDto, Authentication auth) {
-        return vacancyService.editVacancy(vacancyUpdateDto, id, auth);
+    public ResponseEntity<VacancyDtoForShow> editVacancy(@PathVariable Long id, @RequestBody @Valid VacancyUpdateDto vacancyUpdateDto) {
+        return vacancyService.editVacancy(vacancyUpdateDto, id);
     }
 
     @PostMapping("{id}/respond")

@@ -9,7 +9,6 @@ import com.example.demo.service.AuthorityService;
 import com.example.demo.service.UserRoleService;
 import com.example.demo.service.UserService;
 import com.example.demo.util.FileUtil;
-import com.example.demo.util.UserUtil;
 import com.example.demo.util.Utility;
 import jakarta.mail.MessagingException;
 import jakarta.servlet.ServletException;
@@ -19,13 +18,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.LocaleUtils;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.io.UnsupportedEncodingException;
@@ -42,8 +34,6 @@ import static com.fasterxml.jackson.databind.type.LogicalType.Collection;
 public class UserServiceImpl implements UserService {
 
     private final FileUtil fileUtil;
-    private final UserUtil userUtil;
-    private final PasswordEncoder encoder;
     private final UserRoleService userRoleService;
     private final UserRepository userRepository;
     private final EmailServiceImpl emailService;
@@ -96,7 +86,7 @@ public class UserServiceImpl implements UserService {
                 .name(userCreateDto.getName())
                 .surname(userCreateDto.getSurname())
                 .phoneNumber(userCreateDto.getPhoneNumber())
-                .password(encoder.encode(userCreateDto.getPassword()))
+//                .password(encoder.encode(userCreateDto.getPassword()))
                 .build();
 
         String accountType = userCreateDto.getAccountType();
@@ -112,30 +102,30 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public void editProfile(UserUpdateDto userUpdateDto, Authentication auth) {
-        User user = userUtil.getUserByAuth(auth);
+    public void editProfile(UserUpdateDto userUpdateDto) {
+////        User user = userUtil.getUserByAuth(auth);
+//
+//        if(userUpdateDto.getAge() != null) {
+//            user.setAge(userUpdateDto.getAge());
+//        }
+//        if(userUpdateDto.getAvatar() != null) {
+//            String fileName = fileUtil.saveUploadedFile(userUpdateDto.getAvatar(), "/images");
+//            user.setAvatar(fileName);
+//        }
+//        if (userUpdateDto.getSurname() != null) {
+//            user.setSurname(userUpdateDto.getSurname());
+//        }
+//        if(userUpdateDto.getName() != null) {
+//            user.setName(userUpdateDto.getName());
+//        }
+//        if(userUpdateDto.getPassword() != null) {
+//            user.setPassword(encoder.encode(userUpdateDto.getPassword()));
+//        }
+//        if(userUpdateDto.getPhoneNumber() != null) {
+//            user.setPhoneNumber(userUpdateDto.getPhoneNumber());
+//        }
 
-        if(userUpdateDto.getAge() != null) {
-            user.setAge(userUpdateDto.getAge());
-        }
-        if(userUpdateDto.getAvatar() != null) {
-            String fileName = fileUtil.saveUploadedFile(userUpdateDto.getAvatar(), "/images");
-            user.setAvatar(fileName);
-        }
-        if (userUpdateDto.getSurname() != null) {
-            user.setSurname(userUpdateDto.getSurname());
-        }
-        if(userUpdateDto.getName() != null) {
-            user.setName(userUpdateDto.getName());
-        }
-        if(userUpdateDto.getPassword() != null) {
-            user.setPassword(encoder.encode(userUpdateDto.getPassword()));
-        }
-        if(userUpdateDto.getPhoneNumber() != null) {
-            user.setPhoneNumber(userUpdateDto.getPhoneNumber());
-        }
-
-        userRepository.save(user);
+//        userRepository.save(user);
     }
 
     @Override
@@ -156,12 +146,12 @@ public class UserServiceImpl implements UserService {
         return userRepository.findById(id).get().getEmail();
     }
 
-    private void updateResetPasswordToken(String token, String email) {
-        User user = userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("Could not find any user with the email " + email));
-        user.setResetPasswordToken(token);
-        userRepository.saveAndFlush(user);
-    }
-
+//    private void updateResetPasswordToken(String token, String email) {
+//        User user = userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("Could not find any user with the email " + email));
+//        user.setResetPasswordToken(token);
+//        userRepository.saveAndFlush(user);
+//    }
+//
     @Override
     public User getByResetPasswordToken(String token) {
         return userRepository.findByResetPasswordToken(token).orElseThrow(() -> new NoSuchElementException("User not found"));
@@ -169,27 +159,26 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updatePassword(User user, String newPassword) {
-        String encodedPassword = encoder.encode(newPassword);
-        user.setPassword(encodedPassword);
-        user.setResetPasswordToken(null);
-        userRepository.saveAndFlush(user);
+//        String encodedPassword = encoder.encode(newPassword);
+//        user.setPassword(encodedPassword);
+//        user.setResetPasswordToken(null);
+//        userRepository.saveAndFlush(user);
     }
 
     @Override
     public void login(UserLoginDto user) {
         UserDto userFromData = getUserByEmail(user.getEmail());
-        if(!encoder.matches(user.getPassword(), userFromData.getPassword())) {
-            throw new IllegalArgumentException("Incorrect password");
-        }
+//        if(!encoder.matches(user.getPassword(), userFromData.getPassword())) {
+//            throw new IllegalArgumentException("Incorrect password");
+//        }
     }
 
-    @Override
-    public void makeResetPasswdLink(HttpServletRequest request) throws UsernameNotFoundException, UnsupportedEncodingException, MessagingException {
-        String email = request.getParameter("email");
-        String token = UUID.randomUUID().toString();
-        updateResetPasswordToken(token, email);
-        String passwordLink = Utility.getSiteURL(request) + "/auth/reset_password?token=" + token;
-        emailService.sendEmail(email, passwordLink);
+    public void makeResetPasswdLink(HttpServletRequest request) throws UnsupportedEncodingException, MessagingException {
+//        String email = request.getParameter("email");
+//        String token = UUID.randomUUID().toString();
+//        updateResetPasswordToken(token, email);
+//        String passwordLink = Utility.getSiteURL(request) + "/auth/reset_password?token=" + token;
+//        emailService.sendEmail(email, passwordLink);
     }
 
     @Override

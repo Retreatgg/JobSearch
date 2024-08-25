@@ -10,11 +10,9 @@ import com.example.demo.service.CategoryService;
 import com.example.demo.service.RespondedApplicantService;
 import com.example.demo.service.UserService;
 import com.example.demo.service.VacancyService;
-import com.example.demo.util.UserUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -32,7 +30,7 @@ public class VacancyServiceImpl implements VacancyService {
     private final RespondedApplicantService respondedApplicantService;
     private final VacancyRepository vacancyRepository;
     private final CategoryService categoryService;
-    private final UserUtil userUtil;
+//    private final UserUtil userUtil;
     private final VacancyMapper vacancyMapper;
 
 
@@ -47,7 +45,7 @@ public class VacancyServiceImpl implements VacancyService {
     }
 
     @Override
-    public void deleteVacancyById(Long id, Authentication auth) {
+    public void deleteVacancyById(Long id) {
 //        User user = userUtil.getUserByAuth(auth);
 //        if (user.getAccountType().equals(EMPLOYER.toString())) {
 //            Vacancy vacancy = findById(id);
@@ -61,7 +59,7 @@ public class VacancyServiceImpl implements VacancyService {
     }
 
     @Override
-    public ResponseEntity<VacancyDtoForShow> addVacancy(VacancyDto vacancyDto, Authentication auth) {
+    public ResponseEntity<VacancyDtoForShow> addVacancy(VacancyDto vacancyDto) {
 //        String authority = userUtil.getAuthority(auth);
 //        User user = userUtil.getUserByAuth(auth);
 //
@@ -70,6 +68,8 @@ public class VacancyServiceImpl implements VacancyService {
         vacancy.setCreatedDate(LocalDateTime.now());
         vacancy.setUpdateTime(LocalDateTime.now());
         vacancy.setAuthor(userService.getUserById(1L));
+        vacancy.setCountResponses(0L);
+        vacancy.setCategory(categoryService.findByName(vacancyDto.getCategoryName()));
 
         Vacancy addedVacancy = vacancyRepository.save(vacancy);
         return ResponseEntity.ok(vacancyMapper.toDtoForShow(addedVacancy));
@@ -80,10 +80,8 @@ public class VacancyServiceImpl implements VacancyService {
 
 
     @Override
-    public ResponseEntity<VacancyDtoForShow> editVacancy(VacancyUpdateDto vacancyDto, long vacancyId, Authentication auth) {
-        String authority = userUtil.getAuthority(auth);
+    public ResponseEntity<VacancyDtoForShow> editVacancy(VacancyUpdateDto vacancyDto, long vacancyId) {
 
-        if (authority.equals(EMPLOYER.toString())) {
             Vacancy vacancy = findById(vacancyId);
             if (vacancyDto.getExpTo() != null) {
                 vacancy.setExpTo(vacancyDto.getExpTo());
@@ -103,11 +101,11 @@ public class VacancyServiceImpl implements VacancyService {
             if (vacancyDto.getCategoryId() != null) {
                 vacancy.setCategory(categoryService.findById(vacancyDto.getCategoryId()));
             }
+            if (vacancyDto.getSalary() != null) {
+                vacancy.setSalary(vacancyDto.getSalary());
+            }
             Vacancy editedVacancy = vacancyRepository.save(vacancy);
             return ResponseEntity.ok(vacancyMapper.toDtoForShow(editedVacancy));
-        } else {
-            throw new NoSuchElementException("User not authorized to edit vacancy");
-        }
     }
 
     @Override
